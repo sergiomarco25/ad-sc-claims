@@ -1,0 +1,638 @@
+- id: sun2023-C01
+  paper: sun2023
+  statement: "Human microglia from aged brains fall into 12 transcriptional states: homeostatic (MG0), neuronal surveillance (MG1), three inflammatory states (MG2, MG8, MG10), ribosome biogenesis (MG3), lipid-processing (MG4), phagocytic (MG5), stress-related (MG6), glycolytic (MG7), antiviral (MG11) and cycling (MG12)."
+  quote: "We annotate 12 microglial transcriptional states, including AD-dysregulated homeostatic, inflammatory, and lipid-processing states"
+  location: "Fig. 1A-B; Fig. S1C-G; Results \"Characterization of Microglia Transcriptional States\""
+  centrality: headline
+  modality: snRNA
+  region: multiple
+  cell_type: Microglia
+  cell_state: "MG0 homeostatic; MG1 neuronal surveillance; MG2 inflammatory I (CPEB4/TMEM163/IL4R); MG3 ribosome biogenesis; MG4 lipid-processing; MG5 phagocytic; MG6 stress-related; MG7 glycolytic; MG8 inflammatory II (LRRK2/SPON1/FOXP1); MG10 inflammatory III (IL1B/CCL3/RELB); MG11 antiviral; MG12 cycling"
+  claim_type: state_existence
+  direction: exists
+  comparison: "all donors (non-AD, early AD, late AD)"
+  genes: [P2RY12, CX3CR1, CPEB4, TMEM163, IL4R, PPARG, LRRK2, SPON1, FOXP1, IL1B, CCL3, RELB, CSF1R, CD74, C3]
+  gene_source: "Table S1 pages 2-3 (2,228 state markers); Fig. 1B; ROSMAP.Microglia.6regions...clusterDEGs.txt at compbio.mit.edu/microglia_states"
+  reported_stat: "152,459 microglia nuclei from 443 donors, 6 regions; markers by Wilcoxon (min.pct 0.25, logFC 0.25)"
+  unit_of_analysis: cells
+  method: "in-silico sorting of immune nuclei, Harmony + Seurat clustering (resolution 0.5), Wilcoxon markers, Enrichr GO"
+  testable_with: rna
+  test_template: state_signature
+  requires: "enough microglia per donor for state mapping"
+  notes: "Cluster 9 (BAMs), 13 (T cells), 14-15 (doublets) were excluded, so there is no MG9. MG3, MG6, MG10, MG11 and MG12 align strongly with Olah et al. 2020 states and MG0 weakly. All states are found in all 6 regions, but their proportions differ between regions (Fig. S2B-C)."
+- id: sun2023-C02
+  paper: sun2023
+  statement: "The lipid-processing microglial state MG4 makes up a larger fraction of microglia in the prefrontal cortex of AD individuals than of non-AD individuals."
+  quote: "lipid-processing MG4 and inflammatory MG8 showed significantly-increased fractions in AD"
+  location: "Fig. 1C; Fig. S2D; Results \"Characterization of Microglia Transcriptional States\""
+  centrality: headline
+  modality: snRNA
+  region: PFC
+  cell_type: Microglia
+  cell_state: "MG4 lipid-processing (PPARG, APOE, ABCA1, TREM2)"
+  claim_type: composition
+  direction: enriched
+  comparison: "AD (early and late) vs non-AD"
+  genes: [PPARG, APOE, ABCA1, TREM2]
+  gene_source: "Table S1 pages 2-3; Fig. 1I"
+  reported_stat: "propeller adjusted P < 0.05 (*** in Fig. 1C); 423 PFC donors"
+  unit_of_analysis: donors
+  method: "propeller (speckle) on per-sample state proportions, with covariates"
+  testable_with: rna
+  test_template: composition_donor
+  requires: "AD group (non-AD / early AD / late AD from k-means on pathology and cognition); microglia state labels"
+  notes: "AD groups are k-means clusters on 7 pathology and cognition variables, not standard diagnostic criteria (authors' own caveat). The paper says 'prefrontal cortex'; ROSMAP PFC is recorded as DLPFC, as for mathys2019. Which pairwise contrast carries the effect is in Fig. S2D."
+- id: sun2023-C03
+  paper: sun2023
+  statement: "The inflammatory microglial state MG8 (inflammatory II; LRRK2/SPON1/FOXP1) makes up a larger fraction of microglia in the prefrontal cortex of AD individuals than of non-AD individuals."
+  quote: "lipid-processing MG4 and inflammatory MG8 showed significantly-increased fractions in AD"
+  location: "Fig. 1C; Fig. S2D; Results \"Characterization of Microglia Transcriptional States\""
+  centrality: headline
+  modality: snRNA
+  region: PFC
+  cell_type: Microglia
+  cell_state: "MG8 inflammatory II (LRRK2/SPON1/FOXP1)"
+  claim_type: composition
+  direction: enriched
+  comparison: "AD (early and late) vs non-AD"
+  genes: [LRRK2, SPON1, FOXP1]
+  gene_source: "Table S1 pages 2-3"
+  reported_stat: "propeller adjusted P < 0.05 (*** in Fig. 1C); 423 PFC donors"
+  unit_of_analysis: donors
+  method: "propeller (speckle) on per-sample state proportions, with covariates"
+  testable_with: rna
+  test_template: composition_donor
+  requires: "AD group (k-means on pathology and cognition); microglia state labels"
+  notes: "See C02 for the group definition and region note."
+- id: sun2023-C04
+  paper: sun2023
+  statement: "The neuronal surveillance microglial state MG1 makes up a smaller fraction of microglia in the prefrontal cortex of AD individuals than of non-AD individuals."
+  quote: "neuronal surveillance MG1 showed a significantly-decreased fraction in AD"
+  location: "Fig. 1C; Fig. S2D; Results \"Characterization of Microglia Transcriptional States\""
+  centrality: main
+  modality: snRNA
+  region: PFC
+  cell_type: Microglia
+  cell_state: "MG1 neuronal surveillance (high neurotransmitter receptor expression)"
+  claim_type: composition
+  direction: depleted
+  comparison: "AD (early and late) vs non-AD"
+  genes: []
+  gene_source: "Table S1 pages 2-3; Fig. S1F (neurotransmitter receptors)"
+  reported_stat: "propeller adjusted P < 0.05 (Fig. 1C); 423 PFC donors"
+  unit_of_analysis: donors
+  method: "propeller (speckle) on per-sample state proportions, with covariates"
+  testable_with: rna
+  test_template: composition_donor
+  requires: "AD group (k-means on pathology and cognition); microglia state labels"
+  notes: "MG1 proportion also differs with PMI (Fig. S2K), so PMI should be a covariate. MG1 markers are neurotransmitter receptors, so a neuronal ambient-RNA signal should be ruled out in a re-test."
+- id: sun2023-C05
+  paper: sun2023
+  statement: "In the prefrontal cortex, the fraction of lipid-processing MG4 microglia has the strongest positive correlation with tangles, amyloid, Braak stage and cognitive decline among microglial states."
+  quote: "lipid-processing MG4 microglia showed the most significantly positive correlation with tangles, amyloid, Braak score"
+  location: "Fig. S2E; Results \"Characterization of Microglia Transcriptional States\""
+  centrality: secondary
+  modality: snRNA
+  region: PFC
+  cell_type: Microglia
+  cell_state: "MG4 lipid-processing"
+  claim_type: pathology_association
+  direction: associated_pos
+  comparison: "within all donors (continuous pathology and cognition)"
+  genes: []
+  gene_source: ""
+  reported_stat: "Pearson correlation, cor.test; significance stars in Fig. S2E; 423 PFC donors"
+  unit_of_analysis: donors
+  method: "Pearson correlation of per-donor state fraction with pathology variables"
+  testable_with: rna
+  test_template: pathology_correlation
+  requires: "quantitative tangle density, amyloid load, Braak stage, cognitive decline"
+  notes: "Uncorrected correlations; MG4 fraction also differs with age and PMI (Fig. S2K)."
+- id: sun2023-C06
+  paper: sun2023
+  statement: "In the prefrontal cortex, the fraction of inflammatory MG8 microglia correlates more strongly with amyloid plaques than with tangles."
+  quote: "inflammatory MG8 was more positively correlated with plaques"
+  location: "Fig. S2E; Results \"Characterization of Microglia Transcriptional States\""
+  centrality: secondary
+  modality: snRNA
+  region: PFC
+  cell_type: Microglia
+  cell_state: "MG8 inflammatory II"
+  claim_type: pathology_association
+  direction: associated_pos
+  comparison: "within all donors (continuous pathology)"
+  genes: []
+  gene_source: ""
+  reported_stat: "Pearson correlation, cor.test (Fig. S2E); 423 PFC donors"
+  unit_of_analysis: donors
+  method: "Pearson correlation of per-donor state fraction with pathology variables"
+  testable_with: rna
+  test_template: pathology_correlation
+  requires: "quantitative plaque and tangle measures"
+  notes: "'More positively correlated' is a comparison between pathology measures, not a formal test of difference."
+- id: sun2023-C07
+  paper: sun2023
+  statement: "In the prefrontal cortex, the fraction of phagocytic MG5 microglia correlates more strongly with tangles than with plaques."
+  quote: "phagocytic MG5 microglia were more positively correlated with tangles"
+  location: "Fig. S2E; Results \"Characterization of Microglia Transcriptional States\""
+  centrality: secondary
+  modality: snRNA
+  region: PFC
+  cell_type: Microglia
+  cell_state: "MG5 phagocytic"
+  claim_type: pathology_association
+  direction: associated_pos
+  comparison: "within all donors (continuous pathology)"
+  genes: []
+  gene_source: ""
+  reported_stat: "Pearson correlation, cor.test (Fig. S2E); 423 PFC donors"
+  unit_of_analysis: donors
+  method: "Pearson correlation of per-donor state fraction with pathology variables"
+  testable_with: rna
+  test_template: pathology_correlation
+  requires: "quantitative plaque and tangle measures"
+  notes: "MG5 fraction also differs with age (Fig. S2K)."
+- id: sun2023-C08
+  paper: sun2023
+  statement: "By RNAscope in prefrontal cortex, AD individuals have a lower fraction of P2RY12-expressing (homeostatic) microglial nuclei than non-AD individuals."
+  quote: "AD subjects had relatively lower fractions of P2RY12-expressing nuclei"
+  location: "Fig. 1E; Results \"Characterization of Microglia Transcriptional States\""
+  centrality: main
+  modality: imaging
+  region: PFC
+  cell_type: Microglia
+  cell_state: "P2RY12+ (homeostatic marker)"
+  claim_type: composition
+  direction: depleted
+  comparison: "AD vs non-AD"
+  genes: [P2RY12]
+  gene_source: text
+  reported_stat: "4 AD vs 4 non-AD; Student's t-test; legend gives n = 91-149 cells per group (significance of this panel not stated in text)"
+  unit_of_analysis: "unclear (donor averages plotted; legend counts cells)"
+  method: "RNAscope in situ hybridisation, fraction of total DAPI nuclei"
+  testable_with: rna
+  test_template: composition_donor
+  requires: "AD diagnosis; P2RY12 expression per nucleus"
+  notes: "Small validation cohort. The text says 'relatively lower', so it is unclear whether this panel reached significance."
+- id: sun2023-C09
+  paper: sun2023
+  statement: "By RNAscope in prefrontal cortex, PPARG+P2RY12+ microglia (marking the lipid-processing MG4 state) make up a larger fraction of cells in AD individuals than in controls."
+  quote: "a significant increase in the fraction of PPARG+P2RY12+ cells in AD subjects relative to controls"
+  location: "Fig. 1F; Results \"Characterization of Microglia Transcriptional States\""
+  centrality: main
+  modality: imaging
+  region: PFC
+  cell_type: Microglia
+  cell_state: "MG4 lipid-processing (PPARG+)"
+  claim_type: composition
+  direction: enriched
+  comparison: "AD vs non-AD"
+  genes: [PPARG, P2RY12]
+  gene_source: text
+  reported_stat: "Student's t-test, ** P < 0.01; 4 AD vs 4 controls"
+  unit_of_analysis: "unclear (donor averages plotted; legend counts cells)"
+  method: "RNAscope in situ hybridisation"
+  testable_with: rna
+  test_template: composition_donor
+  requires: "AD diagnosis; MG4 / PPARG+ microglia labels"
+  notes: "Validates C02 in situ."
+- id: sun2023-C10
+  paper: sun2023
+  statement: "By RNAscope in prefrontal cortex, FOXP1+LRRK2+ microglia (marking the inflammatory MG8 state) are enriched in AD individuals."
+  quote: "we also observed enrichment of FOXP1+LRRK2+ microglia in these subjects"
+  location: "Fig. 1G; Results \"Characterization of Microglia Transcriptional States\""
+  centrality: main
+  modality: imaging
+  region: PFC
+  cell_type: Microglia
+  cell_state: "MG8 inflammatory II (FOXP1+LRRK2+)"
+  claim_type: composition
+  direction: enriched
+  comparison: "AD vs non-AD"
+  genes: [FOXP1, LRRK2, P2RY12]
+  gene_source: text
+  reported_stat: "Student's t-test (Fig. 1G); 4 AD vs 4 controls"
+  unit_of_analysis: "unclear (donor averages plotted; legend counts cells)"
+  method: "RNAscope in situ hybridisation"
+  testable_with: rna
+  test_template: composition_donor
+  requires: "AD diagnosis; MG8 labels"
+  notes: "The Fig. 1G legend calls LRRK2 and FOXP1 'MG2 markers', but the text and Fig. 2 list them as MG8 markers; recorded as MG8."
+- id: sun2023-C11
+  paper: sun2023
+  statement: "The mouse disease-associated microglia (DAM) signature is most strongly enriched in the ribosome-biogenesis state MG3 and more weakly in several other states, including MG4 and MG10, so DAM-like signatures in the human AD brain do not mark a single state."
+  quote: "DAM-like signatures in the human AD brain do not encompass a single-state"
+  location: "Fig. 1H-K; Fig. S1D-E; Results \"Characterization of Microglia Transcriptional States\""
+  centrality: main
+  modality: snRNA; imaging
+  region: multiple
+  cell_type: Microglia
+  cell_state: "MG3 ribosome biogenesis; MG4 lipid-processing; MG10 inflammatory III"
+  claim_type: other
+  direction: NA
+  comparison: "all donors (signature enrichment across states)"
+  genes: [APOE, PPARG, HLA-A, CD74, C1QB, ABCA1, TREM2]
+  gene_source: "Fig. S1D-E (Keren-Shaul et al. 2017 DAM genes); Fig. 1I"
+  reported_stat: "DAM signature enrichment per state (Fig. 1H); RNAscope: 88% of PPARG+ nuclei APOE-high, 27.6% of APOE+ nuclei PPARG-low (152 P2RY12+ cells, 4 AD donors)"
+  unit_of_analysis: cells
+  method: "gene-set enrichment of mouse DAM signature; RNAscope APOE/PPARG/P2RY12 co-detection"
+  testable_with: rna
+  test_template: state_signature
+  requires: "mouse DAM gene list; microglia state labels"
+  notes: "MG3 DAM enrichment is mostly driven by ribosomal protein genes. The Discussion says DAM signatures are lowly enriched across all states 'with the only exception being the homeostatic state MG0', which conflicts with the Results naming MG3."
+- id: sun2023-C12
+  paper: sun2023
+  statement: "The ribosome-biogenesis state MG3, which carries the strongest DAM signature, does not change in proportion between AD and non-AD prefrontal cortex."
+  quote: "a microglial state that is proportionally unchanged in AD"
+  location: "Fig. 1C,H; Results \"Characterization of Microglia Transcriptional States\"; Discussion"
+  centrality: main
+  modality: snRNA
+  region: PFC
+  cell_type: Microglia
+  cell_state: "MG3 ribosome biogenesis"
+  claim_type: composition
+  direction: NA
+  comparison: "AD (early and late) vs non-AD"
+  genes: []
+  gene_source: ""
+  reported_stat: "propeller, not significant; 423 PFC donors"
+  unit_of_analysis: donors
+  method: "propeller (speckle) on per-sample state proportions"
+  testable_with: rna
+  test_template: composition_donor
+  requires: "AD group; microglia state labels"
+  notes: "Null claim; the authors contrast it with DAM expansion in AD mouse models. MG3 proportion differs by sex (Fig. S2K)."
+- id: sun2023-C13
+  paper: sun2023
+  statement: "The three inflammatory states (MG10 > MG2 > MG8 in inflammatory strength) overlap in marker expression in situ and represent a continuum of inflammatory responses rather than discrete populations."
+  quote: "Microglial inflammatory states capture an inflammatory continuum"
+  location: "Fig. 2A-G; Fig. S4A-D; Results \"Distinct Inflammatory States in the Aged Human Brain\""
+  centrality: main
+  modality: snRNA; imaging
+  region: multiple
+  cell_type: Microglia
+  cell_state: "MG2 inflammatory I; MG8 inflammatory II; MG10 inflammatory III"
+  claim_type: trajectory
+  direction: NA
+  comparison: "within donors (AD subjects for RNAscope)"
+  genes: [IL1B, CCL3, RELB, CPEB4, TMEM163, LRRK2, FOXP1]
+  gene_source: "Fig. 2E-F; Fig. S4D"
+  reported_stat: "MG2 markers co-detected with MG8/MG10 markers in 23% of inflammatory microglia; RNAscope HiPlex, 291 microglia from 4 AD subjects"
+  unit_of_analysis: cells
+  method: "pathway enrichment per state; multiplexed immunostaining and RNAscope HiPlex co-detection with hierarchical clustering"
+  testable_with: rna
+  test_template: trajectory
+  requires: "inflammatory state labels or marker co-expression per nucleus"
+  notes: "Supported in part by iMGL pulse-chase experiments (MG10 markers acute, MG2/MG8 markers sustained; amyloid fibrils induce IL1B early and LRRK2 late), which are iPSC-only and kept in the notes file."
+- id: sun2023-C14
+  paper: sun2023
+  statement: "The strongly inflammatory state MG10 changes its transcription more in early AD, whereas the inflammatory states MG2 and MG8 change more in late AD."
+  quote: "MG10 shows greater transcriptional changes in early disease stages while MG2 and MG8"
+  location: "Results \"Distinct Inflammatory States in the Aged Human Brain\" (cites Fig. S4E-H; DEG counts per state in Fig. 5A)"
+  centrality: secondary
+  modality: snRNA
+  region: multiple
+  cell_type: Microglia
+  cell_state: "MG10; MG2; MG8"
+  claim_type: de_gene
+  direction: NA
+  comparison: "early AD vs non-AD; late AD vs early AD"
+  genes: []
+  gene_source: "Table S1 pages 10-11"
+  reported_stat: "DEG counts per state and stage (Fig. 5A); no statistic given for the comparison"
+  unit_of_analysis: "cells and donors (DEG = significant in >= 2 of MAST, MAST with random effect, edgeR pseudobulk)"
+  method: "MAST, MAST-RE, edgeR pseudobulk with covariates; counts of DEGs per state"
+  testable_with: rna
+  test_template: de_pseudobulk
+  requires: "AD stage (early / late); inflammatory state labels"
+  notes: "The text cites Fig. S4E-H (iMGL qPCR panels), which looks like a figure-reference error; Fig. 5A has the per-state DEG counts. DEG numbers depend on nuclei per state."
+- id: sun2023-C15
+  paper: sun2023
+  statement: "Microglial chromatin accessibility resolves only three epigenomic states (one homeostatic, two activated), far fewer than the 12 transcriptional states, so microglia are more heterogeneous in transcription than in chromatin."
+  quote: "microglia show higher heterogeneity at the transcriptional level than the chromatin accessibility level"
+  location: "Fig. 3A; Fig. S5A-E; Results \"Prediction of Upstream Transcription Factors of Microglial States\"; Highlights"
+  centrality: headline
+  modality: snATAC; multiome-ATAC; multiome-RNA
+  region: multiple
+  cell_type: Microglia
+  cell_state: "HOM; ACT1; ACT2 (epigenomic states)"
+  claim_type: chromatin
+  direction: NA
+  comparison: "all donors (RNA vs ATAC state resolution)"
+  genes: [P2RY12, CCL3, SPP1]
+  gene_source: "Fig. S5B-C"
+  reported_stat: "41,832 snATAC microglia nuclei (~100 donors) -> 3 states; multiome 4,244 microglia (19 donors) -> 9 RNA vs 2 ATAC clusters"
+  unit_of_analysis: cells
+  method: "ArchR iterative LSI clustering (snATAC); 10x multiome per-modality clustering"
+  testable_with: atac
+  test_template: chromatin_da
+  requires: "matched snRNA and snATAC (or multiome) microglia"
+  notes: "Highlight 'Chromatin accessibility poorly captured microglia transcriptional state diversity'. In ATAC, CCL3 is more accessible in ACT1, SPP1 in ACT2, and P2RY12 less accessible in the activated states (not recorded separately)."
+- id: sun2023-C16
+  paper: sun2023
+  statement: "Motif and target-enrichment analyses point to state-specific upstream transcription factors, with FOXO3 (MG8), IRF8 (MG2, MG6, MG10), STAT3 (MG3) and RUNX1 (MG7) supported by both methods, TFDP1 (MG12) and IRF7 (MG11) specific to one state, and SPI1 and CTCF shared by all states."
+  quote: "7 TFs were identified in both methods, including FOXO3 (MG8), IRF8 (MG2, MG6, MG10)"
+  location: "Fig. 3C-E; Fig. S5J-L; Results \"Prediction of Upstream Transcription Factors of Microglial States\""
+  centrality: headline
+  modality: snATAC; snRNA
+  region: multiple
+  cell_type: Microglia
+  cell_state: "MG2; MG3; MG6; MG7; MG8; MG10; MG11; MG12"
+  claim_type: chromatin
+  direction: NA
+  comparison: "all donors (state marker genes and linked peaks)"
+  genes: [FOXO3, IRF8, STAT3, RUNX1, TFDP1, IRF7, HIF1A, SPI1, CTCF]
+  gene_source: "Fig. 3C-D; Table S1 page 8 (peak-gene links)"
+  reported_stat: "36 TFs by HOMER motifs on linked distal peaks, 40 by Enrichr target enrichment, 7 shared; 122,658 peak-to-promoter links"
+  unit_of_analysis: cells
+  method: "ArchR co-accessibility peak-gene links; HOMER motif enrichment; Enrichr (TRANSFAC/JASPAR, ChEA, ENCODE); DoRothEA"
+  testable_with: atac
+  test_template: chromatin_da
+  requires: "microglia state labels with matched chromatin data"
+  notes: "Predictions without an AD contrast. Functional tests (homeostatic TF overexpression; CRISPRi of FOXO3/HIF1A/FOXP2) were done only in iPSC microglia and are in the notes file. One TF name in the MG8 sentence is lost in the manuscript text."
+- id: sun2023-C17
+  paper: sun2023
+  statement: "Microglia show 1,542 AD differentially expressed genes across states and two disease stages, many of them state-specific or stage-specific, and 473 of them change in a stage-specific way in at least two states."
+  quote: "We identify 1,542 AD-differentially-expressed genes, including both microglia-state-specific and disease-stage-specific alterations"
+  location: "Fig. 5A-B; Fig. S7-S8; Results \"Transcriptional Changes of Microglia States in AD\""
+  centrality: headline
+  modality: snRNA
+  region: multiple
+  cell_type: Microglia
+  cell_state: "all 12 states"
+  claim_type: de_gene
+  direction: NA
+  comparison: "early AD vs non-AD; late AD vs early AD"
+  genes: []
+  gene_source: "Table S1 pages 10-11; Fig. S8 (51 groups)"
+  reported_stat: "1,542 DEGs over 48 comparisons (FDR <= 0.05 and |coef| >= 0.1 for MAST/MAST-RE, |logFC| >= 0.58 for edgeR; significant in >= 2 of 3 methods); 31 of 48 comparisons overlap Gerrits et al. 2021 DEGs"
+  unit_of_analysis: "cells and donors (>= 2 of MAST, MAST with random effect, edgeR pseudobulk)"
+  method: "MAST, MAST-RE and edgeR pseudobulk, covariates: genes detected, % mito, % ribo, age, sex, PMI, race, batch, region, LBD/PD"
+  testable_with: rna
+  test_template: de_pseudobulk
+  requires: "AD stage (non-AD / early / late); microglia state labels; age, sex, PMI"
+  notes: "Stages are k-means groups (no, low, high AD pathology), named non-AD / early AD / late AD. 'Late response' compares late with early AD, not with non-AD. Regions are pooled with region as a covariate."
+- id: sun2023-C18
+  paper: sun2023
+  statement: "Homeostatic genes including P2RY12 and CX3CR1 (group G25) are downregulated across diverse microglial states in early AD but not in late AD, suggesting that loss of the homeostatic state is an early event."
+  quote: "the impairment of the microglial homeostatic state may be an early event in AD progression"
+  location: "Fig. 5B-C; Results \"Transcriptional Changes of Microglia States in AD\""
+  centrality: headline
+  modality: snRNA
+  region: multiple
+  cell_type: Microglia
+  cell_state: "multiple states (group G25)"
+  claim_type: de_gene
+  direction: down
+  comparison: "early AD vs non-AD"
+  genes: [P2RY12, CX3CR1]
+  gene_source: "Table S1 pages 10-11 (group G25); Fig. 5B"
+  reported_stat: "DEG in >= 2 of 3 methods (FDR <= 0.05); G25 GO enrichment: microglial cell migration, Wnt signalling, neurogenesis"
+  unit_of_analysis: "cells and donors (>= 2 of MAST, MAST-RE, edgeR pseudobulk)"
+  method: "MAST / MAST-RE / edgeR with covariates; Enrichr GO"
+  testable_with: rna
+  test_template: de_pseudobulk
+  requires: "early-stage AD group (low pathology) vs no pathology"
+  notes: "Abstract: 'AD-dysregulated homeostatic' states. MG0 proportion itself is unchanged (C25)."
+- id: sun2023-C19
+  paper: sun2023
+  statement: "Genes including APOE, MSR1 and CD74 (group G2) are upregulated in microglia in late AD but not in early AD, suggesting that lipid-related microglial changes are a secondary event."
+  quote: "regulatory functions related to lipid accumulation of microglia may be a secondary effect"
+  location: "Fig. 5B-C; Results \"Transcriptional Changes of Microglia States in AD\"; Discussion"
+  centrality: main
+  modality: snRNA
+  region: multiple
+  cell_type: Microglia
+  cell_state: "multiple states (group G2)"
+  claim_type: de_gene
+  direction: up
+  comparison: "late AD vs early AD"
+  genes: [APOE, MSR1, CD74]
+  gene_source: "Table S1 pages 10-11 (group G2); Fig. 5B"
+  reported_stat: "DEG in >= 2 of 3 methods; G2 GO: chemokine production, amyloid-beta clearance, cholesterol transport"
+  unit_of_analysis: "cells and donors (>= 2 of MAST, MAST-RE, edgeR pseudobulk)"
+  method: "MAST / MAST-RE / edgeR with covariates; Enrichr GO"
+  testable_with: rna
+  test_template: de_pseudobulk
+  requires: "AD stage (late vs early)"
+  notes: "With C21 this underlies the Discussion conclusion that inflammatory processes precede lipid regulation in microglia."
+- id: sun2023-C20
+  paper: sun2023
+  statement: "Genes including the AD risk gene BIN1 and the cytokine CCL3 (group G26) are downregulated in multiple microglial states in late AD, and the NF-kB subunit RELB is a predicted upstream regulator of this group."
+  quote: "were widely down-regulated in multiple states of late stage of AD progression"
+  location: "Fig. 5B-D; Results \"Transcriptional Changes of Microglia States in AD\""
+  centrality: main
+  modality: snRNA
+  region: multiple
+  cell_type: Microglia
+  cell_state: "multiple states (group G26)"
+  claim_type: de_gene
+  direction: down
+  comparison: "late AD vs early AD"
+  genes: [BIN1, CCL3, RELB]
+  gene_source: "Table S1 pages 10-11 (group G26); Fig. 5B,D"
+  reported_stat: "DEG in >= 2 of 3 methods; G26 GO: response to cytokine and insulin, receptor-mediated endocytosis, amyloid-beta formation; RELB TF enrichment (Enrichr adjusted P < 0.05)"
+  unit_of_analysis: "cells and donors (>= 2 of MAST, MAST-RE, edgeR pseudobulk)"
+  method: "MAST / MAST-RE / edgeR with covariates; Enrichr GO and TF enrichment"
+  testable_with: rna
+  test_template: de_pseudobulk
+  requires: "AD stage (late vs early)"
+  notes: "66 TFs were enriched for DEG groups, 41 of them in the six stage-specific groups (Fig. 5D)."
+- id: sun2023-C21
+  paper: sun2023
+  statement: "Genes including IL1B, CCL4 and VEGFA (group G49) are upregulated in microglia in early AD and then downregulated in late AD."
+  quote: "were up-regulated in early AD and down-regulated in late AD"
+  location: "Fig. 5B-C; Results \"Transcriptional Changes of Microglia States in AD\""
+  centrality: main
+  modality: snRNA
+  region: multiple
+  cell_type: Microglia
+  cell_state: "multiple states (group G49)"
+  claim_type: de_gene
+  direction: NA
+  comparison: "early AD vs non-AD (up); late AD vs early AD (down)"
+  genes: [IL1B, CCL4, VEGFA]
+  gene_source: "Table S1 pages 10-11 (group G49); Fig. 5B"
+  reported_stat: "DEG in >= 2 of 3 methods; G49 GO: cell proliferation, migration, angiogenesis, cytokine-mediated signalling"
+  unit_of_analysis: "cells and donors (>= 2 of MAST, MAST-RE, edgeR pseudobulk)"
+  method: "MAST / MAST-RE / edgeR with covariates; Enrichr GO"
+  testable_with: rna
+  test_template: de_pseudobulk
+  requires: "AD stage (non-AD / early / late)"
+  notes: "Two-phase claim: up early, down late. Direction set to NA because one field cannot hold both."
+- id: sun2023-C22
+  paper: sun2023
+  statement: "Genes including the AD risk gene PICALM (group G50) are downregulated in microglia in early AD and upregulated in late AD."
+  quote: "were down-regulated in early stage but up-regulated in late stage"
+  location: "Fig. 5B-C; Results \"Transcriptional Changes of Microglia States in AD\""
+  centrality: main
+  modality: snRNA
+  region: multiple
+  cell_type: Microglia
+  cell_state: "multiple states (group G50)"
+  claim_type: de_gene
+  direction: NA
+  comparison: "early AD vs non-AD (down); late AD vs early AD (up)"
+  genes: [PICALM]
+  gene_source: "Table S1 pages 10-11 (group G50); Fig. 5B"
+  reported_stat: "DEG in >= 2 of 3 methods; G50 GO: intracellular signal transduction, amyloid-beta formation, neuron death"
+  unit_of_analysis: "cells and donors (>= 2 of MAST, MAST-RE, edgeR pseudobulk)"
+  method: "MAST / MAST-RE / edgeR with covariates; Enrichr GO"
+  testable_with: rna
+  test_template: de_pseudobulk
+  requires: "AD stage (non-AD / early / late)"
+  notes: "Two-phase claim: down early, up late."
+- id: sun2023-C23
+  paper: sun2023
+  statement: "Marker genes of the inflammatory states MG8 and MG2 show the strongest enrichment for AD GWAS heritability among microglial states."
+  quote: "inflammatory MG8 and MG2 show the most significant enrichment"
+  location: "Fig. 6A; Results \"Association of Microglial Transcriptional States with AD Genetics\""
+  centrality: main
+  modality: snRNA
+  region: multiple
+  cell_type: Microglia
+  cell_state: "MG8 inflammatory II; MG2 inflammatory I"
+  claim_type: genetic_enrichment
+  direction: enriched
+  comparison: "AD GWAS signal across microglial state markers"
+  genes: []
+  gene_source: "Table S1 pages 2-3 (state markers)"
+  reported_stat: "MAGMA.Celltype, FDR < 0.05 (red bars, Fig. 6A)"
+  unit_of_analysis: "genes"
+  method: "MAGMA.Celltype gene-level enrichment, AD GWAS (refs 42-44)"
+  testable_with: rna
+  test_template: genetic_enrichment
+  requires: "AD GWAS summary statistics; microglia state markers"
+  notes: "Fig. S10A: other states associate with lupus, ulcerative colitis and triglyceride GWAS, and weakly with brain disorders."
+- id: sun2023-C24
+  paper: sun2023
+  statement: "Marker genes of the homeostatic (MG0), lipid-processing (MG4) and antiviral (MG11) states are also significantly enriched for AD GWAS heritability."
+  quote: "MG0 (homeostatic), MG4 (lipid-processing) and MG11(antiviral) also show significant enrichment"
+  location: "Fig. 6A; Results \"Association of Microglial Transcriptional States with AD Genetics\""
+  centrality: main
+  modality: snRNA
+  region: multiple
+  cell_type: Microglia
+  cell_state: "MG0 homeostatic; MG4 lipid-processing; MG11 antiviral"
+  claim_type: genetic_enrichment
+  direction: enriched
+  comparison: "AD GWAS signal across microglial state markers"
+  genes: []
+  gene_source: "Table S1 pages 2-3 (state markers)"
+  reported_stat: "MAGMA.Celltype, P < 0.05 or FDR < 0.05 (Fig. 6A; strength per state not given in text)"
+  unit_of_analysis: "genes"
+  method: "MAGMA.Celltype gene-level enrichment, AD GWAS"
+  testable_with: rna
+  test_template: genetic_enrichment
+  requires: "AD GWAS summary statistics; microglia state markers"
+  notes: "The text does not say which of the three reach FDR < 0.05 and which only P < 0.05."
+- id: sun2023-C25
+  paper: sun2023
+  statement: "The proportion of homeostatic MG0 microglia does not change in AD, even though homeostatic genes are downregulated."
+  quote: "the homeostatic MG0 state showed no significant change in cell proportion"
+  location: "Fig. 1C; Results \"Association of Microglial Transcriptional States with AD Genetics\""
+  centrality: main
+  modality: snRNA
+  region: PFC
+  cell_type: Microglia
+  cell_state: "MG0 homeostatic"
+  claim_type: composition
+  direction: NA
+  comparison: "AD (early and late) vs non-AD"
+  genes: [P2RY12, CX3CR1]
+  gene_source: "Table S1 pages 2-3"
+  reported_stat: "propeller, not significant; 423 PFC donors"
+  unit_of_analysis: donors
+  method: "propeller (speckle) on per-sample state proportions"
+  testable_with: rna
+  test_template: composition_donor
+  requires: "AD group; microglia state labels"
+  notes: "Null claim. The authors contrast it with the downregulation of homeostatic genes (C18) and the lower P2RY12+ fraction by RNAscope (C08)."
+- id: sun2023-C26
+  paper: sun2023
+  statement: "Of the top AD GWAS risk genes, 35 are highly expressed in at least one microglial state, for example TREM2 in the lipid-processing state MG4."
+  quote: "TREM2, encoding a lipid receptor, was highly expressed in lipidprocessing MG4"
+  location: "Fig. 6B; Fig. S10B; Results \"Association of Microglial Transcriptional States with AD Genetics\""
+  centrality: main
+  modality: snRNA
+  region: multiple
+  cell_type: Microglia
+  cell_state: "MG4 lipid-processing"
+  claim_type: other
+  direction: NA
+  comparison: "all donors (state-specific expression of AD risk genes)"
+  genes: [TREM2]
+  gene_source: "Fig. 6B (35 GWAS Catalog AD genes, variant P < 1e-8); Fig. S10B (P < 1e-5)"
+  reported_stat: "35 AD risk genes highly expressed in >= 1 state; no statistic in text"
+  unit_of_analysis: cells
+  method: "expression of GWAS Catalog AD genes across states"
+  testable_with: rna
+  test_template: state_signature
+  requires: "GWAS Catalog AD gene list; microglia state labels"
+  notes: "The text names only TREM2; the other 34 genes are in Fig. 6B. The text writes 'lipidprocessing' without a hyphen."
+- id: sun2023-C27
+  paper: sun2023
+  statement: "Of 1,036 genes with microglia-specific TWAS association to AD, 178 are also differentially expressed in microglia during AD progression, more than expected by chance."
+  quote: "178 of them were also differentially expressed in AD progression"
+  location: "Fig. 6C-D; Table S1 page 13; Results \"Association of Microglial Transcriptional States with AD Genetics\""
+  centrality: main
+  modality: snRNA
+  region: multiple
+  cell_type: Microglia
+  cell_state: ""
+  claim_type: genetic_enrichment
+  direction: enriched
+  comparison: "overlap of microglia TWAS genes with AD DEGs (early and late)"
+  genes: []
+  gene_source: "Table S1 page 13 (1,036 TWAS genes); Fig. 6C"
+  reported_stat: "Fisher's exact test P = 1.3e-12; 178 / 1,036 TWAS genes"
+  unit_of_analysis: "genes"
+  method: "microglia pseudobulk sc-eQTL (knockoff filter) + TWAS per LD block; Fisher's exact test of overlap with DEGs"
+  testable_with: rna
+  test_template: genetic_enrichment
+  requires: "microglia TWAS gene list (Table S1 page 13); stage-wise AD DEGs"
+  notes: "The 178 genes are enriched for intracellular signal transduction, cell migration, immune response and amyloid-beta formation (Fig. 6D). eQTL/TWAS needs genotypes; only the overlap with DEGs can be re-tested from expression data."
+- id: sun2023-C28
+  paper: sun2023
+  statement: "Of 44 AD GWAS-risk or TWAS genes differentially expressed in microglia, more change in late AD (34) than in early AD (17), and APOE, BIN1 and PICALM are both risk and TWAS genes."
+  quote: "17 genes showed the differential expression in the early stage while 34 genes"
+  location: "Fig. 6E; Results \"Association of Microglial Transcriptional States with AD Genetics\""
+  centrality: main
+  modality: snRNA
+  region: multiple
+  cell_type: Microglia
+  cell_state: "multiple states"
+  claim_type: de_gene
+  direction: NA
+  comparison: "early AD vs non-AD; late AD vs early AD"
+  genes: [APOE, BIN1, PICALM]
+  gene_source: "Fig. 6E (44 genes, edgeR logFC per state and stage)"
+  reported_stat: "44 genes DE in >= 1 state; 17 early, 34 late across multiple states"
+  unit_of_analysis: "cells and donors (>= 2 of MAST, MAST-RE, edgeR pseudobulk)"
+  method: "stage-wise DE per state (as in Fig. 5B)"
+  testable_with: rna
+  test_template: de_pseudobulk
+  requires: "AD stage (non-AD / early / late); GWAS and TWAS gene lists"
+  notes: "The authors read this as a time-sensitive genetic effect on expression. The 41 other genes are only in Fig. 6E."
+- id: sun2023-C29
+  paper: sun2023
+  statement: "BIN1 (a GWAS and TWAS gene) and RELB (a GWAS gene and upstream TF) are strongly co-expressed across donors and are differentially expressed together across multiple microglial states in AD."
+  quote: "BIN1 (GWAS/TWAS) and RELB (GWAS/TF) were highly correlated and simultaneously differentially expressed"
+  location: "Fig. 6E-F; Results \"Association of Microglial Transcriptional States with AD Genetics\""
+  centrality: main
+  modality: snRNA
+  region: multiple
+  cell_type: Microglia
+  cell_state: "multiple states"
+  claim_type: other
+  direction: associated_pos
+  comparison: "across donors within early (non-AD + early AD) and late (early + late AD) comparisons"
+  genes: [BIN1, RELB]
+  gene_source: "Fig. 6F (co-expression network of APOE, BIN1, RELB, PICALM, THRB, ZBTB16, HS3ST1 and others)"
+  reported_stat: "Pearson cor.test P < 0.01 per state and comparison; edge weight = number of co-expression occurrences"
+  unit_of_analysis: donors
+  method: "donor-level Pearson co-expression per state and stage; Cytoscape network"
+  testable_with: rna
+  test_template: de_pseudobulk
+  requires: "donor-level microglia pseudobulk; AD stage"
+  notes: "No template for co-expression exists; de_pseudobulk covers the joint DE part and a donor-level correlation can be run alongside it."

@@ -1,0 +1,7 @@
+claim_id	term	reason
+leng2021-C06	EC layer genes (Ramsden et al. mouse MEC)	the layer gene sets are from another study, not in this paper's supplement
+leng2021-C07	EC:Exc.s5 markers	no marker table for EC:Exc.s5 in the supplement
+leng2021-C09	functions of genes distinguishing a subpopulation	describes what the genes separating EC:Exc.s2/s4 from other neurons encode; a re-test needs that subpopulation labelled in the target data
+leng2021-C10	functions of genes distinguishing a subpopulation	describes what the genes separating EC:Exc.s2/s4 from other neurons encode; a re-test needs that subpopulation labelled in the target data
+leng2021-C12	which subpopulation has the most downregulated genes	a comparison between subpopulations; the re-tests have no ranking test
+leng2021-C25	overlap with mouse reactive astrocyte genes (Anderson et al. 2016)	an overlap with another study's gene sets

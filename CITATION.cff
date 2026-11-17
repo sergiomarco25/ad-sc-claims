@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+message: "If you use this claim store, please cite it as below."
+title: "AD single-cell claim store"
+abstract: >-
+  Published conclusions of human post-mortem brain Alzheimer's disease single-nucleus studies, extracted as structured
+  claims, re-tested donor-level across harmonised datasets (SEA-AD, PsychAD), rated for certainty, and served as an
+  atlas, a knowledge graph and an MCP server. Built with the claimstore engine and template of the PD single-cell
+  claim store (https://github.com/sergiomarco25/pd-sc-claims).
+type: software
+authors:
+  - family-names: "Marco Salas"
+    given-names: "Sergio"
+repository-code: "https://github.com/sergiomarco25/ad-sc-claims"
+url: "https://sergiomarco25.github.io/ad-sc-claims/"
+license: Apache-2.0
+keywords:
+  - Alzheimer's disease
+  - single-nucleus
+  - replication
+  - meta-analysis
+  - knowledge graph

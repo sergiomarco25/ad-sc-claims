@@ -1,0 +1,47 @@
+# Claim contexts and the store's contrast vocabulary for the AD field (claimstore.contexts, claimstore.build_store).
+# A claim's comparison text (lower case) is matched against `rules` in order; the first match gives its contrast code
+# (claims/contrast_overrides.tsv takes precedence).
+
+# AD phrasings added (2026-11-17): 'do not differ', 'does not change', 'no selective ...', 'no <cell type> changes/differs'
+null_pattern = 'not significantly|no significant|not changed|unchanged|no difference|not (?:reduced|increased|altered|different|depleted|enriched)|comparable|did not differ|does not differ|no change|do not differ|do(?:es)? not change|no selective|\bno\b[^.;]{0,80}\b(?:changes|differs)\b'
+
+rules = [
+    ["braak 6 vs braak 0|braak 2 and braak 6 vs braak 0", "ADlate_vs_control"],
+    ["braak 2 vs braak 0|early-pathology vs no-pathology|middle vs lowest third|early ad vs non-ad", "ADearly_vs_control"],
+    ["female|male vs female", "sex"],
+    ["age at death|; age$", "age"],
+    ["apoe e4", "not_available"],
+    ["cognitive decline|ad pathology traits", "ad_pathology"],
+    ["cognit|resilience", "cognition"],
+    ["along cps|\\bcps\\b|gpath|global ad pathology|ad pathology traits|ad pathology measures|neocortical|tau burden|at8|pam score|continuous pathology|highest vs middle third|late-pathology vs early|late ad vs early ad|prad|aba pseudotime", "ad_pathology"],
+    ["^ad vs control|ad-pathology vs no-pathology|ad vs non-ad|ad \\(early and late\\) vs non-ad", "AD_vs_control"],
+    ["within|vs other|vs all other|vs unaffected|subclusters|subpopulations|severely affected|mediation|sem across|gwas signal|trajectories|markers vs|proportions across|vs mic|vs ast", "within"],
+]
+
+[cell_class_expand]
+"Neurons (other)" = ["Excitatory neurons", "Inhibitory neurons", "Neurons (other)"]
+All = ["ALL"]
+
+[region_map]
+PFC = ["DLPFC", "PFC"]
+DLPFC = ["DLPFC", "PFC"]
+SFG = ["SFG"]
+MTG = ["MTG"]
+EC = ["EC"]
+hippocampus = ["hippocampus"]
+AG = ["AG"]
+thalamus = ["thalamus"]
+occipital = ["occipital"]
+
+# contrast code -> [kind, case group, reference group] (the store's vocab_contrasts table)
+[contrast_labels]
+AD_vs_control = ["case_control", "AD", "control"]
+ADearly_vs_control = ["stage", "AD, Braak NFT stage 1-4", "control"]
+ADlate_vs_control = ["stage", "AD, Braak NFT stage 5-6", "control"]
+ad_pathology = ["continuous", "more AD pathology", "less AD pathology"]
+cognition = ["continuous", "better cognition or resilience", "worse cognition"]
+sex = ["covariate", "male", "female"]
+age = ["covariate", "older age", "younger age"]
+within = ["within", "", ""]
+not_available = ["not_available", "", ""]
+"" = ["unassigned", "", ""]

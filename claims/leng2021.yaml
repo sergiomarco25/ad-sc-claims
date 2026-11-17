@@ -1,0 +1,572 @@
+- id: leng2021-C01
+  paper: leng2021
+  statement: "The relative abundance of excitatory neurons in the caudal entorhinal cortex trends downward at Braak stages 2 and 6 compared with Braak stage 0."
+  quote: "we observed a downward trend in the relative abundance of EC excitatory neurons"
+  location: "Fig. 1f; Results \"Changes in broad cell type composition with neuropathological AD progression\""
+  centrality: main
+  modality: snRNA
+  region: EC
+  cell_type: Excitatory neurons
+  cell_state: ""
+  claim_type: composition
+  direction: depleted
+  comparison: "Braak 2 and Braak 6 vs Braak 0"
+  genes: []
+  gene_source: ""
+  reported_stat: "Braak 2 P_unadjusted = 0.18; Braak 6 P_unadjusted = 0.02; not significant after Holm correction; n = 3/4/3 donors (Braak 0/2/6)"
+  unit_of_analysis: donors
+  method: "beta regression on per-donor relative abundance (relative.abundance ~ braak.stage), Holm correction"
+  testable_with: rna
+  test_template: composition_donor
+  requires: "Braak stage"
+  notes: "Trend only; the authors say there were not many significant broad cell-type changes. All snRNA-seq donors are male and APOE e3/e3."
+- id: leng2021-C02
+  paper: leng2021
+  statement: "The relative abundance of excitatory neurons in the superior frontal gyrus trends downward only at Braak stage 6, not at Braak stage 2."
+  quote: "of SFG excitatory neurons only in Braak stage 6"
+  location: "Fig. 1g; Results \"Changes in broad cell type composition with neuropathological AD progression\""
+  centrality: main
+  modality: snRNA
+  region: SFG
+  cell_type: Excitatory neurons
+  cell_state: ""
+  claim_type: composition
+  direction: depleted
+  comparison: "Braak 6 vs Braak 0"
+  genes: []
+  gene_source: ""
+  reported_stat: "Braak 6 P_unadjusted = 0.05; not significant after Holm correction; n = 3/4/3 donors (Braak 0/2/6)"
+  unit_of_analysis: donors
+  method: "beta regression on per-donor relative abundance, Holm correction"
+  testable_with: rna
+  test_template: composition_donor
+  requires: "Braak stage"
+  notes: "Trend only. SFG sampled at Brodmann area 8, level of the anterior commissure."
+- id: leng2021-C03
+  paper: leng2021
+  statement: "The EC excitatory neuron subpopulation EC:Exc.s2 (RORB+, layer II-like) loses about half of its relative abundance by Braak stage 2, with no further decrease at Braak stage 6, i.e. it is depleted early in AD."
+  quote: "a striking ~50% decrease in its relative abundance in Braak stage 2"
+  location: "Fig. 2c; Results \"Selective vulnerability of excitatory neuron subpopulations\""
+  centrality: headline
+  modality: snRNA
+  region: EC
+  cell_type: Excitatory neurons
+  cell_state: "EC:Exc.s2 (RORB+, CTC-340A15.2+, CTC-535M15.2+; mouse MEC layer II genes)"
+  claim_type: composition
+  direction: depleted
+  comparison: "Braak 2 vs Braak 0 (no further change at Braak 6)"
+  genes: [RORB, CTC-340A15.2, CTC-535M15.2]
+  gene_source: "Fig. 2c; Extended Data Fig. 2a (subpopulation markers)"
+  reported_stat: "~50% decrease Braak 2 vs 0; beta regression with Holm-adjusted P shown in Fig. 2c (value not given in text); n = 3/4/3 donors"
+  unit_of_analysis: donors
+  method: "scAlign cross-sample alignment + subclustering; beta regression on per-donor subpopulation proportion within EC excitatory neurons, Holm correction"
+  testable_with: rna
+  test_template: composition_donor
+  requires: "Braak stage; EC excitatory neuron subtypes mapped to EC:Exc.s2 (RORB+)"
+  notes: "Core of the abstract claim that RORB marks selectively vulnerable EC excitatory neurons. Proportion is within excitatory neurons, so it is relative, not absolute, loss."
+- id: leng2021-C04
+  paper: leng2021
+  statement: "The RORB+ EC excitatory subpopulation EC:Exc.s4 shows a 50-60% reduction in relative abundance at Braak stage 2 compared with Braak stage 0."
+  quote: "EC:Exc.s1 and EC:Exc.s4 similarly exhibited a ~50–60% reduction in their relative abundance"
+  location: "Fig. 2c; Results \"Selective vulnerability of excitatory neuron subpopulations\""
+  centrality: headline
+  modality: snRNA
+  region: EC
+  cell_type: Excitatory neurons
+  cell_state: "EC:Exc.s4 (RORB+, CTC-340A15.2+, CTC-535M15.2+; mouse MEC layer II genes)"
+  claim_type: composition
+  direction: depleted
+  comparison: "Braak 2 vs Braak 0"
+  genes: [RORB, CTC-340A15.2, CTC-535M15.2]
+  gene_source: "Fig. 2c; Extended Data Fig. 2a"
+  reported_stat: "~50-60% reduction Braak 2 vs 0; beta regression, Holm-adjusted P in Fig. 2c; n = 3/4/3 donors"
+  unit_of_analysis: donors
+  method: "beta regression on per-donor subpopulation proportion, Holm correction"
+  testable_with: rna
+  test_template: composition_donor
+  requires: "Braak stage; EC excitatory neuron subtypes mapped to EC:Exc.s4 (RORB+)"
+  notes: "Together with C03 this is the 'RORB+ vulnerable EC neurons' headline."
+- id: leng2021-C05
+  paper: leng2021
+  statement: "The EC excitatory subpopulation EC:Exc.s1 (CDH9-high, layer II-like, no specific marker) shows a 50-60% reduction in relative abundance at Braak stage 2 compared with Braak stage 0."
+  quote: "EC:Exc.s1 and EC:Exc.s4 similarly exhibited a ~50–60% reduction in their relative abundance"
+  location: "Fig. 2c; Results \"Selective vulnerability of excitatory neuron subpopulations\""
+  centrality: main
+  modality: snRNA
+  region: EC
+  cell_type: Excitatory neurons
+  cell_state: "EC:Exc.s1 (CDH9-high; mouse MEC layer II genes)"
+  claim_type: composition
+  direction: depleted
+  comparison: "Braak 2 vs Braak 0"
+  genes: [CDH9]
+  gene_source: "Fig. 2c"
+  reported_stat: "~50-60% reduction Braak 2 vs 0; beta regression, Holm-adjusted P in Fig. 2c; n = 3/4/3 donors"
+  unit_of_analysis: donors
+  method: "beta regression on per-donor subpopulation proportion, Holm correction"
+  testable_with: rna
+  test_template: composition_donor
+  requires: "Braak stage; EC excitatory neuron subtypes mapped to EC:Exc.s1"
+  notes: "CDH9 is also expressed by other EC excitatory subpopulations, so EC:Exc.s1 has no specific marker; the authors did not follow it up."
+- id: leng2021-C06
+  paper: leng2021
+  statement: "EC excitatory subpopulations expressing mouse EC layer III (EC:Exc.s0) or layer V/VI genes (EC:Exc.s3, s5, s7), and the layer II-like EC:Exc.s6 and s8, show no selective depletion across Braak stages."
+  quote: "We failed to find evidence of selective vulnerability in neuronal subpopulations expressing genes"
+  location: "Fig. 2c; Results \"Selective vulnerability of excitatory neuron subpopulations\""
+  centrality: main
+  modality: snRNA
+  region: EC
+  cell_type: Excitatory neurons
+  cell_state: "EC:Exc.s0 (layer III-like); EC:Exc.s3, s5, s7 (layer V/VI-like); EC:Exc.s6, s8 (layer II-like)"
+  claim_type: composition
+  direction: NA
+  comparison: "Braak 2 and Braak 6 vs Braak 0"
+  genes: []
+  gene_source: "Fig. 2c (layer genes from Ramsden et al. mouse MEC S4 Dataset)"
+  reported_stat: "no significant change after Holm correction; n = 3/4/3 donors"
+  unit_of_analysis: donors
+  method: "beta regression on per-donor subpopulation proportion, Holm correction"
+  testable_with: rna
+  test_template: composition_donor
+  requires: "Braak stage; EC excitatory subtype labels"
+  notes: "Null claim that defines the selectivity; 3 vs 4 vs 3 donors gives little power to exclude effects. The text writes 'EC:Exc.7' for EC:Exc.s7."
+- id: leng2021-C07
+  paper: leng2021
+  statement: "The layer V/VI-like EC excitatory subpopulation EC:Exc.s5 increases in relative abundance at Braak stage 2, which the authors attribute to the earlier loss of more vulnerable subpopulations."
+  quote: "EC:Exc.s5 exhibited a statistically significant increase in its relative abundance in Braak stage 2"
+  location: "Fig. 2c; Results \"Selective vulnerability of excitatory neuron subpopulations\""
+  centrality: secondary
+  modality: snRNA
+  region: EC
+  cell_type: Excitatory neurons
+  cell_state: "EC:Exc.s5 (mouse MEC layer V/VI genes)"
+  claim_type: composition
+  direction: enriched
+  comparison: "Braak 2 vs Braak 0"
+  genes: []
+  gene_source: ""
+  reported_stat: "significant after Holm correction (P in Fig. 2c); n = 3/4/3 donors"
+  unit_of_analysis: donors
+  method: "beta regression on per-donor subpopulation proportion, Holm correction"
+  testable_with: rna
+  test_template: composition_donor
+  requires: "Braak stage; EC excitatory subtype labels"
+  notes: "Compositional artefact by the authors' own reading (neurons are post-mitotic); they expect later depletion of EC:Exc.s5."
+- id: leng2021-C08
+  paper: leng2021
+  statement: "RORB and the non-coding transcripts CTC-340A15.2 and CTC-535M15.2 are specific markers of the vulnerable EC excitatory subpopulations EC:Exc.s2 and EC:Exc.s4."
+  quote: "EC:Exc.s2 and EC:Exc.s4 specifically expressed RORB, CTC-340A15.2 and CTC-535M15.2"
+  location: "Fig. 2c; Extended Data Fig. 2a; Results \"Selective vulnerability of excitatory neuron subpopulations\""
+  centrality: headline
+  modality: snRNA
+  region: EC
+  cell_type: Excitatory neurons
+  cell_state: "EC:Exc.s2; EC:Exc.s4"
+  claim_type: state_existence
+  direction: exists
+  comparison: "within all donors (EC excitatory subpopulations)"
+  genes: [RORB, CTC-340A15.2, CTC-535M15.2]
+  gene_source: "Extended Data Fig. 2a (genes expressed by four or fewer subpopulations)"
+  reported_stat: "scran::findMarkers (lfc 0.58, blocked by sample); 10 donors"
+  unit_of_analysis: cells
+  method: "pairwise marker detection between subpopulations (scran::findMarkers) and manual curation"
+  testable_with: rna
+  test_template: state_signature
+  requires: "EC excitatory neurons; the two lncRNAs use older GENCODE names (CTC-340A15.2, CTC-535M15.2) that may need mapping"
+  notes: "RORB is also expressed by some non-vulnerable neocortical excitatory neurons (Discussion)."
+- id: leng2021-C09
+  paper: leng2021
+  statement: "Genes more highly expressed in the vulnerable RORB+ EC excitatory neurons than in other EC excitatory neurons are enriched for axon-localized proteins and voltage-gated potassium channels."
+  quote: "enriched for axon-localized proteins and voltage-gated potassium channels"
+  location: "Extended Data Fig. 2b-c; Supplementary Table 1; Results \"Selective vulnerability of excitatory neuron subpopulations\""
+  centrality: secondary
+  modality: snRNA
+  region: EC
+  cell_type: Excitatory neurons
+  cell_state: "EC:Exc.s2 + EC:Exc.s4 (RORB+)"
+  claim_type: de_pathway
+  direction: up
+  comparison: "EC:Exc.s2/s4 vs all other EC excitatory neurons (within donors)"
+  genes: []
+  gene_source: "Supplementary Table 1"
+  reported_stat: "edgeR pseudobulk FDR < 0.1; GO/Reactome enrichment via STRING FDR < 0.05"
+  unit_of_analysis: donors
+  method: "per-donor pseudobulk edgeR (subpopulation vs rest), STRING GO cellular component / Reactome enrichment"
+  testable_with: rna
+  test_template: de_pseudobulk
+  requires: "RORB+ EC excitatory subtype labels"
+  notes: "Characterises the vulnerable neurons rather than an AD contrast; the Discussion uses it to propose mechanisms."
+- id: leng2021-C10
+  paper: leng2021
+  statement: "Genes with lower expression in the vulnerable RORB+ EC excitatory neurons than in other EC excitatory neurons are enriched for synapse- and dendrite-localized proteins, G-protein signalling, ion transport and neurotransmitter receptor signalling."
+  quote: "enriched for synapse- and dendrite-localized proteins and pathways involving G-protein mediated signaling"
+  location: "Extended Data Fig. 2d-e; Supplementary Table 1; Results \"Selective vulnerability of excitatory neuron subpopulations\""
+  centrality: secondary
+  modality: snRNA
+  region: EC
+  cell_type: Excitatory neurons
+  cell_state: "EC:Exc.s2 + EC:Exc.s4 (RORB+)"
+  claim_type: de_pathway
+  direction: down
+  comparison: "EC:Exc.s2/s4 vs all other EC excitatory neurons (within donors)"
+  genes: []
+  gene_source: "Supplementary Table 1"
+  reported_stat: "edgeR pseudobulk FDR < 0.1; GO/Reactome enrichment via STRING FDR < 0.05"
+  unit_of_analysis: donors
+  method: "per-donor pseudobulk edgeR (subpopulation vs rest), STRING GO / Reactome enrichment"
+  testable_with: rna
+  test_template: de_pseudobulk
+  requires: "RORB+ EC excitatory subtype labels"
+  notes: "Same analysis as C09, lower-expressed side."
+- id: leng2021-C11
+  paper: leng2021
+  statement: "At Braak stage 6 compared with Braak stage 0, many EC excitatory neuron subpopulations show a broad decrease in expression of genes encoding pre- and post-synaptic proteins."
+  quote: "a broad decrease in expression of genes encoding pre- and post-synaptic proteins"
+  location: "Extended Data Fig. 3b,d,f; Supplementary Table 2; Results \"Selective vulnerability of excitatory neuron subpopulations\""
+  centrality: secondary
+  modality: snRNA
+  region: EC
+  cell_type: Excitatory neurons
+  cell_state: ""
+  claim_type: de_pathway
+  direction: down
+  comparison: "Braak 6 vs Braak 0"
+  genes: []
+  gene_source: "Supplementary Table 2"
+  reported_stat: "numbers of DEGs per subpopulation in Extended Data Fig. 3a-b; GO/Reactome enrichment FDR < 0.05; n = 3 vs 3 donors"
+  unit_of_analysis: donors
+  method: "differential expression across Braak stages per subpopulation (test not detailed in Methods; likely the same pseudobulk edgeR) + STRING enrichment"
+  testable_with: rna
+  test_template: geneset_shift
+  requires: "Braak stage (late vs none)"
+  notes: "The authors relate it to Marinaro et al. (familial AD frontal cortex) and older laser-capture microarray data."
+- id: leng2021-C12
+  paper: leng2021
+  statement: "Among EC excitatory subpopulations, the vulnerable EC:Exc.s2 has the most genes downregulated at Braak stage 6 versus 0 and the strongest enrichment of pre- and post-synaptic proteins among them."
+  quote: "EC:Exc.s2 had the largest number of downwardly differentially expressed genes"
+  location: "Extended Data Fig. 3b,d; Results \"Selective vulnerability of excitatory neuron subpopulations\""
+  centrality: secondary
+  modality: snRNA
+  region: EC
+  cell_type: Excitatory neurons
+  cell_state: "EC:Exc.s2 (RORB+)"
+  claim_type: de_gene
+  direction: down
+  comparison: "Braak 6 vs Braak 0"
+  genes: []
+  gene_source: "Supplementary Table 2"
+  reported_stat: "DEG counts in Extended Data Fig. 3b; n = 3 vs 3 donors"
+  unit_of_analysis: donors
+  method: "differential expression across Braak stages per subpopulation (test not detailed in Methods)"
+  testable_with: rna
+  test_template: de_pseudobulk
+  requires: "Braak stage; EC:Exc.s2 labels"
+  notes: "DEG counts depend on the number of nuclei per subpopulation, so a ranking of subpopulations by DEG number is hard to compare across datasets."
+- id: leng2021-C13
+  paper: leng2021
+  statement: "In the superior frontal gyrus, the excitatory subpopulations SFG:Exc.s2 and SFG:Exc.s4, which carry the EC vulnerability markers RORB, CTC-340A15.2 and CTC-535M15.2, trend towards lower relative abundance only at Braak stage 6."
+  quote: "trended towards decreased relative abundance only in Braak stage 6"
+  location: "Fig. 2d; Results \"Selective vulnerability of excitatory neuron subpopulations\""
+  centrality: main
+  modality: snRNA
+  region: SFG
+  cell_type: Excitatory neurons
+  cell_state: "SFG:Exc.s2; SFG:Exc.s4 (RORB+)"
+  claim_type: composition
+  direction: depleted
+  comparison: "Braak 6 vs Braak 0"
+  genes: [RORB, CTC-340A15.2, CTC-535M15.2]
+  gene_source: "Fig. 2d"
+  reported_stat: "not significant after Holm correction; n = 3/4/3 donors"
+  unit_of_analysis: donors
+  method: "beta regression on per-donor subpopulation proportion, Holm correction"
+  testable_with: rna
+  test_template: composition_donor
+  requires: "Braak stage; RORB+ neocortical excitatory subtype labels"
+  notes: "Trend only. SFG:Exc.s7 (also RORB+) decreased significantly at Braak 2 but the authors call the size negligible; not recorded as a claim."
+- id: leng2021-C14
+  paper: leng2021
+  statement: "The RORB+ SFG excitatory subpopulations SFG:Exc.s2 and SFG:Exc.s4 are transcriptionally most similar to the vulnerable EC subpopulations EC:Exc.s2 and EC:Exc.s4."
+  quote: "SFG:Exc.s4 and SFG:Exc.s2 were indeed most similar to EC:Exc.s4 and EC:Exc.s2"
+  location: "Fig. 2e; Extended Data Fig. 4; Results \"Selective vulnerability of excitatory neuron subpopulations\""
+  centrality: main
+  modality: snRNA
+  region: EC; SFG
+  cell_type: Excitatory neurons
+  cell_state: "SFG:Exc.s2/s4 ~ EC:Exc.s2/s4"
+  claim_type: state_existence
+  direction: exists
+  comparison: "within all donors (SFG vs EC subpopulations)"
+  genes: [RORB]
+  gene_source: "Fig. 2e (Pearson correlation of subpopulation profiles)"
+  reported_stat: "Pearson correlation between subpopulation expression profiles; confirmed by joint EC+SFG alignment (Extended Data Fig. 4)"
+  unit_of_analysis: cells
+  method: "Pearson correlation of average profiles; joint scAlign alignment of EC and SFG excitatory neurons"
+  testable_with: rna
+  test_template: state_signature
+  requires: "EC and neocortical excitatory neurons profiled in the same study"
+  notes: "Basis for the authors' suggestion that vulnerability mechanisms are shared across regions."
+- id: leng2021-C15
+  paper: leng2021
+  statement: "In a re-analysis of the Mathys et al. 2019 prefrontal cortex data, the RORB-high excitatory subpopulation Mathys:Exc.s4, the one most similar to EC:Exc.s2/s4, is significantly depleted in male AD cases compared with male controls."
+  quote: "a statistically significant decrease in the relative abundance of Mathys:Exc.s4 in male AD cases"
+  location: "Extended Data Fig. 5b-c; Results \"Selective vulnerability of excitatory neuron subpopulations\""
+  centrality: secondary
+  modality: snRNA
+  region: PFC
+  cell_type: Excitatory neurons
+  cell_state: "Mathys:Exc.s4 (RORB-high)"
+  claim_type: composition
+  direction: depleted
+  comparison: "AD vs control (males)"
+  genes: [RORB]
+  gene_source: "Extended Data Fig. 5b"
+  reported_stat: "beta regression, Holm-adjusted (P in Extended Data Fig. 5b); 12 AD vs 12 control males"
+  unit_of_analysis: donors
+  method: "scAlign alignment + subclustering of Mathys et al. excitatory neurons; beta regression per sex, Holm correction"
+  testable_with: rna
+  test_template: composition_donor
+  requires: "sex; AD pathology diagnosis; RORB-high excitatory subtype labels"
+  notes: "Re-analysis of Mathys et al. 2019 (syn18485175), so it is not independent of mathys2019 claims. Leng writes 'prefrontal cortex'; the source samples are Brodmann area 10, recorded as DLPFC as for mathys2019. No significant change in females (Mathys:Exc.s1 trend, P_unadjusted = 0.17)."
+- id: leng2021-C16
+  paper: leng2021
+  statement: "In the superficial layers of the caudal EC, the proportion of RORB+ neurons among TBR1+ excitatory neurons is substantially lower at Braak stages 2-4 and 5-6 than at Braak stages 0-1."
+  quote: "a substantial reduction in the proportion of RORB+ neurons among excitatory neurons"
+  location: "Fig. 3d-e; Results \"Validation of the selective vulnerability of RORB-expressing excitatory neurons\""
+  centrality: headline
+  modality: imaging
+  region: EC
+  cell_type: Excitatory neurons
+  cell_state: "RORB+ TBR1+ neurons"
+  claim_type: composition
+  direction: depleted
+  comparison: "Braak 2-4 and Braak 5-6 vs Braak 0-1"
+  genes: [RORB, TBR1]
+  gene_source: text
+  reported_stat: "beta regression without multiple-testing adjustment (P in Fig. 3e); Braak 0-1 n = 6, 2-4 n = 12, 5-6 n = 8 donors"
+  unit_of_analysis: donors
+  method: "multiplex immunofluorescence (DAPI, TBR1, RORB, CP13), 4 ROIs per case in cytoarchitectonically delineated caudal EC; beta regression"
+  testable_with: rna
+  test_template: composition_donor
+  requires: "Braak stage; EC excitatory neurons; fraction of RORB+ among excitatory neurons (layer position not available in snRNA)"
+  notes: "Independent validation cohort of 26 donors (includes females and APOE e4 carriers; 5 donors overlap the snRNA set). Restricted to layers above layer IV (dissecans-1)."
+- id: leng2021-C17
+  paper: leng2021
+  statement: "Phospho-tau (CP13) neurofibrillary inclusions are found preferentially in RORB+ rather than RORB- excitatory neurons of the EC, consistent with tau-driven loss of RORB+ neurons."
+  quote: "we detected phospho-tau (CP-13) preferentially in RORB+ compared to RORB- excitatory neurons"
+  location: "Fig. 3f-g; Results \"Validation of the selective vulnerability of RORB-expressing excitatory neurons\""
+  centrality: headline
+  modality: imaging
+  region: EC
+  cell_type: Excitatory neurons
+  cell_state: "RORB+ TBR1+ neurons"
+  claim_type: pathology_association
+  direction: enriched
+  comparison: "RORB+ vs RORB- excitatory neurons (Braak 2-4 and 5-6)"
+  genes: [RORB, TBR1, MAPT]
+  gene_source: text
+  reported_stat: "two-sided Fisher's exact test on TBR1+ cell counts summed across ROIs and donors (P in Fig. 3g); Braak 2-4 n = 6, 5-6 n = 4 donors"
+  unit_of_analysis: cells
+  method: "multiplex immunofluorescence, CP13 (pSer202 tau); Fisher's exact test"
+  testable_with: not_testable
+  test_template: not_testable
+  requires: "per-cell phospho-tau measurement (multiplex imaging or tangle-sorted nuclei)"
+  notes: "Cells pooled across donors for the Fisher test. MAPT added as the gene behind the CP13 epitope; the text names only the antibody."
+- id: leng2021-C18
+  paper: leng2021
+  statement: "No inhibitory neuron subpopulation in the EC or SFG changes significantly in relative abundance across Braak stages."
+  quote: "We did not any detect statistically significant changes in the relative abundance of inhibitory"
+  location: "Fig. 4c-d; Results \"Lack of differences in vulnerability of inhibitory neuron subpopulations\""
+  centrality: main
+  modality: snRNA
+  region: EC; SFG
+  cell_type: Inhibitory neurons
+  cell_state: ""
+  claim_type: composition
+  direction: NA
+  comparison: "Braak 2 and Braak 6 vs Braak 0"
+  genes: []
+  gene_source: "Fig. 4c-d (Lake et al. inhibitory subtype markers)"
+  reported_stat: "no significant change after Holm correction; n = 3/4/3 donors"
+  unit_of_analysis: donors
+  method: "beta regression on per-donor subpopulation proportion, Holm correction"
+  testable_with: rna
+  test_template: composition_donor
+  requires: "Braak stage; inhibitory subtype labels"
+  notes: "Null claim with low power (10 donors). The quote keeps the paper's typo 'did not any detect'."
+- id: leng2021-C19
+  paper: leng2021
+  statement: "In the re-analysed Mathys et al. 2019 prefrontal cortex data, no inhibitory neuron subpopulation differs in relative abundance between AD cases and controls in either sex."
+  quote: "Inhibitory neurons from Mathys et al. also do not show differences in resilience"
+  location: "Extended Data Fig. 7; Results \"Lack of differences in vulnerability of inhibitory neuron subpopulations\""
+  centrality: secondary
+  modality: snRNA
+  region: PFC
+  cell_type: Inhibitory neurons
+  cell_state: ""
+  claim_type: composition
+  direction: NA
+  comparison: "AD vs control (males and females separately)"
+  genes: []
+  gene_source: ""
+  reported_stat: "no significant change; 12 AD vs 12 control per sex"
+  unit_of_analysis: donors
+  method: "beta regression per sex, Holm correction"
+  testable_with: rna
+  test_template: composition_donor
+  requires: "sex; AD pathology diagnosis; inhibitory subtype labels"
+  notes: "Re-analysis of mathys2019 data (Brodmann area 10, recorded as DLPFC)."
+- id: leng2021-C20
+  paper: leng2021
+  statement: "Microglia trend towards higher relative abundance in the EC with AD progression, consistent with microgliosis."
+  quote: "We found a trend towards increased relative abundance of microglia in the EC"
+  location: "Fig. 1f; Results \"Analysis of glial subpopulations\""
+  centrality: main
+  modality: snRNA
+  region: EC
+  cell_type: Microglia
+  cell_state: ""
+  claim_type: composition
+  direction: enriched
+  comparison: "across Braak stages 0, 2, 6"
+  genes: []
+  gene_source: ""
+  reported_stat: "trend; not significant after Holm correction; n = 3/4/3 donors"
+  unit_of_analysis: donors
+  method: "beta regression on per-donor cell-type proportion"
+  testable_with: rna
+  test_template: composition_donor
+  requires: "Braak stage"
+  notes: "Microglia subclustering (4 EC, 5 SFG subpopulations) could not resolve DAM-like states because most DAM and homeostatic markers were barely detected in nuclei; not recorded as a claim."
+- id: leng2021-C21
+  paper: leng2021
+  statement: "Oligodendrocyte subpopulations EC:Oligo.s0, EC:Oligo.s4, SFG:Oligo.s1 and SFG:Oligo.s2 express higher levels of the AD-associated oligodendrocyte genes (Mathys et al. Oli0 markers), such as CRYAB and QDPR."
+  quote: "exhibited higher expression of AD-associated oligodendrocyte genes from Mathys et al."
+  location: "Extended Data Fig. 9d-e; Results \"Analysis of glial subpopulations\""
+  centrality: secondary
+  modality: snRNA
+  region: EC; SFG
+  cell_type: Oligodendrocytes
+  cell_state: "EC:Oligo.s0; EC:Oligo.s4; SFG:Oligo.s1; SFG:Oligo.s2"
+  claim_type: state_existence
+  direction: exists
+  comparison: "within all donors (oligodendrocyte subpopulations)"
+  genes: [CRYAB, QDPR]
+  gene_source: "Extended Data Fig. 9d-e (Mathys et al. 2019 Oli0 markers)"
+  reported_stat: "relative expression heatmap; no statistic given"
+  unit_of_analysis: cells
+  method: "scAlign subclustering; marker heatmap"
+  testable_with: rna
+  test_template: state_signature
+  requires: "Mathys et al. Oli0 marker list"
+  notes: "No change of these subpopulations with Braak stage is claimed in the text (abundances are plotted in Extended Data Fig. 9)."
+- id: leng2021-C22
+  paper: leng2021
+  statement: "Both the EC and the SFG contain a GFAP-high astrocyte subpopulation (EC:Astro.3; SFG:Astro.s4 and s5) that also expresses reactive-astrocyte markers CD44, HSPB1, TNC and HSP90AA1 and likely represents reactive astrocytes."
+  quote: "expressed dramatically higher levels of GFAP, which we will refer to as GFAPhigh astrocytes"
+  location: "Fig. 5a-d; Results \"Analysis of glial subpopulations\""
+  centrality: headline
+  modality: snRNA
+  region: EC; SFG
+  cell_type: Astrocytes
+  cell_state: "GFAPhigh astrocytes (EC:Astro.3; SFG:Astro.s4; SFG:Astro.s5)"
+  claim_type: state_existence
+  direction: exists
+  comparison: "within all donors (astrocyte subpopulations)"
+  genes: [GFAP, CD44, HSPB1, TNC, HSP90AA1]
+  gene_source: "Fig. 5c-d"
+  reported_stat: "4 EC and 6 SFG astrocyte subpopulations; 10 donors"
+  unit_of_analysis: cells
+  method: "scAlign subclustering; scran::findMarkers"
+  testable_with: rna
+  test_template: state_signature
+  requires: "astrocyte subclustering"
+  notes: "Abundance across Braak stages is plotted (Fig. 5c-d) but no change is claimed, so this is not an AD-vs-control claim. 'GFAPhigh' is GFAP with superscript 'high' in print."
+- id: leng2021-C23
+  paper: leng2021
+  statement: "In the SFG, GFAP-high astrocytes form two subpopulations, one with higher CD44 and TNC (extracellular matrix) and one with higher HSPB1 and HSP90AA1 (chaperones)."
+  quote: "in the SFG, GFAPhigh astrocytes consisted of two subpopulations"
+  location: "Fig. 5d; Results \"Analysis of glial subpopulations\""
+  centrality: secondary
+  modality: snRNA
+  region: SFG
+  cell_type: Astrocytes
+  cell_state: "SFG:Astro.s4; SFG:Astro.s5 (GFAPhigh)"
+  claim_type: state_existence
+  direction: exists
+  comparison: "within all donors (astrocyte subpopulations)"
+  genes: [GFAP, CD44, TNC, HSPB1, HSP90AA1]
+  gene_source: "Fig. 5d"
+  reported_stat: "marker heatmap; no statistic given"
+  unit_of_analysis: cells
+  method: "scAlign subclustering; scran::findMarkers"
+  testable_with: rna
+  test_template: state_signature
+  requires: "astrocyte subclustering"
+  notes: "The text does not say which of SFG:Astro.s4 / s5 is the CD44/TNC one."
+- id: leng2021-C24
+  paper: leng2021
+  statement: "GFAP-high astrocytes express lower levels of genes for glutamate/GABA homeostasis (SLC1A2, SLC1A3, GLUL, SLC6A11) and synaptic adhesion/maintenance (NRXN1, CADM2, PTN, GPC5), suggesting a loss of homeostatic function."
+  quote: "GFAPhigh astrocytes consistently expressed lower levels of genes associated with glutamate/GABA homeostasis"
+  location: "Fig. 5c-d,f-g; Results \"Analysis of glial subpopulations\""
+  centrality: headline
+  modality: snRNA
+  region: EC; SFG
+  cell_type: Astrocytes
+  cell_state: "GFAPhigh astrocytes"
+  claim_type: de_gene
+  direction: down
+  comparison: "GFAPhigh vs other astrocyte subpopulations (within donors)"
+  genes: [SLC1A2, SLC1A3, GLUL, SLC6A11, NRXN1, CADM2, PTN, GPC5]
+  gene_source: "Fig. 5c-d,g; full DEG list in the supplementary tables (number not given in the text)"
+  reported_stat: "edgeR pseudobulk FDR < 0.1; Reactome enrichment of downregulated genes (Fig. 5f)"
+  unit_of_analysis: donors
+  method: "per-donor pseudobulk edgeR (subpopulation vs rest); STRING Reactome enrichment"
+  testable_with: rna
+  test_template: de_pseudobulk
+  requires: "GFAP-high (reactive) astrocyte labels"
+  notes: "The abstract states it as decreased expression of homeostatic genes. The contrast is reactive vs other astrocytes, not AD vs control."
+- id: leng2021-C25
+  paper: leng2021
+  statement: "Genes differentially expressed in GFAP-high astrocytes overlap significantly with those of reactive astrocytes in a mouse spinal cord injury model, including genes for glutamate homeostasis, synaptic adhesion, lipid metabolism, cytoskeleton, extracellular matrix and transporters."
+  quote: "showed significant overlap with differentially expressed genes from reactive astrocytes"
+  location: "Fig. 5e-g; Results \"Analysis of glial subpopulations\""
+  centrality: main
+  modality: snRNA
+  region: EC; SFG
+  cell_type: Astrocytes
+  cell_state: "GFAPhigh astrocytes"
+  claim_type: other
+  direction: NA
+  comparison: "GFAPhigh vs other astrocytes, overlap with Anderson et al. 2016 reactive astrocyte DEGs"
+  genes: []
+  gene_source: "Fig. 5e,g (Anderson et al. 2016 gene sets)"
+  reported_stat: "one-sided hypergeometric test, Benjamini-Hochberg adjusted (P in Fig. 5e)"
+  unit_of_analysis: donors
+  method: "GeneOverlap hypergeometric test"
+  testable_with: rna
+  test_template: state_signature
+  requires: "Anderson et al. 2016 reactive astrocyte gene list"
+  notes: "Supports the authors' reading of GFAPhigh astrocytes as reactive astrocytes."
+- id: leng2021-C26
+  paper: leng2021
+  statement: "GFAP-high astrocytes are also found in the re-analysed Mathys et al. 2019 prefrontal cortex data, where Mathys:Astro.s2 upregulates reactive markers and downregulates glutamate/GABA homeostasis and synaptic adhesion genes, and Mathys:Astro.s3 shares their DEGs."
+  quote: "Mathys:Astro.s2 behaved identically compared to GFAPhigh astrocytes in our dataset"
+  location: "Extended Data Fig. 10; Results \"Analysis of glial subpopulations\""
+  centrality: secondary
+  modality: snRNA
+  region: PFC
+  cell_type: Astrocytes
+  cell_state: "Mathys:Astro.s2; Mathys:Astro.s3 (GFAP-high)"
+  claim_type: state_existence
+  direction: exists
+  comparison: "within all donors (astrocyte subpopulations), replication of GFAPhigh state"
+  genes: [GFAP, CD44, HSPB1, TNC, HSP90AA1, SLC1A2, SLC1A3, GLUL, SLC6A11, NRXN1, CADM2, PTN, GPC5]
+  gene_source: "Extended Data Fig. 10b-c"
+  reported_stat: "hypergeometric overlap P in Extended Data Fig. 10c; 3 astrocyte subpopulations in Mathys et al."
+  unit_of_analysis: cells
+  method: "scAlign subclustering of Mathys et al. astrocytes; GeneOverlap hypergeometric test"
+  testable_with: rna
+  test_template: state_signature
+  requires: "astrocyte subclustering"
+  notes: "Re-analysis of mathys2019 data (Brodmann area 10, recorded as DLPFC). The text gives Mathys:Astro.s2 for the markers and Mathys:Astro.s3 for the DEG overlap."

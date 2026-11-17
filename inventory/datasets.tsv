@@ -1,0 +1,3 @@
+cohort	papers	regions	modality	n_pd	n_ctrl	accession	data_access	local	comparator_tier	tier_reason	screening
+psychad		DLPFC	snRNA			CELLxGENE (PsychAD, Lee et al.)	open	raw/psychad_mssm (link to the reference project's raw file); loader src/ad_sc_claims/build/psychad.py			include
+seaad	gabitto2024	MTG;DLPFC	snRNA			CELLxGENE collection 1ca90a2d-2943-483d-b678-b809bf464c30	open	raw/seaad (MTG and DLPFC whole-taxonomy h5ad); loader src/ad_sc_claims/build/seaad.py			include

@@ -1,0 +1,616 @@
+- id: green2024-C01
+  paper: green2024
+  statement: "The proportion of the lipid-associated microglial subpopulation Mic.12 (APOE+GPNMB+) is among the strongest associations with neocortical amyloid-beta and tau burden in the aged DLPFC."
+  quote: "The strongest associations with both Aβ and tau burden were found"
+  location: "Fig. 3b-d; Results \"Linking cell subpopulations to AD traits\""
+  centrality: headline
+  modality: snRNA
+  region: DLPFC
+  cell_type: Microglia
+  cell_state: "Mic.12 (lipid-associated, APOE+GPNMB+, CPM)"
+  claim_type: pathology_association
+  direction: associated_pos
+  comparison: "association with neocortical Aβ and tau burden (continuous), across older individuals"
+  genes: [APOE, GPNMB, CPM]
+  gene_source: "Supplementary Table 2 (subpopulation markers); associations in Supplementary Table 3"
+  reported_stat: "FDR < 0.05 (discovery n = 437); replicated with CelMod bulk-inferred proportions (n = 673); meta-analysis n = 1,110"
+  unit_of_analysis: donors
+  method: "linear regression of trait on sqrt(proportion within microglia), adjusted for age, sex, PMI, nuclei and genes per participant; BH FDR"
+  testable_with: rna
+  test_template: pathology_correlation
+  requires: "quantitative neocortical Aβ and tau (midfrontal); Mic.12 signature or label transfer"
+  notes: "Proportion is within the microglia class (which includes monocytes and macrophages). Neocortical Aβ and tau were measured in midfrontal cortex of the opposite hemisphere."
+- id: green2024-C02
+  paper: green2024
+  statement: "The proportion of the lipid-associated microglial subpopulation Mic.13 (APOE+GPNMB+TREM2+) is strongly associated with neocortical amyloid-beta and tau burden and with faster cognitive decline."
+  quote: "proportion of Mic.13 was also higher in individuals with a higher rate of cognitive decline"
+  location: "Abstract; Fig. 3b-d; Results \"Linking cell subpopulations to AD traits\""
+  centrality: headline
+  modality: snRNA
+  region: DLPFC
+  cell_type: Microglia
+  cell_state: "Mic.13 (lipid-associated, APOE+GPNMB+TREM2+, PTPRG, SPP1)"
+  claim_type: pathology_association
+  direction: associated_pos
+  comparison: "association with neocortical Aβ, tau and rate of cognitive decline (continuous)"
+  genes: [APOE, GPNMB, TREM2, SPP1, PTPRG]
+  gene_source: "Supplementary Table 2; Supplementary Table 3"
+  reported_stat: "FDR < 0.05 for all three traits (discovery n = 437); replicated (n = 673); meta-analysis n = 1,110"
+  unit_of_analysis: donors
+  method: "linear regression on sqrt proportion, adjusted for age, sex, PMI, library quality; BH FDR"
+  testable_with: rna
+  test_template: pathology_correlation
+  requires: "quantitative neocortical Aβ and tau; longitudinal cognitive slope; Mic.13 signature or label transfer"
+  notes: ""
+- id: green2024-C03
+  paper: green2024
+  statement: "The proportion of the stress-response astrocyte subpopulation Ast.10 (SLC38A2+) is associated with greater neocortical tau burden and faster cognitive decline."
+  quote: "stress-responding Ast.10 and Oli.7 subpopulations with a greater tau burden and more rapid cognitive decline"
+  location: "Fig. 3b-d; Results \"Linking cell subpopulations to AD traits\""
+  centrality: main
+  modality: snRNA
+  region: DLPFC
+  cell_type: Astrocytes
+  cell_state: "Ast.10 (SLC38A2; oxidative stress, metallothioneins)"
+  claim_type: pathology_association
+  direction: associated_pos
+  comparison: "association with neocortical tau and rate of cognitive decline (continuous)"
+  genes: [SLC38A2]
+  gene_source: "Supplementary Table 2; Supplementary Table 3"
+  reported_stat: "FDR < 0.05 (n = 437), FDR < 0.01 for two or more traits; replicated (n = 673); meta-analysis n = 1,110"
+  unit_of_analysis: donors
+  method: "linear regression on sqrt proportion within astrocytes, adjusted; BH FDR"
+  testable_with: rna
+  test_template: pathology_correlation
+  requires: "quantitative neocortical tau; cognitive slope; Ast.10 signature or label transfer"
+  notes: "Ast.10 matches the human AD-elevated astrocyte signature of an earlier ROSMAP study (ref. 1)."
+- id: green2024-C04
+  paper: green2024
+  statement: "The proportion of the stress-response oligodendrocyte subpopulation Oli.7 is associated with greater neocortical tau burden and faster cognitive decline."
+  quote: "stress-responding Ast.10 and Oli.7 subpopulations with a greater tau burden and more rapid cognitive decline"
+  location: "Fig. 3b-d; Results \"Linking cell subpopulations to AD traits\""
+  centrality: main
+  modality: snRNA
+  region: DLPFC
+  cell_type: Oligodendrocytes
+  cell_state: "Oli.7 (SLC38A2, IGF1R, QDPR, cholesterol biosynthesis)"
+  claim_type: pathology_association
+  direction: associated_pos
+  comparison: "association with neocortical tau and rate of cognitive decline (continuous)"
+  genes: [SLC38A2, IGF1R, QDPR]
+  gene_source: "Supplementary Table 2; Supplementary Table 3"
+  reported_stat: "FDR < 0.05 (n = 437); replicated (n = 673); meta-analysis n = 1,110"
+  unit_of_analysis: donors
+  method: "linear regression on sqrt proportion within oligodendrocytes, adjusted; BH FDR"
+  testable_with: rna
+  test_template: pathology_correlation
+  requires: "quantitative neocortical tau; cognitive slope; Oli.7 signature or label transfer"
+  notes: ""
+- id: green2024-C05
+  paper: green2024
+  statement: "The PV+ inhibitory neuron subpopulation Inh.16 (MEPE+, layers 5-6) increases in relative proportion with neocortical tau burden, suggesting relative resilience."
+  quote: "this specific subpopulation of PV+ neurons may be relatively resilient"
+  location: "Fig. 3b,d; Extended Data Fig. 5c; Results \"Linking cell subpopulations to AD traits\""
+  centrality: main
+  modality: snRNA
+  region: DLPFC
+  cell_type: Inhibitory neurons
+  cell_state: "Inh.16 (PVALB+ MEPE+, L5-6)"
+  claim_type: pathology_association
+  direction: associated_pos
+  comparison: "association with neocortical tau burden (continuous)"
+  genes: [PVALB, MEPE]
+  gene_source: "Supplementary Table 2"
+  reported_stat: "FDR < 0.05 (n = 437); same or stronger in meta-analysis (n = 1,110)"
+  unit_of_analysis: donors
+  method: "linear regression on sqrt proportion within inhibitory neurons, adjusted; BH FDR"
+  testable_with: rna
+  test_template: pathology_correlation
+  requires: "quantitative neocortical tau; inhibitory neuron subtype labels"
+  notes: "Proportion is relative to all inhibitory neurons, so 'resilient' means relative, not absolute, preservation."
+- id: green2024-C06
+  paper: green2024
+  statement: "The SST+ inhibitory neuron subpopulation Inh.6 (RSPO3+KLF5+, layers 2-5) decreases in relative proportion as neocortical tau burden increases, suggesting enhanced vulnerability."
+  quote: "the specific subpopulation of SST+ neurons may have enhanced vulnerability in AD"
+  location: "Fig. 3b,d; Results \"Linking cell subpopulations to AD traits\""
+  centrality: main
+  modality: snRNA
+  region: DLPFC
+  cell_type: Inhibitory neurons
+  cell_state: "Inh.6 (SST+ RSPO3+ KLF5+, L2-5)"
+  claim_type: pathology_association
+  direction: associated_neg
+  comparison: "association with neocortical tau burden (continuous)"
+  genes: [SST, RSPO3, KLF5]
+  gene_source: "Supplementary Table 2"
+  reported_stat: "FDR < 0.05 (n = 437); same or stronger in meta-analysis (n = 1,110)"
+  unit_of_analysis: donors
+  method: "linear regression on sqrt proportion within inhibitory neurons, adjusted; BH FDR"
+  testable_with: rna
+  test_template: pathology_correlation
+  requires: "quantitative neocortical tau; inhibitory neuron subtype labels"
+  notes: ""
+- id: green2024-C07
+  paper: green2024
+  statement: "In causal mediation models, Mic.12 is placed upstream of amyloid-beta accumulation in the Aβ-tau-cognitive decline cascade."
+  quote: "Mic.12 upstream of Aβ"
+  location: "Abstract; Fig. 3f,j; Results \"Causal modelling of glia in the AD cascade\""
+  centrality: headline
+  modality: snRNA
+  region: DLPFC
+  cell_type: Microglia
+  cell_state: Mic.12
+  claim_type: other
+  direction: associated_pos
+  comparison: "mediation model across older individuals (Mic.12 -> Aβ)"
+  genes: [APOE, GPNMB, CPM]
+  gene_source: "Supplementary Table 2"
+  reported_stat: "n = 432 (Fig. 3f); SEM CFI = 1.00, TLI = 1.00"
+  unit_of_analysis: donors
+  method: "causal mediation analysis with APOE e4 anchor; structural equation model"
+  testable_with: rna
+  test_template: pathology_correlation
+  requires: "quantitative Aβ and tau; APOE genotype; cognitive slope"
+  notes: "Causal ordering is a modelling assumption on cross-sectional data; the abstract says Mic.12 'drives amyloid-β proteinopathy'."
+- id: green2024-C08
+  paper: green2024
+  statement: "Mic.12 proportion is associated with age at death, consistent with an age-dependent microglial dysfunction."
+  quote: "Mic.12 had a strong association with age"
+  location: "Extended Data Fig. 6e; Results \"Causal modelling of glia in the AD cascade\""
+  centrality: secondary
+  modality: snRNA
+  region: DLPFC
+  cell_type: Microglia
+  cell_state: Mic.12
+  claim_type: clinical_association
+  direction: associated_pos
+  comparison: "association with age at death"
+  genes: []
+  gene_source: ""
+  reported_stat: "P = 2.8e-5"
+  unit_of_analysis: donors
+  method: "regression of proportion on age"
+  testable_with: rna
+  test_template: pathology_correlation
+  requires: "age at death; Mic.12 label"
+  notes: "Sign of the age association is not stated explicitly; read as positive from the interpretation (age-dependent dysfunction)."
+- id: green2024-C09
+  paper: green2024
+  statement: "Mic.13 lies downstream of amyloid-beta and Mic.12 and upstream of tau, mediating about one third of the amyloid-beta-tau association; tau mediates most of the Mic.13-cognitive decline association."
+  quote: "The proportion of Mic.13 mediated 32% of the strong association between Aβ and tau"
+  location: "Abstract; Fig. 3g; Extended Data Fig. 6d-f; Results \"Causal modelling of glia in the AD cascade\""
+  centrality: headline
+  modality: snRNA
+  region: DLPFC
+  cell_type: Microglia
+  cell_state: Mic.13
+  claim_type: other
+  direction: associated_pos
+  comparison: "mediation model (Aβ -> Mic.13 -> tau)"
+  genes: [APOE, GPNMB, TREM2]
+  gene_source: "Supplementary Table 2"
+  reported_stat: "32% of Aβ-tau association mediated by Mic.13; tau mediates 62% of Mic.13-cognitive decline; n = 432"
+  unit_of_analysis: donors
+  method: "causal mediation analysis; SEM"
+  testable_with: rna
+  test_template: pathology_correlation
+  requires: "quantitative Aβ and tau; cognitive slope"
+  notes: "Model-based causal inference on cross-sectional data."
+- id: green2024-C10
+  paper: green2024
+  statement: "Mic.13 proportion is associated with APOE e4 but not with age."
+  quote: "was not associated with age but was associated with the genetic risk factor APOE ε4"
+  location: "Extended Data Fig. 6e; Results \"Causal modelling of glia in the AD cascade\""
+  centrality: secondary
+  modality: snRNA
+  region: DLPFC
+  cell_type: Microglia
+  cell_state: Mic.13
+  claim_type: clinical_association
+  direction: associated_pos
+  comparison: "APOE e4 carriers vs non-carriers; age"
+  genes: [APOE]
+  gene_source: text
+  reported_stat: "statistic in Extended Data Fig. 6e"
+  unit_of_analysis: donors
+  method: "regression of proportion on APOE e4 and age"
+  testable_with: rna
+  test_template: pathology_correlation
+  requires: "APOE genotype; age at death"
+  notes: ""
+- id: green2024-C11
+  paper: green2024
+  statement: "Ast.10 lies downstream of tau and mediates part of the tau-cognitive decline association, and explains additional variance in cognitive decline not related to AD pathology."
+  quote: "Ast.10 mediated 8.4% of the strong tau–cognitive-decline association"
+  location: "Abstract; Fig. 3i; Results \"Causal modelling of glia in the AD cascade\""
+  centrality: headline
+  modality: snRNA
+  region: DLPFC
+  cell_type: Astrocytes
+  cell_state: Ast.10
+  claim_type: other
+  direction: associated_pos
+  comparison: "mediation model (tau -> Ast.10 -> cognitive decline)"
+  genes: [SLC38A2]
+  gene_source: "Supplementary Table 2"
+  reported_stat: "8.4% mediated; additional 2.5% of variance in cognitive decline; n = 433"
+  unit_of_analysis: donors
+  method: "causal mediation analysis; SEM"
+  testable_with: rna
+  test_template: pathology_correlation
+  requires: "quantitative tau; cognitive slope"
+  notes: ""
+- id: green2024-C12
+  paper: green2024
+  statement: "Mic.13 and Ast.10 proportions remain associated after adjusting for tau burden, suggesting interaction independent of tau."
+  quote: "an association between Mic.13 and Ast.10 even after adjusting for tau"
+  location: "Fig. 3h; Results \"Causal modelling of glia in the AD cascade\""
+  centrality: main
+  modality: snRNA
+  region: DLPFC
+  cell_type: "Microglia; Astrocytes"
+  cell_state: "Mic.13; Ast.10"
+  claim_type: other
+  direction: associated_pos
+  comparison: "Mic.13 vs Ast.10 proportions across individuals, adjusted for tau"
+  genes: []
+  gene_source: ""
+  reported_stat: "n = 432 (Fig. 3h)"
+  unit_of_analysis: donors
+  method: "causal mediation analysis"
+  testable_with: rna
+  test_template: pathology_correlation
+  requires: "quantitative tau; Mic.13 and Ast.10 labels"
+  notes: ""
+- id: green2024-C13
+  paper: green2024
+  statement: "A structural equation model orders Mic.12 -> Aβ -> Mic.13 -> tau -> Ast.10 -> cognitive decline, with Oli.7 downstream of Ast.10, and reproduces in bulk-inferred proportions of an independent sample except for one relationship."
+  quote: "we constructed a structural equation model (SEM) integrating Mic.12, Mic.13, Ast.10, Oli.7 and AD endophenotypes"
+  location: "Fig. 3j; Extended Data Fig. 6h,i; Results \"Causal modelling of glia in the AD cascade\""
+  centrality: main
+  modality: snRNA
+  region: DLPFC
+  cell_type: "Microglia; Astrocytes; Oligodendrocytes"
+  cell_state: "Mic.12; Mic.13; Ast.10; Oli.7"
+  claim_type: other
+  direction: NA
+  comparison: "SEM across older individuals"
+  genes: []
+  gene_source: ""
+  reported_stat: "CFI = 1.00, TLI = 1.00; replication n = 605 (CelMod bulk), all but one path reproduced"
+  unit_of_analysis: donors
+  method: "structural equation model"
+  testable_with: rna
+  test_template: pathology_correlation
+  requires: "quantitative Aβ and tau; cognitive slope; APOE genotype"
+  notes: "Replication used CelMod proportions inferred from bulk RNA-seq."
+- id: green2024-C14
+  paper: green2024
+  statement: "Mic.12 and Mic.13 share lipid-associated programmes (foam-cell differentiation, cholesterol storage, lipid metabolism; APOE, GPNMB) but are distinct states: Mic.12 has higher endocytic and MHC class II genes, Mic.13 higher cell-junction, adhesion and ECM genes and TREM2."
+  quote: "these two microglial subpopulations are distinct"
+  location: "Fig. 4a-e; Extended Data Fig. 7a-d; Results \"Two disease-associated microglial states\""
+  centrality: main
+  modality: "snRNA; imaging"
+  region: DLPFC
+  cell_type: Microglia
+  cell_state: "Mic.12; Mic.13"
+  claim_type: state_existence
+  direction: exists
+  comparison: "Mic.13 vs Mic.12 vs other microglia"
+  genes: [APOE, GPNMB, PELI1, PELI2, HLA-DRA, ADAM10, TGFBR1, SMAD3, PPARG, TREM2, SCIN, WIPF3, PRKCE, MSR1, CPM, TPRG1]
+  gene_source: "Fig. 4c; Supplementary Table 2"
+  reported_stat: "hypergeometric pathway enrichment FDR < 0.05; smFISH in 15 independent DLPFC samples shows CPM-high and TPRG1-high IBA1+ cells are distinct"
+  unit_of_analysis: cells
+  method: "subclustering; DE and pathway enrichment; RNAscope smFISH with IBA1 IF"
+  testable_with: rna
+  test_template: state_signature
+  requires: "microglia with enough nuclei for subclustering"
+  notes: "Not a disease contrast; recorded because it defines the two AD-associated states. smFISH samples from the New York Brain Bank (8 AD, 1 MCI, 6 non-impaired)."
+- id: green2024-C15
+  paper: green2024
+  statement: "In smFISH of independent DLPFC samples, the proportions of CPM+IBA1+ (Mic.12) and TPRG1+IBA1+ (Mic.13) microglia are associated with AT8 tau burden."
+  quote: "we found that it was associated with the proportion of Mic.12"
+  location: "Fig. 4f; Results \"Two disease-associated microglial states\""
+  centrality: main
+  modality: imaging
+  region: DLPFC
+  cell_type: Microglia
+  cell_state: "Mic.12 (CPM+); Mic.13 (TPRG1+)"
+  claim_type: pathology_association
+  direction: associated_pos
+  comparison: "association with AT8 tau burden (continuous)"
+  genes: [CPM, TPRG1]
+  gene_source: text
+  reported_stat: "Mic.12 t = 3.2, P = 0.0066; Mic.13 t = 2.8, P = 0.014; n = 15 samples (8 AD, 1 MCI, 6 NCI)"
+  unit_of_analysis: donors
+  method: "linear regression of smFISH proportions on AT8 area"
+  testable_with: spatial
+  test_template: pathology_correlation
+  requires: "in situ RNA detection of CPM/TPRG1 in IBA1+ cells; AT8 quantification"
+  notes: "Orthogonal validation of C01 and C02."
+- id: green2024-C16
+  paper: green2024
+  statement: "Mic.12 and Mic.13 microglia have reduced compactness (less ramification) compared with other microglia, and Mic.12 also has increased eccentricity."
+  quote: "significantly reduced compactness—a measure of cell membrane ramification—among both the Mic.12 and Mic.13 subpopulations"
+  location: "Fig. 4g; Extended Data Fig. 7c; Results \"Two disease-associated microglial states\""
+  centrality: main
+  modality: imaging
+  region: DLPFC
+  cell_type: Microglia
+  cell_state: "Mic.12; Mic.13"
+  claim_type: other
+  direction: down
+  comparison: "Mic.12/Mic.13 vs other microglia (morphology)"
+  genes: [CPM, TPRG1]
+  gene_source: text
+  reported_stat: "compactness FDR < 1e-4; Mic.12 eccentricity FDR < 0.05"
+  unit_of_analysis: cells
+  method: "CellProfiler morphology on RNAscope/IBA1 images"
+  testable_with: not_testable
+  test_template: not_testable
+  requires: "morphology imaging"
+  notes: "Not testable with sequencing data."
+- id: green2024-C17
+  paper: green2024
+  statement: "Mic.12 and Mic.13 proportions are positively associated with the neuropathological proportion of activated (stage III) microglia (PAM), with Mic.13 the main driver."
+  quote: "both Mic.12 and Mic.13 have a strong positive association with the PAM score"
+  location: "Fig. 4h; Results \"Two disease-associated microglial states\""
+  centrality: main
+  modality: snRNA
+  region: DLPFC
+  cell_type: Microglia
+  cell_state: "Mic.12; Mic.13"
+  claim_type: pathology_association
+  direction: associated_pos
+  comparison: "association with PAM score (midfrontal cortex)"
+  genes: []
+  gene_source: ""
+  reported_stat: "n = 91 participants; Mic.12 association attenuated after adjusting for Mic.13; other microglia negatively associated"
+  unit_of_analysis: donors
+  method: "linear regression of PAM on proportions"
+  testable_with: rna
+  test_template: pathology_correlation
+  requires: "PAM score (ROSMAP histopathology)"
+  notes: ""
+- id: green2024-C18
+  paper: green2024
+  statement: "Cellular composition of the aged DLPFC follows two distinct trajectories from a shared start: progression to AD (prAD), with rising neocortical Aβ, tau and cognitive decline, and alternative brain ageing (ABA), with constant Aβ, low tau and variable decline."
+  quote: "we identified two distinct trajectories of cellular change in the ageing DLPFC"
+  location: "Abstract; Fig. 5b-f; Extended Data Fig. 8; Results \"Distinct cellular paths of brain ageing\""
+  centrality: headline
+  modality: snRNA
+  region: DLPFC
+  cell_type: All
+  cell_state: ""
+  claim_type: trajectory
+  direction: NA
+  comparison: "prAD vs ABA trajectories along pseudotime"
+  genes: []
+  gene_source: "Supplementary Table 5 (trajectory assignments and dynamics)"
+  reported_stat: "n = 437 (386 in Palantir model); replicated in 673 bulk-inferred participants (62 subpopulations)"
+  unit_of_analysis: donors
+  method: "BEYOND (PHATE embedding of per-participant subpopulation proportions; Palantir and VIA trajectories)"
+  testable_with: rna
+  test_template: trajectory
+  requires: "per-donor subpopulation proportions for many donors; Aβ, tau, cognitive slope"
+  notes: "Needs a large cohort spanning the clinicopathological range; VIA suggests a minor third trajectory."
+- id: green2024-C19
+  paper: green2024
+  statement: "Along the prAD trajectory the disease-associated subpopulations Mic.12, Mic.13, Ast.10 and Oli.7 increase in proportion."
+  quote: "Mic.12, Mic.13, Ast.10 and Oli.7 all increase in proportion along one axis"
+  location: "Fig. 5c; Fig. 6a; Results \"Distinct cellular paths of brain ageing\""
+  centrality: main
+  modality: snRNA
+  region: DLPFC
+  cell_type: "Microglia; Astrocytes; Oligodendrocytes"
+  cell_state: "Mic.12; Mic.13; Ast.10; Oli.7"
+  claim_type: trajectory
+  direction: up
+  comparison: "along prAD pseudotime"
+  genes: []
+  gene_source: "Supplementary Table 5"
+  reported_stat: "n = 386 (Palantir); robust to embedding and algorithm"
+  unit_of_analysis: donors
+  method: "BEYOND dynamics along pseudotime"
+  testable_with: rna
+  test_template: trajectory
+  requires: "BEYOND-like trajectory assignment"
+  notes: ""
+- id: green2024-C20
+  paper: green2024
+  statement: "Along the ABA trajectory, reactive glial subpopulations such as Ast.5 (GFAP+SERPINA3+OSMR+) and OPC.3 (SERPINA3+OSMR+) increase in proportion."
+  quote: "reactive glial cells, such as Ast.5 and OPC.3, increase along a different axis"
+  location: "Fig. 5c; Fig. 6a; Results \"Distinct cellular paths of brain ageing\""
+  centrality: main
+  modality: snRNA
+  region: DLPFC
+  cell_type: "Astrocytes; OPCs"
+  cell_state: "Ast.5; OPC.3"
+  claim_type: trajectory
+  direction: up
+  comparison: "along ABA pseudotime"
+  genes: [GFAP, SERPINA3, OSMR]
+  gene_source: "Supplementary Table 2"
+  reported_stat: "n = 386 (Palantir)"
+  unit_of_analysis: donors
+  method: "BEYOND dynamics along pseudotime"
+  testable_with: rna
+  test_template: trajectory
+  requires: "BEYOND-like trajectory assignment"
+  notes: "Ast.5 matches mouse disease-associated astrocytes."
+- id: green2024-C21
+  paper: green2024
+  statement: "Along prAD, subpopulations change in sequence: early Mic.12 and Mic.13, then Ast.3, OPC.1 and Oli.6, then late Oli.7 and Ast.10."
+  quote: "mid (Ast.3, OPC.1 and Oli.6) and late (Oli.7, Ast.10) changes along prAD"
+  location: "Fig. 6a; Extended Data Fig. 9a; Results \"Dynamics of multicellular communities\""
+  centrality: main
+  modality: snRNA
+  region: DLPFC
+  cell_type: "Microglia; Astrocytes; Oligodendrocytes; OPCs"
+  cell_state: "Mic.12; Mic.13; Ast.3; OPC.1; Oli.6; Oli.7; Ast.10"
+  claim_type: trajectory
+  direction: up
+  comparison: "along prAD pseudotime (timing)"
+  genes: []
+  gene_source: "Supplementary Table 5"
+  reported_stat: "n = 386"
+  unit_of_analysis: donors
+  method: "BEYOND dynamics"
+  testable_with: rna
+  test_template: trajectory
+  requires: "pseudotime ordering of donors"
+  notes: ""
+- id: green2024-C22
+  paper: green2024
+  statement: "A homeostatic community C1 (homeostatic glia such as Ast.1, Ast.2, Mic.2, Oli.1, OPC.2 and End.2, plus neuronal subcommunity C1.1) decreases along both trajectories."
+  quote: "The healthy community C1 was composed of subpopulations that decreased in frequency along both trajectories"
+  location: "Fig. 6b,c; Extended Data Fig. 9c; Results \"Dynamics of multicellular communities\""
+  centrality: main
+  modality: snRNA
+  region: DLPFC
+  cell_type: "Astrocytes; Microglia; Oligodendrocytes; OPCs; Endothelial; Excitatory neurons; Inhibitory neurons"
+  cell_state: "community C1 (C1.1 neuronal; C1.2 homeostatic glia)"
+  claim_type: trajectory
+  direction: down
+  comparison: "along prAD and ABA pseudotime"
+  genes: []
+  gene_source: "Supplementary Table 5 (community membership)"
+  reported_stat: "replicated in 673 bulk-inferred participants"
+  unit_of_analysis: donors
+  method: "BEYOND integrative clustering of co-occurrence and dynamics"
+  testable_with: rna
+  test_template: trajectory
+  requires: "pseudotime ordering of donors; community membership"
+  notes: ""
+- id: green2024-C23
+  paper: green2024
+  statement: "A prAD community C2 increases along the prAD but not the ABA trajectory; its late subcommunity C2.3 includes Mic.13, Ast.10, Oli.7, Ast.9, Mic.11 and End.5."
+  quote: "prAD C2 community increased in proportion along the prAD trajectory but not the ABA trajectory"
+  location: "Fig. 6b,c; Results \"Dynamics of multicellular communities\""
+  centrality: headline
+  modality: snRNA
+  region: DLPFC
+  cell_type: "Microglia; Astrocytes; Oligodendrocytes; OPCs; Endothelial; Inhibitory neurons"
+  cell_state: "community C2 (C2.1 neuronal incl. Inh.16; C2.2 mid-prAD; C2.3 late-prAD)"
+  claim_type: trajectory
+  direction: up
+  comparison: "along prAD vs ABA pseudotime"
+  genes: []
+  gene_source: "Supplementary Table 5"
+  reported_stat: "replicated in 673 bulk-inferred participants"
+  unit_of_analysis: donors
+  method: "BEYOND"
+  testable_with: rna
+  test_template: trajectory
+  requires: "pseudotime ordering of donors; community membership"
+  notes: "Abstract: trajectories are 'defined by coordinated progressive changes in certain cellular communities'."
+- id: green2024-C24
+  paper: green2024
+  statement: "A reactive community C3 (Ast.5, OPC.3, Mic.6-7, Oli.4, Peri.1) increases along the ABA trajectory."
+  quote: "the ABA reactive C3 community, which included the reactive-like subpopulations Ast.5, OPC.3"
+  location: "Fig. 6b,c; Extended Data Fig. 9c; Results \"Dynamics of multicellular communities\""
+  centrality: main
+  modality: snRNA
+  region: DLPFC
+  cell_type: "Astrocytes; OPCs; Microglia; Oligodendrocytes; Pericytes"
+  cell_state: "community C3"
+  claim_type: trajectory
+  direction: up
+  comparison: "along ABA pseudotime"
+  genes: []
+  gene_source: "Supplementary Table 5"
+  reported_stat: "replicated in 673 bulk-inferred participants"
+  unit_of_analysis: donors
+  method: "BEYOND"
+  testable_with: rna
+  test_template: trajectory
+  requires: "pseudotime ordering of donors; community membership"
+  notes: ""
+- id: green2024-C25
+  paper: green2024
+  statement: "Community C2 and late subcommunity C2.3 proportions increase with neocortical Aβ, tau and cognitive decline, whereas community C1 and neuronal subcommunity C1.1 decrease."
+  quote: "C2 and subcommunity C2.3 proportions increase with the accumulation of neocortical Aβ and tau"
+  location: "Fig. 6d; Results \"Dynamics of multicellular communities\""
+  centrality: main
+  modality: snRNA
+  region: DLPFC
+  cell_type: All
+  cell_state: "communities C1, C1.1, C2, C2.3"
+  claim_type: pathology_association
+  direction: associated_pos
+  comparison: "association with neocortical Aβ, tau and rate of cognitive decline (continuous)"
+  genes: []
+  gene_source: "Supplementary Table 5"
+  reported_stat: "linear regression t-test, FDR < 0.05"
+  unit_of_analysis: donors
+  method: "linear regression of traits on community summary scores"
+  testable_with: rna
+  test_template: pathology_correlation
+  requires: "community membership; quantitative Aβ, tau; cognitive slope"
+  notes: "Direction 'associated_pos' is for C2/C2.3; C1/C1.1 are negatively associated."
+- id: green2024-C26
+  paper: green2024
+  statement: "Along prAD, the shared functions of changing communities progress from lipid-associated/inflammatory programmes, to glucose metabolism, mitochondrial and synaptic programmes (mid-prAD C2.2), to stress-response programmes (late-prAD C2.3: metal ion, heat and oxidative stress)."
+  quote: "a progression starting with lipid-associated/inflammation, followed by altered glucose metabolism/mitochondrial/synaptic function"
+  location: "Fig. 6c; Results \"Dynamics of multicellular communities\""
+  centrality: main
+  modality: snRNA
+  region: DLPFC
+  cell_type: "Microglia; Astrocytes; Oligodendrocytes; OPCs; Endothelial"
+  cell_state: "communities C2.2, C2.3"
+  claim_type: de_pathway
+  direction: up
+  comparison: "along prAD pseudotime (community marker pathways)"
+  genes: []
+  gene_source: "Supplementary Table 2 (subpopulation pathways); Supplementary Table 5"
+  reported_stat: "pathway enrichment of community members (no statistic in text)"
+  unit_of_analysis: cells
+  method: "pathway enrichment of subpopulation markers grouped by community"
+  testable_with: rna
+  test_template: geneset_shift
+  requires: "community membership; pseudotime"
+  notes: "Based on marker pathways of the member subpopulations, not on DE along pseudotime."
+- id: green2024-C27
+  paper: green2024
+  statement: "In Visium spatial transcriptomics, Mic.13 and Ast.10 signatures co-localise within tissue of participants on the prAD trajectory but not of other participants."
+  quote: "were found to be co-localized in tissue sections of participants assigned to the prAD trajectory"
+  location: "Fig. 6e,f; Extended Data Fig. 9e,f; Results \"Dynamics of multicellular communities\""
+  centrality: main
+  modality: spatial-Visium
+  region: DLPFC
+  cell_type: "Microglia; Astrocytes"
+  cell_state: "Mic.13; Ast.10"
+  claim_type: spatial_colocalisation
+  direction: enriched
+  comparison: "prAD vs other (early/ABA) participants"
+  genes: []
+  gene_source: "Methods (marker gene signatures per subpopulation)"
+  reported_stat: "FDR < 0.01 (one-sided t-test); n = 10 participants"
+  unit_of_analysis: "spots within participants; participants compared"
+  method: "per-participant Pearson correlation of signature scores across spots (MAGIC-imputed)"
+  testable_with: spatial
+  test_template: spatial_neighbourhood
+  requires: "Visium sections with trajectory assignment; Mic.13 and Ast.10 signatures"
+  notes: "Only 10 participants; few in advanced ABA."
+- id: green2024-C28
+  paper: green2024
+  statement: "In Visium, the Ast.10 signature is higher than the Ast.5 signature in participants on the prAD trajectory."
+  quote: "higher compared with the expression of the Ast.5 signature among participants from the prAD trajectory"
+  location: "Fig. 6g; Extended Data Fig. 9g; Results \"Dynamics of multicellular communities\""
+  centrality: main
+  modality: spatial-Visium
+  region: DLPFC
+  cell_type: Astrocytes
+  cell_state: "Ast.10 vs Ast.5"
+  claim_type: state_enrichment
+  direction: enriched
+  comparison: "Ast.10 vs Ast.5 signature within prAD participants"
+  genes: []
+  gene_source: "Methods (marker gene signatures)"
+  reported_stat: "FDR < 0.01 (one-sided t-test); n = 10 participants"
+  unit_of_analysis: "spots within participants"
+  method: "one-sided t-test of signature levels"
+  testable_with: spatial
+  test_template: state_signature
+  requires: "Visium sections with trajectory assignment"
+  notes: "Not enough advanced-ABA participants to test the reverse (Ast.5 > Ast.10 in ABA)."

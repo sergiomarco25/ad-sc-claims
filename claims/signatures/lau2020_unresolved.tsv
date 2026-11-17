@@ -1,0 +1,4 @@
+claim_id	term	reason
+lau2020-C03	overlap of DEG sets	the claim is about how DEG sets overlap (between cell types, or with another study); a direction re-test of the genes would not test it
+lau2020-C12	overlap of DEG sets	the claim is about how DEG sets overlap (between cell types, or with another study); a direction re-test of the genes would not test it
+lau2020-C22	functions of the angiogenic endothelial signature	describes the interaction network of the signature genes; nothing to re-test in expression

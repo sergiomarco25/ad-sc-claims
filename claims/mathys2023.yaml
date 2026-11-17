@@ -1,0 +1,704 @@
+- id: mathys2023-C01
+  paper: mathys2023
+  statement: "Genes associated with global AD pathology overlap significantly between excitatory neuron subtypes of the prefrontal cortex, so AD pathology-associated changes are shared across excitatory subtypes."
+  quote: "AD pathology-associated alterations shared between excitatory neuron subtypes"
+  location: "Summary; Fig. 2G,H; Fig. S2D-G; Results \"Systematic differential analysis of gene expression\""
+  centrality: headline
+  modality: snRNA
+  region: PFC
+  cell_type: Excitatory neurons
+  cell_state: "14 excitatory neuron subtypes"
+  claim_type: de_gene
+  direction: NA
+  comparison: "along global AD pathology (gpath), 427 donors"
+  genes: []
+  gene_source: "GitHub mathyslab7/ROSMAP_snRNAseq_PFC (DE results per cell type)"
+  reported_stat: "one-sided Fisher's exact overlap, Bonferroni; many pairs -log10 P > 100 or > 200; confirmed by expression-matched permutation test"
+  unit_of_analysis: donors
+  method: "muscat pseudobulk edgeR (covariates age at death, PMI), BH adj P < 0.05; GeneOverlap Fisher test"
+  testable_with: rna
+  test_template: de_pseudobulk
+  requires: "global AD pathology score (gpath); excitatory neuron subtype labels"
+  notes: "DEG sets for gpath, neuritic plaque, NFT burden and tangle density also overlap within neuronal subtypes, astrocytes and oligodendrocytes (Fig. 2B-F, S2A). The authors report positive correlation with Lau, Morabito, Sadick and Su; significant DEG overlap with the De Jager DLPFC dataset; and partial confirmation in SEA-AD MTG."
+- id: mathys2023-C02
+  paper: mathys2023
+  statement: "The excitatory-neuron consensus signature positively associated with global AD pathology is enriched for neuron projection morphogenesis, mRNA metabolic processes, chromatin organization and synaptic signaling."
+  quote: "neuron projection morphogenesis, mRNA metabolic processes, chromatin organization, and synaptic signaling"
+  location: "Fig. 3A; Fig. S3A-F; Results \"AD pathology-associated changes conserved across excitatory neuron subtypes\""
+  centrality: main
+  modality: snRNA
+  region: PFC
+  cell_type: Excitatory neurons
+  cell_state: "consensus signature (up in >=3 Exc subtypes)"
+  claim_type: de_pathway
+  direction: up
+  comparison: "along global AD pathology (gpath)"
+  genes: []
+  gene_source: "GitHub DE results; consensus = genes significant in >=3 excitatory subtypes"
+  reported_stat: "Metascape GO q-values (Fig. 3A); SynGO: pre- and postsynaptic genes"
+  unit_of_analysis: donors
+  method: "muscat pseudobulk edgeR (age, PMI); consensus across >=3 Exc subtypes; Metascape GO"
+  testable_with: rna
+  test_template: geneset_shift
+  requires: "global AD pathology score (gpath)"
+  notes: "Synaptic genes up in nuclei but many are down at protein level (Johnson et al. proteomics); authors read this as a homeostatic response to synaptic loss. Synaptic genes negatively associated with pathology were confirmed down by proteomics, RT-qPCR and multiplex ISH."
+- id: mathys2023-C03
+  paper: mathys2023
+  statement: "The spliceosome hnRNPs HNRNPA2B1 and HNRNPH3 are upregulated with AD pathology across excitatory neuron subtypes."
+  quote: "included the heterogeneous nuclear ribonucleoproteins HNRNPA2B1 and HNRNPH3"
+  location: "Fig. 3C; Data S1 pages 6B-C, 7D-E; Results \"AD pathology-associated changes conserved across excitatory neuron subtypes\""
+  centrality: main
+  modality: snRNA
+  region: PFC
+  cell_type: Excitatory neurons
+  cell_state: ""
+  claim_type: de_gene
+  direction: up
+  comparison: "along global AD pathology (gpath); pathologic AD vs non-AD for validation"
+  genes: [HNRNPA2B1, HNRNPH3]
+  gene_source: "text; Fig. 3C"
+  reported_stat: "BH adj P < 0.05 in multiple Exc subtypes; HNRNPA2B1 up in pathologic AD by RT-qPCR and multiplex RNA ISH"
+  unit_of_analysis: donors
+  method: "muscat pseudobulk edgeR (age, PMI); RT-qPCR; HiPlex RNAscope"
+  testable_with: rna
+  test_template: de_pseudobulk
+  requires: "global AD pathology score (gpath)"
+  notes: ""
+- id: mathys2023-C04
+  paper: mathys2023
+  statement: "The excitatory-neuron consensus signature negatively associated with global AD pathology is enriched for tRNA metabolic processes and lipid metabolism."
+  quote: "enriched for genes involved in tRNA metabolic processes and metabolism of lipids"
+  location: "Fig. 3B; Results \"AD pathology-associated changes conserved across excitatory neuron subtypes\""
+  centrality: main
+  modality: snRNA
+  region: PFC
+  cell_type: Excitatory neurons
+  cell_state: "consensus signature (down in >=3 Exc subtypes)"
+  claim_type: de_pathway
+  direction: down
+  comparison: "along global AD pathology (gpath)"
+  genes: []
+  gene_source: "GitHub DE results; consensus = genes significant in >=3 excitatory subtypes"
+  reported_stat: "Metascape GO q-values (Fig. 3B)"
+  unit_of_analysis: donors
+  method: "muscat pseudobulk edgeR (age, PMI); Metascape GO"
+  testable_with: rna
+  test_template: geneset_shift
+  requires: "global AD pathology score (gpath)"
+  notes: "The Discussion adds lower expression of mitochondrial ribosomal protein and aminoacyl-tRNA synthetase genes."
+- id: mathys2023-C05
+  paper: mathys2023
+  statement: "The lipid metabolism genes BDH1, GPCPD1, MECR and TM7SF2 are negatively associated with multiple AD pathology measures across multiple cell types, and BDH1 and GPCPD1 are lower in neuronal nuclei of pathologic AD."
+  quote: "included the lipid metabolism genes BDH1, GPCPD1, MECR, and TM7SF2"
+  location: "Fig. 3E; Data S1 page 6D-E; Results \"AD pathology-associated changes conserved across excitatory neuron subtypes\""
+  centrality: main
+  modality: snRNA
+  region: PFC
+  cell_type: "Excitatory neurons; Astrocytes"
+  cell_state: ""
+  claim_type: de_gene
+  direction: down
+  comparison: "along AD pathology measures (gpath, plaques, NFT); pathologic AD vs non-AD (RT-qPCR)"
+  genes: [BDH1, GPCPD1, MECR, TM7SF2]
+  gene_source: "text; Fig. 3E"
+  reported_stat: "BH adj P < 0.05 in multiple cell types; RT-qPCR on NeuN+ nuclei confirmed BDH1 and GPCPD1 down"
+  unit_of_analysis: donors
+  method: "muscat pseudobulk edgeR (age, PMI); RT-qPCR"
+  testable_with: rna
+  test_template: de_pseudobulk
+  requires: "global AD pathology score (gpath) or pathologic AD diagnosis"
+  notes: "Text says 'across multiple cell types' without naming them; Fig. 3E columns not available as text. Astrocytes included because of C06 and BDH1 IHC in GFAP+ cells."
+- id: mathys2023-C06
+  paper: mathys2023
+  statement: "Cholesterol biosynthesis and lipid metabolism genes are negatively associated with global AD pathology in astrocytes."
+  quote: "dysregulation of lipid metabolism and cholesterol biosynthesis genes was also evident in astrocytes"
+  location: "Fig. 3F; Data S1 page 8A-C; Results \"AD pathology-associated changes conserved across excitatory neuron subtypes\""
+  centrality: main
+  modality: snRNA
+  region: PFC
+  cell_type: Astrocytes
+  cell_state: "cholesterol biosynthesis genes"
+  claim_type: de_pathway
+  direction: down
+  comparison: "along global AD pathology (gpath)"
+  genes: [BDH1]
+  gene_source: "Fig. 3F (cholesterol biosynthesis genes in astrocytes)"
+  reported_stat: "association scores, BH adj P < 0.05 (Fig. 3F); IHC support (BDH1 in GFAP+ astrocytes)"
+  unit_of_analysis: donors
+  method: "muscat pseudobulk edgeR (age, PMI); immunohistochemistry with IMARIS colocalization"
+  testable_with: rna
+  test_template: geneset_shift
+  requires: "global AD pathology score (gpath)"
+  notes: "Individual cholesterol biosynthesis genes are only in Fig. 3F."
+- id: mathys2023-C07
+  paper: mathys2023
+  statement: "Individuals with high AD pathology show lower expression of genes encoding the mitochondrial intermembrane space bridging (MIB) complex in layer 4/5 excitatory neurons, alongside widespread changes in electron transport chain genes."
+  quote: "decreased expression of several genes encoding components of the mitochondrial intermembrane space bridging complex"
+  location: "Fig. 3G,H; Data S1 page 8D; Results \"AD pathology-associated changes conserved across excitatory neuron subtypes\""
+  centrality: main
+  modality: snRNA
+  region: PFC
+  cell_type: Excitatory neurons
+  cell_state: "Exc L4-5 RORB IL1RAPL2"
+  claim_type: de_pathway
+  direction: down
+  comparison: "along global AD pathology (gpath)"
+  genes: [CHCHD6]
+  gene_source: "Fig. 3G,H (MIB and ETC genes); CHCHD6 named in IHC methods"
+  reported_stat: "association scores (Fig. 3H); CHCHD6 IHC in NeuN+ neurons (Data S1 page 8D)"
+  unit_of_analysis: donors
+  method: "muscat pseudobulk edgeR (age, PMI); immunohistochemistry"
+  testable_with: rna
+  test_template: geneset_shift
+  requires: "global AD pathology score (gpath); excitatory layer 4/5 subtype labels"
+  notes: "MIB gene list is not in the text (only CHCHD6 appears, in the IHC methods). Discussion states that ETC genes are decreased."
+- id: mathys2023-C08
+  paper: mathys2023
+  statement: "Expression of the cohesin complex is the most consistently and significantly increased protein complex across excitatory neuron subtypes in individuals with high AD pathology."
+  quote: "most consistently and significantly elevated across excitatory neuron subtypes"
+  location: "Summary; Fig. 4A-C; Fig. S4A-D; Fig. 5D; Results \"Coordinated increase of cohesin complex expression and DNA damage response in AD\""
+  centrality: headline
+  modality: snRNA
+  region: PFC
+  cell_type: Excitatory neurons
+  cell_state: "Cohesin-SA1 / Cohesin-SA2 complex module score"
+  claim_type: de_pathway
+  direction: up
+  comparison: "along global AD pathology (gpath)"
+  genes: [STAG1]
+  gene_source: "CORUM complexes Cohesin-SA1 and Cohesin-SA2 (component genes in Fig. S4B)"
+  reported_stat: "Cohesin-SA1 top of 2,338 complexes by Fisher and Cauchy aggregated P across 12 Exc subtypes; ROSMAP bulk RNA-seq n=638; proteomics; RT-qPCR 6 vs 6"
+  unit_of_analysis: donors
+  method: "Seurat module score per complex averaged per donor; GLM with age at death and PMI; BH; P aggregation across subtypes"
+  testable_with: rna
+  test_template: geneset_shift
+  requires: "global AD pathology score (gpath); CORUM cohesin component genes"
+  notes: "Also increased in a subset of excitatory subtypes in other regions (Fig. 4A, multi-region data), and across tertiles of gpath (highest group significant, Fig. 5D). Only STAG1 is named in the text, in the RT-qPCR legend."
+- id: mathys2023-C09
+  paper: mathys2023
+  statement: "Chromatin regulators and DNA damage response genes that co-vary with cohesin (ATRX, ZBTB1, SIRT1, CHD1, BPTF, ZBTB7A, NIPBL, USP47, BAZ1B, CDKN2AIP, MACROD1) are increased with AD pathology across excitatory neuron subtypes."
+  quote: "accompanied by elevated expression of a plethora of chromatin regulators and DNA damage response factors"
+  location: "Summary; Fig. 4D; Fig. S4E-H; Data S1 page 9A-C; Results \"Coordinated increase of cohesin complex expression and DNA damage response in AD\""
+  centrality: headline
+  modality: snRNA
+  region: PFC
+  cell_type: Excitatory neurons
+  cell_state: "cohesin-co-regulated DNA damage response module"
+  claim_type: de_gene
+  direction: up
+  comparison: "along global AD pathology (gpath)"
+  genes: [ATRX, ZBTB1, SIRT1, CHD1, BPTF, ZBTB7A, NIPBL, USP47, BAZ1B, CDKN2AIP, MACROD1]
+  gene_source: "text; Fig. 4D module 3"
+  reported_stat: "Spearman gene-cohesin correlation (BH) across cells; many genes significant for gpath in multiple Exc subtypes"
+  unit_of_analysis: "cells (co-expression); donors (DE)"
+  method: "Spearman correlation with cohesin module score; k-means of association scores; muscat DE"
+  testable_with: rna
+  test_template: de_pseudobulk
+  requires: "global AD pathology score (gpath)"
+  notes: "Consistent with companion papers (Dileep et al.; Xiong et al.)."
+- id: mathys2023-C10
+  paper: mathys2023
+  statement: "In prefrontal oligodendrocytes, cohesin complex expression and co-regulated DNA damage response and repair genes increase with global AD pathology."
+  quote: "was also positively associated with global AD pathology in PFC oligodendrocytes"
+  location: "Summary; Fig. 4A, E-G; Data S1 page 9D; Results \"Coordinated increase of cohesin complex expression and DNA damage response in AD\""
+  centrality: headline
+  modality: snRNA
+  region: PFC
+  cell_type: Oligodendrocytes
+  cell_state: "Cohesin-SA1/SA2 module; DNA damage response genes"
+  claim_type: de_pathway
+  direction: up
+  comparison: "along global AD pathology (gpath)"
+  genes: []
+  gene_source: "Fig. 4F (DNA damage response genes co-regulated with cohesin in oligodendrocytes)"
+  reported_stat: "GLM association of complex module score (age, PMI; BH); Fig. 4F gene-level associations"
+  unit_of_analysis: donors
+  method: "module score GLM; Spearman co-expression; k-means; muscat DE"
+  testable_with: rna
+  test_template: geneset_shift
+  requires: "global AD pathology score (gpath)"
+  notes: "Oligodendrocyte DNA damage response genes are not named in the text."
+- id: mathys2023-C11
+  paper: mathys2023
+  statement: "Early AD changes (middle versus lowest third of pathology), positively associated with pathology across multiple cell types, are enriched for synapse organization, cell projection organization, chromatin organization and DNA damage response."
+  quote: "early changes positively associated with AD pathology were enriched for genes involved in synapse organization"
+  location: "Fig. 5A,B; Fig. S5A,B; Results \"Temporal changes in gene expression across multiple stages of Alzheimer's disease progression\""
+  centrality: main
+  modality: snRNA
+  region: PFC
+  cell_type: "Excitatory neurons; Inhibitory neurons; Astrocytes; Oligodendrocytes; OPCs; Microglia"
+  cell_state: ""
+  claim_type: de_pathway
+  direction: up
+  comparison: "middle vs lowest third of AD pathology (early stage)"
+  genes: []
+  gene_source: "Fig. 5B; Fig. S5B"
+  reported_stat: "Metascape GO enrichment of stage-specific DEGs"
+  unit_of_analysis: donors
+  method: "muscat pseudobulk DE between tertile groups; Metascape GO"
+  testable_with: rna
+  test_template: geneset_shift
+  requires: "AD pathology measure split into tertiles (e.g. gpath)"
+  notes: "Text says 'across multiple cell types' without listing them; cell_type lists the major classes analysed."
+- id: mathys2023-C12
+  paper: mathys2023
+  statement: "In microglia, cell activation genes rise early with AD pathology (only microglia), and late changes add regulation of defense response and the TYROBP causal network."
+  quote: "genes involved in cell activation were enriched only in microglia"
+  location: "Fig. S5C,D; Results \"Temporal changes in gene expression across multiple stages of Alzheimer's disease progression\""
+  centrality: main
+  modality: snRNA
+  region: PFC
+  cell_type: Microglia
+  cell_state: "cell activation / TYROBP causal network"
+  claim_type: de_pathway
+  direction: up
+  comparison: "middle vs lowest third (early) and highest vs middle third (late) of AD pathology"
+  genes: [TYROBP]
+  gene_source: "Fig. S5C,D"
+  reported_stat: "Metascape GO enrichment of stage-specific DEGs"
+  unit_of_analysis: donors
+  method: "muscat pseudobulk DE between tertile groups; Metascape GO"
+  testable_with: rna
+  test_template: geneset_shift
+  requires: "AD pathology measure split into tertiles"
+  notes: ""
+- id: mathys2023-C13
+  paper: mathys2023
+  statement: "Early AD changes negatively associated with pathology are enriched for autophagy genes in astrocytes, excitatory and inhibitory neurons, oligodendrocytes and OPCs."
+  quote: "Genes involved in autophagy were enriched among early changes negatively associated with AD pathology"
+  location: "Fig. 5C; Fig. S5E; Results \"Temporal changes in gene expression across multiple stages of Alzheimer's disease progression\""
+  centrality: main
+  modality: snRNA
+  region: PFC
+  cell_type: "Astrocytes; Excitatory neurons; Inhibitory neurons; Oligodendrocytes; OPCs"
+  cell_state: "autophagy genes"
+  claim_type: de_pathway
+  direction: down
+  comparison: "middle vs lowest third of AD pathology (early stage)"
+  genes: []
+  gene_source: "Fig. 5C; Fig. S5E"
+  reported_stat: "Metascape GO enrichment of stage-specific DEGs"
+  unit_of_analysis: donors
+  method: "muscat pseudobulk DE between tertile groups; Metascape GO"
+  testable_with: rna
+  test_template: geneset_shift
+  requires: "AD pathology measure split into tertiles"
+  notes: ""
+- id: mathys2023-C14
+  paper: mathys2023
+  statement: "Late AD changes (highest versus middle third of pathology) positively associated with pathology in neurons are enriched for mRNA metabolic processes, chromatin organization, DNA damage response, cell projection organization, synaptic signaling and protein catabolism."
+  quote: "synaptic signaling, and protein catabolic processes in neurons"
+  location: "Fig. 5B; Fig. S5B; Results \"Temporal changes in gene expression across multiple stages of Alzheimer's disease progression\""
+  centrality: main
+  modality: snRNA
+  region: PFC
+  cell_type: "Excitatory neurons; Inhibitory neurons"
+  cell_state: ""
+  claim_type: de_pathway
+  direction: up
+  comparison: "highest vs middle third of AD pathology (late stage)"
+  genes: []
+  gene_source: "Fig. 5B; Fig. S5B"
+  reported_stat: "Metascape GO enrichment of stage-specific DEGs"
+  unit_of_analysis: donors
+  method: "muscat pseudobulk DE between tertile groups; Metascape GO"
+  testable_with: rna
+  test_template: geneset_shift
+  requires: "AD pathology measure split into tertiles"
+  notes: ""
+- id: mathys2023-C15
+  paper: mathys2023
+  statement: "Late AD changes positively associated with pathology in oligodendrocytes are enriched for cholesterol metabolism genes."
+  quote: "cholesterol metabolism in oligodendrocytes"
+  location: "Fig. S5C,D; Results \"Temporal changes in gene expression across multiple stages of Alzheimer's disease progression\""
+  centrality: secondary
+  modality: snRNA
+  region: PFC
+  cell_type: Oligodendrocytes
+  cell_state: "cholesterol metabolism genes"
+  claim_type: de_pathway
+  direction: up
+  comparison: "highest vs middle third of AD pathology (late stage)"
+  genes: []
+  gene_source: "Fig. S5C,D"
+  reported_stat: "Metascape GO enrichment of stage-specific DEGs"
+  unit_of_analysis: donors
+  method: "muscat pseudobulk DE between tertile groups; Metascape GO"
+  testable_with: rna
+  test_template: geneset_shift
+  requires: "AD pathology measure split into tertiles"
+  notes: "Opposite in direction to the astrocyte cholesterol biosynthesis decrease (C06)."
+- id: mathys2023-C16
+  paper: mathys2023
+  statement: "Late AD changes negatively associated with pathology are enriched for lipid metabolism genes in astrocytes, excitatory and inhibitory neurons, and oligodendrocytes."
+  quote: "enriched for lipid metabolism genes in astrocytes, excitatory and inhibitory neurons, and oligodendrocytes"
+  location: "Fig. 5C; Fig. S5F; Results \"Temporal changes in gene expression across multiple stages of Alzheimer's disease progression\""
+  centrality: main
+  modality: snRNA
+  region: PFC
+  cell_type: "Astrocytes; Excitatory neurons; Inhibitory neurons; Oligodendrocytes"
+  cell_state: "lipid metabolism genes"
+  claim_type: de_pathway
+  direction: down
+  comparison: "highest vs middle third of AD pathology (late stage)"
+  genes: []
+  gene_source: "Fig. 5C; Fig. S5F"
+  reported_stat: "Metascape GO enrichment of stage-specific DEGs"
+  unit_of_analysis: donors
+  method: "muscat pseudobulk DE between tertile groups; Metascape GO"
+  testable_with: rna
+  test_template: geneset_shift
+  requires: "AD pathology measure split into tertiles"
+  notes: ""
+- id: mathys2023-C17
+  paper: mathys2023
+  statement: "Many genes changed at a late stage of AD in prefrontal cortex are already changed at an early stage in middle temporal gyrus, suggesting the same alterations occur with a regional time offset."
+  quote: "similar molecular alterations happen with different temporal patterns in different regions of the brain"
+  location: "Fig. 5E-G; Fig. S5G; Results \"Temporal changes in gene expression across multiple stages of Alzheimer's disease progression\""
+  centrality: main
+  modality: snRNA
+  region: "PFC; MTG"
+  cell_type: "Excitatory neurons; Inhibitory neurons; Astrocytes; Oligodendrocytes; OPCs; Microglia"
+  cell_state: ""
+  claim_type: de_gene
+  direction: NA
+  comparison: "late-stage DEGs in PFC (gpath tertiles) vs early-stage DEGs in MTG (SEA-AD pseudo-progression tertiles)"
+  genes: []
+  gene_source: "Fig. 5E,F"
+  reported_stat: "overlapping fractions of stage-specific DEGs (Fig. 5G); no single test statistic in text"
+  unit_of_analysis: donors
+  method: "muscat DE in tertiles of gpath (PFC) and of continuous pseudo-progression score (SEA-AD MTG); overlap"
+  testable_with: rna
+  test_template: de_pseudobulk
+  requires: "two regions with stage information (PFC and MTG); AD pathology tertiles"
+  notes: "MTG part uses SEA-AD data (not generated here). Early changes also overlapped between PFC and MTG."
+- id: mathys2023-C18
+  paper: mathys2023
+  statement: "Within a given cell type, genes associated with cognitive impairment overlap significantly with AD pathology-associated genes, so cognition-related expression changes largely mirror AD pathology changes."
+  quote: "the gene expression alterations associated with cognitive impairment closely reflect AD pathology-associated changes"
+  location: "Fig. 6A,B; Fig. S6A,B; Results \"Molecular correlates of cognitive impairment in the aged human brain\""
+  centrality: main
+  modality: snRNA
+  region: PFC
+  cell_type: "Excitatory neurons; Inhibitory neurons; Astrocytes; Oligodendrocytes"
+  cell_state: ""
+  claim_type: clinical_association
+  direction: NA
+  comparison: "DEGs along global cognition / cognitive domains vs DEGs along AD pathology"
+  genes: []
+  gene_source: "GitHub DE results"
+  reported_stat: "one-sided Fisher's exact overlap; -log10 P > 100-200 in many Exc subtypes (Fig. 6B)"
+  unit_of_analysis: donors
+  method: "muscat pseudobulk edgeR (age, PMI); GeneOverlap Fisher"
+  testable_with: rna
+  test_template: de_pseudobulk
+  requires: "global cognition score (cogn_global_lv); AD pathology scores"
+  notes: "Overlap is strongest in excitatory subtypes; also in a subset of inhibitory subtypes, astrocytes and oligodendrocytes."
+- id: mathys2023-C19
+  paper: mathys2023
+  statement: "Lipid metabolism genes are positively associated with global cognitive function in the excitatory-neuron consensus signature, and cholesterol biosynthesis genes are positively associated with cognition in astrocytes."
+  quote: "positively associated with global cognitive function was enriched for genes involved in lipid metabolism"
+  location: "Fig. S6C-E; Results \"Molecular correlates of cognitive impairment in the aged human brain\""
+  centrality: secondary
+  modality: snRNA
+  region: PFC
+  cell_type: "Excitatory neurons; Astrocytes"
+  cell_state: "lipid metabolism / cholesterol biosynthesis genes"
+  claim_type: clinical_association
+  direction: associated_pos
+  comparison: "along global cognitive function"
+  genes: []
+  gene_source: "Fig. S6D,E"
+  reported_stat: "Metascape GO; association scores (Fig. S6E)"
+  unit_of_analysis: donors
+  method: "muscat pseudobulk edgeR (age, PMI); Metascape GO"
+  testable_with: rna
+  test_template: geneset_shift
+  requires: "global cognition score (cogn_global_lv)"
+  notes: "Matches the pathology result (lipid genes down with AD pathology, C04-C06)."
+- id: mathys2023-C20
+  paper: mathys2023
+  statement: "Synaptic signaling and neuron projection development genes, mainly postsynaptic, are negatively associated with global cognitive function across excitatory neuron subtypes."
+  quote: "the negatively associated consensus signature included genes involved in synaptic signaling and neuron projection development"
+  location: "Fig. S6C,D,F; Results \"Molecular correlates of cognitive impairment in the aged human brain\""
+  centrality: secondary
+  modality: snRNA
+  region: PFC
+  cell_type: Excitatory neurons
+  cell_state: "consensus signature (negatively associated with cognition)"
+  claim_type: clinical_association
+  direction: associated_neg
+  comparison: "along global cognitive function"
+  genes: []
+  gene_source: "Fig. S6D"
+  reported_stat: "Metascape GO; SynGO postsynaptic terms most significant (Fig. S6F)"
+  unit_of_analysis: donors
+  method: "muscat pseudobulk edgeR (age, PMI); Metascape GO; SynGO"
+  testable_with: rna
+  test_template: geneset_shift
+  requires: "global cognition score (cogn_global_lv)"
+  notes: ""
+- id: mathys2023-C21
+  paper: mathys2023
+  statement: "In oligodendrocytes, cholesterol biosynthesis genes are negatively associated with global cognitive function, opposite to astrocytes."
+  quote: "astrocytes showing positive associations, while oligodendrocytes exhibited the opposite trend"
+  location: "Fig. S6D,E; Results \"Molecular correlates of cognitive impairment in the aged human brain\""
+  centrality: secondary
+  modality: snRNA
+  region: PFC
+  cell_type: Oligodendrocytes
+  cell_state: "cholesterol biosynthesis genes"
+  claim_type: clinical_association
+  direction: associated_neg
+  comparison: "along global cognitive function"
+  genes: []
+  gene_source: "Fig. S6E"
+  reported_stat: "association scores (Fig. S6E)"
+  unit_of_analysis: donors
+  method: "muscat pseudobulk edgeR (age, PMI)"
+  testable_with: rna
+  test_template: geneset_shift
+  requires: "global cognition score (cogn_global_lv)"
+  notes: "Described as a 'trend'."
+- id: mathys2023-C22
+  paper: mathys2023
+  statement: "Synaptic genes CACNG3, PAK1, NPTX2, RPH3A, SVOP, BDNF, NUMB and VGF are positively associated with global cognitive function across excitatory neuron subtypes, and NPTX2 is reduced in cognitively impaired individuals."
+  quote: "genes positively associated with global cognitive function, including CACNG3, PAK1, NPTX2, RPH3A, SVOP, and BDNF"
+  location: "Summary; Fig. 6C-G; Data S1 page 11; Results \"Molecular correlates of cognitive impairment in the aged human brain\""
+  centrality: headline
+  modality: "snRNA; imaging"
+  region: PFC
+  cell_type: Excitatory neurons
+  cell_state: ""
+  claim_type: clinical_association
+  direction: associated_pos
+  comparison: "along global cognitive function; no cognitive impairment vs AD dementia (validation)"
+  genes: [CACNG3, PAK1, NPTX2, RPH3A, SVOP, BDNF, NUMB, VGF]
+  gene_source: "text; Fig. 6D,E"
+  reported_stat: "BH adj P < 0.05 in multiple Exc subtypes; NPTX2 RNAscope p=0.0031 and IHC p=0.0142 (6 vs 6 donors); VGF and NUMB by RT-qPCR/IHC"
+  unit_of_analysis: donors
+  method: "muscat pseudobulk edgeR (age, PMI); RNAscope; IHC; RT-qPCR"
+  testable_with: rna
+  test_template: de_pseudobulk
+  requires: "global cognition score (cogn_global_lv)"
+  notes: ""
+- id: mathys2023-C23
+  paper: mathys2023
+  statement: "FGF signaling genes (including FGF1 and FGF22) are positively associated with multiple measures of cognition across excitatory neuron subtypes."
+  quote: "several genes involved in FGF signaling were positively associated with multiple measures of cognition"
+  location: "Fig. 6D,E; Results \"Molecular correlates of cognitive impairment in the aged human brain\"; Discussion"
+  centrality: main
+  modality: snRNA
+  region: PFC
+  cell_type: Excitatory neurons
+  cell_state: ""
+  claim_type: clinical_association
+  direction: associated_pos
+  comparison: "along cognition measures (global and domains)"
+  genes: [FGF1, FGF22]
+  gene_source: "Discussion text; Fig. 6D,E"
+  reported_stat: "association scores (Fig. 6D,E)"
+  unit_of_analysis: donors
+  method: "muscat pseudobulk edgeR (age, PMI)"
+  testable_with: rna
+  test_template: de_pseudobulk
+  requires: "cognition scores (cogn_global_lv and domains)"
+  notes: "FGF1 and FGF22 are named only in the Discussion."
+- id: mathys2023-C24
+  paper: mathys2023
+  statement: "Five genes (HES4, PDE10A, RPH3A, ST6GAL2, UST) are more highly expressed in cognitively resilient individuals, in at least 8 excitatory neuron subtypes for at least one resilience measure."
+  quote: "We identified 5 genes (HES4, PDE10A, RPH3A, ST6GAL2, and UST)"
+  location: "Summary; Methods S1 page 5; Results \"Molecular correlates of cognitive resilience to AD pathology\""
+  centrality: headline
+  modality: snRNA
+  region: PFC
+  cell_type: Excitatory neurons
+  cell_state: ""
+  claim_type: clinical_association
+  direction: associated_pos
+  comparison: "along cognitive resilience (CR/CDR scores: cognition given AD pathology)"
+  genes: [HES4, PDE10A, RPH3A, ST6GAL2, UST]
+  gene_source: "text; Methods S1 page 5D,E"
+  reported_stat: "DE (BH) for >=1 of 16 resilience tests in >=8 Exc subtypes; supported by bulk RNA-seq, RT-qPCR and group DE (pathologic AD with NCI vs with AD dementia)"
+  unit_of_analysis: donors
+  method: "muscat pseudobulk edgeR on CR/CDR residual scores (age, PMI)"
+  testable_with: rna
+  test_template: de_pseudobulk
+  requires: "cognitive resilience score (residual of global cognition or its slope given gpath, plaq_n, nft or tangles)"
+  notes: "UST is a predicted MEF2 target."
+- id: mathys2023-C25
+  paper: mathys2023
+  statement: "Microglia increase in relative abundance in individuals with the highest global AD pathology, neuritic plaque burden and amyloid, while most other major cell types do not change."
+  quote: "microglial cells that exhibited a significant increase in its relative abundance"
+  location: "Fig. 7A,B; Data S1 page 12A-D; Results \"Neuronal and glial compositional changes with the accumulation of AD pathology\""
+  centrality: main
+  modality: snRNA
+  region: PFC
+  cell_type: Microglia
+  cell_state: ""
+  claim_type: composition
+  direction: up
+  comparison: "highest vs lowest quartile of gpath, neuritic plaque and amyloid"
+  genes: []
+  gene_source: text
+  reported_stat: "Kruskal-Wallis + Dunn on quartiles (P < 0.05); quasi-binomial association FDR < 0.05"
+  unit_of_analysis: donors
+  method: "Kruskal-Wallis + Dunn; quasi-binomial regression (age, sex, PMI), BH"
+  testable_with: rna
+  test_template: composition_donor
+  requires: "global AD pathology (gpath), neuritic plaque, amyloid"
+  notes: "Excitatory neurons trend down, significant only for the neocortical gpath measure (gpath_3neocort); not recorded as a separate claim."
+- id: mathys2023-C26
+  paper: mathys2023
+  statement: "Three transcriptionally similar SST inhibitory neuron subtypes (Inh CUX2 MSR1, Inh ENOX2 SPHKAP, Inh L3-5 SST MAFB) are selectively vulnerable, decreasing in relative abundance with AD pathology."
+  quote: "selectively vulnerable somatostatin inhibitory neuron subtypes depleted in AD"
+  location: "Summary; Fig. 7C-F; Data S1 page 13; Results \"Neuronal and glial compositional changes with the accumulation of AD pathology\""
+  centrality: headline
+  modality: snRNA
+  region: PFC
+  cell_type: Inhibitory neurons
+  cell_state: "Inh CUX2 MSR1; Inh ENOX2 SPHKAP; Inh L3-5 SST MAFB"
+  claim_type: composition
+  direction: down
+  comparison: "highest vs lowest quartile of gpath, NFT burden, tangle density; pathologic AD vs non-AD"
+  genes: [SST, CUX2, MSR1, ENOX2, SPHKAP, MAFB]
+  gene_source: "subtype names; Fig. S1F markers"
+  reported_stat: "hypergeometric overrepresentation in low-pathology donors (Bonferroni, 6,954 tests); Mann-Whitney Holm-Sidak; quasi-binomial; confirmed in 615 donors combined with De Jager"
+  unit_of_analysis: "donors (fractions, quasi-binomial); cells (hypergeometric)"
+  method: "hypergeometric; Mann-Whitney (Holm-Sidak); quasi-binomial regression (age, sex, PMI)"
+  testable_with: rna
+  test_template: composition_donor
+  requires: "global AD pathology, NFT burden, tangle density; high-resolution inhibitory subtype labels"
+  notes: "Overrepresented in low pathology for gpath, neuritic plaque, diffuse plaque, amyloid, NFT, tangles and NIA-Reagan non-AD."
+- id: mathys2023-C27
+  paper: mathys2023
+  statement: "The SST inhibitory neuron subclass as a whole decreases in relative abundance in individuals with the highest global AD pathology, neurofibrillary tangle burden and tangle density."
+  quote: "the relative abundance of the entire subclass of SST inhibitory neurons"
+  location: "Fig. 7E,F; Data S1 page 13A-D, 13G-H; Results \"Neuronal and glial compositional changes with the accumulation of AD pathology\"; Discussion"
+  centrality: main
+  modality: snRNA
+  region: PFC
+  cell_type: Inhibitory neurons
+  cell_state: "SST subclass"
+  claim_type: composition
+  direction: down
+  comparison: "highest vs lowest quartile of gpath, NFT burden, tangle density"
+  genes: [SST]
+  gene_source: text
+  reported_stat: "Mann-Whitney Holm-Sidak P < 0.05; quasi-binomial; confirmed in combined 615-donor dataset"
+  unit_of_analysis: donors
+  method: "Mann-Whitney (Holm-Sidak); quasi-binomial regression (age, sex, PMI)"
+  testable_with: rna
+  test_template: composition_donor
+  requires: "global AD pathology, NFT burden, tangle density"
+  notes: "Authors cite earlier reports of SST loss in AD."
+- id: mathys2023-C28
+  paper: mathys2023
+  statement: "The vulnerable SST inhibitory subtypes and the SST subclass are more abundant in individuals with high global cognitive function, episodic memory and semantic memory, and lower in those scoring low."
+  quote: "including the vulnerable SST neurons, that were significantly overrepresented"
+  location: "Summary; Fig. 7G-J; Data S1 page 15; Results \"Differences in cell type composition associated with cognitive impairment\""
+  centrality: headline
+  modality: snRNA
+  region: PFC
+  cell_type: Inhibitory neurons
+  cell_state: "SST subclass; Inh CUX2 MSR1; Inh ENOX2 SPHKAP; Inh L3-5 SST MAFB"
+  claim_type: composition
+  direction: enriched
+  comparison: "highest vs lowest quartile of global cognition, episodic, semantic memory, perceptual orientation"
+  genes: [SST]
+  gene_source: "subtype names; Fig. S1F"
+  reported_stat: "hypergeometric (Bonferroni); Mann-Whitney Holm-Sidak; quasi-binomial (Fig. 7I); confirmed in 615 combined donors"
+  unit_of_analysis: "donors (fractions, quasi-binomial); cells (hypergeometric)"
+  method: "hypergeometric; Mann-Whitney (Holm-Sidak); quasi-binomial regression (age, sex, PMI)"
+  testable_with: rna
+  test_template: composition_donor
+  requires: "global cognition and cognitive domain scores"
+  notes: "Overall inhibitory neurons are also lower in donors with the lowest perceptual orientation and semantic memory scores (Data S1 page 14), and excitatory neurons lower with lowest perceptual orientation."
+- id: mathys2023-C29
+  paper: mathys2023
+  statement: "A LAMP5 RELN group of inhibitory neurons (Inh LAMP5 RELN, Inh PTPRK FAM19A1, Inh SORCS1 TTN) is more abundant in individuals with preserved high cognitive function."
+  quote: "inhibitory neurons that were more abundant in individuals with preserved high cognitive function"
+  location: "Summary; Fig. 7D,G,H,J; Data S1 pages 15-16; Results \"Differences in cell type composition associated with cognitive impairment\""
+  centrality: headline
+  modality: snRNA
+  region: PFC
+  cell_type: Inhibitory neurons
+  cell_state: "Inh LAMP5 RELN; Inh PTPRK FAM19A1; Inh SORCS1 TTN (LAMP5 RELN group)"
+  claim_type: composition
+  direction: enriched
+  comparison: "highest vs lowest quartile of global cognition, episodic memory, perceptual orientation, semantic memory"
+  genes: [LAMP5, RELN, PTPRK, FAM19A1, SORCS1, TTN]
+  gene_source: "subtype names; Fig. S1F"
+  reported_stat: "hypergeometric (Bonferroni); Mann-Whitney Holm-Sidak; quasi-binomial; confirmed in 615 combined donors"
+  unit_of_analysis: "donors (fractions, quasi-binomial); cells (hypergeometric)"
+  method: "hypergeometric; Mann-Whitney (Holm-Sidak); quasi-binomial regression (age, sex, PMI)"
+  testable_with: rna
+  test_template: composition_donor
+  requires: "global cognition and cognitive domain scores; high-resolution inhibitory subtype labels"
+  notes: "Group defined by UMAP adjacency of the three subtypes. The text cites 'Figures 8I and 8J', but the paper has no Figure 8; probably Fig. 7I,J."
+- id: mathys2023-C30
+  paper: mathys2023
+  statement: "Inhibitory neurons are more abundant in individuals with high cognitive resilience to AD pathology, and among pathologic AD cases are more abundant in those without cognitive impairment than in those with AD dementia."
+  quote: "the relative abundance of inhibitory neurons was significantly higher in individuals with high cognitive resilience"
+  location: "Summary; Fig. 7K,L; Fig. S7A,B; Results \"Cell types associated with cognitive resilience to AD pathology\""
+  centrality: headline
+  modality: "snRNA; imaging"
+  region: PFC
+  cell_type: Inhibitory neurons
+  cell_state: ""
+  claim_type: composition
+  direction: enriched
+  comparison: "high vs low cognitive resilience; within pathologic AD: no cognitive impairment vs AD dementia"
+  genes: [GAD2]
+  gene_source: text
+  reported_stat: "Mann-Whitney Holm-Sidak P < 0.05; quasi-binomial; GAD2 RNAscope p=0.0178 (5 vs 5 pathologic AD donors)"
+  unit_of_analysis: donors
+  method: "Mann-Whitney (Holm-Sidak); quasi-binomial regression (age, sex, PMI); RNAscope"
+  testable_with: rna
+  test_template: composition_donor
+  requires: "cognitive resilience score or cogdx within pathologic AD (NIA-Reagan)"
+  notes: "Resilience defined for gpath, neuritic plaque and NFT burden."
+- id: mathys2023-C31
+  paper: mathys2023
+  statement: "The LAMP5 RELN group (especially Inh LAMP5 RELN and Inh PTPRK FAM19A1) is more abundant in individuals with high cognitive resilience to AD pathology and, among pathologic AD cases, in those without cognitive impairment."
+  quote: "RELN-positive inhibitory neurons of the LAMP5 subclass were significantly overrepresented"
+  location: "Fig. 7N,O; Fig. S7C,G; Data S1 pages 17-19; Results \"Cell types associated with cognitive resilience to AD pathology\""
+  centrality: main
+  modality: snRNA
+  region: PFC
+  cell_type: Inhibitory neurons
+  cell_state: "Inh LAMP5 RELN; Inh PTPRK FAM19A1; Inh SORCS1 TTN (LAMP5 RELN group)"
+  claim_type: composition
+  direction: enriched
+  comparison: "high vs low cognitive resilience; within pathologic AD: no cognitive impairment vs AD dementia"
+  genes: [LAMP5, RELN, PTPRK, FAM19A1, SORCS1, TTN]
+  gene_source: "subtype names; Fig. S1F"
+  reported_stat: "hypergeometric (Bonferroni); Mann-Whitney Holm-Sidak; quasi-binomial; RT-qPCR, RNA ISH, IHC; 615-donor combined dataset"
+  unit_of_analysis: "donors (fractions, quasi-binomial); cells (hypergeometric)"
+  method: "hypergeometric; Mann-Whitney (Holm-Sidak); quasi-binomial regression (age, sex, PMI)"
+  testable_with: rna
+  test_template: composition_donor
+  requires: "cognitive resilience score or cogdx within pathologic AD; high-resolution inhibitory subtype labels"
+  notes: ""
+- id: mathys2023-C32
+  paper: mathys2023
+  statement: "The SST inhibitory subclass and the vulnerable SST subtypes are more abundant in individuals with high cognitive resilience to AD pathology and, among pathologic AD cases, in those without cognitive impairment."
+  quote: "the relative abundance of the vulnerable SST neurons was significantly higher"
+  location: "Fig. 7M; Fig. S7C-F; Results \"Cell types associated with cognitive resilience to AD pathology\""
+  centrality: main
+  modality: snRNA
+  region: PFC
+  cell_type: Inhibitory neurons
+  cell_state: "SST subclass; Inh CUX2 MSR1; Inh ENOX2 SPHKAP; Inh L3-5 SST MAFB"
+  claim_type: composition
+  direction: enriched
+  comparison: "high vs low cognitive resilience; within pathologic AD: no cognitive impairment vs AD dementia"
+  genes: [SST]
+  gene_source: text
+  reported_stat: "Mann-Whitney Holm-Sidak P < 0.05; quasi-binomial (Fig. S7E)"
+  unit_of_analysis: donors
+  method: "Mann-Whitney (Holm-Sidak); quasi-binomial regression (age, sex, PMI)"
+  testable_with: rna
+  test_template: composition_donor
+  requires: "cognitive resilience score or cogdx within pathologic AD"
+  notes: "SST subtype overrepresentation in high resilience described as a tendency (Fig. S7C)."

@@ -1,0 +1,2 @@
+paper_id	first_author	year	title	journal_or_preprint	doi	pmid	modality	regions	n_pd	n_ctrl	n_other_disease	n_nuclei	accession	data_access	processed_data_available	author_cell_labels_available	main_conclusions_short	notes	tracks	screening	screening_reason	reuses_data_of	cohort	local	comparator_tier	tier_reason
+grubman2019	Grubman A	2019	A single-cell atlas of entorhinal cortex from individuals with Alzheimer's disease reveals cell-type-specific gene expression regulation	Nat Neurosci	10.1038/s41593-019-0539-4	31768052	snRNA	EC	6	6		13214	GSE138852	open						include						

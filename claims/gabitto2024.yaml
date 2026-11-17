@@ -1,0 +1,660 @@
+- id: gabitto2024-C01
+  paper: gabitto2024
+  statement: "A subset of high-ADNC donors (11 of 42, 'severely affected') with the steepest memory decline have MTG nuclei with less nuclear-localised RNA (MALAT1, MEG3), more mitochondrially encoded RNA and fewer UMIs and genes than other high-ADNC donors."
+  quote: "Nuclei from severely affected donors had lower nuclear-localized RNA"
+  location: "Fig. 1d,e,h; Extended Data Fig. 2a; Results \"Profiling AD progression across pathological stages\""
+  centrality: main
+  modality: snRNA
+  region: MTG
+  cell_type: All
+  cell_state: ""
+  claim_type: other
+  direction: down
+  comparison: "severely affected vs other high-ADNC donors"
+  genes: [MALAT1, MEG3, MT-CO1, MT-ND3]
+  gene_source: text
+  reported_stat: "11 of 42 high-ADNC donors; memory-decline slope -0.15 vs -0.11 (P = 0.01 vs 0.15 against no/low ADNC); n = 543,252 cells in Fig. 1h"
+  unit_of_analysis: "donors (library-level QC PCA); cells for per-gene UMI distributions"
+  method: "PCA on library-level QC metrics; per-cell UMI box plots"
+  testable_with: rna
+  test_template: de_pseudobulk
+  requires: "flag for severely affected donors (QC-metric PCA outliers with NeuN-ir loss); ADNC; cognitive slopes"
+  notes: "The authors read this as global transcriptional shutdown, not tissue degradation, and excluded these 11 donors from all gene expression tests. Direction 'down' refers to nuclear RNA and UMIs; mitochondrial RNA goes up."
+- id: gabitto2024-C02
+  paper: gabitto2024
+  statement: "Severely affected donors have far fewer accessible chromatin peaks in MTG (mostly a subset of those in other high-ADNC donors) plus a small set of unique peaks enriched for inflammation- and dedifferentiation-associated TF motifs, read as global chromatin repression."
+  quote: "severely affected donors underwent global chromatin repression leading to transcriptional shutdown"
+  location: "Fig. 1i; Extended Data Fig. 2c-e; Results \"Profiling AD progression across pathological stages\""
+  centrality: main
+  modality: "snATAC; multiome-ATAC"
+  region: MTG
+  cell_type: All
+  cell_state: ""
+  claim_type: chromatin
+  direction: down
+  comparison: "severely affected vs other high-ADNC donors"
+  genes: []
+  gene_source: "Extended Data Fig. 2e (TF motifs of the 1,574 unique peaks)"
+  reported_stat: "11 severely affected vs 11 random high-ADNC donors; 1,574 peaks unique to severely affected donors; no difference in peak length distributions"
+  unit_of_analysis: donors
+  method: "per-donor peak calling; Jaccard distance clustering of peak universes; motif enrichment"
+  testable_with: atac
+  test_template: chromatin_da
+  requires: "flag for severely affected donors; snATAC per donor"
+  notes: "Peak counts depend on depth and data quality, which the authors note is systematically lower in these donors."
+- id: gabitto2024-C03
+  paper: gabitto2024
+  statement: "Specific Sst interneuron supertypes lose relative abundance early along the continuous pseudoprogression score (CPS), before the exponential rise in plaques and tangles, in both MTG and A9."
+  quote: "Sst supertypes decreased in their relative abundance early in CPS"
+  location: "Abstract; Fig. 3b,c; Results \"Vulnerable and disease-associated supertypes\""
+  centrality: headline
+  modality: "snRNA; multiome-RNA"
+  region: "MTG; DLPFC"
+  cell_type: Inhibitory neurons
+  cell_state: "vulnerable Sst supertypes (e.g. Sst_20, Sst_25)"
+  claim_type: composition
+  direction: depleted
+  comparison: "along CPS (early epoch); also ADNC and cognitive status"
+  genes: [SST]
+  gene_source: "Supplementary Table 4 (scCODA results per supertype)"
+  reported_stat: "36 of 139 supertypes credibly changed (mean inclusion probability > 0.8 over 139 reference-rotated scCODA models); n = 82 donors (MTG)"
+  unit_of_analysis: "samples (sequencing libraries; donor grouping checked in Extended Data Fig. 7j)"
+  method: "scCODA (Bayesian compositional model) within neuronal nuclei, covariates sex, age, race, 10x chemistry, APOE4"
+  testable_with: rna
+  test_template: composition_donor
+  requires: "SEA-AD/BRAIN Initiative supertype labels (label transfer); CPS or quantitative pathology; neuronal and non-neuronal nuclei analysed separately (70:30 NeuN sort)"
+  notes: "Abundance is relative within neurons, which were FANS-enriched to 70% of nuclei. The individual vulnerable Sst supertype names are in Fig. 3b and Supplementary Table 4; only Sst_20 and Sst_25 are named in the text."
+- id: gabitto2024-C04
+  paper: gabitto2024
+  statement: "A subset of L2/3 IT excitatory neuron supertypes decreases in relative abundance sharply at high CPS (late epoch)."
+  quote: "L2/3 IT neurons and Pvalb interneurons decreased sharply at high CPS"
+  location: "Abstract; Fig. 3b,c; Fig. 8; Results \"Vulnerable and disease-associated supertypes\""
+  centrality: headline
+  modality: "snRNA; multiome-RNA"
+  region: "MTG; DLPFC"
+  cell_type: Excitatory neurons
+  cell_state: "vulnerable L2/3 IT supertypes"
+  claim_type: composition
+  direction: depleted
+  comparison: "along CPS (late epoch)"
+  genes: []
+  gene_source: "Supplementary Table 4"
+  reported_stat: "mean inclusion probability > 0.8 (scCODA); n = 82 donors (MTG)"
+  unit_of_analysis: "samples (sequencing libraries)"
+  method: "scCODA within neuronal nuclei"
+  testable_with: rna
+  test_template: composition_donor
+  requires: "SEA-AD supertype labels; CPS or quantitative pathology"
+  notes: "Abstract phrases this as 'loss of excitatory neurons' in the later phase; at supertype level it is a subset of L2/3 IT types."
+- id: gabitto2024-C05
+  paper: gabitto2024
+  statement: "Vulnerable Pvalb interneuron supertypes decrease in relative abundance late along CPS."
+  quote: "L2/3 IT neurons and Pvalb interneurons decreased sharply at high CPS"
+  location: "Abstract; Fig. 3b,c; Fig. 8; Results \"Vulnerable and disease-associated supertypes\""
+  centrality: headline
+  modality: "snRNA; multiome-RNA"
+  region: "MTG; DLPFC"
+  cell_type: Inhibitory neurons
+  cell_state: "vulnerable Pvalb supertypes"
+  claim_type: composition
+  direction: depleted
+  comparison: "along CPS (late epoch)"
+  genes: [PVALB]
+  gene_source: "Supplementary Table 4"
+  reported_stat: "mean inclusion probability > 0.8 (scCODA); n = 82 donors (MTG)"
+  unit_of_analysis: "samples (sequencing libraries)"
+  method: "scCODA within neuronal nuclei"
+  testable_with: rna
+  test_template: composition_donor
+  requires: "SEA-AD supertype labels; CPS or quantitative pathology"
+  notes: ""
+- id: gabitto2024-C06
+  paper: gabitto2024
+  statement: "Vip interneuron supertypes are lost in the late, high-pathology phase in MTG."
+  quote: "loss of excitatory neurons and Pvalb+ and Vip+ inhibitory neuron subtypes"
+  location: "Abstract; Fig. 3b; Fig. 8a,b; Discussion"
+  centrality: headline
+  modality: "snRNA; multiome-RNA"
+  region: MTG
+  cell_type: Inhibitory neurons
+  cell_state: "vulnerable Vip supertypes"
+  claim_type: composition
+  direction: depleted
+  comparison: "along CPS (late epoch)"
+  genes: [VIP]
+  gene_source: "Supplementary Table 4"
+  reported_stat: "mean inclusion probability > 0.8 (scCODA)"
+  unit_of_analysis: "samples (sequencing libraries)"
+  method: "scCODA within neuronal nuclei"
+  testable_with: rna
+  test_template: composition_donor
+  requires: "SEA-AD supertype labels; CPS or quantitative pathology"
+  notes: "The Vip timing (late) is stated in the abstract and Fig. 8; the Results text only lists Vip among vulnerable CGE types."
+- id: gabitto2024-C07
+  paper: gabitto2024
+  statement: "Superficial CGE-derived Sncg and Lamp5 interneuron supertypes are lost early along CPS, together with Sst."
+  quote: "During the early epoch, superficial Sst, Sncg and Lamp5 interneurons were lost."
+  location: "Fig. 3b; Fig. 8a,b legend"
+  centrality: main
+  modality: "snRNA; multiome-RNA"
+  region: MTG
+  cell_type: Inhibitory neurons
+  cell_state: "vulnerable Sncg and Lamp5 supertypes"
+  claim_type: composition
+  direction: depleted
+  comparison: "along CPS (early epoch)"
+  genes: [SNCG, LAMP5]
+  gene_source: "Supplementary Table 4"
+  reported_stat: "mean inclusion probability > 0.8 (scCODA)"
+  unit_of_analysis: "samples (sequencing libraries)"
+  method: "scCODA within neuronal nuclei"
+  testable_with: rna
+  test_template: composition_donor
+  requires: "SEA-AD supertype labels; CPS or quantitative pathology"
+  notes: "Stated in the Fig. 8 summary; the Results text names CGE types as vulnerable without timing."
+- id: gabitto2024-C08
+  paper: gabitto2024
+  statement: "A disease-associated microglial supertype (micro-PVM_3) increases in relative abundance with disease from early CPS, and is also increased with ADNC in two ROSMAP DLPFC datasets."
+  quote: "consistently increased in abundance with AD across datasets"
+  location: "Abstract; Fig. 3b,c; Fig. 4e; Fig. 6a,b; Results \"Microglia and astrocyte activation in early AD\""
+  centrality: headline
+  modality: "snRNA; multiome-RNA"
+  region: "MTG; DLPFC"
+  cell_type: Microglia
+  cell_state: "micro-PVM_3 (disease-associated microglia; matches Mic.12/Mic.13 of Green et al.)"
+  claim_type: composition
+  direction: enriched
+  comparison: "along CPS (early epoch); along ADNC in Green 2023 and Mathys 2023 data"
+  genes: []
+  gene_source: "Fig. 6c (micro-PVM_3 markers); Supplementary Table 4"
+  reported_stat: "mean inclusion probability > 0.8 (scCODA) in SEA-AD and in refs 13 and 14"
+  unit_of_analysis: "samples (sequencing libraries) in SEA-AD; donors in refs 13, 14"
+  method: "scCODA within non-neuronal nuclei"
+  testable_with: rna
+  test_template: composition_donor
+  requires: "SEA-AD supertype labels or a DAM signature; CPS or ADNC"
+  notes: "The abstract says 'presence of inflammatory microglia' in the early phase. Marker genes of micro-PVM_3 are only in Fig. 6c."
+- id: gabitto2024-C09
+  paper: gabitto2024
+  statement: "A protoplasmic astrocyte supertype (Astro_2) increases in relative abundance early along CPS in both MTG and A9."
+  quote: "protoplasmic astrocytes (Astro_2) specifically increased early in CPS"
+  location: "Abstract; Fig. 3b,c; Fig. 6g-i; Results \"Microglia and astrocyte activation in early AD\""
+  centrality: headline
+  modality: "snRNA; multiome-RNA"
+  region: "MTG; DLPFC"
+  cell_type: Astrocytes
+  cell_state: Astro_2
+  claim_type: composition
+  direction: enriched
+  comparison: "along CPS (early epoch)"
+  genes: []
+  gene_source: "Fig. 6i (astrocyte supertype markers); Supplementary Table 4"
+  reported_stat: "mean inclusion probability > 0.8 (scCODA); not replicated in refs 13, 14"
+  unit_of_analysis: "samples (sequencing libraries)"
+  method: "scCODA within non-neuronal nuclei"
+  testable_with: rna
+  test_template: composition_donor
+  requires: "SEA-AD supertype labels; CPS or quantitative pathology"
+  notes: "The abstract calls these 'reactive astrocytes'. The authors state the increase could not be replicated in the Green and Mathys DLPFC datasets."
+- id: gabitto2024-C10
+  paper: gabitto2024
+  statement: "Two myelinating oligodendrocyte supertypes (Oligo_2, Oligo_4) decrease in relative abundance early along CPS in both MTG and A9."
+  quote: "two supertypes (Oligo_2 and Oligo_4) were vulnerable early in both MTG and A9"
+  location: "Fig. 3b,c; Fig. 7a,b; Results \"Oligodendrocyte loss and remyelination by OPCs\""
+  centrality: main
+  modality: "snRNA; multiome-RNA"
+  region: "MTG; DLPFC"
+  cell_type: Oligodendrocytes
+  cell_state: "Oligo_2; Oligo_4"
+  claim_type: composition
+  direction: depleted
+  comparison: "along CPS (early epoch)"
+  genes: [CNP]
+  gene_source: "Fig. 7b (oligodendrocyte supertype markers)"
+  reported_stat: "mean inclusion probability > 0.8 (scCODA)"
+  unit_of_analysis: "samples (sequencing libraries)"
+  method: "scCODA within non-neuronal nuclei"
+  testable_with: rna
+  test_template: composition_donor
+  requires: "SEA-AD supertype labels; CPS or quantitative pathology"
+  notes: "The authors report the opposite direction (oligodendrocytes increasing) in the Green 2023 and Mathys 2023 DLPFC data, the only contradictory replication."
+- id: gabitto2024-C11
+  paper: gabitto2024
+  statement: "One OPC supertype (OPC_2) decreases in relative abundance late along CPS."
+  quote: "We also observed a late decrease in one OPC supertype (OPC_2)"
+  location: "Fig. 3b; Fig. 7a; Results \"Oligodendrocyte loss and remyelination by OPCs\""
+  centrality: main
+  modality: "snRNA; multiome-RNA"
+  region: MTG
+  cell_type: OPCs
+  cell_state: OPC_2
+  claim_type: composition
+  direction: depleted
+  comparison: "along CPS (late epoch)"
+  genes: []
+  gene_source: "Fig. 7b"
+  reported_stat: "mean inclusion probability > 0.8 (scCODA)"
+  unit_of_analysis: "samples (sequencing libraries)"
+  method: "scCODA within non-neuronal nuclei"
+  testable_with: rna
+  test_template: composition_donor
+  requires: "SEA-AD supertype labels; CPS or quantitative pathology"
+  notes: ""
+- id: gabitto2024-C12
+  paper: gabitto2024
+  statement: "MERFISH of MTG from a subset of donors confirms the decline of vulnerable Sst supertypes along CPS, with relative abundance matching snRNA-seq in the same donors."
+  quote: "there was a consistent decline in Sst supertypes across modalities"
+  location: "Fig. 3d; Results \"Vulnerable and disease-associated supertypes\""
+  centrality: main
+  modality: "spatial-other; snRNA"
+  region: MTG
+  cell_type: Inhibitory neurons
+  cell_state: "vulnerable Sst supertypes"
+  claim_type: composition
+  direction: depleted
+  comparison: "along CPS"
+  genes: [SST]
+  gene_source: "Supplementary Table 3 (140-gene MERFISH panel)"
+  reported_stat: "snRNA-seq vs MERFISH abundance R = 0.84; 27 donors, 69 MERFISH sections"
+  unit_of_analysis: donors
+  method: "linear regression of relative abundance on CPS; bootstrap s.e."
+  testable_with: spatial
+  test_template: composition_donor
+  requires: "cell-resolved spatial data with supertype mapping; CPS or pathology"
+  notes: "MERFISH is a 140-gene imaging panel; classed as spatial-other."
+- id: gabitto2024-C13
+  paper: gabitto2024
+  statement: "Along CPS nearly every neuronal supertype downregulates electron transport chain and ribosomal genes, with the vulnerable Sst supertypes as the exception."
+  quote: "nearly every type of neuron showed decreases along the CPS in the electron transport chain"
+  location: "Extended Data Fig. 8g; Fig. 5h; Results \"Vulnerable and disease-associated supertypes\" and \"Vulnerable Sst neurons in early AD\""
+  centrality: main
+  modality: "snRNA; multiome-RNA"
+  region: MTG
+  cell_type: "Excitatory neurons; Inhibitory neurons"
+  cell_state: ""
+  claim_type: de_pathway
+  direction: down
+  comparison: "along CPS"
+  genes: []
+  gene_source: "Supplementary Table 6 (31 curated gene sets incl. ETC and ribosomal); Supplementary Table 5 (DE per supertype)"
+  reported_stat: "ETC and ribosomal families: P near 0 for unaffected vs vulnerable Sst (Fig. 5h)"
+  unit_of_analysis: "cells (NEBULA negative binomial mixed model)"
+  method: "NEBULA along CPS per supertype; gene family enrichment (Supplementary Note)"
+  testable_with: rna
+  test_template: geneset_shift
+  requires: "CPS or quantitative pathology; ETC (complex I, IV, ATP synthase) and ribosomal gene sets"
+  notes: "Severely affected donors excluded from DE."
+- id: gabitto2024-C14
+  paper: gabitto2024
+  statement: "Supertype abundance changes in SEA-AD A9 replicate in two ROSMAP DLPFC datasets (Green 2023, Mathys 2023) along ADNC for five Sst, one Lamp5 and one L2/3 IT supertype (decreased) and one microglial supertype (increased)."
+  quote: "This included five Sst interneuron, one microglia, one Lamp5 interneuron and one L2/3 IT supertype."
+  location: "Abstract; Fig. 4e-g; Extended Data Fig. 9e; Results \"An integrated atlas of community AD data\""
+  centrality: headline
+  modality: snRNA
+  region: DLPFC
+  cell_type: "Inhibitory neurons; Excitatory neurons"
+  cell_state: "Sst supertypes; Lamp5 supertype; L2/3 IT supertype"
+  claim_type: composition
+  direction: depleted
+  comparison: "along CPS (SEA-AD A9) and along ADNC (refs 13, 14)"
+  genes: []
+  gene_source: "Supplementary Table 4"
+  reported_stat: "8 of 34 A9-significant supertypes significant in all three studies; effect sizes smaller in refs 13, 14"
+  unit_of_analysis: "donors (refs 13, 14); sequencing libraries (SEA-AD)"
+  method: "scCODA, covariates sex, age, APOE4 (refs 13, 14)"
+  testable_with: rna
+  test_template: composition_donor
+  requires: "BRAIN Initiative A9 supertype labels; ADNC"
+  notes: "Ref. 13 is the Green et al. ROSMAP DLPFC dataset (green2024, syn31512863) and ref. 14 is Mathys et al. 2023 (syn52293417). The microglial supertype replication is recorded in C08. Only supertypes present in at least 75% of donors reached significance."
+- id: gabitto2024-C15
+  paper: gabitto2024
+  statement: "Nearly all vulnerable neuronal supertypes (Sst, Pvalb, CGE-derived interneurons, L2/3 IT) lie in the supragranular layers 2-3, while deeper Sst supertypes are unaffected."
+  quote: "Nearly all vulnerable neuron supertypes were located in the upper (supragranular) cortical layers."
+  location: "Fig. 5a-c; Extended Data Fig. 10c,d; Results \"Vulnerable Sst neurons in early AD\""
+  centrality: main
+  modality: spatial-other
+  region: MTG
+  cell_type: "Inhibitory neurons; Excitatory neurons"
+  cell_state: "vulnerable supertypes"
+  claim_type: spatial_colocalisation
+  direction: enriched
+  comparison: "vulnerable vs unaffected supertypes (cortical depth)"
+  genes: []
+  gene_source: "Supplementary Table 3 (MERFISH panel)"
+  reported_stat: "n = 349,941 MERFISH cells with cortical depth"
+  unit_of_analysis: cells
+  method: "MERFISH mean depth per supertype vs scCODA effect size"
+  testable_with: spatial
+  test_template: spatial_neighbourhood
+  requires: "spatial data with cortical depth/layer and supertype labels"
+  notes: "A property of the vulnerable types (layer position), not a disease contrast in itself."
+- id: gabitto2024-C16
+  paper: gabitto2024
+  statement: "HCN1 expression is higher in vulnerable than in unaffected Sst supertypes, in both snRNA-seq and MERFISH."
+  quote: "was higher in vulnerable Sst supertypes in both snRNA-seq and MERFISH in donors with AD"
+  location: "Fig. 5e,f; Results \"Vulnerable Sst neurons in early AD\""
+  centrality: main
+  modality: "snRNA; spatial-other"
+  region: MTG
+  cell_type: Inhibitory neurons
+  cell_state: "vulnerable Sst supertypes"
+  claim_type: de_gene
+  direction: up
+  comparison: "vulnerable vs unaffected Sst supertypes"
+  genes: [HCN1]
+  gene_source: text
+  reported_stat: "NEBULA negative binomial regression (P not given in text)"
+  unit_of_analysis: "cells (NEBULA)"
+  method: "NEBULA"
+  testable_with: rna
+  test_template: de_pseudobulk
+  requires: "SEA-AD Sst supertype labels"
+  notes: "Linked to higher Sag in vulnerable Sst types in patch-seq from neurosurgical non-AD tissue (P = 4e-6, n = 209 cells); that electrophysiology is not a disease claim and is not recorded."
+- id: gabitto2024-C17
+  paper: gabitto2024
+  statement: "Early in CPS, vulnerable Sst supertypes, compared with unaffected Sst supertypes, downregulate tyrosine and Ca2+/calmodulin-dependent kinases and HECT-family E3 ubiquitin ligases."
+  quote: "the vulnerable Sst supertypes collectively downregulated specific kinases"
+  location: "Fig. 5h; Results \"Vulnerable Sst neurons in early AD\""
+  centrality: main
+  modality: "snRNA; multiome-RNA"
+  region: MTG
+  cell_type: Inhibitory neurons
+  cell_state: "vulnerable Sst supertypes"
+  claim_type: de_pathway
+  direction: down
+  comparison: "along CPS (early epoch), vulnerable vs unaffected Sst"
+  genes: []
+  gene_source: "Supplementary Table 5; Supplementary Note (gene families)"
+  reported_stat: "kinases P = 8.92e-11; ubiquitin ligases P = 0.036"
+  unit_of_analysis: "cells (NEBULA)"
+  method: "NEBULA early effect sizes; gene family enrichment test"
+  testable_with: rna
+  test_template: geneset_shift
+  requires: "SEA-AD Sst supertype labels; CPS"
+  notes: "No such differential gene families between vulnerable and unaffected Pvalb supertypes."
+- id: gabitto2024-C18
+  paper: gabitto2024
+  statement: "NGF and the GWAS gene MME are sharply downregulated early in CPS specifically in vulnerable Sst supertypes."
+  quote: "Several notable genes were sharply downregulated early in CPS specifically in vulnerable Sst supertypes"
+  location: "Fig. 5i; Results \"Vulnerable Sst neurons in early AD\""
+  centrality: main
+  modality: "snRNA; multiome-RNA"
+  region: MTG
+  cell_type: Inhibitory neurons
+  cell_state: "vulnerable Sst supertypes"
+  claim_type: de_gene
+  direction: down
+  comparison: "along CPS (early epoch)"
+  genes: [NGF, MME]
+  gene_source: text
+  reported_stat: "LOESS of expression along CPS (no statistic in text)"
+  unit_of_analysis: "cells (NEBULA)"
+  method: "NEBULA along CPS"
+  testable_with: rna
+  test_template: de_pseudobulk
+  requires: "SEA-AD Sst supertype labels; CPS"
+  notes: "The authors note that NGFR is expressed in oligodendrocytes and OPCs (suggested communication link, not tested)."
+- id: gabitto2024-C19
+  paper: gabitto2024
+  statement: "Microglia upregulate inflammatory, interferon-response, Fc receptor, MHC class II and complement genes early along CPS."
+  quote: "Early changes included significant upregulation of gene sets involved in inflammatory processes"
+  location: "Fig. 6d,f; Results \"Microglia and astrocyte activation in early AD\""
+  centrality: main
+  modality: "snRNA; multiome-RNA"
+  region: MTG
+  cell_type: Microglia
+  cell_state: ""
+  claim_type: de_gene
+  direction: up
+  comparison: "along CPS (early epoch)"
+  genes: [IL1B, CSF1R, STAB1, NINJ1, JAK3, IRF1, IRF7, IFI16, FCGR1A, FCGR1B, FCGR2A, FCGR3B, CD74, HLA-DRB5, C1QA, C1QB]
+  gene_source: "text; Supplementary Table 5"
+  reported_stat: "NEBULA early effect sizes; gene family enrichment (P not given in text)"
+  unit_of_analysis: "cells (NEBULA)"
+  method: "NEBULA; gene family enrichment"
+  testable_with: rna
+  test_template: de_pseudobulk
+  requires: "CPS or quantitative pathology"
+  notes: ""
+- id: gabitto2024-C20
+  paper: gabitto2024
+  statement: "Microglia upregulate several plaque-induced genes early along CPS."
+  quote: "we also observed early upregulation of several homologs of genes induced by Aβ plaques"
+  location: "Fig. 6d; Results \"Microglia and astrocyte activation in early AD\""
+  centrality: main
+  modality: "snRNA; multiome-RNA"
+  region: MTG
+  cell_type: Microglia
+  cell_state: "plaque-induced genes (PIG)"
+  claim_type: de_gene
+  direction: up
+  comparison: "along CPS (early epoch)"
+  genes: [CSF1R, CTSC, C1QA, C1QB, LY86, FCGR3A]
+  gene_source: text
+  reported_stat: "NEBULA early effect sizes"
+  unit_of_analysis: "cells (NEBULA)"
+  method: "NEBULA"
+  testable_with: rna
+  test_template: de_pseudobulk
+  requires: "CPS or quantitative pathology"
+  notes: "Plaque-induced gene set from mouse (ref. 66); human homologs."
+- id: gabitto2024-C21
+  paper: gabitto2024
+  statement: "Microglia upregulate further plaque-induced genes, including cathepsins CTSD and CTSS, LYZ and APOE, late along CPS in donors with higher pathology."
+  quote: "Other plaque-induced genes were upregulated later in CPS in donors with higher levels of pathology"
+  location: "Fig. 6d,k; Results \"Microglia and astrocyte activation in early AD\""
+  centrality: main
+  modality: "snRNA; multiome-RNA"
+  region: MTG
+  cell_type: Microglia
+  cell_state: ""
+  claim_type: de_gene
+  direction: up
+  comparison: "along CPS (late epoch)"
+  genes: [CTSD, CTSS, LYZ, APOE]
+  gene_source: text
+  reported_stat: "NEBULA late effect sizes"
+  unit_of_analysis: "cells (NEBULA)"
+  method: "NEBULA"
+  testable_with: rna
+  test_template: de_pseudobulk
+  requires: "CPS or quantitative pathology"
+  notes: ""
+- id: gabitto2024-C22
+  paper: gabitto2024
+  statement: "Four microglia-specific transcription factors (RUNX1, IKZF1, NFATC2, MAF) are upregulated early along CPS, and their predicted 201 target genes are also upregulated early."
+  quote: "Four transcription factors (RUNX1, IKZF1, NFATC2, MAF) showed specific microglial expression and were upregulated early"
+  location: "Fig. 6e,f; Results \"Microglia and astrocyte activation in early AD\""
+  centrality: main
+  modality: "snRNA; multiome-RNA; snATAC"
+  region: MTG
+  cell_type: Microglia
+  cell_state: ""
+  claim_type: de_gene
+  direction: up
+  comparison: "along CPS (early epoch)"
+  genes: [RUNX1, IKZF1, NFATC2, MAF]
+  gene_source: "text (TFs); the 201 GRN target genes are in Fig. 6e and the GitHub code, not listed in text"
+  reported_stat: "201 coregulated target genes shifted up vs all other genes (cumulative density, Fig. 6e)"
+  unit_of_analysis: "cells (NEBULA)"
+  method: "NEBULA; microglial gene regulatory network from snATAC-seq"
+  testable_with: rna
+  test_template: de_pseudobulk
+  requires: "CPS or quantitative pathology"
+  notes: "The GRN part needs chromatin data; the TF upregulation is testable with RNA alone."
+- id: gabitto2024-C23
+  paper: gabitto2024
+  statement: "Astrocytes upregulate cell adhesion molecules, neuronal guidance cues, signalling receptors and GFAP early along CPS."
+  quote: "Early changes included upregulation of cellular adhesion molecules"
+  location: "Fig. 6j; Results \"Microglia and astrocyte activation in early AD\""
+  centrality: main
+  modality: "snRNA; multiome-RNA"
+  region: MTG
+  cell_type: Astrocytes
+  cell_state: ""
+  claim_type: de_gene
+  direction: up
+  comparison: "along CPS (early epoch)"
+  genes: [CADM1, CDRH3, PCDHGA1, PCDHB14, PCDHB16, CLSTN1, ITGA6, NEO1, ANOS1, NLGN3, NTRK3, SEMA4B, NTNG2, PTCHD1, NRP1, BMPR2, UNC5C, GFAP]
+  gene_source: "text; Supplementary Table 5"
+  reported_stat: "NEBULA early effect sizes"
+  unit_of_analysis: "cells (NEBULA)"
+  method: "NEBULA"
+  testable_with: rna
+  test_template: de_pseudobulk
+  requires: "CPS or quantitative pathology"
+  notes: "'CDRH3' is as printed; it is not a standard HGNC symbol (possibly CDH13 or another cadherin)."
+- id: gabitto2024-C24
+  paper: gabitto2024
+  statement: "Late along CPS, astrocytes further upregulate adhesion and guidance molecules (NCAM2, CERCAM), hedgehog signalling receptors (PTCHD4, PTCH2, SMO) and their target GLI1, and EGF and its receptor."
+  quote: "Later in CPS, astrocytes continue to upregulate molecules involved in cellular adhesion, axonal guidance"
+  location: "Fig. 6j; Results \"Microglia and astrocyte activation in early AD\""
+  centrality: main
+  modality: "snRNA; multiome-RNA"
+  region: MTG
+  cell_type: Astrocytes
+  cell_state: ""
+  claim_type: de_gene
+  direction: up
+  comparison: "along CPS (late epoch)"
+  genes: [NCAM2, CERCAM, PTCHD4, PTCH2, SMO, GLI1]
+  gene_source: "text; Supplementary Table 5"
+  reported_stat: "NEBULA late effect sizes"
+  unit_of_analysis: "cells (NEBULA)"
+  method: "NEBULA"
+  testable_with: rna
+  test_template: de_pseudobulk
+  requires: "CPS or quantitative pathology"
+  notes: "The EGF ligand and receptor are not named by symbol in the text."
+- id: gabitto2024-C25
+  paper: gabitto2024
+  statement: "Astrocytes downregulate APOE late along CPS, while microglia upregulate it."
+  quote: "Astrocytes also downregulated APOE"
+  location: "Fig. 6k; Results \"Microglia and astrocyte activation in early AD\""
+  centrality: main
+  modality: "snRNA; multiome-RNA"
+  region: MTG
+  cell_type: "Astrocytes; Microglia"
+  cell_state: ""
+  claim_type: de_gene
+  direction: down
+  comparison: "along CPS (late epoch)"
+  genes: [APOE]
+  gene_source: text
+  reported_stat: "LOESS of expression along CPS"
+  unit_of_analysis: "cells (NEBULA)"
+  method: "NEBULA"
+  testable_with: rna
+  test_template: de_pseudobulk
+  requires: "CPS or quantitative pathology"
+  notes: "Direction 'down' is for astrocytes; the microglial APOE increase is recorded in C21."
+- id: gabitto2024-C26
+  paper: gabitto2024
+  statement: "Oligodendrocytes upregulate the gamma-secretase component NCSTN, the myelination transcription factor MYRF and the myelin component PLLP early along CPS."
+  quote: "there is an early upregulation of a gamma-secretase component (NCSTN), the transcription factor MYRF"
+  location: "Fig. 7e,g; Results \"Oligodendrocyte loss and remyelination by OPCs\""
+  centrality: main
+  modality: "snRNA; multiome-RNA"
+  region: MTG
+  cell_type: Oligodendrocytes
+  cell_state: ""
+  claim_type: de_gene
+  direction: up
+  comparison: "along CPS (early epoch)"
+  genes: [NCSTN, MYRF, PLLP]
+  gene_source: text
+  reported_stat: "NEBULA early effect sizes"
+  unit_of_analysis: "cells (NEBULA)"
+  method: "NEBULA"
+  testable_with: rna
+  test_template: de_pseudobulk
+  requires: "CPS or quantitative pathology"
+  notes: "The paper also notes that oligodendrocytes have the highest APP and PSEN1 expression (no disease contrast, not recorded)."
+- id: gabitto2024-C27
+  paper: gabitto2024
+  statement: "Oligodendrocytes upregulate cholesterol biosynthesis genes late along CPS."
+  quote: "Significant increases in expression of the cholesterol biosynthesis gene family"
+  location: "Fig. 7e,g; Results \"Oligodendrocyte loss and remyelination by OPCs\""
+  centrality: main
+  modality: "snRNA; multiome-RNA"
+  region: MTG
+  cell_type: Oligodendrocytes
+  cell_state: ""
+  claim_type: de_pathway
+  direction: up
+  comparison: "along CPS (late epoch)"
+  genes: [DHCR24, LBR, FDFT, HSD17B1, SC5D, CYP51A1, SQLE, DHCR7]
+  gene_source: text
+  reported_stat: "cholesterol biosynthesis family P = 0.0040 (late)"
+  unit_of_analysis: "cells (NEBULA)"
+  method: "NEBULA; gene family enrichment"
+  testable_with: rna
+  test_template: geneset_shift
+  requires: "CPS or quantitative pathology"
+  notes: "'FDFT' is as printed; presumably FDFT1."
+- id: gabitto2024-C28
+  paper: gabitto2024
+  statement: "Late along CPS, oligodendrocytes downregulate MYRF and myelin and myelination genes."
+  quote: "late in CPS there is downregulation of MYRF and several components of myelin"
+  location: "Fig. 7e,g; Results \"Oligodendrocyte loss and remyelination by OPCs\""
+  centrality: main
+  modality: "snRNA; multiome-RNA"
+  region: MTG
+  cell_type: Oligodendrocytes
+  cell_state: ""
+  claim_type: de_pathway
+  direction: down
+  comparison: "along CPS (late epoch)"
+  genes: [MYRF, MOBP, MOG, OMG, PLLP, OPALIN]
+  gene_source: text
+  reported_stat: "myelin components P = 0.006 (late)"
+  unit_of_analysis: "cells (NEBULA)"
+  method: "NEBULA; gene family enrichment"
+  testable_with: rna
+  test_template: geneset_shift
+  requires: "CPS or quantitative pathology"
+  notes: "MYRF and PLLP go up early (C26) and down late."
+- id: gabitto2024-C29
+  paper: gabitto2024
+  statement: "OPCs upregulate a differentiation/remyelination programme early along CPS: transcription factors OLIG1, OLIG2, SOX10, SOX8, PRRX1, ASCL1, Notch ligands DLL1, DLL3, and 317 GRN-predicted downstream genes."
+  quote: "In OPCs, there was early upregulation of several transcription factors"
+  location: "Abstract; Fig. 7e-g; Results \"Oligodendrocyte loss and remyelination by OPCs\""
+  centrality: headline
+  modality: "snRNA; multiome-RNA; snATAC"
+  region: MTG
+  cell_type: OPCs
+  cell_state: "remyelination programme"
+  claim_type: de_pathway
+  direction: up
+  comparison: "along CPS (early epoch)"
+  genes: [OLIG1, OLIG2, SOX10, SOX8, PRRX1, ASCL1, DLL1, DLL3]
+  gene_source: "text; the 317 GRN target genes are not listed in text"
+  reported_stat: "remyelination programme P = 9.62e-5 (early); n = 28,429 OPCs"
+  unit_of_analysis: "cells (NEBULA)"
+  method: "NEBULA; gene family enrichment; OPC GRN from snATAC-seq"
+  testable_with: rna
+  test_template: geneset_shift
+  requires: "CPS or quantitative pathology"
+  notes: "Abstract: 'a remyelination response by oligodendrocyte precursor cells' in the early phase."
+- id: gabitto2024-C30
+  paper: gabitto2024
+  statement: "IGF1, expressed mainly by inhibitory interneurons, decreases later along CPS in several inhibitory interneuron populations."
+  quote: "IGF1 expression decreased later in CPS in several inhibitory interneuron populations"
+  location: "Fig. 7h,i; Results \"Oligodendrocyte loss and remyelination by OPCs\""
+  centrality: main
+  modality: "snRNA; multiome-RNA"
+  region: MTG
+  cell_type: Inhibitory neurons
+  cell_state: ""
+  claim_type: de_gene
+  direction: down
+  comparison: "along CPS (late epoch)"
+  genes: [IGF1]
+  gene_source: text
+  reported_stat: "LOESS of expression along CPS (no statistic in text)"
+  unit_of_analysis: "cells (NEBULA)"
+  method: "NEBULA"
+  testable_with: rna
+  test_template: de_pseudobulk
+  requires: "CPS or quantitative pathology"
+  notes: "The authors suggest inhibitory neurons drive the myelination changes through IGF1 (not tested)."

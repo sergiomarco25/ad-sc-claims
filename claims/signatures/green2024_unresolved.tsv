@@ -1,0 +1,8 @@
+claim_id	term	reason
+green2024-C18	trajectory structure	two trajectories inferred from donor composition; no re-test template
+green2024-C21	order of changes along pseudotime	a timing claim; the re-tests compare groups, not order
+green2024-C20	alternative brain ageing trajectory	no contrast in these datasets matches it (claims/contrast_overrides.tsv)
+green2024-C24	alternative brain ageing trajectory	no contrast in these datasets matches it (claims/contrast_overrides.tsv)
+green2024-C25	community proportions in all cells vs cognition	a whole-tissue shift of many subpopulations' markers would mix composition and expression
+green2024-C26	sequence of community functions	pathway programmes ordered along pseudotime
+green2024-C28	Ast.10 vs Ast.5 signature in Visium	a comparison of two signatures in spatial data

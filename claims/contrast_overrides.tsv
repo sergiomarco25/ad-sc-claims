@@ -1,0 +1,5 @@
+claim_id	contrast	note
+gabitto2024-C03	ad_pathology	Sst loss along CPS; the comparison mentions cognitive status, but the claim is oriented along disease, not along better cognition
+sun2023-C05	ad_pathology	MG4 rises with tangles, amyloid, Braak and cognitive decline: oriented along disease, not along better cognition
+green2024-C20	not_available	alternative brain ageing (ABA) trajectory, with low tau: no contrast in these datasets matches it
+green2024-C24	not_available	alternative brain ageing (ABA) trajectory, with low tau: no contrast in these datasets matches it

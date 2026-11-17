@@ -1,0 +1,176 @@
+- id: grubman2019-C01
+  paper: grubman2019
+  statement: "In entorhinal cortex, AD-associated transcriptional changes are concentrated in specific cell subpopulations: within each major cell type, nuclei form AD-specific and control-specific subclusters."
+  quote: "transcriptional changes in specific cell subpopulations are associated with Alzheimer's disease"
+  location: "Abstract (full text not accessed; figure not verified)"
+  centrality: headline
+  modality: snRNA
+  region: EC
+  cell_type: "Astrocytes; Microglia; Oligodendrocytes; OPCs; Neurons (other); Endothelial"
+  cell_state: "AD subclusters (GEO covariates: a1, a2; m1, m2; o1, o2, o3; O1; n1; e1)"
+  claim_type: state_enrichment
+  direction: enriched
+  comparison: "AD vs control"
+  genes: []
+  gene_source: "not available (full text not accessed); author labels in GEO GSE138852 covariates"
+  reported_stat: "13,214 nuclei; 6 AD vs 6 control donors; statistics not available from abstract"
+  unit_of_analysis: cells
+  method: "subclustering of each cell type; test not available from abstract"
+  testable_with: rna
+  test_template: state_signature
+  requires: "author subcluster signatures (GSE138852 covariates: subclustID, subclustCond)"
+  notes: "Per the deposited covariates, subclusters are almost entirely AD-only or control-only (e.g. a1 220 AD vs 2 ct nuclei; o1 1877 vs 4). Each 10x library pools 2 donors of the same group and donors are not demultiplexed, so condition is confounded with library; the segregation may partly be a batch effect."
+- id: grubman2019-C02
+  paper: grubman2019
+  statement: "APOE is repressed in oligodendrocyte progenitor cells (OPCs) from AD entorhinal cortex compared with control OPCs."
+  quote: "APOE is specifically repressed in Alzheimer's disease oligodendrocyte progenitor cells"
+  location: "Abstract (full text not accessed; figure not verified)"
+  centrality: headline
+  modality: snRNA
+  region: EC
+  cell_type: OPCs
+  cell_state: "AD OPC subcluster (O1 in GEO covariates)"
+  claim_type: de_gene
+  direction: down
+  comparison: "AD vs control"
+  genes: [APOE]
+  gene_source: text
+  reported_stat: "not available from abstract; 6 AD vs 6 control donors"
+  unit_of_analysis: cells
+  method: "not available from abstract"
+  testable_with: rna
+  test_template: de_pseudobulk
+  requires: ""
+  notes: "Abstract says 'specifically repressed', implying OPC/astrocyte specificity. Unit of analysis assumed to be cells (donors pooled per library)."
+- id: grubman2019-C03
+  paper: grubman2019
+  statement: "APOE is repressed in AD astrocyte subpopulations of the entorhinal cortex compared with control astrocytes."
+  quote: "repressed in Alzheimer's disease oligodendrocyte progenitor cells and astrocyte subpopulations"
+  location: "Abstract (full text not accessed; figure not verified)"
+  centrality: headline
+  modality: snRNA
+  region: EC
+  cell_type: Astrocytes
+  cell_state: "AD astrocyte subclusters (a1, a2 in GEO covariates)"
+  claim_type: de_gene
+  direction: down
+  comparison: "AD vs control"
+  genes: [APOE]
+  gene_source: text
+  reported_stat: "not available from abstract; 6 AD vs 6 control donors"
+  unit_of_analysis: cells
+  method: "not available from abstract"
+  testable_with: rna
+  test_template: de_pseudobulk
+  requires: ""
+  notes: "Subcluster-level claim; re-test as astrocyte pseudobulk AD vs control and, if possible, within AD-enriched astrocyte states."
+- id: grubman2019-C04
+  paper: grubman2019
+  statement: "APOE is up-regulated in an AD-specific microglial subpopulation of the entorhinal cortex."
+  quote: "upregulated in an Alzheimer's disease-specific microglial subopulation"
+  location: "Abstract (full text not accessed; figure not verified)"
+  centrality: headline
+  modality: snRNA
+  region: EC
+  cell_type: Microglia
+  cell_state: "AD-specific microglial subpopulation (AD subclusters m1, m2 in GEO covariates)"
+  claim_type: de_gene
+  direction: up
+  comparison: "AD vs control"
+  genes: [APOE]
+  gene_source: text
+  reported_stat: "not available from abstract; 449 microglial nuclei in total (GEO covariates)"
+  unit_of_analysis: cells
+  method: "not available from abstract"
+  testable_with: rna
+  test_template: de_pseudobulk
+  requires: "microglial subcluster labels or signature of the AD-specific subpopulation"
+  notes: "'subopulation' is the abstract's own spelling. Which of the AD microglial subclusters (m1 or m2) carries the APOE increase is not stated in the abstract. Few microglia overall."
+- id: grubman2019-C05
+  paper: grubman2019
+  statement: "An AD-specific microglial subpopulation is present in AD entorhinal cortex and essentially absent from controls."
+  quote: "an Alzheimer's disease-specific microglial subopulation"
+  location: "Abstract (full text not accessed; figure not verified)"
+  centrality: headline
+  modality: snRNA
+  region: EC
+  cell_type: Microglia
+  cell_state: "AD-specific microglial subpopulation (m1/m2 in GEO covariates)"
+  claim_type: state_enrichment
+  direction: enriched
+  comparison: "AD vs control"
+  genes: [APOE]
+  gene_source: "not available (full text not accessed)"
+  reported_stat: "not available from abstract; per GEO covariates m1 = 74 AD vs 4 control nuclei, m2 = 84 vs 20"
+  unit_of_analysis: cells
+  method: "subclustering; test not available from abstract"
+  testable_with: rna
+  test_template: state_signature
+  requires: "signature of the AD-specific microglial subcluster"
+  notes: "Same library/condition confounding caveat as C01. Marker genes of the subcluster beyond APOE are not in the abstract."
+- id: grubman2019-C06
+  paper: grubman2019
+  statement: "AD risk (GWAS) genes are differentially regulated between AD and control subclusters in a cell type-specific, coordinated way."
+  quote: "coordinated control of Alzheimer's disease risk genes and their cell-type-specific contribution to disease susceptibility"
+  location: "Abstract; bioRxiv preprint highlights (doi:10.1101/628347) (full text not accessed)"
+  centrality: headline
+  modality: snRNA
+  region: EC
+  cell_type: "Astrocytes; Microglia; Oligodendrocytes; OPCs; Neurons (other); Endothelial"
+  cell_state: "AD subclusters vs control subclusters"
+  claim_type: de_gene
+  direction: NA
+  comparison: "AD vs control"
+  genes: [APOE]
+  gene_source: "not available (full text not accessed)"
+  reported_stat: "not available from abstract"
+  unit_of_analysis: cells
+  method: "not available from abstract"
+  testable_with: rna
+  test_template: de_pseudobulk
+  requires: "AD GWAS gene list used by the authors"
+  notes: "Preprint highlight: 'manifold AD GWAS genes specifically associated with one cell-type, and sets of AD GWAS genes co-ordinately and differentially regulated between different brain cell-types in AD sub-cellular clusters'. The GWAS gene list is not in the abstract."
+- id: grubman2019-C07
+  paper: grubman2019
+  statement: "Transcription factor regulatory modules combined with AD risk loci identify transcription factors that drive cell type-specific transitions from control to AD subcluster states."
+  quote: "revealed drivers of cell-type-specific state transitions towards Alzheimer's disease"
+  location: "Abstract (full text not accessed; figure not verified)"
+  centrality: headline
+  modality: snRNA
+  region: EC
+  cell_type: "Astrocytes; Microglia; Oligodendrocytes; OPCs; Neurons (other); Endothelial"
+  cell_state: "control-to-AD subcluster transitions"
+  claim_type: other
+  direction: NA
+  comparison: "AD vs control subclusters"
+  genes: []
+  gene_source: "not available (full text not accessed)"
+  reported_stat: "not available from abstract"
+  unit_of_analysis: cells
+  method: "transcription factor regulatory network inference integrated with AD GWAS loci (details not available)"
+  testable_with: not_testable
+  test_template: not_testable
+  requires: "the authors' TF network and predicted driver TFs"
+  notes: "General network-inference claim; only the TFEB example (C08) is specific enough to re-test."
+- id: grubman2019-C08
+  paper: grubman2019
+  statement: "TFEB, a master regulator of lysosomal function, regulates multiple AD risk genes in a specific AD astrocyte subpopulation, driving astrocyte diversity in AD."
+  quote: "transcription factor EB, a master regulator of lysosomal function, regulates multiple disease genes"
+  location: "Abstract (full text not accessed; figure not verified)"
+  centrality: headline
+  modality: snRNA
+  region: EC
+  cell_type: Astrocytes
+  cell_state: "specific AD astrocyte subpopulation (a1 or a2 in GEO covariates; not stated in abstract)"
+  claim_type: other
+  direction: NA
+  comparison: "AD vs control astrocyte subclusters"
+  genes: [TFEB]
+  gene_source: "not available (TFEB target genes not listed in abstract)"
+  reported_stat: "not available from abstract"
+  unit_of_analysis: cells
+  method: "transcription factor regulatory network inference integrated with AD GWAS loci"
+  testable_with: rna
+  test_template: geneset_shift
+  requires: "TFEB target gene set (e.g. CLEAR network) in astrocytes"
+  notes: "Direction not stated: the abstract only says TFEB 'regulates' the disease genes in that subpopulation; a natural re-test is higher TFEB-target activity in AD astrocytes. Preprint: 'astrocyte diversity in AD was under the control of transcription factor EB (TFEB)'."

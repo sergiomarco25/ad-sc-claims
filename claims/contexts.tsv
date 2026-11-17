@@ -1,0 +1,205 @@
+claim_id	paper	dataset	regions	cell_classes	cell_state	contrast	direction	claim_type	test_template	status	comparison_text	null_claim
+gabitto2024-C01	gabitto2024	seaad	MTG	ALL		within	down	other	de_pseudobulk	ok	severely affected vs other high-ADNC donors	False
+gabitto2024-C02	gabitto2024	seaad	MTG	ALL		within	down	chromatin	chromatin_da	ok	severely affected vs other high-ADNC donors	False
+gabitto2024-C03	gabitto2024	seaad	DLPFC;MTG	Inhibitory neurons	vulnerable Sst supertypes (e.g. Sst_20, Sst_25)	ad_pathology	depleted	composition	composition_donor	ok	along CPS (early epoch); also ADNC and cognitive status	False
+gabitto2024-C04	gabitto2024	seaad	DLPFC;MTG	Excitatory neurons	vulnerable L2/3 IT supertypes	ad_pathology	depleted	composition	composition_donor	ok	along CPS (late epoch)	False
+gabitto2024-C05	gabitto2024	seaad	DLPFC;MTG	Inhibitory neurons	vulnerable Pvalb supertypes	ad_pathology	depleted	composition	composition_donor	ok	along CPS (late epoch)	False
+gabitto2024-C06	gabitto2024	seaad	MTG	Inhibitory neurons	vulnerable Vip supertypes	ad_pathology	depleted	composition	composition_donor	ok	along CPS (late epoch)	False
+gabitto2024-C07	gabitto2024	seaad	MTG	Inhibitory neurons	vulnerable Sncg and Lamp5 supertypes	ad_pathology	depleted	composition	composition_donor	ok	along CPS (early epoch)	False
+gabitto2024-C08	gabitto2024	seaad	DLPFC;MTG	Microglia	micro-PVM_3 (disease-associated microglia; matches Mic.12/Mic.13 of Green et al.)	ad_pathology	enriched	composition	composition_donor	ok	along CPS (early epoch); along ADNC in Green 2023 and Mathys 2023 data	False
+gabitto2024-C09	gabitto2024	seaad	DLPFC;MTG	Astrocytes	Astro_2	ad_pathology	enriched	composition	composition_donor	ok	along CPS (early epoch)	False
+gabitto2024-C10	gabitto2024	seaad	DLPFC;MTG	Oligodendrocytes	Oligo_2; Oligo_4	ad_pathology	depleted	composition	composition_donor	ok	along CPS (early epoch)	False
+gabitto2024-C11	gabitto2024	seaad	MTG	OPCs	OPC_2	ad_pathology	depleted	composition	composition_donor	ok	along CPS (late epoch)	False
+gabitto2024-C12	gabitto2024	seaad	MTG	Inhibitory neurons	vulnerable Sst supertypes	ad_pathology	depleted	composition	composition_donor	ok	along CPS	False
+gabitto2024-C13	gabitto2024	seaad	MTG	Excitatory neurons; Inhibitory neurons		ad_pathology	down	de_pathway	geneset_shift	ok	along CPS	False
+gabitto2024-C14	gabitto2024	seaad	DLPFC	Inhibitory neurons; Excitatory neurons	Sst supertypes; Lamp5 supertype; L2/3 IT supertype	ad_pathology	depleted	composition	composition_donor	ok	along CPS (SEA-AD A9) and along ADNC (refs 13, 14)	False
+gabitto2024-C15	gabitto2024	seaad	MTG	Inhibitory neurons; Excitatory neurons	vulnerable supertypes	within	enriched	spatial_colocalisation	spatial_neighbourhood	ok	vulnerable vs unaffected supertypes (cortical depth)	False
+gabitto2024-C16	gabitto2024	seaad	MTG	Inhibitory neurons	vulnerable Sst supertypes	within	up	de_gene	de_pseudobulk	ok	vulnerable vs unaffected Sst supertypes	False
+gabitto2024-C17	gabitto2024	seaad	MTG	Inhibitory neurons	vulnerable Sst supertypes	ad_pathology	down	de_pathway	geneset_shift	ok	along CPS (early epoch), vulnerable vs unaffected Sst	False
+gabitto2024-C18	gabitto2024	seaad	MTG	Inhibitory neurons	vulnerable Sst supertypes	ad_pathology	down	de_gene	de_pseudobulk	ok	along CPS (early epoch)	False
+gabitto2024-C19	gabitto2024	seaad	MTG	Microglia		ad_pathology	up	de_gene	de_pseudobulk	ok	along CPS (early epoch)	False
+gabitto2024-C20	gabitto2024	seaad	MTG	Microglia	plaque-induced genes (PIG)	ad_pathology	up	de_gene	de_pseudobulk	ok	along CPS (early epoch)	False
+gabitto2024-C21	gabitto2024	seaad	MTG	Microglia		ad_pathology	up	de_gene	de_pseudobulk	ok	along CPS (late epoch)	False
+gabitto2024-C22	gabitto2024	seaad	MTG	Microglia		ad_pathology	up	de_gene	de_pseudobulk	ok	along CPS (early epoch)	False
+gabitto2024-C23	gabitto2024	seaad	MTG	Astrocytes		ad_pathology	up	de_gene	de_pseudobulk	ok	along CPS (early epoch)	False
+gabitto2024-C24	gabitto2024	seaad	MTG	Astrocytes		ad_pathology	up	de_gene	de_pseudobulk	ok	along CPS (late epoch)	False
+gabitto2024-C25	gabitto2024	seaad	MTG	Astrocytes; Microglia		ad_pathology	down	de_gene	de_pseudobulk	ok	along CPS (late epoch)	False
+gabitto2024-C26	gabitto2024	seaad	MTG	Oligodendrocytes		ad_pathology	up	de_gene	de_pseudobulk	ok	along CPS (early epoch)	False
+gabitto2024-C27	gabitto2024	seaad	MTG	Oligodendrocytes		ad_pathology	up	de_pathway	geneset_shift	ok	along CPS (late epoch)	False
+gabitto2024-C28	gabitto2024	seaad	MTG	Oligodendrocytes		ad_pathology	down	de_pathway	geneset_shift	ok	along CPS (late epoch)	False
+gabitto2024-C29	gabitto2024	seaad	MTG	OPCs	remyelination programme	ad_pathology	up	de_pathway	geneset_shift	ok	along CPS (early epoch)	False
+gabitto2024-C30	gabitto2024	seaad	MTG	Inhibitory neurons		ad_pathology	down	de_gene	de_pseudobulk	ok	along CPS (late epoch)	False
+green2024-C01	green2024	green2024		Microglia	Mic.12 (lipid-associated, APOE+GPNMB+, CPM)	ad_pathology	associated_pos	pathology_association	pathology_correlation	no dataset	association with neocortical Aβ and tau burden (continuous), across older individuals	False
+green2024-C02	green2024	green2024		Microglia	Mic.13 (lipid-associated, APOE+GPNMB+TREM2+, PTPRG, SPP1)	ad_pathology	associated_pos	pathology_association	pathology_correlation	no dataset	association with neocortical Aβ, tau and rate of cognitive decline (continuous)	False
+green2024-C03	green2024	green2024		Astrocytes	Ast.10 (SLC38A2; oxidative stress, metallothioneins)	ad_pathology	associated_pos	pathology_association	pathology_correlation	no dataset	association with neocortical tau and rate of cognitive decline (continuous)	False
+green2024-C04	green2024	green2024		Oligodendrocytes	Oli.7 (SLC38A2, IGF1R, QDPR, cholesterol biosynthesis)	ad_pathology	associated_pos	pathology_association	pathology_correlation	no dataset	association with neocortical tau and rate of cognitive decline (continuous)	False
+green2024-C05	green2024	green2024		Inhibitory neurons	Inh.16 (PVALB+ MEPE+, L5-6)	ad_pathology	associated_pos	pathology_association	pathology_correlation	no dataset	association with neocortical tau burden (continuous)	False
+green2024-C06	green2024	green2024		Inhibitory neurons	Inh.6 (SST+ RSPO3+ KLF5+, L2-5)	ad_pathology	associated_neg	pathology_association	pathology_correlation	no dataset	association with neocortical tau burden (continuous)	False
+green2024-C07	green2024	green2024		Microglia	Mic.12	within	associated_pos	other	pathology_correlation	no dataset	mediation model across older individuals (Mic.12 -> Aβ)	False
+green2024-C08	green2024	green2024		Microglia	Mic.12	age	associated_pos	clinical_association	pathology_correlation	no dataset	association with age at death	False
+green2024-C09	green2024	green2024		Microglia	Mic.13	within	associated_pos	other	pathology_correlation	no dataset	mediation model (Aβ -> Mic.13 -> tau)	False
+green2024-C10	green2024	green2024		Microglia	Mic.13	age	associated_pos	clinical_association	pathology_correlation	no dataset	APOE e4 carriers vs non-carriers; age	False
+green2024-C11	green2024	green2024		Astrocytes	Ast.10	ad_pathology	associated_pos	other	pathology_correlation	no dataset	mediation model (tau -> Ast.10 -> cognitive decline)	False
+green2024-C12	green2024	green2024		Microglia; Astrocytes	Mic.13; Ast.10	within	associated_pos	other	pathology_correlation	no dataset	Mic.13 vs Ast.10 proportions across individuals, adjusted for tau	False
+green2024-C13	green2024	green2024		Microglia; Astrocytes; Oligodendrocytes	Mic.12; Mic.13; Ast.10; Oli.7	within	NA	other	pathology_correlation	no dataset	SEM across older individuals	False
+green2024-C14	green2024	green2024		Microglia	Mic.12; Mic.13	within	exists	state_existence	state_signature	no dataset	Mic.13 vs Mic.12 vs other microglia	False
+green2024-C15	green2024	green2024		Microglia	Mic.12 (CPM+); Mic.13 (TPRG1+)	ad_pathology	associated_pos	pathology_association	pathology_correlation	no dataset	association with AT8 tau burden (continuous)	False
+green2024-C16	green2024	green2024		Microglia	Mic.12; Mic.13	within	down	other	not_testable	no dataset	Mic.12/Mic.13 vs other microglia (morphology)	False
+green2024-C17	green2024	green2024		Microglia	Mic.12; Mic.13	ad_pathology	associated_pos	pathology_association	pathology_correlation	no dataset	association with PAM score (midfrontal cortex)	False
+green2024-C18	green2024	green2024		ALL		ad_pathology	NA	trajectory	trajectory	no dataset	prAD vs ABA trajectories along pseudotime	False
+green2024-C19	green2024	green2024		Microglia; Astrocytes; Oligodendrocytes	Mic.12; Mic.13; Ast.10; Oli.7	ad_pathology	up	trajectory	trajectory	no dataset	along prAD pseudotime	False
+green2024-C20	green2024	green2024		Astrocytes; OPCs	Ast.5; OPC.3	not_available	up	trajectory	trajectory	no dataset	along ABA pseudotime	False
+green2024-C21	green2024	green2024		Microglia; Astrocytes; Oligodendrocytes; OPCs	Mic.12; Mic.13; Ast.3; OPC.1; Oli.6; Oli.7; Ast.10	ad_pathology	up	trajectory	trajectory	no dataset	along prAD pseudotime (timing)	False
+green2024-C22	green2024	green2024		Astrocytes; Microglia; Oligodendrocytes; OPCs; Endothelial; Excitatory neurons; Inhibitory neurons	community C1 (C1.1 neuronal; C1.2 homeostatic glia)	ad_pathology	down	trajectory	trajectory	no dataset	along prAD and ABA pseudotime	False
+green2024-C23	green2024	green2024		Microglia; Astrocytes; Oligodendrocytes; OPCs; Endothelial; Inhibitory neurons	community C2 (C2.1 neuronal incl. Inh.16; C2.2 mid-prAD; C2.3 late-prAD)	ad_pathology	up	trajectory	trajectory	no dataset	along prAD vs ABA pseudotime	False
+green2024-C24	green2024	green2024		Astrocytes; OPCs; Microglia; Oligodendrocytes; Pericytes	community C3	not_available	up	trajectory	trajectory	no dataset	along ABA pseudotime	False
+green2024-C25	green2024	green2024		ALL	communities C1, C1.1, C2, C2.3	ad_pathology	associated_pos	pathology_association	pathology_correlation	no dataset	association with neocortical Aβ, tau and rate of cognitive decline (continuous)	False
+green2024-C26	green2024	green2024		Microglia; Astrocytes; Oligodendrocytes; OPCs; Endothelial	communities C2.2, C2.3	ad_pathology	up	de_pathway	geneset_shift	no dataset	along prAD pseudotime (community marker pathways)	False
+green2024-C27	green2024	green2024		Microglia; Astrocytes	Mic.13; Ast.10	ad_pathology	enriched	spatial_colocalisation	spatial_neighbourhood	no dataset	prAD vs other (early/ABA) participants	False
+green2024-C28	green2024	green2024		Astrocytes	Ast.10 vs Ast.5	ad_pathology	enriched	state_enrichment	state_signature	no dataset	Ast.10 vs Ast.5 signature within prAD participants	False
+grubman2019-C01	grubman2019	grubman2019		Astrocytes; Microglia; Oligodendrocytes; OPCs; Neurons (other); Endothelial	AD subclusters (GEO covariates: a1, a2; m1, m2; o1, o2, o3; O1; n1; e1)	AD_vs_control	enriched	state_enrichment	state_signature	no dataset	AD vs control	False
+grubman2019-C02	grubman2019	grubman2019		OPCs	AD OPC subcluster (O1 in GEO covariates)	AD_vs_control	down	de_gene	de_pseudobulk	no dataset	AD vs control	False
+grubman2019-C03	grubman2019	grubman2019		Astrocytes	AD astrocyte subclusters (a1, a2 in GEO covariates)	AD_vs_control	down	de_gene	de_pseudobulk	no dataset	AD vs control	False
+grubman2019-C04	grubman2019	grubman2019		Microglia	AD-specific microglial subpopulation (AD subclusters m1, m2 in GEO covariates)	AD_vs_control	up	de_gene	de_pseudobulk	no dataset	AD vs control	False
+grubman2019-C05	grubman2019	grubman2019		Microglia	AD-specific microglial subpopulation (m1/m2 in GEO covariates)	AD_vs_control	enriched	state_enrichment	state_signature	no dataset	AD vs control	False
+grubman2019-C06	grubman2019	grubman2019		Astrocytes; Microglia; Oligodendrocytes; OPCs; Neurons (other); Endothelial	AD subclusters vs control subclusters	AD_vs_control	NA	de_gene	de_pseudobulk	no dataset	AD vs control	False
+grubman2019-C07	grubman2019	grubman2019		Astrocytes; Microglia; Oligodendrocytes; OPCs; Neurons (other); Endothelial	control-to-AD subcluster transitions	AD_vs_control	NA	other	not_testable	no dataset	AD vs control subclusters	False
+grubman2019-C08	grubman2019	grubman2019		Astrocytes	specific AD astrocyte subpopulation (a1 or a2 in GEO covariates; not stated in abstract)	AD_vs_control	NA	other	geneset_shift	no dataset	AD vs control astrocyte subclusters	False
+lau2020-C01	lau2020	lau2020		Endothelial		AD_vs_control	enriched	composition	composition_donor	no dataset	AD vs control	False
+lau2020-C02	lau2020	lau2020		Astrocytes; Excitatory neurons; Inhibitory neurons; Microglia; Oligodendrocytes		AD_vs_control	NA	composition	composition_donor	no dataset	AD vs control	True
+lau2020-C03	lau2020	lau2020		Astrocytes; Endothelial; Excitatory neurons; Inhibitory neurons; Microglia; Oligodendrocytes		AD_vs_control	NA	de_gene	de_pseudobulk	no dataset	AD vs control	False
+lau2020-C04	lau2020	lau2020		Excitatory neurons; Inhibitory neurons		AD_vs_control	down	de_pathway	geneset_shift	no dataset	AD vs control	False
+lau2020-C05	lau2020	lau2020		Astrocytes		AD_vs_control	down	de_pathway	geneset_shift	no dataset	AD vs control	False
+lau2020-C06	lau2020	lau2020		Astrocytes		AD_vs_control	down	de_gene	de_pseudobulk	no dataset	AD vs control	False
+lau2020-C07	lau2020	lau2020		Microglia		AD_vs_control	up	de_pathway	geneset_shift	no dataset	AD vs control	False
+lau2020-C08	lau2020	lau2020		Endothelial		AD_vs_control	up	de_pathway	geneset_shift	no dataset	AD vs control	False
+lau2020-C09	lau2020	lau2020		Endothelial		AD_vs_control	up	de_pathway	geneset_shift	no dataset	AD vs control	False
+lau2020-C10	lau2020	lau2020		Oligodendrocytes		AD_vs_control	down	de_pathway	geneset_shift	no dataset	AD vs control	False
+lau2020-C11	lau2020	lau2020		ALL		AD_vs_control	NA	de_gene	de_pseudobulk	no dataset	AD vs control (bulk PFC microarray, GSE33000)	False
+lau2020-C12	lau2020	lau2020		Astrocytes; Excitatory neurons; Inhibitory neurons; Microglia; Oligodendrocytes		AD_vs_control	NA	de_gene	de_pseudobulk	no dataset	AD vs control (concordance with Mathys 2019)	False
+lau2020-C13	lau2020	lau2020		Astrocytes	a1; a6 (AD-up-regulated astrocyte subpopulations)	AD_vs_control	enriched	composition	composition_donor	no dataset	AD vs control	False
+lau2020-C14	lau2020	lau2020		Astrocytes	a3 (AD-down-regulated homeostatic / neuroprotective astrocytes)	AD_vs_control	depleted	composition	composition_donor	no dataset	AD vs control	False
+lau2020-C15	lau2020	lau2020		Astrocytes	alarmin-expressing / stress-response astrocytes (a1, a6)	AD_vs_control	enriched	state_enrichment	state_signature	no dataset	AD vs control	False
+lau2020-C16	lau2020	lau2020		Oligodendrocytes	o3; o5 (AD-down-regulated mature myelinating oligodendrocytes)	AD_vs_control	depleted	composition	composition_donor	no dataset	AD vs control	False
+lau2020-C17	lau2020	lau2020		Oligodendrocytes	o1; o2 (AD-up-regulated remyelinating-like oligodendrocytes)	AD_vs_control	enriched	composition	composition_donor	no dataset	AD vs control	False
+lau2020-C18	lau2020	lau2020		Microglia	m6 (complement / synaptic-pruning microglia)	AD_vs_control	depleted	composition	composition_donor	no dataset	AD vs control	False
+lau2020-C19	lau2020	lau2020		Endothelial	angiogenic endothelial cells (e1, e3, e4)	AD_vs_control	enriched	state_enrichment	state_signature	no dataset	AD vs control	False
+lau2020-C20	lau2020	lau2020		Endothelial	angiogenic endothelial cells (e1, e3, e4)	AD_vs_control	up	de_gene	de_pseudobulk	no dataset	AD vs control (endothelial cells; signature of AD-up-regulated subpopulations)	False
+lau2020-C21	lau2020	lau2020		Endothelial	angiogenic endothelial cells (e1, e3, e4)	AD_vs_control	up	de_gene	de_pseudobulk	no dataset	AD vs control (endothelial cells; signature of AD-up-regulated subpopulations)	False
+lau2020-C22	lau2020	lau2020		Endothelial	angiogenic endothelial cells (e1, e3, e4)	within	up	de_pathway	geneset_shift	no dataset	AD-up-regulated endothelial subpopulations vs other endothelial cells	False
+lau2020-C23	lau2020	lau2020		Endothelial	angiogenic endothelial cells (e1, e3, e4)	within	associated_pos	other	geneset_shift	no dataset	AD-up-regulated endothelial subpopulations vs other endothelial cells	False
+leng2021-C01	leng2021	leng2021		Excitatory neurons		ADlate_vs_control	depleted	composition	composition_donor	no dataset	Braak 2 and Braak 6 vs Braak 0	False
+leng2021-C02	leng2021	leng2021		Excitatory neurons		ADlate_vs_control	depleted	composition	composition_donor	no dataset	Braak 6 vs Braak 0	False
+leng2021-C03	leng2021	leng2021		Excitatory neurons	EC:Exc.s2 (RORB+, CTC-340A15.2+, CTC-535M15.2+; mouse MEC layer II genes)	ADearly_vs_control	depleted	composition	composition_donor	no dataset	Braak 2 vs Braak 0 (no further change at Braak 6)	False
+leng2021-C04	leng2021	leng2021		Excitatory neurons	EC:Exc.s4 (RORB+, CTC-340A15.2+, CTC-535M15.2+; mouse MEC layer II genes)	ADearly_vs_control	depleted	composition	composition_donor	no dataset	Braak 2 vs Braak 0	False
+leng2021-C05	leng2021	leng2021		Excitatory neurons	EC:Exc.s1 (CDH9-high; mouse MEC layer II genes)	ADearly_vs_control	depleted	composition	composition_donor	no dataset	Braak 2 vs Braak 0	False
+leng2021-C06	leng2021	leng2021		Excitatory neurons	EC:Exc.s0 (layer III-like); EC:Exc.s3, s5, s7 (layer V/VI-like); EC:Exc.s6, s8 (layer II-like)	ADlate_vs_control	NA	composition	composition_donor	no dataset	Braak 2 and Braak 6 vs Braak 0	True
+leng2021-C07	leng2021	leng2021		Excitatory neurons	EC:Exc.s5 (mouse MEC layer V/VI genes)	ADearly_vs_control	enriched	composition	composition_donor	no dataset	Braak 2 vs Braak 0	False
+leng2021-C08	leng2021	leng2021		Excitatory neurons	EC:Exc.s2; EC:Exc.s4	within	exists	state_existence	state_signature	no dataset	within all donors (EC excitatory subpopulations)	False
+leng2021-C09	leng2021	leng2021		Excitatory neurons	EC:Exc.s2 + EC:Exc.s4 (RORB+)	within	up	de_pathway	de_pseudobulk	no dataset	EC:Exc.s2/s4 vs all other EC excitatory neurons (within donors)	False
+leng2021-C10	leng2021	leng2021		Excitatory neurons	EC:Exc.s2 + EC:Exc.s4 (RORB+)	within	down	de_pathway	de_pseudobulk	no dataset	EC:Exc.s2/s4 vs all other EC excitatory neurons (within donors)	False
+leng2021-C11	leng2021	leng2021		Excitatory neurons		ADlate_vs_control	down	de_pathway	geneset_shift	no dataset	Braak 6 vs Braak 0	False
+leng2021-C12	leng2021	leng2021		Excitatory neurons	EC:Exc.s2 (RORB+)	ADlate_vs_control	down	de_gene	de_pseudobulk	no dataset	Braak 6 vs Braak 0	False
+leng2021-C13	leng2021	leng2021		Excitatory neurons	SFG:Exc.s2; SFG:Exc.s4 (RORB+)	ADlate_vs_control	depleted	composition	composition_donor	no dataset	Braak 6 vs Braak 0	False
+leng2021-C14	leng2021	leng2021		Excitatory neurons	SFG:Exc.s2/s4 ~ EC:Exc.s2/s4	within	exists	state_existence	state_signature	no dataset	within all donors (SFG vs EC subpopulations)	False
+leng2021-C15	leng2021	leng2021		Excitatory neurons	Mathys:Exc.s4 (RORB-high)	AD_vs_control	depleted	composition	composition_donor	no dataset	AD vs control (males)	False
+leng2021-C16	leng2021	leng2021		Excitatory neurons	RORB+ TBR1+ neurons		depleted	composition	composition_donor	no dataset	Braak 2-4 and Braak 5-6 vs Braak 0-1	False
+leng2021-C17	leng2021	leng2021		Excitatory neurons	RORB+ TBR1+ neurons		enriched	pathology_association	not_testable	no dataset	RORB+ vs RORB- excitatory neurons (Braak 2-4 and 5-6)	False
+leng2021-C18	leng2021	leng2021		Inhibitory neurons		ADlate_vs_control	NA	composition	composition_donor	no dataset	Braak 2 and Braak 6 vs Braak 0	True
+leng2021-C19	leng2021	leng2021		Inhibitory neurons		sex	NA	composition	composition_donor	no dataset	AD vs control (males and females separately)	True
+leng2021-C20	leng2021	leng2021		Microglia			enriched	composition	composition_donor	no dataset	across Braak stages 0, 2, 6	False
+leng2021-C21	leng2021	leng2021		Oligodendrocytes	EC:Oligo.s0; EC:Oligo.s4; SFG:Oligo.s1; SFG:Oligo.s2	within	exists	state_existence	state_signature	no dataset	within all donors (oligodendrocyte subpopulations)	False
+leng2021-C22	leng2021	leng2021		Astrocytes	GFAPhigh astrocytes (EC:Astro.3; SFG:Astro.s4; SFG:Astro.s5)	within	exists	state_existence	state_signature	no dataset	within all donors (astrocyte subpopulations)	False
+leng2021-C23	leng2021	leng2021		Astrocytes	SFG:Astro.s4; SFG:Astro.s5 (GFAPhigh)	within	exists	state_existence	state_signature	no dataset	within all donors (astrocyte subpopulations)	False
+leng2021-C24	leng2021	leng2021		Astrocytes	GFAPhigh astrocytes	within	down	de_gene	de_pseudobulk	no dataset	GFAPhigh vs other astrocyte subpopulations (within donors)	False
+leng2021-C25	leng2021	leng2021		Astrocytes	GFAPhigh astrocytes	within	NA	other	state_signature	no dataset	GFAPhigh vs other astrocytes, overlap with Anderson et al. 2016 reactive astrocyte DEGs	False
+leng2021-C26	leng2021	leng2021		Astrocytes	Mathys:Astro.s2; Mathys:Astro.s3 (GFAP-high)	within	exists	state_existence	state_signature	no dataset	within all donors (astrocyte subpopulations), replication of GFAPhigh state	False
+mathys2019-C01	mathys2019	mathys2019		Excitatory neurons; Inhibitory neurons		AD_vs_control	down	de_gene	de_pseudobulk	no dataset	AD-pathology vs no-pathology	False
+mathys2019-C02	mathys2019	mathys2019		Oligodendrocytes; Astrocytes; Microglia		AD_vs_control	up	de_gene	de_pseudobulk	no dataset	AD-pathology vs no-pathology	False
+mathys2019-C03	mathys2019	mathys2019		Microglia		AD_vs_control	up	de_gene	de_pseudobulk	no dataset	AD-pathology vs no-pathology	False
+mathys2019-C04	mathys2019	mathys2019		Astrocytes		AD_vs_control	down	de_gene	de_pseudobulk	no dataset	AD-pathology vs no-pathology	False
+mathys2019-C05	mathys2019	mathys2019		Excitatory neurons; Inhibitory neurons; Astrocytes; Oligodendrocytes; OPCs; Microglia		AD_vs_control	NA	de_gene	de_pseudobulk	no dataset	AD-pathology vs no-pathology	False
+mathys2019-C06	mathys2019	mathys2019		Excitatory neurons; Oligodendrocytes		AD_vs_control	up	de_gene	de_pseudobulk	no dataset	AD-pathology vs no-pathology	False
+mathys2019-C07	mathys2019	mathys2019		Excitatory neurons; Inhibitory neurons; Oligodendrocytes; OPCs	myelination / axon regeneration genes	AD_vs_control	NA	de_pathway	geneset_shift	no dataset	AD-pathology vs no-pathology	False
+mathys2019-C08	mathys2019	mathys2019		Excitatory neurons		AD_vs_control	down	de_gene	de_pseudobulk	no dataset	AD-pathology vs no-pathology	False
+mathys2019-C09	mathys2019	mathys2019		Excitatory neurons; Oligodendrocytes; Microglia		AD_vs_control	NA	other	not_testable	no dataset	AD-pathology vs no-pathology (snRNA) vs ROSMAP bulk AD vs non-AD	False
+mathys2019-C10	mathys2019	mathys2019		Excitatory neurons; Inhibitory neurons; Astrocytes; Oligodendrocytes; OPCs; Microglia		ADearly_vs_control	NA	de_gene	de_pseudobulk	no dataset	early-pathology vs no-pathology	False
+mathys2019-C11	mathys2019	mathys2019		Excitatory neurons; Inhibitory neurons; Astrocytes; Oligodendrocytes; OPCs; Microglia	global stress response / proteostasis	ad_pathology	up	de_pathway	geneset_shift	no dataset	late-pathology vs early-pathology	False
+mathys2019-C12	mathys2019	mathys2019		Excitatory neurons; Inhibitory neurons; Astrocytes; Oligodendrocytes; OPCs; Microglia		ad_pathology	down	de_gene	de_pseudobulk	no dataset	late-pathology vs early-pathology	False
+mathys2019-C13	mathys2019	mathys2019		Microglia	gene-trait module M7	ad_pathology	associated_pos	pathology_association	pathology_correlation	no dataset	correlation with AD pathology traits (amyloid, NFT, plaques, tangles, gpath)	False
+mathys2019-C14	mathys2019	mathys2019		Oligodendrocytes	gene-trait module M9	ad_pathology	associated_pos	pathology_association	pathology_correlation	no dataset	correlation with AD pathology traits	False
+mathys2019-C15	mathys2019	mathys2019		Microglia	gene-trait modules M6, M7	ad_pathology	associated_pos	genetic_enrichment	genetic_enrichment	no dataset	correlation with AD pathology traits; overlap with AD GWAS genes	False
+mathys2019-C16	mathys2019	mathys2019		Excitatory neurons; Inhibitory neurons	gene-trait module M3	ad_pathology	associated_neg	genetic_enrichment	genetic_enrichment	no dataset	correlation with AD pathology traits; overlap with cognition GWAS genes	False
+mathys2019-C17	mathys2019	mathys2019		Excitatory neurons	Ex4	AD_vs_control	enriched	state_enrichment	state_signature	no dataset	AD-pathology vs no-pathology (and along amyloid, Braak, CERAD, NIA-Reagan, cogdx)	False
+mathys2019-C18	mathys2019	mathys2019		Inhibitory neurons	In0	AD_vs_control	enriched	state_enrichment	state_signature	no dataset	AD-pathology vs no-pathology	False
+mathys2019-C19	mathys2019	mathys2019		Astrocytes	Ast1	AD_vs_control	enriched	state_enrichment	state_signature	no dataset	AD-pathology vs no-pathology	False
+mathys2019-C20	mathys2019	mathys2019		Oligodendrocytes	Oli0	AD_vs_control	enriched	state_enrichment	state_signature	no dataset	AD-pathology vs no-pathology	False
+mathys2019-C21	mathys2019	mathys2019		Microglia	Mic1	AD_vs_control	enriched	state_enrichment	state_signature	no dataset	AD-pathology vs no-pathology	False
+mathys2019-C22	mathys2019	mathys2019		OPCs	Opc1	AD_vs_control	enriched	state_enrichment	state_signature	no dataset	AD-pathology vs no-pathology	False
+mathys2019-C23	mathys2019	mathys2019		Excitatory neurons; Inhibitory neurons; Astrocytes; Oligodendrocytes	Ex6; In2; Ast0; Oli1	AD_vs_control	depleted	state_enrichment	state_signature	no dataset	AD-pathology vs no-pathology	False
+mathys2019-C24	mathys2019	mathys2019		Microglia	Mic1 vs mouse DAM / late-response microglia	within	exists	state_existence	state_signature	no dataset	human Mic1 markers vs mouse DAM and aged human microglia signatures	False
+mathys2019-C25	mathys2019	mathys2019		Excitatory neurons; Astrocytes; Oligodendrocytes; Microglia	Ex4; Ast1; Oli0; Mic1 (female); Ex6; Ast0; Oli1 (male)	sex	enriched	state_enrichment	state_signature	no dataset	female vs male cells within AD-associated subpopulations	False
+mathys2019-C26	mathys2019	mathys2019		Oligodendrocytes		sex	associated_pos	pathology_association	pathology_correlation	no dataset	male vs female, gene-trait correlation with AD pathology	False
+mathys2019-C27	mathys2019	mathys2019		Excitatory neurons; Inhibitory neurons		sex	associated_neg	pathology_association	pathology_correlation	no dataset	female vs male, gene-trait correlation with amyloid	False
+mathys2019-C28	mathys2019	mathys2019		OPCs		sex	associated_neg	pathology_association	pathology_correlation	no dataset	female vs male, gene-trait correlation with AD pathology	False
+mathys2023-C01	mathys2023	mathys2023		Excitatory neurons	14 excitatory neuron subtypes	ad_pathology	NA	de_gene	de_pseudobulk	no dataset	along global AD pathology (gpath), 427 donors	False
+mathys2023-C02	mathys2023	mathys2023		Excitatory neurons	consensus signature (up in >=3 Exc subtypes)	ad_pathology	up	de_pathway	geneset_shift	no dataset	along global AD pathology (gpath)	False
+mathys2023-C03	mathys2023	mathys2023		Excitatory neurons		ad_pathology	up	de_gene	de_pseudobulk	no dataset	along global AD pathology (gpath); pathologic AD vs non-AD for validation	False
+mathys2023-C04	mathys2023	mathys2023		Excitatory neurons	consensus signature (down in >=3 Exc subtypes)	ad_pathology	down	de_pathway	geneset_shift	no dataset	along global AD pathology (gpath)	False
+mathys2023-C05	mathys2023	mathys2023		Excitatory neurons; Astrocytes		ad_pathology	down	de_gene	de_pseudobulk	no dataset	along AD pathology measures (gpath, plaques, NFT); pathologic AD vs non-AD (RT-qPCR)	False
+mathys2023-C06	mathys2023	mathys2023		Astrocytes	cholesterol biosynthesis genes	ad_pathology	down	de_pathway	geneset_shift	no dataset	along global AD pathology (gpath)	False
+mathys2023-C07	mathys2023	mathys2023		Excitatory neurons	Exc L4-5 RORB IL1RAPL2	ad_pathology	down	de_pathway	geneset_shift	no dataset	along global AD pathology (gpath)	False
+mathys2023-C08	mathys2023	mathys2023		Excitatory neurons	Cohesin-SA1 / Cohesin-SA2 complex module score	ad_pathology	up	de_pathway	geneset_shift	no dataset	along global AD pathology (gpath)	False
+mathys2023-C09	mathys2023	mathys2023		Excitatory neurons	cohesin-co-regulated DNA damage response module	ad_pathology	up	de_gene	de_pseudobulk	no dataset	along global AD pathology (gpath)	False
+mathys2023-C10	mathys2023	mathys2023		Oligodendrocytes	Cohesin-SA1/SA2 module; DNA damage response genes	ad_pathology	up	de_pathway	geneset_shift	no dataset	along global AD pathology (gpath)	False
+mathys2023-C11	mathys2023	mathys2023		Excitatory neurons; Inhibitory neurons; Astrocytes; Oligodendrocytes; OPCs; Microglia		ADearly_vs_control	up	de_pathway	geneset_shift	no dataset	middle vs lowest third of AD pathology (early stage)	False
+mathys2023-C12	mathys2023	mathys2023		Microglia	cell activation / TYROBP causal network	ADearly_vs_control	up	de_pathway	geneset_shift	no dataset	middle vs lowest third (early) and highest vs middle third (late) of AD pathology	False
+mathys2023-C13	mathys2023	mathys2023		Astrocytes; Excitatory neurons; Inhibitory neurons; Oligodendrocytes; OPCs	autophagy genes	ADearly_vs_control	down	de_pathway	geneset_shift	no dataset	middle vs lowest third of AD pathology (early stage)	False
+mathys2023-C14	mathys2023	mathys2023		Excitatory neurons; Inhibitory neurons		ad_pathology	up	de_pathway	geneset_shift	no dataset	highest vs middle third of AD pathology (late stage)	False
+mathys2023-C15	mathys2023	mathys2023		Oligodendrocytes	cholesterol metabolism genes	ad_pathology	up	de_pathway	geneset_shift	no dataset	highest vs middle third of AD pathology (late stage)	False
+mathys2023-C16	mathys2023	mathys2023		Astrocytes; Excitatory neurons; Inhibitory neurons; Oligodendrocytes	lipid metabolism genes	ad_pathology	down	de_pathway	geneset_shift	no dataset	highest vs middle third of AD pathology (late stage)	False
+mathys2023-C17	mathys2023	mathys2023		Excitatory neurons; Inhibitory neurons; Astrocytes; Oligodendrocytes; OPCs; Microglia		ad_pathology	NA	de_gene	de_pseudobulk	no dataset	late-stage DEGs in PFC (gpath tertiles) vs early-stage DEGs in MTG (SEA-AD pseudo-progression tertiles)	False
+mathys2023-C18	mathys2023	mathys2023		Excitatory neurons; Inhibitory neurons; Astrocytes; Oligodendrocytes		cognition	NA	clinical_association	de_pseudobulk	no dataset	DEGs along global cognition / cognitive domains vs DEGs along AD pathology	False
+mathys2023-C19	mathys2023	mathys2023		Excitatory neurons; Astrocytes	lipid metabolism / cholesterol biosynthesis genes	cognition	associated_pos	clinical_association	geneset_shift	no dataset	along global cognitive function	False
+mathys2023-C20	mathys2023	mathys2023		Excitatory neurons	consensus signature (negatively associated with cognition)	cognition	associated_neg	clinical_association	geneset_shift	no dataset	along global cognitive function	False
+mathys2023-C21	mathys2023	mathys2023		Oligodendrocytes	cholesterol biosynthesis genes	cognition	associated_neg	clinical_association	geneset_shift	no dataset	along global cognitive function	False
+mathys2023-C22	mathys2023	mathys2023		Excitatory neurons		cognition	associated_pos	clinical_association	de_pseudobulk	no dataset	along global cognitive function; no cognitive impairment vs AD dementia (validation)	False
+mathys2023-C23	mathys2023	mathys2023		Excitatory neurons		cognition	associated_pos	clinical_association	de_pseudobulk	no dataset	along cognition measures (global and domains)	False
+mathys2023-C24	mathys2023	mathys2023		Excitatory neurons		cognition	associated_pos	clinical_association	de_pseudobulk	no dataset	along cognitive resilience (CR/CDR scores: cognition given AD pathology)	False
+mathys2023-C25	mathys2023	mathys2023		Microglia		ad_pathology	up	composition	composition_donor	no dataset	highest vs lowest quartile of gpath, neuritic plaque and amyloid	False
+mathys2023-C26	mathys2023	mathys2023		Inhibitory neurons	Inh CUX2 MSR1; Inh ENOX2 SPHKAP; Inh L3-5 SST MAFB	ad_pathology	down	composition	composition_donor	no dataset	highest vs lowest quartile of gpath, NFT burden, tangle density; pathologic AD vs non-AD	False
+mathys2023-C27	mathys2023	mathys2023		Inhibitory neurons	SST subclass	ad_pathology	down	composition	composition_donor	no dataset	highest vs lowest quartile of gpath, NFT burden, tangle density	False
+mathys2023-C28	mathys2023	mathys2023		Inhibitory neurons	SST subclass; Inh CUX2 MSR1; Inh ENOX2 SPHKAP; Inh L3-5 SST MAFB	cognition	enriched	composition	composition_donor	no dataset	highest vs lowest quartile of global cognition, episodic, semantic memory, perceptual orientation	False
+mathys2023-C29	mathys2023	mathys2023		Inhibitory neurons	Inh LAMP5 RELN; Inh PTPRK FAM19A1; Inh SORCS1 TTN (LAMP5 RELN group)	cognition	enriched	composition	composition_donor	no dataset	highest vs lowest quartile of global cognition, episodic memory, perceptual orientation, semantic memory	False
+mathys2023-C30	mathys2023	mathys2023		Inhibitory neurons		cognition	enriched	composition	composition_donor	no dataset	high vs low cognitive resilience; within pathologic AD: no cognitive impairment vs AD dementia	False
+mathys2023-C31	mathys2023	mathys2023		Inhibitory neurons	Inh LAMP5 RELN; Inh PTPRK FAM19A1; Inh SORCS1 TTN (LAMP5 RELN group)	cognition	enriched	composition	composition_donor	no dataset	high vs low cognitive resilience; within pathologic AD: no cognitive impairment vs AD dementia	False
+mathys2023-C32	mathys2023	mathys2023		Inhibitory neurons	SST subclass; Inh CUX2 MSR1; Inh ENOX2 SPHKAP; Inh L3-5 SST MAFB	cognition	enriched	composition	composition_donor	no dataset	high vs low cognitive resilience; within pathologic AD: no cognitive impairment vs AD dementia	False
+sun2023-C01	sun2023	sun2023		Microglia	MG0 homeostatic; MG1 neuronal surveillance; MG2 inflammatory I (CPEB4/TMEM163/IL4R); MG3 ribosome biogenesis; MG4 lipid-processing; MG5 phagocytic; MG6 stress-related; MG7 glycolytic; MG8 inflammatory II (LRRK2/SPON1/FOXP1); MG10 inflammatory III (IL1B/CCL3/RELB); MG11 antiviral; MG12 cycling		exists	state_existence	state_signature	no dataset	all donors (non-AD, early AD, late AD)	False
+sun2023-C02	sun2023	sun2023		Microglia	MG4 lipid-processing (PPARG, APOE, ABCA1, TREM2)	AD_vs_control	enriched	composition	composition_donor	no dataset	AD (early and late) vs non-AD	False
+sun2023-C03	sun2023	sun2023		Microglia	MG8 inflammatory II (LRRK2/SPON1/FOXP1)	AD_vs_control	enriched	composition	composition_donor	no dataset	AD (early and late) vs non-AD	False
+sun2023-C04	sun2023	sun2023		Microglia	MG1 neuronal surveillance (high neurotransmitter receptor expression)	AD_vs_control	depleted	composition	composition_donor	no dataset	AD (early and late) vs non-AD	False
+sun2023-C05	sun2023	sun2023		Microglia	MG4 lipid-processing	ad_pathology	associated_pos	pathology_association	pathology_correlation	no dataset	within all donors (continuous pathology and cognition)	False
+sun2023-C06	sun2023	sun2023		Microglia	MG8 inflammatory II	ad_pathology	associated_pos	pathology_association	pathology_correlation	no dataset	within all donors (continuous pathology)	False
+sun2023-C07	sun2023	sun2023		Microglia	MG5 phagocytic	ad_pathology	associated_pos	pathology_association	pathology_correlation	no dataset	within all donors (continuous pathology)	False
+sun2023-C08	sun2023	sun2023		Microglia	P2RY12+ (homeostatic marker)	AD_vs_control	depleted	composition	composition_donor	no dataset	AD vs non-AD	False
+sun2023-C09	sun2023	sun2023		Microglia	MG4 lipid-processing (PPARG+)	AD_vs_control	enriched	composition	composition_donor	no dataset	AD vs non-AD	False
+sun2023-C10	sun2023	sun2023		Microglia	MG8 inflammatory II (FOXP1+LRRK2+)	AD_vs_control	enriched	composition	composition_donor	no dataset	AD vs non-AD	False
+sun2023-C11	sun2023	sun2023		Microglia	MG3 ribosome biogenesis; MG4 lipid-processing; MG10 inflammatory III		NA	other	state_signature	no dataset	all donors (signature enrichment across states)	False
+sun2023-C12	sun2023	sun2023		Microglia	MG3 ribosome biogenesis	AD_vs_control	NA	composition	composition_donor	no dataset	AD (early and late) vs non-AD	True
+sun2023-C13	sun2023	sun2023		Microglia	MG2 inflammatory I; MG8 inflammatory II; MG10 inflammatory III	within	NA	trajectory	trajectory	no dataset	within donors (AD subjects for RNAscope)	False
+sun2023-C14	sun2023	sun2023		Microglia	MG10; MG2; MG8	ADearly_vs_control	NA	de_gene	de_pseudobulk	no dataset	early AD vs non-AD; late AD vs early AD	False
+sun2023-C15	sun2023	sun2023		Microglia	HOM; ACT1; ACT2 (epigenomic states)		NA	chromatin	chromatin_da	no dataset	all donors (RNA vs ATAC state resolution)	False
+sun2023-C16	sun2023	sun2023		Microglia	MG2; MG3; MG6; MG7; MG8; MG10; MG11; MG12		NA	chromatin	chromatin_da	no dataset	all donors (state marker genes and linked peaks)	False
+sun2023-C17	sun2023	sun2023		Microglia	all 12 states	ADearly_vs_control	NA	de_gene	de_pseudobulk	no dataset	early AD vs non-AD; late AD vs early AD	False
+sun2023-C18	sun2023	sun2023		Microglia	multiple states (group G25)	ADearly_vs_control	down	de_gene	de_pseudobulk	no dataset	early AD vs non-AD	False
+sun2023-C19	sun2023	sun2023		Microglia	multiple states (group G2)	ad_pathology	up	de_gene	de_pseudobulk	no dataset	late AD vs early AD	False
+sun2023-C20	sun2023	sun2023		Microglia	multiple states (group G26)	ad_pathology	down	de_gene	de_pseudobulk	no dataset	late AD vs early AD	False
+sun2023-C21	sun2023	sun2023		Microglia	multiple states (group G49)	ADearly_vs_control	NA	de_gene	de_pseudobulk	no dataset	early AD vs non-AD (up); late AD vs early AD (down)	False
+sun2023-C22	sun2023	sun2023		Microglia	multiple states (group G50)	ADearly_vs_control	NA	de_gene	de_pseudobulk	no dataset	early AD vs non-AD (down); late AD vs early AD (up)	False
+sun2023-C23	sun2023	sun2023		Microglia	MG8 inflammatory II; MG2 inflammatory I	within	enriched	genetic_enrichment	genetic_enrichment	no dataset	AD GWAS signal across microglial state markers	False
+sun2023-C24	sun2023	sun2023		Microglia	MG0 homeostatic; MG4 lipid-processing; MG11 antiviral	within	enriched	genetic_enrichment	genetic_enrichment	no dataset	AD GWAS signal across microglial state markers	False
+sun2023-C25	sun2023	sun2023		Microglia	MG0 homeostatic	AD_vs_control	NA	composition	composition_donor	no dataset	AD (early and late) vs non-AD	True
+sun2023-C26	sun2023	sun2023		Microglia	MG4 lipid-processing		NA	other	state_signature	no dataset	all donors (state-specific expression of AD risk genes)	False
+sun2023-C27	sun2023	sun2023		Microglia			enriched	genetic_enrichment	genetic_enrichment	no dataset	overlap of microglia TWAS genes with AD DEGs (early and late)	False
+sun2023-C28	sun2023	sun2023		Microglia	multiple states	ADearly_vs_control	NA	de_gene	de_pseudobulk	no dataset	early AD vs non-AD; late AD vs early AD	False
+sun2023-C29	sun2023	sun2023		Microglia	multiple states	within	associated_pos	other	de_pseudobulk	no dataset	across donors within early (non-AD + early AD) and late (early + late AD) comparisons	False

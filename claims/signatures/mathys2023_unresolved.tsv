@@ -1,0 +1,12 @@
+claim_id	term	reason
+mathys2023-C01	overlap of DEG sets	the claim is about how DEG sets overlap (between subtypes, or between cognition and pathology); a direction re-test of the genes would not test it
+mathys2023-C18	overlap of DEG sets	the claim is about how DEG sets overlap (between subtypes, or between cognition and pathology); a direction re-test of the genes would not test it
+mathys2023-C10	pathway named only	the claim names pathways (GO terms, gene families) whose member genes are shown only in figures
+mathys2023-C11	pathway named only	the claim names pathways (GO terms, gene families) whose member genes are shown only in figures
+mathys2023-C13	pathway named only	the claim names pathways (GO terms, gene families) whose member genes are shown only in figures
+mathys2023-C14	pathway named only	the claim names pathways (GO terms, gene families) whose member genes are shown only in figures
+mathys2023-C15	pathway named only	the claim names pathways (GO terms, gene families) whose member genes are shown only in figures
+mathys2023-C16	pathway named only	the claim names pathways (GO terms, gene families) whose member genes are shown only in figures
+mathys2023-C19	pathway named only	the claim names pathways (GO terms, gene families) whose member genes are shown only in figures
+mathys2023-C21	pathway named only	the claim names pathways (GO terms, gene families) whose member genes are shown only in figures
+mathys2023-C17	PFC late vs MTG early changes	a comparison across regions and stages of two studies

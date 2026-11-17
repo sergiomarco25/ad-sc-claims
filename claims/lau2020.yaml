@@ -1,0 +1,506 @@
+- id: lau2020-C01
+  paper: lau2020
+  statement: "The proportion of endothelial cells among prefrontal cortex nuclei is higher in AD than in control samples."
+  quote: "the proportion of endothelial cells was higher in the AD samples than the NC samples"
+  location: "Fig. 2A,B; Results \"Cell Type-Specific Transcriptomic Changes Reveal Dysregulated Molecular Pathways in AD Brains\""
+  centrality: main
+  modality: snRNA
+  region: PFC
+  cell_type: Endothelial
+  cell_state: ""
+  claim_type: composition
+  direction: enriched
+  comparison: "AD vs control"
+  genes: [CLDN5]
+  gene_source: "text (CLDN5 used as endothelial marker)"
+  reported_stat: "3.0 ± 0.9% vs 1.2 ± 0.3% of nuclei (mean ± SEM); 12 AD vs 9 NC donors; no test reported"
+  unit_of_analysis: donors
+  method: "descriptive comparison of per-sample proportions (mean ± SEM); no statistical test reported"
+  testable_with: rna
+  test_template: composition_donor
+  requires: ""
+  notes: "AD = Braak >= 4, NC = Braak <= 2. Endothelial nuclei are rare (2.3% overall), so the estimate is noisy; the authors attribute absence of endothelial findings in earlier studies to lower endothelial sampling."
+- id: lau2020-C02
+  paper: lau2020
+  statement: "The proportions of astrocytes, excitatory neurons, inhibitory neurons, microglia and oligodendrocytes in prefrontal cortex do not differ between AD and control samples."
+  quote: "proportions of astrocytes, excitatory neurons, inhibitory neurons, microglia, and oligodendrocytes were similar"
+  location: "Fig. 2A,B; Results \"Cell Type-Specific Transcriptomic Changes Reveal Dysregulated Molecular Pathways in AD Brains\""
+  centrality: main
+  modality: snRNA
+  region: PFC
+  cell_type: "Astrocytes; Excitatory neurons; Inhibitory neurons; Microglia; Oligodendrocytes"
+  cell_state: ""
+  claim_type: composition
+  direction: NA
+  comparison: "AD vs control"
+  genes: [AQP4, CAMK2A, GAD1, C3, MBP]
+  gene_source: "text (cell-type markers)"
+  reported_stat: "described as similar; 12 AD vs 9 NC donors; no test reported"
+  unit_of_analysis: donors
+  method: "descriptive comparison of per-sample proportions; no statistical test reported"
+  testable_with: rna
+  test_template: composition_donor
+  requires: ""
+  notes: "Null claim (no difference). No separate OPC class was annotated; OPCs are presumably inside the oligodendrocyte class."
+- id: lau2020-C03
+  paper: lau2020
+  statement: "AD-associated transcriptomic changes in prefrontal cortex are largely cell type-specific: of 2,190 DEGs across six major cell types, only 11 are shared by all six."
+  quote: "most observed AD-associated transcriptomic changes are cell type-specific"
+  location: "Fig. 2C,D; Results \"Cell Type-Specific Transcriptomic Changes Reveal Dysregulated Molecular Pathways in AD Brains\""
+  centrality: headline
+  modality: snRNA
+  region: PFC
+  cell_type: "Astrocytes; Endothelial; Excitatory neurons; Inhibitory neurons; Microglia; Oligodendrocytes"
+  cell_state: ""
+  claim_type: de_gene
+  direction: NA
+  comparison: "AD vs control"
+  genes: []
+  gene_source: "SI Appendix, Table S3 (DEGs per cell type)"
+  reported_stat: "2,190 DEGs: 551 astrocytes, 299 endothelial, 347 excitatory, 125 inhibitory, 340 microglia, 528 oligodendrocytes; 11 shared by all six; adj P < 0.1 and |log2FC| >= 0.1"
+  unit_of_analysis: cells
+  method: "Wilcoxon rank-sum test on nuclei (Seurat FindMarkers), BH-adjusted"
+  testable_with: rna
+  test_template: de_pseudobulk
+  requires: ""
+  notes: "Lenient thresholds (adj P < 0.1, |log2FC| >= 0.1) on a nucleus-level Wilcoxon test; donor-level pseudobulk will likely find far fewer DEGs. The 11 shared genes are only in Fig. 2D / Table S3."
+- id: lau2020-C04
+  paper: lau2020
+  statement: "In AD, DEGs of both excitatory and inhibitory neurons (e.g. SNAP25) are associated with synaptic organization and adhesion, i.e. impaired neuronal synaptic signaling."
+  quote: "DEGs in both excitatory and inhibitory neurons (e.g., SNAP25) were associated with synaptic organization"
+  location: "Fig. 2E; SI Appendix, Fig. S2; Results \"Cell Type-Specific Transcriptomic Changes Reveal Dysregulated Molecular Pathways in AD Brains\""
+  centrality: headline
+  modality: snRNA
+  region: PFC
+  cell_type: "Excitatory neurons; Inhibitory neurons"
+  cell_state: ""
+  claim_type: de_pathway
+  direction: down
+  comparison: "AD vs control"
+  genes: [SNAP25]
+  gene_source: "Fig. 2E heatmap; SI Appendix, Table S3"
+  reported_stat: "347 excitatory and 125 inhibitory DEGs (adj P < 0.1); GO enrichment p not given in text"
+  unit_of_analysis: cells
+  method: "Wilcoxon rank-sum DEGs on nuclei, then GO enrichment"
+  testable_with: rna
+  test_template: geneset_shift
+  requires: "GO synaptic organization / synaptic signaling gene sets"
+  notes: "Direction taken from the Discussion ('impaired synaptic signaling in astrocytes and neurons'); the Results text only says 'associated with'. The authors did not subcluster neurons because changes were subtle."
+- id: lau2020-C05
+  paper: lau2020
+  statement: "Genes down-regulated in AD astrocytes (e.g. HES5, NTRK2, SLC1A2, SPARCL1, WIF1) are associated with synaptic signaling and glutamate secretion."
+  quote: "were associated with synaptic signaling and glutamate secretion"
+  location: "Fig. 2E; Results \"Cell Type-Specific Transcriptomic Changes Reveal Dysregulated Molecular Pathways in AD Brains\""
+  centrality: headline
+  modality: snRNA
+  region: PFC
+  cell_type: Astrocytes
+  cell_state: ""
+  claim_type: de_pathway
+  direction: down
+  comparison: "AD vs control"
+  genes: [HES5, NTRK2, SLC1A2, SPARCL1, WIF1]
+  gene_source: "text; Fig. 2E; SI Appendix, Table S3"
+  reported_stat: "551 astrocyte DEGs (adj P < 0.1, |log2FC| >= 0.1); enrichment statistics not given in text"
+  unit_of_analysis: cells
+  method: "Wilcoxon rank-sum DEGs on nuclei, then GO enrichment"
+  testable_with: rna
+  test_template: geneset_shift
+  requires: "GO synaptic signaling / glutamate secretion gene sets"
+  notes: "Abstract: changes associated with disruption of synaptic signaling. Astrocyte genes HES5, SLC1A2, SPARCL1, TNIK, WIF1 also reported concordant in bulk PFC microarray (C11)."
+- id: lau2020-C06
+  paper: lau2020
+  statement: "Astrocytic neurexin genes NRXN1 and NRXN3 are down-regulated in AD prefrontal cortex."
+  quote: "astrocytic neurexin genes (including NRXN1 and NRXN3)"
+  location: "Fig. 2E; Results \"Cell Type-Specific Transcriptomic Changes Reveal Dysregulated Molecular Pathways in AD Brains\""
+  centrality: secondary
+  modality: snRNA
+  region: PFC
+  cell_type: Astrocytes
+  cell_state: ""
+  claim_type: de_gene
+  direction: down
+  comparison: "AD vs control"
+  genes: [NRXN1, NRXN3]
+  gene_source: text
+  reported_stat: "adj P < 0.1, |log2FC| >= 0.1 (per-gene values in SI Appendix, Table S3)"
+  unit_of_analysis: cells
+  method: "Wilcoxon rank-sum test on nuclei (Seurat FindMarkers)"
+  testable_with: rna
+  test_template: de_pseudobulk
+  requires: ""
+  notes: "Authors link this to reduced excitatory synaptogenesis support (interpretation, not tested)."
+- id: lau2020-C07
+  paper: lau2020
+  statement: "Microglial DEGs in AD (e.g. AIF1, CD14, GPR183, PLEKHA7) are associated with immune response, reflecting aberrant microglial immune activation."
+  quote: "DEGs in microglia (e.g., AIF1, CD14, GPR183, and PLEKHA7)"
+  location: "Fig. 2E; Results \"Cell Type-Specific Transcriptomic Changes Reveal Dysregulated Molecular Pathways in AD Brains\""
+  centrality: headline
+  modality: snRNA
+  region: PFC
+  cell_type: Microglia
+  cell_state: ""
+  claim_type: de_pathway
+  direction: up
+  comparison: "AD vs control"
+  genes: [AIF1, CD14, GPR183, PLEKHA7]
+  gene_source: "text; Fig. 2E; SI Appendix, Table S3"
+  reported_stat: "340 microglial DEGs (adj P < 0.1, |log2FC| >= 0.1); enrichment statistics not given in text"
+  unit_of_analysis: cells
+  method: "Wilcoxon rank-sum DEGs on nuclei, then GO enrichment"
+  testable_with: rna
+  test_template: geneset_shift
+  requires: "GO immune response gene set"
+  notes: "Direction 'up' taken from the Discussion ('aberrant immune activation in microglia and endothelial cells'); the per-gene directions of AIF1, CD14, GPR183, PLEKHA7 are not stated in text."
+- id: lau2020-C08
+  paper: lau2020
+  statement: "Endothelial DEGs in AD (e.g. CLDN5, EPHA4, FLT1, PECAM1, VWF) are associated with angiogenesis, indicating enhanced endothelial angiogenesis."
+  quote: "enhanced angiogenesis in endothelial cells"
+  location: "Fig. 2E; Fig. 3B; Results \"Cell Type-Specific Transcriptomic Changes Reveal Dysregulated Molecular Pathways in AD Brains\"; Discussion"
+  centrality: headline
+  modality: snRNA
+  region: PFC
+  cell_type: Endothelial
+  cell_state: ""
+  claim_type: de_pathway
+  direction: up
+  comparison: "AD vs control"
+  genes: [CLDN5, EPHA4, FLT1, PECAM1, VWF]
+  gene_source: "text; Fig. 2E; SI Appendix, Table S3"
+  reported_stat: "299 endothelial DEGs (adj P < 0.1, |log2FC| >= 0.1); enrichment statistics not given in text"
+  unit_of_analysis: cells
+  method: "Wilcoxon rank-sum DEGs on nuclei, then GO enrichment"
+  testable_with: rna
+  test_template: geneset_shift
+  requires: "GO angiogenesis gene set; enough endothelial nuclei per donor"
+  notes: "Quote from the Discussion summary of the four dysregulated pathways. Endothelial nuclei are few (~2% of nuclei)."
+- id: lau2020-C09
+  paper: lau2020
+  statement: "AD endothelial cells show dysregulation of immune response-related genes such as HLA-E (aberrant endothelial immune activation)."
+  quote: "endothelial cells also exhibited dysregulation of immune response-related genes (e.g., HLA-E) in AD"
+  location: "Fig. 2E; Results \"Cell Type-Specific Transcriptomic Changes Reveal Dysregulated Molecular Pathways in AD Brains\""
+  centrality: main
+  modality: snRNA
+  region: PFC
+  cell_type: Endothelial
+  cell_state: ""
+  claim_type: de_pathway
+  direction: up
+  comparison: "AD vs control"
+  genes: [HLA-E]
+  gene_source: "text; Fig. 2E"
+  reported_stat: "not given in text"
+  unit_of_analysis: cells
+  method: "Wilcoxon rank-sum DEGs on nuclei, then GO enrichment"
+  testable_with: rna
+  test_template: geneset_shift
+  requires: "GO immune response / antigen presentation gene sets"
+  notes: "Results say 'dysregulation'; direction 'up' from the Discussion ('aberrant immune activation in ... endothelial cells') and from HLA-E enrichment in AD-up endothelial subpopulations (C21)."
+- id: lau2020-C10
+  paper: lau2020
+  statement: "Oligodendrocyte DEGs in AD (e.g. CTNNA2, OPALIN) are associated with myelination, indicating reduced myelination."
+  quote: "reduced myelination in oligodendrocytes"
+  location: "Fig. 2E; Fig. 3C; Results \"Cell Type-Specific Transcriptomic Changes Reveal Dysregulated Molecular Pathways in AD Brains\"; Discussion"
+  centrality: headline
+  modality: snRNA
+  region: PFC
+  cell_type: Oligodendrocytes
+  cell_state: ""
+  claim_type: de_pathway
+  direction: down
+  comparison: "AD vs control"
+  genes: [CTNNA2, OPALIN]
+  gene_source: "text; Fig. 2E; SI Appendix, Table S3"
+  reported_stat: "528 oligodendrocyte DEGs (adj P < 0.1, |log2FC| >= 0.1); enrichment statistics not given in text"
+  unit_of_analysis: cells
+  method: "Wilcoxon rank-sum DEGs on nuclei, then GO enrichment"
+  testable_with: rna
+  test_template: geneset_shift
+  requires: "GO myelination gene set"
+  notes: "Quote from the Discussion summary. Results text says only 'associated with ... myelination'."
+- id: lau2020-C11
+  paper: lau2020
+  statement: "Cell type-specific AD DEGs from snRNA-seq replicate with concordant direction in bulk prefrontal cortex microarray data (86.7% of replicable DEGs), including astrocyte, endothelial and oligodendrocyte genes."
+  quote: "86.7% of the replicable DEGs in the prefrontal cortex microarray exhibited concordant changes"
+  location: "Fig. 3A-C; SI Appendix, Fig. S3 and Table S4; Results \"Cross-Study Validation of the Transcriptomic Changes in AD Brains\""
+  centrality: main
+  modality: snRNA
+  region: PFC
+  cell_type: All
+  cell_state: ""
+  claim_type: de_gene
+  direction: NA
+  comparison: "AD vs control (bulk PFC microarray, GSE33000)"
+  genes: [HES5, SLC1A2, SPARCL1, TNIK, WIF1, CLDN5, FLT1, HLA-E, PECAM1, VWF, CTNNA2, GLDN, MOBP, NEAT1, OPALIN]
+  gene_source: "text; Fig. 3A-C; SI Appendix, Table S4"
+  reported_stat: "1,113 snRNA DEGs significant in PFC microarray (310 AD vs 157 NC; adj P < 0.05), 86.7% concordant; 764 significant in temporal cortex microarray (106 AD vs 135 NC)"
+  unit_of_analysis: donors
+  method: "limma on microarray adjusted for age and sex, BH; direction concordance with snRNA-seq DEGs"
+  testable_with: rna
+  test_template: de_pseudobulk
+  requires: "per-gene snRNA-seq DEG directions (SI Appendix, Table S3)"
+  notes: "Validation rests on bulk microarray (GSE33000 Narayanan; GSE15222 Webster temporal cortex), not single-nucleus data; re-test as all-cell or cell-type pseudobulk direction concordance. Sex-stratified concordance shown in SI Fig. S3."
+- id: lau2020-C12
+  paper: lau2020
+  statement: "Cell type-specific AD DEGs overlap with those of the Mathys et al. 2019 prefrontal snRNA-seq study (273 shared DEGs), and over 90% of shared DEGs change in the same direction."
+  quote: "More than 90% of the overlapping genes"
+  location: "SI Appendix, Fig. S4; Results \"Cross-Study Validation of the Transcriptomic Changes in AD Brains\""
+  centrality: secondary
+  modality: snRNA
+  region: PFC
+  cell_type: "Astrocytes; Excitatory neurons; Inhibitory neurons; Microglia; Oligodendrocytes"
+  cell_state: ""
+  claim_type: de_gene
+  direction: NA
+  comparison: "AD vs control (concordance with Mathys 2019)"
+  genes: []
+  gene_source: "SI Appendix, Fig. S4"
+  reported_stat: "273 shared DEGs (53 astro, 97 excitatory, 24 inhibitory, 13 microglia, 86 oligodendrocyte); >90% concordant"
+  unit_of_analysis: cells
+  method: "overlap and direction concordance of Wilcoxon DEG lists"
+  testable_with: rna
+  test_template: de_pseudobulk
+  requires: "Mathys 2019 DEG list"
+  notes: "Shared DEGs were annotated as transsynaptic signaling (astrocytes), synaptic signaling (excitatory), mitochondrial function (inhibitory), secretion (microglia), axonogenesis (oligodendrocytes). Endothelial cells could not be compared (too few in Mathys)."
+- id: lau2020-C13
+  paper: lau2020
+  statement: "Astrocyte subpopulations a1 and a6 (AD-up-regulated subpopulations) make up a larger share of astrocytes in AD than in control prefrontal cortex."
+  quote: "relative proportions of a1 and a6 were 9.9% and 10.2% larger in the AD samples"
+  location: "Fig. 4A,B; SI Appendix, Fig. S5A,B; Results \"The Disrupted Subpopulation Heterogeneity of Astrocytes and Oligodendrocytes Contributes to Neuronal Dysfunction in AD\""
+  centrality: main
+  modality: snRNA
+  region: PFC
+  cell_type: Astrocytes
+  cell_state: "a1; a6 (AD-up-regulated astrocyte subpopulations)"
+  claim_type: composition
+  direction: enriched
+  comparison: "AD vs control"
+  genes: [CRYAB, GFAP, LINGO1, HMGB1]
+  gene_source: "SI Appendix, Fig. S5D,E and Table S5"
+  reported_stat: "a1 +9.9%, a6 +10.2% relative proportion in AD vs NC; no test reported"
+  unit_of_analysis: cells
+  method: "subclustering (Seurat, resolution 0.2); proportion comparison without test; AD association by DEG enrichment score > 0.5"
+  testable_with: rna
+  test_template: composition_donor
+  requires: "astrocyte subpopulation labels (a1-a9) or signature mapping"
+  notes: "Unclear whether proportions are pooled nuclei or per-donor; no statistical test reported. Subclusters a1-a9 are study-specific; re-test needs label transfer or the a1/a6 signature."
+- id: lau2020-C14
+  paper: lau2020
+  statement: "The homeostatic astrocyte subpopulation a3, enriched for neurotransmitter-recycling genes (SLC1A2, GLUL), is reduced in AD."
+  quote: "the subpopulation of homeostatic astrocytes (a3), which are crucial for neurotransmitter recycling, is reduced"
+  location: "Fig. 4A-D; SI Appendix, Fig. S5A-C; Results \"The Disrupted Subpopulation Heterogeneity of Astrocytes and Oligodendrocytes Contributes to Neuronal Dysfunction in AD\""
+  centrality: headline
+  modality: snRNA
+  region: PFC
+  cell_type: Astrocytes
+  cell_state: "a3 (AD-down-regulated homeostatic / neuroprotective astrocytes)"
+  claim_type: composition
+  direction: depleted
+  comparison: "AD vs control"
+  genes: [SLC1A2, GLUL]
+  gene_source: "Fig. 4C; SI Appendix, Table S5"
+  reported_stat: "a3 relative proportion 23.5% smaller in AD; no test reported"
+  unit_of_analysis: cells
+  method: "subclustering; proportion comparison without test; AD association by DEG enrichment score > 0.5"
+  testable_with: rna
+  test_template: composition_donor
+  requires: "astrocyte subpopulation labels or a3 signature (SLC1A2, GLUL, ...)"
+  notes: "Abstract: 'AD brains contain fewer neuroprotective astrocytes'. Signature genes beyond SLC1A2 and GLUL are in Fig. 4C / Table S5."
+- id: lau2020-C15
+  paper: lau2020
+  statement: "Stress-response, alarmin-expressing astrocytes (a1, a6; high CRYAB, GFAP, LINGO1, HMGB1) are induced in AD."
+  quote: "alarmin-expressing astrocytes are induced (a1 and a6)"
+  location: "SI Appendix, Fig. S5D,E; Results \"The Disrupted Subpopulation Heterogeneity of Astrocytes and Oligodendrocytes Contributes to Neuronal Dysfunction in AD\""
+  centrality: main
+  modality: snRNA
+  region: PFC
+  cell_type: Astrocytes
+  cell_state: "alarmin-expressing / stress-response astrocytes (a1, a6)"
+  claim_type: state_enrichment
+  direction: enriched
+  comparison: "AD vs control"
+  genes: [CRYAB, GFAP, LINGO1, HMGB1]
+  gene_source: "SI Appendix, Fig. S5D,E and Table S5"
+  reported_stat: "signature from a1/a6 vs a3 Wilcoxon (adj P < 0.1, |log2FC| >= 0.1); HMGB1 higher in a1/a6 than a3"
+  unit_of_analysis: cells
+  method: "Wilcoxon rank-sum between AD-up- and AD-down-regulated subpopulations"
+  testable_with: rna
+  test_template: state_signature
+  requires: "a1/a6 signature gene set"
+  notes: "Signature-level restatement of C13; testable as a signature score shift in AD astrocytes independent of cluster labels."
+- id: lau2020-C16
+  paper: lau2020
+  statement: "Mature myelinating oligodendrocyte subpopulations o3 and o5 (MAG, MOBP, OPALIN high) are reduced in AD."
+  quote: "there is a decrease in the number of mature myelinated oligodendrocytes"
+  location: "Fig. 4E-H; SI Appendix, Fig. S5F-H; Results \"The Disrupted Subpopulation Heterogeneity of Astrocytes and Oligodendrocytes Contributes to Neuronal Dysfunction in AD\""
+  centrality: headline
+  modality: snRNA
+  region: PFC
+  cell_type: Oligodendrocytes
+  cell_state: "o3; o5 (AD-down-regulated mature myelinating oligodendrocytes)"
+  claim_type: composition
+  direction: depleted
+  comparison: "AD vs control"
+  genes: [MAG, MOBP, OPALIN]
+  gene_source: "Fig. 4G; SI Appendix, Table S5"
+  reported_stat: "4 of 9 oligodendrocyte subpopulations AD-associated; o3, o5 AD-down; no proportion values or test in text"
+  unit_of_analysis: cells
+  method: "subclustering; AD association by DEG enrichment score > 0.5"
+  testable_with: rna
+  test_template: composition_donor
+  requires: "oligodendrocyte subpopulation labels or o3/o5 signature"
+  notes: "Abstract: 'fewer neuroprotective ... oligodendrocytes'. The 'AD-down-regulated' label comes from DEG enrichment scores; the text does not give proportion changes for oligodendrocyte subpopulations, so 'reduced' may reflect expression rather than abundance."
+- id: lau2020-C17
+  paper: lau2020
+  statement: "Remyelinating-like oligodendrocyte subpopulations o1 and o2 (HSPA1A, NEAT1, PDE1A high) are increased in AD."
+  quote: "an increase in the number of remyelinating oligodendrocytes"
+  location: "SI Appendix, Fig. S5I,J; Fig. 4E,F; Results \"The Disrupted Subpopulation Heterogeneity of Astrocytes and Oligodendrocytes Contributes to Neuronal Dysfunction in AD\""
+  centrality: main
+  modality: snRNA
+  region: PFC
+  cell_type: Oligodendrocytes
+  cell_state: "o1; o2 (AD-up-regulated remyelinating-like oligodendrocytes)"
+  claim_type: composition
+  direction: enriched
+  comparison: "AD vs control"
+  genes: [HSPA1A, NEAT1, PDE1A]
+  gene_source: "SI Appendix, Fig. S5I,J and Table S5"
+  reported_stat: "no proportion values or test in text"
+  unit_of_analysis: cells
+  method: "subclustering; AD association by DEG enrichment score > 0.5"
+  testable_with: rna
+  test_template: composition_donor
+  requires: "oligodendrocyte subpopulation labels or o1/o2 signature"
+  notes: "The remyelinating label rests on resemblance to MS remyelinating oligodendrocytes (Jäkel et al.). Same caveat as C16 about 'AD-up' classification."
+- id: lau2020-C18
+  paper: lau2020
+  statement: "Microglial subpopulation m6, expressing complement (C1QA, C1QB, C1QC) and cytokine-response genes (IL4R, IL1RAP), is a smaller proportion of microglia in AD."
+  quote: "the AD samples exhibited a smaller proportion of the m6 subpopulation"
+  location: "SI Appendix, Fig. S6A-D; Results \"The Disrupted Subpopulation Heterogeneity of Astrocytes and Oligodendrocytes Contributes to Neuronal Dysfunction in AD\""
+  centrality: main
+  modality: snRNA
+  region: PFC
+  cell_type: Microglia
+  cell_state: "m6 (complement / synaptic-pruning microglia)"
+  claim_type: composition
+  direction: depleted
+  comparison: "AD vs control"
+  genes: [C1QA, C1QB, C1QC, IL4R, IL1RAP]
+  gene_source: "SI Appendix, Fig. S6C,D and Table S5"
+  reported_stat: "13 microglial subpopulations, 3 AD-associated (m1, m6, m7); m6 proportion smaller in AD; no value or test in text"
+  unit_of_analysis: cells
+  method: "subclustering (resolution 0.3); proportion comparison without test"
+  testable_with: rna
+  test_template: composition_donor
+  requires: "microglial subpopulation labels or m6 signature"
+  notes: "Significance statement mentions 'perturbed synaptic pruning in microglia'. Microglia are 4.7% of nuclei, so 13 subclusters are small."
+- id: lau2020-C19
+  paper: lau2020
+  statement: "A subpopulation of angiogenic endothelial cells (AD-up-regulated subpopulations e1, e3, e4) is induced in AD prefrontal cortex."
+  quote: "a subpopulation of angiogenic endothelial cells is induced in the brain in patients with AD"
+  location: "Fig. 5A,B; SI Appendix, Fig. S7A-C; Results \"The Induction of Angiogenic Endothelial Cells Contributes to Immune Dysregulation in AD\""
+  centrality: headline
+  modality: snRNA
+  region: PFC
+  cell_type: Endothelial
+  cell_state: "angiogenic endothelial cells (e1, e3, e4)"
+  claim_type: state_enrichment
+  direction: enriched
+  comparison: "AD vs control"
+  genes: [CLDN5, ERG, FLT1, VWF, HLA-E]
+  gene_source: "Fig. 5C; SI Appendix, Table S5"
+  reported_stat: "3 of 7 endothelial subpopulations AD-up-regulated (DEG enrichment score > 0.5); proportions in Fig. 5A; no test in text"
+  unit_of_analysis: cells
+  method: "subclustering (resolution 0.2); AD association by DEG enrichment score > 0.5"
+  testable_with: rna
+  test_template: state_signature
+  requires: "endothelial subpopulation labels or e1/e3/e4 signature; enough endothelial nuclei per donor"
+  notes: "Fig. 5 title: 'An endothelial cell subpopulation ... is increased in AD'. 'Induced' is based on DEG enrichment scores and UMAP distribution, not a reported proportion test."
+- id: lau2020-C20
+  paper: lau2020
+  statement: "AD-induced angiogenic endothelial cells show increased expression of angiogenic growth factors and receptors (EGFL7, FLT1, VWF; also CLDN5, ERG)."
+  quote: "increased expression of angiogenic growth factors and their receptors (i.e., EGFL7, FLT1, and VWF)"
+  location: "Abstract; Fig. 5C; Results \"The Induction of Angiogenic Endothelial Cells Contributes to Immune Dysregulation in AD\""
+  centrality: headline
+  modality: snRNA
+  region: PFC
+  cell_type: Endothelial
+  cell_state: "angiogenic endothelial cells (e1, e3, e4)"
+  claim_type: de_gene
+  direction: up
+  comparison: "AD vs control (endothelial cells; signature of AD-up-regulated subpopulations)"
+  genes: [EGFL7, FLT1, VWF, CLDN5, ERG]
+  gene_source: "text; Fig. 5C; SI Appendix, Table S5"
+  reported_stat: "adj P < 0.1, |log2FC| >= 0.1 (subpopulation signature)"
+  unit_of_analysis: cells
+  method: "Wilcoxon rank-sum, AD-up-regulated subpopulations vs other endothelial cells"
+  testable_with: rna
+  test_template: de_pseudobulk
+  requires: "enough endothelial nuclei per donor"
+  notes: "Abstract names EGFL7, FLT1, VWF; Results name CLDN5, ERG, FLT1, VWF. The signature contrast is subpopulation vs subpopulation; the natural re-test is endothelial pseudobulk AD vs control."
+- id: lau2020-C21
+  paper: lau2020
+  statement: "AD-induced angiogenic endothelial cells show increased expression of MHC class I antigen-presentation machinery (B2M, HLA-E)."
+  quote: "antigen-presentation machinery (i.e., B2M and HLA-E)"
+  location: "Abstract; Fig. 5C-E; Results \"The Induction of Angiogenic Endothelial Cells Contributes to Immune Dysregulation in AD\""
+  centrality: headline
+  modality: snRNA
+  region: PFC
+  cell_type: Endothelial
+  cell_state: "angiogenic endothelial cells (e1, e3, e4)"
+  claim_type: de_gene
+  direction: up
+  comparison: "AD vs control (endothelial cells; signature of AD-up-regulated subpopulations)"
+  genes: [B2M, HLA-E]
+  gene_source: "text; Fig. 5C; SI Appendix, Table S5"
+  reported_stat: "adj P < 0.1, |log2FC| >= 0.1 (subpopulation signature)"
+  unit_of_analysis: cells
+  method: "Wilcoxon rank-sum, AD-up-regulated subpopulations vs other endothelial cells"
+  testable_with: rna
+  test_template: de_pseudobulk
+  requires: "enough endothelial nuclei per donor"
+  notes: "Discussion speculates the MHC-I induction may reflect viral infection or drive CD8+ T cell activation (not tested)."
+- id: lau2020-C22
+  paper: lau2020
+  statement: "Signature genes of the AD-up-regulated endothelial subpopulations form an interaction network spanning angiogenesis/adhesion, transmembrane transport, antigen presentation, metal ion homeostasis, cellular respiration and rRNA processing."
+  quote: "angiogenesis/adhesion, transmembrane transport, antigen presentation, metal ion homeostasis, cellular respiration, and rRNA processing"
+  location: "Fig. 5D,E; Results \"The Induction of Angiogenic Endothelial Cells Contributes to Immune Dysregulation in AD\""
+  centrality: main
+  modality: snRNA
+  region: PFC
+  cell_type: Endothelial
+  cell_state: "angiogenic endothelial cells (e1, e3, e4)"
+  claim_type: de_pathway
+  direction: up
+  comparison: "AD-up-regulated endothelial subpopulations vs other endothelial cells"
+  genes: []
+  gene_source: "Fig. 5E; SI Appendix, Table S5"
+  reported_stat: "GO and STRING enrichment; statistics not given in text"
+  unit_of_analysis: cells
+  method: "GO analysis and STRING protein-protein interaction network of up-regulated signature genes"
+  testable_with: rna
+  test_template: geneset_shift
+  requires: "GO gene sets for the six functions; endothelial subpopulation labels or signature"
+  notes: "Annotation-level claim; re-test as endothelial gene-set shifts in AD vs control."
+- id: lau2020-C23
+  paper: lau2020
+  statement: "Upstream regulators of the AD angiogenic endothelial signature (IFNG, IRF7, TCR) point to a proinflammatory response driving the induction of angiogenic endothelial cells."
+  quote: "the induction of angiogenic endothelial cells is regulated by a proinflammatory response"
+  location: "SI Appendix, Fig. S7D; Results \"The Induction of Angiogenic Endothelial Cells Contributes to Immune Dysregulation in AD\""
+  centrality: secondary
+  modality: snRNA
+  region: PFC
+  cell_type: Endothelial
+  cell_state: "angiogenic endothelial cells (e1, e3, e4)"
+  claim_type: other
+  direction: associated_pos
+  comparison: "AD-up-regulated endothelial subpopulations vs other endothelial cells"
+  genes: [IFNG, IRF7, TCR]
+  gene_source: "SI Appendix, Fig. S7D"
+  reported_stat: "ingenuity pathway analysis upstream regulators; statistics not given in text"
+  unit_of_analysis: cells
+  method: "QIAGEN ingenuity pathway analysis (upstream regulator)"
+  testable_with: rna
+  test_template: geneset_shift
+  requires: "interferon-gamma / IRF7 target gene sets"
+  notes: "Inference ('suggests'). TCR is the T-cell receptor complex, not a gene symbol, kept as written. The supporting mouse microarray comparison (SI Fig. S7E) is not a human single-nucleus result."

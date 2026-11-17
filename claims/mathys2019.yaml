@@ -1,0 +1,616 @@
+- id: mathys2019-C01
+  paper: mathys2019
+  statement: "In prefrontal cortex, excitatory and inhibitory neurons show predominantly downregulated genes in AD-pathology versus no-pathology individuals (75% of excitatory and 95% of inhibitory neuron DEGs are down)."
+  quote: "Neurons showed a strong signature of repression"
+  location: "Fig. 1a,b; Results \"Systematic differential expression analysis reveals common and cell-type-specific alterations of gene expression to Alzheimer’s pathology\""
+  centrality: main
+  modality: snRNA
+  region: PFC
+  cell_type: "Excitatory neurons; Inhibitory neurons"
+  cell_state: ""
+  claim_type: de_gene
+  direction: down
+  comparison: "AD-pathology vs no-pathology"
+  genes: []
+  gene_source: "Extended Data Table S2 (cell-level and mixed-model DE per cell type)"
+  reported_stat: "1,031 unique DEGs across cell types; 75% of Ex and 95% of In DEGs downregulated; 24 AD-pathology vs 24 no-pathology donors"
+  unit_of_analysis: "cells (Wilcoxon), with donor random effect in the confirming Poisson mixed model"
+  method: "2-sided Wilcoxon rank-sum on cells (FDR<0.01, |logFC|>0.25) AND Poisson mixed model with donor random effect + RUV (FDR<0.05)"
+  testable_with: rna
+  test_template: de_pseudobulk
+  requires: "AD-pathology / no-pathology labels (amyloid-based selection)"
+  notes: "Direction proportion claim, testable as the share of down vs up DEGs in neurons. 5 of 6 genes tested were confirmed by RT-qPCR in NeuN+ nuclei (8 vs 8 donors). BA10 mapped to DLPFC by the project rule."
+- id: mathys2019-C02
+  paper: mathys2019
+  statement: "In prefrontal cortex, most DEGs in oligodendrocytes, astrocytes and microglia are upregulated in AD-pathology versus no-pathology individuals."
+  quote: "most DEGs in Oli, Ast, and Mic showed upregulation (53%–63%)"
+  location: "Fig. 1a,b; Results \"Systematic differential expression analysis reveals common and cell-type-specific alterations of gene expression to Alzheimer’s pathology\""
+  centrality: main
+  modality: snRNA
+  region: PFC
+  cell_type: "Oligodendrocytes; Astrocytes; Microglia"
+  cell_state: ""
+  claim_type: de_gene
+  direction: up
+  comparison: "AD-pathology vs no-pathology"
+  genes: []
+  gene_source: "Extended Data Table S2"
+  reported_stat: "53-63% of DEGs upregulated in Oli, Ast, Mic; non-neuronal DEG counts much smaller (lower power); 24 vs 24 donors"
+  unit_of_analysis: "cells (Wilcoxon), with donor random effect in the confirming Poisson mixed model"
+  method: "2-sided Wilcoxon rank-sum on cells (FDR<0.01, |logFC|>0.25) AND Poisson mixed model with donor random effect + RUV (FDR<0.05)"
+  testable_with: rna
+  test_template: de_pseudobulk
+  requires: "AD-pathology / no-pathology labels"
+  notes: "Authors note fewer DEGs in glia likely reflect lower power. Per and End excluded from DE (too few cells)."
+- id: mathys2019-C03
+  paper: mathys2019
+  statement: "APOE is upregulated in microglia of AD-pathology versus no-pathology individuals."
+  quote: "APOE was strongly upregulated in Mic but downregulated in Ast"
+  location: "Fig. 1g; Results \"Systematic differential expression analysis reveals common and cell-type-specific alterations of gene expression to Alzheimer’s pathology\""
+  centrality: main
+  modality: snRNA
+  region: PFC
+  cell_type: Microglia
+  cell_state: ""
+  claim_type: de_gene
+  direction: up
+  comparison: "AD-pathology vs no-pathology"
+  genes: [APOE]
+  gene_source: text
+  reported_stat: "FDR-corrected P < 0.01 (2-sided Wilcoxon); Mic n=955 cells (24 AD-pathology) vs 965 cells (24 no-pathology); mixed-model z-score P = 0.001 or 0.05 (Fig. 1g)"
+  unit_of_analysis: cells
+  method: "2-sided Wilcoxon rank-sum on cells; Poisson mixed-model z-score"
+  testable_with: rna
+  test_template: de_pseudobulk
+  requires: ""
+  notes: "Fig. 1g legend gives P = 0.001 and P = 0.05 for the two cell types without saying which is which. Opposite direction in astrocytes is claim C04."
+- id: mathys2019-C04
+  paper: mathys2019
+  statement: "APOE is downregulated in astrocytes of AD-pathology versus no-pathology individuals."
+  quote: "APOE was strongly upregulated in Mic but downregulated in Ast"
+  location: "Fig. 1g; Results \"Systematic differential expression analysis reveals common and cell-type-specific alterations of gene expression to Alzheimer’s pathology\""
+  centrality: main
+  modality: snRNA
+  region: PFC
+  cell_type: Astrocytes
+  cell_state: ""
+  claim_type: de_gene
+  direction: down
+  comparison: "AD-pathology vs no-pathology"
+  genes: [APOE]
+  gene_source: text
+  reported_stat: "FDR-corrected P < 0.01 (2-sided Wilcoxon); Ast n=1,830 cells (24 AD-pathology) vs 1,562 cells (24 no-pathology)"
+  unit_of_analysis: cells
+  method: "2-sided Wilcoxon rank-sum on cells; Poisson mixed-model z-score"
+  testable_with: rna
+  test_template: de_pseudobulk
+  requires: ""
+  notes: "Authors present this as an example of opposite DE directions that bulk RNA-seq cannot resolve."
+- id: mathys2019-C05
+  paper: mathys2019
+  statement: "AD-pathology DEGs are highly cell-type-specific: 95% are perturbed only in neurons or only in a single glial cell type."
+  quote: "perturbed only in neurons or only in one glial cell type"
+  location: "Fig. 1h; Results \"Systematic differential expression analysis reveals common and cell-type-specific alterations of gene expression to Alzheimer’s pathology\""
+  centrality: main
+  modality: snRNA
+  region: PFC
+  cell_type: "Excitatory neurons; Inhibitory neurons; Astrocytes; Oligodendrocytes; OPCs; Microglia"
+  cell_state: ""
+  claim_type: de_gene
+  direction: NA
+  comparison: "AD-pathology vs no-pathology"
+  genes: []
+  gene_source: "Extended Data Table S2; Fig. 1h binary DEG plot (n=1,031)"
+  reported_stat: "95% of 1,031 DEGs specific to neurons or to one glial type"
+  unit_of_analysis: "cells (Wilcoxon), with donor random effect in the confirming Poisson mixed model"
+  method: "DEG overlap across cell types"
+  testable_with: rna
+  test_template: de_pseudobulk
+  requires: ""
+  notes: "Overlap statistic depends on per-cell-type power; low-abundance types have few DEGs, which inflates apparent specificity."
+- id: mathys2019-C06
+  paper: mathys2019
+  statement: "LINGO1, a negative regulator of oligodendrocyte differentiation and myelination, is upregulated in both excitatory neurons and oligodendrocytes in AD-pathology individuals."
+  quote: "LINGO1, which was upregulated in Ex and Oli"
+  location: "Fig. 1h; Results \"Systematic differential expression analysis reveals common and cell-type-specific alterations of gene expression to Alzheimer’s pathology\""
+  centrality: main
+  modality: snRNA
+  region: PFC
+  cell_type: "Excitatory neurons; Oligodendrocytes"
+  cell_state: ""
+  claim_type: de_gene
+  direction: up
+  comparison: "AD-pathology vs no-pathology"
+  genes: [LINGO1]
+  gene_source: text
+  reported_stat: "DEG in Ex and Oli (Wilcoxon FDR<0.01, |logFC|>0.25; mixed model FDR<0.05); RT-qPCR in NeuN+ nuclei, 8 vs 8 donors"
+  unit_of_analysis: "cells (Wilcoxon), with donor random effect in the confirming Poisson mixed model"
+  method: "Wilcoxon + Poisson mixed model; RT-qPCR on FACS NeuN+ nuclei"
+  testable_with: rna
+  test_template: de_pseudobulk
+  requires: ""
+  notes: "LINGO1 was one of six genes tested by RT-qPCR; 5 of 6 were confirmed but the text does not name the one that failed."
+- id: mathys2019-C07
+  paper: mathys2019
+  statement: "Myelination and axon outgrowth/regeneration genes are recurrently perturbed by AD pathology across multiple cell types, including neurons (ERBB2IP, CNTNAP2, NEGR1, BEX1, NTNG1, PRNP) and glia (CRYAB)."
+  quote: "myelination-related processes were recurrently perturbed in multiple cell types"
+  location: "Abstract; Fig. 1h; Results \"Systematic differential expression analysis ...\"; Discussion"
+  centrality: headline
+  modality: snRNA
+  region: PFC
+  cell_type: "Excitatory neurons; Inhibitory neurons; Oligodendrocytes; OPCs"
+  cell_state: "myelination / axon regeneration genes"
+  claim_type: de_pathway
+  direction: NA
+  comparison: "AD-pathology vs no-pathology"
+  genes: [LINGO1, ERBB2IP, CNTNAP2, NEGR1, BEX1, NTNG1, PRNP, CRYAB]
+  gene_source: "text; Fig. 1h (six myelination/axon genes)"
+  reported_stat: "top DEGs (Wilcoxon FDR<0.01 + mixed model FDR<0.05); no formal pathway test reported for this grouping"
+  unit_of_analysis: "cells (Wilcoxon), with donor random effect in the confirming Poisson mixed model"
+  method: "curated grouping of top DEGs"
+  testable_with: rna
+  test_template: geneset_shift
+  requires: ""
+  notes: "Directions differ by gene (LINGO1 up, NTNG1 down in Ex); direction set to NA. The gene grouping is curated by the authors, not an enrichment result."
+- id: mathys2019-C08
+  paper: mathys2019
+  statement: "NTNG1 is downregulated in excitatory neurons in AD pathology, with fewer SLC17A7+ excitatory neurons expressing detectable NTNG1 by in situ hybridization."
+  quote: "significantly fewer Ex, marked by expression of SLC17A7, with detectable NTNG1 expression"
+  location: "Fig. 1h; Extended Data Fig. 4b; Results \"Systematic differential expression analysis ...\""
+  centrality: main
+  modality: "snRNA; imaging"
+  region: PFC
+  cell_type: Excitatory neurons
+  cell_state: ""
+  claim_type: de_gene
+  direction: down
+  comparison: "AD-pathology vs no-pathology"
+  genes: [NTNG1, SLC17A7]
+  gene_source: text
+  reported_stat: "RNAscope fraction of SLC17A7+ cells with NTNG1: P = 0.047 (Student's t), 4 vs 4 donors, 5-6 images each"
+  unit_of_analysis: "cells (snRNA DE); donors (RNAscope)"
+  method: "Wilcoxon + mixed model DE; RNAscope quantification, Student's two-tailed t-test"
+  testable_with: rna
+  test_template: de_pseudobulk
+  requires: ""
+  notes: "RNAscope groups were described as low vs high amyloid individuals (BA10)."
+- id: mathys2019-C09
+  paper: mathys2019
+  statement: "AD differential expression in bulk prefrontal RNA-seq is dominated by changes seen in excitatory neurons and oligodendrocytes, while microglial changes are poorly captured."
+  quote: "dominated by expression changes observed at the single-cell level in Ex and Oli"
+  location: "Fig. 1d-f; Results \"Systematic differential expression analysis ...\""
+  centrality: main
+  modality: snRNA
+  region: PFC
+  cell_type: "Excitatory neurons; Oligodendrocytes; Microglia"
+  cell_state: ""
+  claim_type: other
+  direction: NA
+  comparison: "AD-pathology vs no-pathology (snRNA) vs ROSMAP bulk AD vs non-AD"
+  genes: []
+  gene_source: "Extended Data Table S2 (bulk consistency tests)"
+  reported_stat: "rank permutation z-scores per cell type; ROSMAP bulk n=484"
+  unit_of_analysis: "genes (rank test of sn DEGs in bulk DE ranking)"
+  method: "resampling z-score of sn DEG ranks in bulk limma DE (1,000 random gene sets)"
+  testable_with: rna
+  test_template: not_testable
+  requires: "matched bulk RNA-seq AD differential expression"
+  notes: "Comparison of single-nucleus and bulk signatures; re-test needs a bulk AD DE ranking from a comparable cohort, so no standard template fits."
+- id: mathys2019-C10
+  paper: mathys2019
+  statement: "Large, highly cell-type-specific transcriptional changes are already present in early-pathology individuals (amyloid with modest tangles) compared with no-pathology individuals."
+  quote: "The strongest AD-associated changes appeared early in pathological progression and were highly cell-type-specific"
+  location: "Abstract; Fig. 2a-c; Extended Data Fig. 5; Results \"Cell-type-specific changes during pathological progression\""
+  centrality: headline
+  modality: snRNA
+  region: PFC
+  cell_type: "Excitatory neurons; Inhibitory neurons; Astrocytes; Oligodendrocytes; OPCs; Microglia"
+  cell_state: ""
+  claim_type: de_gene
+  direction: NA
+  comparison: "early-pathology vs no-pathology"
+  genes: []
+  gene_source: "Extended Data Table S2 / Fig. 2c (top genes per cell type and comparison)"
+  reported_stat: "96% of early-vs-no DEGs perturbed in neurons or a single glial type; early-vs-no DEGs similar to AD-vs-no DEGs (Jaccard, Extended Data Fig. 5)"
+  unit_of_analysis: "cells (Wilcoxon), with donor random effect in the confirming Poisson mixed model"
+  method: "Wilcoxon (FDR<0.01, |logFC|>0.25) + Poisson mixed model (FDR<0.05)"
+  testable_with: rna
+  test_template: de_pseudobulk
+  requires: "pathology groups: k-means (k=3) on tangles, nft, gpath, plaq_n, amyloid, cognition"
+  notes: "Early/late groups came from clustering of clinico-pathological traits, not Braak alone; group sizes are not given in the text (Fig. 2a)."
+- id: mathys2019-C11
+  paper: mathys2019
+  statement: "Genes upregulated in late- versus early-pathology individuals are shared across cell types and involve protein folding, chaperones, autophagy, apoptosis and the global stress response (proteostasis)."
+  quote: "Comparing late- versus early-pathology revealed common upregulated genes shared across cell types"
+  location: "Abstract; Fig. 2c-e; Results \"Cell-type-specific changes during pathological progression\""
+  centrality: headline
+  modality: snRNA
+  region: PFC
+  cell_type: "Excitatory neurons; Inhibitory neurons; Astrocytes; Oligodendrocytes; OPCs; Microglia"
+  cell_state: "global stress response / proteostasis"
+  claim_type: de_pathway
+  direction: up
+  comparison: "late-pathology vs early-pathology"
+  genes: [HSP90AA1, HSPA1A, HSPB1, CRYAB]
+  gene_source: "text; Fig. 2e (11 genes up in >=5 cell types)"
+  reported_stat: "11 genes up in >=5 cell types; GO hypergeometric FDR (Fig. 2e)"
+  unit_of_analysis: "cells (Wilcoxon), with donor random effect in the confirming Poisson mixed model"
+  method: "Wilcoxon + Poisson mixed model DE; GO enrichment (hypergeometric, FDR)"
+  testable_with: rna
+  test_template: geneset_shift
+  requires: "pathology groups (early vs late, from tangles/NFT/amyloid/cognition clustering)"
+  notes: "Only 4 of the 11 shared genes are named in the text."
+- id: mathys2019-C12
+  paper: mathys2019
+  statement: "Genes downregulated in late- versus early-pathology individuals are mostly cell-type-specific."
+  quote: "In contrast to upregulated genes, downregulated genes mostly showed cell-type-specific changes."
+  location: "Fig. 2d; Results \"Cell-type-specific changes during pathological progression\""
+  centrality: secondary
+  modality: snRNA
+  region: PFC
+  cell_type: "Excitatory neurons; Inhibitory neurons; Astrocytes; Oligodendrocytes; OPCs; Microglia"
+  cell_state: ""
+  claim_type: de_gene
+  direction: down
+  comparison: "late-pathology vs early-pathology"
+  genes: []
+  gene_source: "Extended Data Table S2"
+  reported_stat: "descriptive (no statistic given)"
+  unit_of_analysis: "cells (Wilcoxon), with donor random effect in the confirming Poisson mixed model"
+  method: "DEG overlap across cell types"
+  testable_with: rna
+  test_template: de_pseudobulk
+  requires: "pathology groups (early vs late)"
+  notes: ""
+- id: mathys2019-C13
+  paper: mathys2019
+  statement: "A microglial gene module (M7), enriched for immune/inflammatory pathways and amyloid-beta clearance, is positively correlated with AD pathology."
+  quote: "M7 showed positive pathological correlation in Mic and was enriched in immune/inflammatory pathways"
+  location: "Extended Data Fig. 6f; Extended Data Table S4; Results \"Cell-type-specific associations of gene expression with AD-related neuropathological traits\""
+  centrality: main
+  modality: snRNA
+  region: PFC
+  cell_type: Microglia
+  cell_state: "gene-trait module M7"
+  claim_type: pathology_association
+  direction: associated_pos
+  comparison: "correlation with AD pathology traits (amyloid, NFT, plaques, tangles, gpath)"
+  genes: []
+  gene_source: "Extended Data Table S4 (M1-M10 module genes; M7 n=80)"
+  reported_stat: "Spearman gene-trait correlations, Bonferroni P<0.01; SOM territories; robust to individual-level and partial correlation (PMI, age, sex, education)"
+  unit_of_analysis: "cells (cell-level Spearman), checked at donor level"
+  method: "Spearman gene-trait correlation per cell type + self-organizing map; Metascape GO"
+  testable_with: rna
+  test_template: pathology_correlation
+  requires: "quantitative AD pathology traits (amyloid, nft, plaq_n, tangles, gpath)"
+  notes: "Module genes only in Extended Data Table S4."
+- id: mathys2019-C14
+  paper: mathys2019
+  statement: "An oligodendrocyte gene module (M9), enriched for oligodendrocyte differentiation and myelination, is positively correlated with AD pathology."
+  quote: "M9 was positively correlated with pathology in Oli and enriched in oligodendrocyte differentiation"
+  location: "Extended Data Fig. 6f; Extended Data Table S4; Results \"Cell-type-specific associations of gene expression with AD-related neuropathological traits\""
+  centrality: main
+  modality: snRNA
+  region: PFC
+  cell_type: Oligodendrocytes
+  cell_state: "gene-trait module M9"
+  claim_type: pathology_association
+  direction: associated_pos
+  comparison: "correlation with AD pathology traits"
+  genes: []
+  gene_source: "Extended Data Table S4"
+  reported_stat: "Spearman gene-trait correlations, Bonferroni P<0.01; SOM territories"
+  unit_of_analysis: "cells (cell-level Spearman), checked at donor level"
+  method: "Spearman gene-trait correlation per cell type + self-organizing map; Metascape GO"
+  testable_with: rna
+  test_template: pathology_correlation
+  requires: "quantitative AD pathology traits"
+  notes: "Authors suggest it may reflect an oligodendrocyte response to myelin loss."
+- id: mathys2019-C15
+  paper: mathys2019
+  statement: "AD GWAS risk genes (APOE, TREM2, MEF2C, PICALM, HLA-DRB1, HLA-DRB5) are overrepresented in microglial modules M6 and M7, whose expression in microglia correlates positively with AD pathology."
+  quote: "whose expression in Mic positively correlates with measures of AD pathology"
+  location: "Extended Data Fig. 6g; Extended Data Table S4; Results \"Cell-type-specific associations of gene expression with AD-related neuropathological traits\""
+  centrality: main
+  modality: snRNA
+  region: PFC
+  cell_type: Microglia
+  cell_state: "gene-trait modules M6, M7"
+  claim_type: genetic_enrichment
+  direction: associated_pos
+  comparison: "correlation with AD pathology traits; overlap with AD GWAS genes"
+  genes: [APOE, TREM2, MEF2C, PICALM, HLA-DRB1, HLA-DRB5]
+  gene_source: "text; Extended Data Table S4"
+  reported_stat: "one-sided Fisher's exact, Bonferroni-corrected (M6 n=70, M7 n=80 genes; 28 AD GWAS genes)"
+  unit_of_analysis: genes
+  method: "one-sided Fisher's exact overlap of module genes with AD GWAS genes"
+  testable_with: rna
+  test_template: genetic_enrichment
+  requires: "quantitative AD pathology traits; AD GWAS gene list"
+  notes: ""
+- id: mathys2019-C16
+  paper: mathys2019
+  statement: "A neuronal module (M3) that overlaps genes associated with general cognitive function is negatively correlated with AD pathology in neurons."
+  quote: "M3 overlapped with genes that are associated with cognition"
+  location: "Extended Data Fig. 6g; Results \"Cell-type-specific associations of gene expression with AD-related neuropathological traits\""
+  centrality: main
+  modality: snRNA
+  region: PFC
+  cell_type: "Excitatory neurons; Inhibitory neurons"
+  cell_state: "gene-trait module M3"
+  claim_type: genetic_enrichment
+  direction: associated_neg
+  comparison: "correlation with AD pathology traits; overlap with cognition GWAS genes"
+  genes: []
+  gene_source: "Extended Data Table S4 (M3 n=1,472 genes)"
+  reported_stat: "one-sided Fisher's exact, Bonferroni-corrected (M3 n=1,472; 709 cognition genes)"
+  unit_of_analysis: genes
+  method: "one-sided Fisher's exact overlap with general cognitive function GWAS genes"
+  testable_with: rna
+  test_template: genetic_enrichment
+  requires: "quantitative AD pathology traits; cognition GWAS gene list"
+  notes: ""
+- id: mathys2019-C17
+  paper: mathys2019
+  statement: "Excitatory neuron subpopulation Ex4, marked by LINGO1, RASGEF1B and SLC26A3, is overrepresented in cells from individuals with AD pathology (high amyloid, Braak, CERAD, NIA-Reagan, cognitive decline)."
+  quote: "AD pathology-associated Ex4 neurons were marked by LINGO1, RASGEF1B, and SLC26A3"
+  location: "Fig. 3a-f; Extended Data Figs. 7, 8; Results \"Identification of AD-associated cellular subpopulations\""
+  centrality: headline
+  modality: snRNA
+  region: PFC
+  cell_type: Excitatory neurons
+  cell_state: Ex4
+  claim_type: state_enrichment
+  direction: enriched
+  comparison: "AD-pathology vs no-pathology (and along amyloid, Braak, CERAD, NIA-Reagan, cogdx)"
+  genes: [LINGO1, RASGEF1B, SLC26A3]
+  gene_source: "Extended Data Fig. 8; Table S6 (subcluster markers; Ex4 783 markers)"
+  reported_stat: "hypergeometric FDR<0.01; robust over 100 trials of 3F+3M donors per group; quantitative traits permutation FDR<0.01; Ex4 n=3,198 cells"
+  unit_of_analysis: cells
+  method: "hypergeometric overrepresentation of cells per subcluster; resampling z-score for quantitative traits"
+  testable_with: rna
+  test_template: state_signature
+  requires: "Braak, CERAD, NIA-Reagan, amyloid, cognitive diagnosis"
+  notes: "Abstract mentions pathology-associated subpopulations 'characterized by regulators of myelination, inflammation, and neuron survival'. Cell-level test; donor-level check only by subsampling."
+- id: mathys2019-C18
+  paper: mathys2019
+  statement: "Inhibitory neuron subpopulation In0, marked by protein folding and stability genes, is overrepresented in cells from individuals with AD pathology."
+  quote: "subpopulations Ex4, In0, Ast1, Oli0 were associated with cells isolated from subjects with AD pathology"
+  location: "Fig. 3a-f; Extended Data Figs. 7, 8; Results \"Identification of AD-associated cellular subpopulations\""
+  centrality: main
+  modality: snRNA
+  region: PFC
+  cell_type: Inhibitory neurons
+  cell_state: In0
+  claim_type: state_enrichment
+  direction: enriched
+  comparison: "AD-pathology vs no-pathology"
+  genes: []
+  gene_source: "Extended Data Fig. 8; Table S6 (In0 1,702 markers)"
+  reported_stat: "hypergeometric FDR<0.01; robust over 100 random 3F+3M trials; In0 n=2,368 cells"
+  unit_of_analysis: cells
+  method: "hypergeometric overrepresentation of cells per subcluster"
+  testable_with: rna
+  test_template: state_signature
+  requires: "Braak, CERAD, NIA-Reagan, amyloid, cognitive diagnosis"
+  notes: "In0 marker genes are not named in the text."
+- id: mathys2019-C19
+  paper: mathys2019
+  statement: "Astrocyte subpopulation Ast1, preferentially expressing GLUL and CLU, is overrepresented in cells from individuals with AD pathology."
+  quote: "The AD pathology-associated astrocyte subpopulation Ast1 showed preferential expression of GLUL"
+  location: "Fig. 3a-f; Extended Data Fig. 8; Results \"Identification of AD-associated cellular subpopulations\""
+  centrality: main
+  modality: snRNA
+  region: PFC
+  cell_type: Astrocytes
+  cell_state: Ast1
+  claim_type: state_enrichment
+  direction: enriched
+  comparison: "AD-pathology vs no-pathology"
+  genes: [GLUL, CLU]
+  gene_source: "Extended Data Fig. 8; Table S6 (Ast1 574 markers)"
+  reported_stat: "hypergeometric FDR<0.01; robust over 100 random trials; Ast1 n=1,134 cells"
+  unit_of_analysis: cells
+  method: "hypergeometric overrepresentation of cells per subcluster"
+  testable_with: rna
+  test_template: state_signature
+  requires: "Braak, CERAD, NIA-Reagan, amyloid, cognitive diagnosis"
+  notes: ""
+- id: mathys2019-C20
+  paper: mathys2019
+  statement: "Oligodendrocyte subpopulation Oli0, marked by CADM2, QDPR, NLGN1 and CRYAB, is overrepresented in cells from individuals with AD pathology; CRYAB-high and QDPR-high oligodendrocyte-lineage cells are seen in AD white matter."
+  quote: "AD pathology-associated Oli0 cells were marked by CADM2, QDPR, NLGN1, and CRYAB"
+  location: "Fig. 3a-h; Extended Data Figs. 8, 9a,b; Results \"Identification of AD-associated cellular subpopulations\""
+  centrality: headline
+  modality: "snRNA; imaging"
+  region: PFC
+  cell_type: Oligodendrocytes
+  cell_state: Oli0
+  claim_type: state_enrichment
+  direction: enriched
+  comparison: "AD-pathology vs no-pathology"
+  genes: [CADM2, QDPR, NLGN1, CRYAB]
+  gene_source: "Extended Data Fig. 8; Table S6 (Oli0 227 markers)"
+  reported_stat: "hypergeometric FDR<0.01; robust over 100 random trials; Oli0 n=8,310 cells; IHC done once"
+  unit_of_analysis: cells
+  method: "hypergeometric overrepresentation; OLIG2/CRYAB and OLIG2/QDPR immunohistochemistry"
+  testable_with: rna
+  test_template: state_signature
+  requires: "Braak, CERAD, NIA-Reagan, amyloid, cognitive diagnosis"
+  notes: "IHC was in BA10 white matter, while snRNA-seq sampled cortex; IHC was qualitative (experiment performed once)."
+- id: mathys2019-C21
+  paper: mathys2019
+  statement: "Microglial subpopulation Mic1, marked by MHC class II genes (CD74, HLA-DRB1) and APOE, C1QB and CD14, is associated with AD pathology, and MHC-II-high microglia are seen in AD-pathology tissue."
+  quote: "the presence of a Mic subpopulation expressing high levels of MHC class II"
+  location: "Fig. 3; Extended Data Figs. 8, 9c,d; Results \"Identification of AD-associated cellular subpopulations\""
+  centrality: headline
+  modality: "snRNA; imaging"
+  region: PFC
+  cell_type: Microglia
+  cell_state: Mic1
+  claim_type: state_enrichment
+  direction: enriched
+  comparison: "AD-pathology vs no-pathology"
+  genes: [CD74, HLA-DRB1, APOE, C1QB, CD14]
+  gene_source: "text; Extended Data Fig. 8; Table S6 (Mic1 487 markers); Extended Data Table S7"
+  reported_stat: "hypergeometric FDR<0.01 (Fig. 3); Mic1 n=509 cells; IHC Iba1/MHC-II done once"
+  unit_of_analysis: cells
+  method: "hypergeometric overrepresentation; Iba1/MHC-II immunohistochemistry"
+  testable_with: rna
+  test_template: state_signature
+  requires: "Braak, CERAD, NIA-Reagan, amyloid, cognitive diagnosis"
+  notes: "Small subcluster (509 cells). Text calls Mic1 'AD-associated' and marked by T-cell activation and immunity genes."
+- id: mathys2019-C22
+  paper: mathys2019
+  statement: "OPC subpopulation Opc1, marked by genes of neuronal and necrotic death, is associated with AD pathology."
+  quote: "AD pathology-associated In0, Opc1, and Mic1"
+  location: "Extended Data Fig. 8; Results \"Identification of AD-associated cellular subpopulations\""
+  centrality: secondary
+  modality: snRNA
+  region: PFC
+  cell_type: OPCs
+  cell_state: Opc1
+  claim_type: state_enrichment
+  direction: enriched
+  comparison: "AD-pathology vs no-pathology"
+  genes: []
+  gene_source: "Extended Data Fig. 8; Table S6 (Opc1 536 markers)"
+  reported_stat: "Opc1 n=976 cells; enrichment shown in Extended Data Fig. 8"
+  unit_of_analysis: cells
+  method: "hypergeometric overrepresentation of cells per subcluster"
+  testable_with: rna
+  test_template: state_signature
+  requires: "Braak, CERAD, NIA-Reagan, amyloid, cognitive diagnosis"
+  notes: "Opc1 is not among the subpopulations listed in the main Fig. 3 text; its association is stated only in passing."
+- id: mathys2019-C23
+  paper: mathys2019
+  statement: "Subpopulations Ex6, In2, Ast0 and Oli1 are associated with cells from no-pathology individuals, that is relatively depleted in AD pathology."
+  quote: "subpopulations Ex6, In2, Ast0, and Oli1 were associated with cells from subjects with no-pathology"
+  location: "Fig. 3a-f; Extended Data Figs. 7, 8; Results \"Identification of AD-associated cellular subpopulations\""
+  centrality: main
+  modality: snRNA
+  region: PFC
+  cell_type: "Excitatory neurons; Inhibitory neurons; Astrocytes; Oligodendrocytes"
+  cell_state: "Ex6; In2; Ast0; Oli1"
+  claim_type: state_enrichment
+  direction: depleted
+  comparison: "AD-pathology vs no-pathology"
+  genes: []
+  gene_source: "Extended Data Fig. 8; Table S6 (Ex6 2,438; In2 350; Ast0 73; Oli1 73 markers)"
+  reported_stat: "hypergeometric FDR<0.01; robust over 100 random 3F+3M trials; Ex6 2,757, In2 984, Ast0 1,728, Oli1 8,032 cells"
+  unit_of_analysis: cells
+  method: "hypergeometric overrepresentation of cells per subcluster"
+  testable_with: rna
+  test_template: state_signature
+  requires: "Braak, CERAD, NIA-Reagan, amyloid, cognitive diagnosis"
+  notes: "Four states in four cell classes in one sentence; test each separately. Opc0 and Mic2 appear as the depleted counterparts in Extended Data Fig. 8 but are not discussed in the text."
+- id: mathys2019-C24
+  paper: mathys2019
+  statement: "Mic1 marker genes significantly overlap mouse disease-associated and late-response microglia signatures, but include human AD genes (C1QB, CD14, APOE) not seen in mouse models or aged human microglia."
+  quote: "AD-associated Mic1 subpopulation marker genes significantly overlap"
+  location: "Extended Data Fig. 9d; Extended Data Table S7; Results \"Identification of AD-associated cellular subpopulations\""
+  centrality: secondary
+  modality: snRNA
+  region: PFC
+  cell_type: Microglia
+  cell_state: "Mic1 vs mouse DAM / late-response microglia"
+  claim_type: state_existence
+  direction: exists
+  comparison: "human Mic1 markers vs mouse DAM and aged human microglia signatures"
+  genes: [CD74, HLA-DRB1, C1QB, CD14, APOE]
+  gene_source: "Extended Data Table S7"
+  reported_stat: "p <= 0.01, one-sided Fisher's exact (DAM, late-response, aged human microglia)"
+  unit_of_analysis: genes
+  method: "one-sided Fisher's exact overlap of marker sets"
+  testable_with: rna
+  test_template: state_signature
+  requires: ""
+  notes: "Comparison with mouse signatures; the human part (a DAM-like MHC-II microglial state in AD) is testable."
+- id: mathys2019-C25
+  paper: mathys2019
+  statement: "Cells from female individuals are overrepresented in AD-associated subpopulations (Ex4, Ast1, Oli0, Mic1), while cells from males are overrepresented in no-pathology subpopulations (Ex6, Ast0, Oli1)."
+  quote: "an overrepresentation of female cells in AD-associated subpopulations"
+  location: "Abstract; Fig. 3d; Extended Data Fig. 10a-c; Results \"Sex-specific differential response to AD pathology\""
+  centrality: headline
+  modality: snRNA
+  region: PFC
+  cell_type: "Excitatory neurons; Astrocytes; Oligodendrocytes; Microglia"
+  cell_state: "Ex4; Ast1; Oli0; Mic1 (female); Ex6; Ast0; Oli1 (male)"
+  claim_type: state_enrichment
+  direction: enriched
+  comparison: "female vs male cells within AD-associated subpopulations"
+  genes: []
+  gene_source: "Table S6 (subpopulation markers); Extended Data Fig. 10b,c (top 10 Ex4 markers higher in females)"
+  reported_stat: "hypergeometric FDR (Fig. 3d); not explained by pathology differences between sexes (Extended Data Fig. 10a; 24 F, 24 M)"
+  unit_of_analysis: cells
+  method: "hypergeometric overrepresentation of cells by sex"
+  testable_with: rna
+  test_template: state_signature
+  requires: "sex; AD pathology labels"
+  notes: "Cell-level enrichment with 12 donors per sex per pathology group; sensitive to donor imbalance in cell numbers."
+- id: mathys2019-C26
+  paper: mathys2019
+  statement: "In males, higher AD pathology correlates with global transcriptional activation in oligodendrocytes, a shift not seen in females."
+  quote: "In males, increased pathology correlated with a global transcriptional activation in Oli"
+  location: "Abstract; Fig. 4; Results \"Sex-specific differential response to AD pathology\""
+  centrality: headline
+  modality: snRNA
+  region: PFC
+  cell_type: Oligodendrocytes
+  cell_state: ""
+  claim_type: pathology_association
+  direction: associated_pos
+  comparison: "male vs female, gene-trait correlation with AD pathology"
+  genes: []
+  gene_source: "Extended Data Supplementary Table S8"
+  reported_stat: "median gene-trait r in males: nft 0.203, tangles 0.165, amyloid 0.108, plaques 0.101; females: -0.04, -0.042, 0.028, -0.031; 24 F, 24 M"
+  unit_of_analysis: donors
+  method: "donor-level Pearson gene-trait correlations split by sex; bootstrap median sex differences"
+  testable_with: rna
+  test_template: pathology_correlation
+  requires: "sex; quantitative AD pathology traits (nft, tangles, amyloid, plaques)"
+  notes: "Distribution shift of transcriptome-wide correlations, not a gene-level test."
+- id: mathys2019-C27
+  paper: mathys2019
+  statement: "In females, higher amyloid correlates with global downregulation of gene expression in excitatory and inhibitory neurons, a response much weaker in males."
+  quote: "In females, increased pathology correlated with a global down-regulation"
+  location: "Fig. 4; Results \"Sex-specific differential response to AD pathology\""
+  centrality: main
+  modality: snRNA
+  region: PFC
+  cell_type: "Excitatory neurons; Inhibitory neurons"
+  cell_state: ""
+  claim_type: pathology_association
+  direction: associated_neg
+  comparison: "female vs male, gene-trait correlation with amyloid"
+  genes: []
+  gene_source: "Extended Data Supplementary Table S8"
+  reported_stat: "median r with amyloid in females: Ex -0.272, In -0.225; males: Ex -0.01, In ~0.1"
+  unit_of_analysis: donors
+  method: "donor-level Pearson gene-trait correlations split by sex; bootstrap median sex differences"
+  testable_with: rna
+  test_template: pathology_correlation
+  requires: "sex; amyloid level"
+  notes: ""
+- id: mathys2019-C28
+  paper: mathys2019
+  statement: "In females, OPCs show a downregulation shift in gene-trait correlations with AD pathology that is not seen in males."
+  quote: "Opc in females present a down-regulation shift in response to pathology not observed in males"
+  location: "Fig. 4; Results \"Sex-specific differential response to AD pathology\""
+  centrality: secondary
+  modality: snRNA
+  region: PFC
+  cell_type: OPCs
+  cell_state: ""
+  claim_type: pathology_association
+  direction: associated_neg
+  comparison: "female vs male, gene-trait correlation with AD pathology"
+  genes: []
+  gene_source: "Extended Data Supplementary Table S8"
+  reported_stat: "described as subtle; bootstrap estimates in Table S8"
+  unit_of_analysis: donors
+  method: "donor-level Pearson gene-trait correlations split by sex"
+  testable_with: rna
+  test_template: pathology_correlation
+  requires: "sex; quantitative AD pathology traits"
+  notes: ""

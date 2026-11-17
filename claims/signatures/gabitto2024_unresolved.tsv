@@ -1,0 +1,7 @@
+claim_id	term	reason
+gabitto2024-C04	supertype markers	the supertype abundance and DE tables (ST4, ST5) are links to the SEA-AD bucket, not downloaded; SEA-AD's own supertype labels could test these claims directly, which the engine cannot yet do
+gabitto2024-C08	supertype markers	the supertype abundance and DE tables (ST4, ST5) are links to the SEA-AD bucket, not downloaded; SEA-AD's own supertype labels could test these claims directly, which the engine cannot yet do
+gabitto2024-C09	supertype markers	the supertype abundance and DE tables (ST4, ST5) are links to the SEA-AD bucket, not downloaded; SEA-AD's own supertype labels could test these claims directly, which the engine cannot yet do
+gabitto2024-C11	supertype markers	the supertype abundance and DE tables (ST4, ST5) are links to the SEA-AD bucket, not downloaded; SEA-AD's own supertype labels could test these claims directly, which the engine cannot yet do
+gabitto2024-C14	supertype markers	the supertype abundance and DE tables (ST4, ST5) are links to the SEA-AD bucket, not downloaded; SEA-AD's own supertype labels could test these claims directly, which the engine cannot yet do
+gabitto2024-C17	kinase and E3 ligase gene families in vulnerable Sst supertypes	gene families named in the Supplementary Note; the per-supertype DE (ST5) is not downloaded

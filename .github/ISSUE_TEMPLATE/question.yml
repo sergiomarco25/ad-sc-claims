@@ -1,0 +1,57 @@
+name: Ask the evidence base
+description: Ask a question about Alzheimer's disease single-cell evidence. We answer from the rated claims, or run a new analysis across the harmonised datasets and add the result as a finding.
+title: "[Question] "
+labels: ["atlas-question"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Questions and answers are public. Please don't include personal or patient-identifying information.
+        Before asking, you can search the claims in the atlas (https://sergiomarco25.github.io/ad-sc-claims/).
+  - type: textarea
+    id: question
+    attributes:
+      label: Your question
+      description: One question, as specific as you can (cell type, region, comparison).
+      placeholder: "Are SST interneurons lower in AD than in controls in the middle temporal gyrus?"
+    validations:
+      required: true
+  - type: input
+    id: cell_types
+    attributes:
+      label: Cell type(s)
+      placeholder: "Microglia; Astrocytes (or: any)"
+  - type: input
+    id: regions
+    attributes:
+      label: Brain region(s)
+      placeholder: "DLPFC; MTG (or: any)"
+  - type: dropdown
+    id: comparison
+    attributes:
+      label: Comparison
+      options:
+        - AD vs control
+        - Along Braak NFT stage
+        - Early or late AD vs control
+        - Cognition (no dementia vs dementia)
+        - Other (describe in the question)
+    validations:
+      required: true
+  - type: textarea
+    id: genes
+    attributes:
+      label: Genes or gene set (optional)
+      description: Gene symbols, a named pathway, or a published signature.
+  - type: textarea
+    id: answer_criterion
+    attributes:
+      label: What would answer it? (optional)
+      description: The result that would mean "yes" and the one that would mean "no", stated before the analysis.
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Before you submit
+      options:
+        - label: I understand the question, any analysis and its answer are public, and results enter the evidence base as rated findings (CC BY 4.0).
+          required: true
