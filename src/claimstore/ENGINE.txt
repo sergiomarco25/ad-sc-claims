@@ -1,5 +1,5 @@
-claimstore engine copied from the claim-store reference project, branch engine-large-reads, commit 54225c7
-(2026-11-17): main f96620f plus the in-place h5ad reader, cross-tests of claims without their own dataset, claim
-signatures, supplementary files, per-class signatures, the atlas, and a store, rating and meta-analysis that accept a
-new field's missing tables.
+claimstore engine copied from the claim-store reference project, branch sorted-only-release, commit 18b5d33
+(2026-11-18): 54225c7 (main f96620f plus the in-place h5ad reader, cross-tests of claims without their own dataset,
+claim signatures, supplementary files, per-class signatures, the atlas, and a store, rating and meta-analysis that
+accept a new field's missing tables) plus no whole-tissue "ALL" pseudobulk for a dataset of sorted nuclei only.
 Update it from there; do not edit it in this project.

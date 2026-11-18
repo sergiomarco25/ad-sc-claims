@@ -5,7 +5,8 @@ Usage: python -I src/claimstore/cli.py pseudobulk DATASET      (analysis environ
 Writes results/de_cache/<dataset>/input/: <region>__<class>.csv.gz (genes x units, raw counts; class "ALL" = all
 nuclei of the unit), units.tsv (unit metadata, donor-level extras of config/harmonise.toml, one column per contrast:
 "case" / "ref" / empty), manifest.tsv. Datasets mixing sorted and unsorted nuclei (obs `enrichment`): the
-`sorted_classes` of config/harmonise.toml use sorted units, every other class unsorted units.
+`sorted_classes` of config/harmonise.toml use sorted units, every other class unsorted units. A dataset of sorted
+nuclei only (e.g. a microglia release) has no "ALL": its nuclei are not the tissue.
 """
 import sys
 
@@ -39,8 +40,10 @@ def export(ds):
     out.mkdir(parents=True, exist_ok=True)
     pb = ad.read_h5ad(H / "pseudobulk" / f"{ds}.h5ad")
     pb.obs = pb.obs.join(donor_extras(ds), on="donor")
+    tissue = True  # whether "ALL" stands for the tissue
     if "enrichment" in pb.obs:
         sorted_ = pb.obs.enrichment.astype(str).str.lower().eq("sorted")
+        tissue = not sorted_.all()
         keep = np.where(pb.obs.cell_class.astype(str).isin(SORTED_CLASSES), sorted_, ~sorted_)
         pb = pb[keep].copy()
     pb.obs["unit"] = pb.obs.donor.astype(str) + "|" + pb.obs.region.astype(str)
@@ -59,7 +62,7 @@ def export(ds):
     genes = pb.var_names.values
     for reg in sorted(meta.region.astype(str).unique()):
         sel = meta.region.astype(str).values == reg
-        blocks = [("ALL", allX[sel], units[sel], meta.n_cells_ALL.values[sel])]
+        blocks = [("ALL", allX[sel], units[sel], meta.n_cells_ALL.values[sel])] if tissue else []
         for cls in sorted(pb.obs.cell_class.astype(str).unique()):
             m = (pb.obs.region.astype(str).values == reg) & (pb.obs.cell_class.astype(str).values == cls) & \
                 (pb.obs.n_cells.values >= MIN_CELLS)

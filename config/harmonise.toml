@@ -22,7 +22,9 @@ cell_classes = ["Excitatory neurons", "Inhibitory neurons", "Neurons (other)", "
                 "Oligodendrocytes", "OPCs", "Endothelial", "Pericytes", "Fibroblasts", "T cells", "Immune (other)",
                 "Unknown"]
 # Datasets mixing sorted and unsorted nuclei (obs `enrichment` = "sorted"): these classes are tested on sorted units
-sorted_classes = []
+# sun2023 is an immune-cell release: all its nuclei are marked sorted, so composition tests leave it out and
+# its microglia are tested on these units
+sorted_classes = ["Microglia"]
 
 # Canonical markers of each class (a class needs >= 2 detected genes); used to check the authors' labels
 [markers]

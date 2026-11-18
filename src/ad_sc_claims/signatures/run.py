@@ -10,12 +10,9 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[2]))  # src/
 
 from ad_sc_claims.signatures._common import Signatures  # noqa: E402
 
-PAPERS = ["gabitto2024", "green2024", "lau2020", "leng2021", "mathys2019", "mathys2023"]
+PAPERS = ["gabitto2024", "green2024", "lau2020", "leng2021", "mathys2019", "mathys2023", "sun2023"]
 # papers whose supplementary tables could not be fetched: their claims stay on the genes they name
 NO_SUPPLEMENT = {
-    "sun2023": (["C04", "C05", "C06", "C07", "C12", "C14", "C17"], "Table S1 (state markers and DE)",
-                "PMC and Europe PMC refuse scripted downloads of the author manuscript's files; the publisher's copy "
-                "was not requested"),
     "grubman2019": (["C01"], "AD and control subclusters", "not in PMC; full text not accessed"),
 }
 

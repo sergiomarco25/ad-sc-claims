@@ -1,3 +1,7 @@
 cohort	papers	regions	modality	n_pd	n_ctrl	accession	data_access	local	comparator_tier	tier_reason	screening
 psychad		DLPFC	snRNA			CELLxGENE (PsychAD, Lee et al.)	open	raw/psychad_mssm (link to the reference project's raw file); loader src/ad_sc_claims/build/psychad.py			include
 seaad	gabitto2024	MTG;DLPFC	snRNA			CELLxGENE collection 1ca90a2d-2943-483d-b678-b809bf464c30	open	raw/seaad (MTG and DLPFC whole-taxonomy h5ad); loader src/ad_sc_claims/build/seaad.py			include
+leng2021	leng2021	EC;SFG	snRNA	7	3	CELLxGENE collection 180bff9c-c8a5-4539-b13b-ddbc00d643e6; GSE147528	open	raw/leng2021 (EC and SFG h5ad); loader src/ad_sc_claims/build/leng2021.py			include
+lau2020	lau2020	PFC	snRNA	12	9	GSE157827	open	raw/lau2020 (GEO RAW tar); donors from Dataset S1; loader src/ad_sc_claims/build/lau2020.py			include
+sun2023	sun2023	PFC;hippocampus;thalamus;EC;MTG;AG	snRNA (microglia)	205	219	personal.broadinstitute.org/cboix/sun_victor_et_al_data (de-identified processed ROSMAP microglia); Synapse syn52293417 (raw, controlled)	open (processed)	raw/sun2023; loader src/ad_sc_claims/build/sun2023.py			include (microglia only)
+grubman2019	grubman2019	EC	snRNA	6	6	GSE138852	open	raw/grubman2019 (downloaded, not harmonised)			exclude: each GEO sample pools two donors and no donor label exists (user decision 2026-11-17)

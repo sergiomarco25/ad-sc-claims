@@ -1,6 +1,9 @@
 item	field	problem
+lau2020	cohort	no cohort entry (inventory/cohorts.yaml or cohorts_extracted.yaml)
+leng2021	cohort	no cohort entry (inventory/cohorts.yaml or cohorts_extracted.yaml)
 psychad	cohort	no cohort entry (inventory/cohorts.yaml or cohorts_extracted.yaml)
 seaad	cohort	no cohort entry (inventory/cohorts.yaml or cohorts_extracted.yaml)
+sun2023	cohort	no cohort entry (inventory/cohorts.yaml or cohorts_extracted.yaml)
 gabitto2024-C01	region	not in vocabulary: ['MTG']
 gabitto2024-C01	cell_type	not in vocabulary: ['All']
 gabitto2024-C01	modality	not in vocabulary: snRNA
@@ -526,6 +529,7 @@ mathys2023-C31	modality	not in vocabulary: snRNA
 mathys2023-C32	region	not in vocabulary: ['PFC']
 mathys2023-C32	cell_type	not in vocabulary: ['Inhibitory neurons']
 mathys2023-C32	modality	not in vocabulary: snRNA
+sun2023-C01	region	not in vocabulary: ['AG', 'EC', 'MTG', 'PFC', 'hippocampus', 'thalamus']
 sun2023-C01	cell_type	not in vocabulary: ['Microglia']
 sun2023-C01	modality	not in vocabulary: snRNA
 sun2023-C02	region	not in vocabulary: ['PFC']
@@ -555,44 +559,61 @@ sun2023-C09	modality	not in vocabulary: imaging
 sun2023-C10	region	not in vocabulary: ['PFC']
 sun2023-C10	cell_type	not in vocabulary: ['Microglia']
 sun2023-C10	modality	not in vocabulary: imaging
+sun2023-C11	region	not in vocabulary: ['AG', 'EC', 'MTG', 'PFC', 'hippocampus', 'thalamus']
 sun2023-C11	cell_type	not in vocabulary: ['Microglia']
 sun2023-C11	modality	not in vocabulary: snRNA; imaging
 sun2023-C12	region	not in vocabulary: ['PFC']
 sun2023-C12	cell_type	not in vocabulary: ['Microglia']
 sun2023-C12	modality	not in vocabulary: snRNA
+sun2023-C13	region	not in vocabulary: ['AG', 'EC', 'MTG', 'PFC', 'hippocampus', 'thalamus']
 sun2023-C13	cell_type	not in vocabulary: ['Microglia']
 sun2023-C13	modality	not in vocabulary: snRNA; imaging
+sun2023-C14	region	not in vocabulary: ['AG', 'EC', 'MTG', 'PFC', 'hippocampus', 'thalamus']
 sun2023-C14	cell_type	not in vocabulary: ['Microglia']
 sun2023-C14	modality	not in vocabulary: snRNA
+sun2023-C15	region	not in vocabulary: ['AG', 'EC', 'MTG', 'PFC', 'hippocampus', 'thalamus']
 sun2023-C15	cell_type	not in vocabulary: ['Microglia']
 sun2023-C15	modality	not in vocabulary: snATAC; multiome-ATAC; multiome-RNA
+sun2023-C16	region	not in vocabulary: ['AG', 'EC', 'MTG', 'PFC', 'hippocampus', 'thalamus']
 sun2023-C16	cell_type	not in vocabulary: ['Microglia']
 sun2023-C16	modality	not in vocabulary: snATAC; snRNA
+sun2023-C17	region	not in vocabulary: ['AG', 'EC', 'MTG', 'PFC', 'hippocampus', 'thalamus']
 sun2023-C17	cell_type	not in vocabulary: ['Microglia']
 sun2023-C17	modality	not in vocabulary: snRNA
+sun2023-C18	region	not in vocabulary: ['AG', 'EC', 'MTG', 'PFC', 'hippocampus', 'thalamus']
 sun2023-C18	cell_type	not in vocabulary: ['Microglia']
 sun2023-C18	modality	not in vocabulary: snRNA
+sun2023-C19	region	not in vocabulary: ['AG', 'EC', 'MTG', 'PFC', 'hippocampus', 'thalamus']
 sun2023-C19	cell_type	not in vocabulary: ['Microglia']
 sun2023-C19	modality	not in vocabulary: snRNA
+sun2023-C20	region	not in vocabulary: ['AG', 'EC', 'MTG', 'PFC', 'hippocampus', 'thalamus']
 sun2023-C20	cell_type	not in vocabulary: ['Microglia']
 sun2023-C20	modality	not in vocabulary: snRNA
+sun2023-C21	region	not in vocabulary: ['AG', 'EC', 'MTG', 'PFC', 'hippocampus', 'thalamus']
 sun2023-C21	cell_type	not in vocabulary: ['Microglia']
 sun2023-C21	modality	not in vocabulary: snRNA
+sun2023-C22	region	not in vocabulary: ['AG', 'EC', 'MTG', 'PFC', 'hippocampus', 'thalamus']
 sun2023-C22	cell_type	not in vocabulary: ['Microglia']
 sun2023-C22	modality	not in vocabulary: snRNA
+sun2023-C23	region	not in vocabulary: ['AG', 'EC', 'MTG', 'PFC', 'hippocampus', 'thalamus']
 sun2023-C23	cell_type	not in vocabulary: ['Microglia']
 sun2023-C23	modality	not in vocabulary: snRNA
+sun2023-C24	region	not in vocabulary: ['AG', 'EC', 'MTG', 'PFC', 'hippocampus', 'thalamus']
 sun2023-C24	cell_type	not in vocabulary: ['Microglia']
 sun2023-C24	modality	not in vocabulary: snRNA
 sun2023-C25	region	not in vocabulary: ['PFC']
 sun2023-C25	cell_type	not in vocabulary: ['Microglia']
 sun2023-C25	modality	not in vocabulary: snRNA
+sun2023-C26	region	not in vocabulary: ['AG', 'EC', 'MTG', 'PFC', 'hippocampus', 'thalamus']
 sun2023-C26	cell_type	not in vocabulary: ['Microglia']
 sun2023-C26	modality	not in vocabulary: snRNA
+sun2023-C27	region	not in vocabulary: ['AG', 'EC', 'MTG', 'PFC', 'hippocampus', 'thalamus']
 sun2023-C27	cell_type	not in vocabulary: ['Microglia']
 sun2023-C27	modality	not in vocabulary: snRNA
+sun2023-C28	region	not in vocabulary: ['AG', 'EC', 'MTG', 'PFC', 'hippocampus', 'thalamus']
 sun2023-C28	cell_type	not in vocabulary: ['Microglia']
 sun2023-C28	modality	not in vocabulary: snRNA
+sun2023-C29	region	not in vocabulary: ['AG', 'EC', 'MTG', 'PFC', 'hippocampus', 'thalamus']
 sun2023-C29	cell_type	not in vocabulary: ['Microglia']
 sun2023-C29	modality	not in vocabulary: snRNA
 green2024-C01	source_dataset	source dataset not harmonised
@@ -631,55 +652,6 @@ grubman2019-C05	source_dataset	source dataset not harmonised
 grubman2019-C06	source_dataset	source dataset not harmonised
 grubman2019-C07	source_dataset	source dataset not harmonised
 grubman2019-C08	source_dataset	source dataset not harmonised
-lau2020-C01	source_dataset	source dataset not harmonised
-lau2020-C02	source_dataset	source dataset not harmonised
-lau2020-C03	source_dataset	source dataset not harmonised
-lau2020-C04	source_dataset	source dataset not harmonised
-lau2020-C05	source_dataset	source dataset not harmonised
-lau2020-C06	source_dataset	source dataset not harmonised
-lau2020-C07	source_dataset	source dataset not harmonised
-lau2020-C08	source_dataset	source dataset not harmonised
-lau2020-C09	source_dataset	source dataset not harmonised
-lau2020-C10	source_dataset	source dataset not harmonised
-lau2020-C11	source_dataset	source dataset not harmonised
-lau2020-C12	source_dataset	source dataset not harmonised
-lau2020-C13	source_dataset	source dataset not harmonised
-lau2020-C14	source_dataset	source dataset not harmonised
-lau2020-C15	source_dataset	source dataset not harmonised
-lau2020-C16	source_dataset	source dataset not harmonised
-lau2020-C17	source_dataset	source dataset not harmonised
-lau2020-C18	source_dataset	source dataset not harmonised
-lau2020-C19	source_dataset	source dataset not harmonised
-lau2020-C20	source_dataset	source dataset not harmonised
-lau2020-C21	source_dataset	source dataset not harmonised
-lau2020-C22	source_dataset	source dataset not harmonised
-lau2020-C23	source_dataset	source dataset not harmonised
-leng2021-C01	source_dataset	source dataset not harmonised
-leng2021-C02	source_dataset	source dataset not harmonised
-leng2021-C03	source_dataset	source dataset not harmonised
-leng2021-C04	source_dataset	source dataset not harmonised
-leng2021-C05	source_dataset	source dataset not harmonised
-leng2021-C06	source_dataset	source dataset not harmonised
-leng2021-C07	source_dataset	source dataset not harmonised
-leng2021-C08	source_dataset	source dataset not harmonised
-leng2021-C09	source_dataset	source dataset not harmonised
-leng2021-C10	source_dataset	source dataset not harmonised
-leng2021-C11	source_dataset	source dataset not harmonised
-leng2021-C12	source_dataset	source dataset not harmonised
-leng2021-C13	source_dataset	source dataset not harmonised
-leng2021-C14	source_dataset	source dataset not harmonised
-leng2021-C15	source_dataset	source dataset not harmonised
-leng2021-C16	source_dataset	source dataset not harmonised
-leng2021-C17	source_dataset	source dataset not harmonised
-leng2021-C18	source_dataset	source dataset not harmonised
-leng2021-C19	source_dataset	source dataset not harmonised
-leng2021-C20	source_dataset	source dataset not harmonised
-leng2021-C21	source_dataset	source dataset not harmonised
-leng2021-C22	source_dataset	source dataset not harmonised
-leng2021-C23	source_dataset	source dataset not harmonised
-leng2021-C24	source_dataset	source dataset not harmonised
-leng2021-C25	source_dataset	source dataset not harmonised
-leng2021-C26	source_dataset	source dataset not harmonised
 mathys2019-C01	source_dataset	source dataset not harmonised
 mathys2019-C02	source_dataset	source dataset not harmonised
 mathys2019-C03	source_dataset	source dataset not harmonised
@@ -740,32 +712,3 @@ mathys2023-C29	source_dataset	source dataset not harmonised
 mathys2023-C30	source_dataset	source dataset not harmonised
 mathys2023-C31	source_dataset	source dataset not harmonised
 mathys2023-C32	source_dataset	source dataset not harmonised
-sun2023-C01	source_dataset	source dataset not harmonised
-sun2023-C02	source_dataset	source dataset not harmonised
-sun2023-C03	source_dataset	source dataset not harmonised
-sun2023-C04	source_dataset	source dataset not harmonised
-sun2023-C05	source_dataset	source dataset not harmonised
-sun2023-C06	source_dataset	source dataset not harmonised
-sun2023-C07	source_dataset	source dataset not harmonised
-sun2023-C08	source_dataset	source dataset not harmonised
-sun2023-C09	source_dataset	source dataset not harmonised
-sun2023-C10	source_dataset	source dataset not harmonised
-sun2023-C11	source_dataset	source dataset not harmonised
-sun2023-C12	source_dataset	source dataset not harmonised
-sun2023-C13	source_dataset	source dataset not harmonised
-sun2023-C14	source_dataset	source dataset not harmonised
-sun2023-C15	source_dataset	source dataset not harmonised
-sun2023-C16	source_dataset	source dataset not harmonised
-sun2023-C17	source_dataset	source dataset not harmonised
-sun2023-C18	source_dataset	source dataset not harmonised
-sun2023-C19	source_dataset	source dataset not harmonised
-sun2023-C20	source_dataset	source dataset not harmonised
-sun2023-C21	source_dataset	source dataset not harmonised
-sun2023-C22	source_dataset	source dataset not harmonised
-sun2023-C23	source_dataset	source dataset not harmonised
-sun2023-C24	source_dataset	source dataset not harmonised
-sun2023-C25	source_dataset	source dataset not harmonised
-sun2023-C26	source_dataset	source dataset not harmonised
-sun2023-C27	source_dataset	source dataset not harmonised
-sun2023-C28	source_dataset	source dataset not harmonised
-sun2023-C29	source_dataset	source dataset not harmonised

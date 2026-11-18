@@ -8,7 +8,8 @@ the claim-store template of the PD single-cell claim store (https://github.com/s
 2026-11-16; the engine is kept in `src/claimstore/` (its source commit in `src/claimstore/ENGINE.txt`).
 
 - Browse: the atlas at https://sergiomarco25.github.io/ad-sc-claims/ (`docs/index.html`): every claim with its
-  rating and its re-tests in SEA-AD and PsychAD, the datasets, genes and a knowledge graph.
+  rating and its re-tests in five datasets (SEA-AD, PsychAD, Leng 2021, Lau 2020 and the microglia of Sun 2023), the
+  datasets, genes and a knowledge graph.
 - Ask: open an issue with the question form; answers enter the evidence base as rated findings.
 - Results and the effort it took to add this field: `EFFORT.md`. Data paths: `data_root` in `config/project.toml`
   (`data/`, usually a link to the data area) or `AD_SC_CLAIMS_DATA_ROOT`.

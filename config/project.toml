@@ -75,7 +75,9 @@ r_env = ""
 [pipeline]
 # Datasets the pipeline builds and tests, one loader each: src/ad_sc_claims/build/<dataset>.py
 loaders = "ad_sc_claims.build"
-datasets = ["psychad", "seaad"]
+# 2026-11-17: Leng 2021, Lau 2020 and Sun 2023 (microglia) added; Grubman 2019 left out (GEO samples pool two
+# donors each, so no donor-level test)
+datasets = ["psychad", "seaad", "leng2021", "lau2020", "sun2023"]
 default_mem_gb = 64
 de_contrasts = ["AD_vs_control"]
 gsea_contrasts = []
