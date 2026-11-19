@@ -5,8 +5,9 @@ Usage: python -I src/claimstore/cli.py pseudobulk DATASET      (analysis environ
 Writes results/de_cache/<dataset>/input/: <region>__<class>.csv.gz (genes x units, raw counts; class "ALL" = all
 nuclei of the unit), units.tsv (unit metadata, donor-level extras of config/harmonise.toml, one column per contrast:
 "case" / "ref" / empty), manifest.tsv. Datasets mixing sorted and unsorted nuclei (obs `enrichment`): the
-`sorted_classes` of config/harmonise.toml use sorted units, every other class unsorted units. A dataset of sorted
-nuclei only (e.g. a microglia release) has no "ALL": its nuclei are not the tissue.
+`sorted_classes` of config/harmonise.toml use sorted units, every other class unsorted units, and "ALL" sums the
+unsorted nuclei only (sorted ones would over-represent the sorted class). A dataset of sorted nuclei only (e.g. a
+microglia release) has no "ALL": its nuclei are not the tissue.
 """
 import sys
 
@@ -41,18 +42,23 @@ def export(ds):
     pb = ad.read_h5ad(H / "pseudobulk" / f"{ds}.h5ad")
     pb.obs = pb.obs.join(donor_extras(ds), on="donor")
     tissue = True  # whether "ALL" stands for the tissue
+    allpb = pb  # the rows "ALL" sums: every row, or the unsorted ones when sorted nuclei are mixed in
     if "enrichment" in pb.obs:
         sorted_ = pb.obs.enrichment.astype(str).str.lower().eq("sorted")
         tissue = not sorted_.all()
+        if sorted_.any() and tissue:
+            allpb = pb[~sorted_.values].copy()
         keep = np.where(pb.obs.cell_class.astype(str).isin(SORTED_CLASSES), sorted_, ~sorted_)
         pb = pb[keep].copy()
     pb.obs["unit"] = pb.obs.donor.astype(str) + "|" + pb.obs.region.astype(str)
-    # ALL = sum over classes per unit (before the per-class n_cells filter)
     codes, units = pd.factorize(pb.obs.unit)
-    ind = sp.csr_matrix((np.ones(pb.n_obs), (codes, np.arange(pb.n_obs))), shape=(len(units), pb.n_obs))
-    allX = ind @ sp.csr_matrix(pb.X)
     meta = pb.obs.drop_duplicates("unit").set_index("unit").loc[units]
-    meta["n_cells_ALL"] = np.bincount(codes, weights=pb.obs.n_cells.values)
+    # ALL = sum over classes per unit (before the per-class n_cells filter)
+    acodes = pd.Index(units).get_indexer(allpb.obs.donor.astype(str) + "|" + allpb.obs.region.astype(str))
+    ok = acodes >= 0
+    ind = sp.csr_matrix((np.ones(ok.sum()), (acodes[ok], np.where(ok)[0])), shape=(len(units), allpb.n_obs))
+    allX = ind @ sp.csr_matrix(allpb.X)
+    meta["n_cells_ALL"] = np.bincount(acodes[ok], weights=allpb.obs.n_cells.values[ok], minlength=len(units))
     groups = unit_groups(meta)
     units_tab = meta.drop(columns=[c for c in ["cell_class", "n_cells"] if c in meta]).join(groups)
     units_tab.index.name = "unit"
@@ -62,7 +68,8 @@ def export(ds):
     genes = pb.var_names.values
     for reg in sorted(meta.region.astype(str).unique()):
         sel = meta.region.astype(str).values == reg
-        blocks = [("ALL", allX[sel], units[sel], meta.n_cells_ALL.values[sel])] if tissue else []
+        sa = sel & (meta.n_cells_ALL.values > 0)  # units with no unsorted nuclei have no "ALL"
+        blocks = [("ALL", allX[sa], units[sa], meta.n_cells_ALL.values[sa])] if tissue else []
         for cls in sorted(pb.obs.cell_class.astype(str).unique()):
             m = (pb.obs.region.astype(str).values == reg) & (pb.obs.cell_class.astype(str).values == cls) & \
                 (pb.obs.n_cells.values >= MIN_CELLS)

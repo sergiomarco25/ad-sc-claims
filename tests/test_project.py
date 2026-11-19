@@ -61,6 +61,16 @@ def test_harmonise_config_is_consistent():
     assert not harmonise_problems(ROOT), harmonise_problems(ROOT)
 
 
+def test_regions_have_glossary_rows():
+    """Every region code of the claim schema has a row in claims/REGIONS.md, so claims and datasets agree on it."""
+    import re
+    import tomllib
+    f = ROOT / "claims" / "REGIONS.md"
+    codes = set(tomllib.loads((ROOT / "config" / "schema.toml").read_text())["vocab"]["region"]) - {"multiple"}
+    rows = set(re.findall(r"^\| `([^`]+)` \|", f.read_text(), re.M)) if f.exists() else set()
+    assert codes <= rows, f"regions without a row in claims/REGIONS.md: {sorted(codes - rows)}"
+
+
 def test_schema_files_are_current():
     for name, built in (("claim", schema.claim_schema()), ("finding", schema.finding_schema())):
         f = ROOT / "claims" / "schema" / f"{name}.schema.json"

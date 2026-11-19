@@ -103,11 +103,11 @@ leng2021-C12	leng2021	leng2021	EC	Excitatory neurons	EC:Exc.s2 (RORB+)	ADlate_vs
 leng2021-C13	leng2021	leng2021	SFG	Excitatory neurons	SFG:Exc.s2; SFG:Exc.s4 (RORB+)	ADlate_vs_control	depleted	composition	composition_donor	ok	Braak 6 vs Braak 0	False
 leng2021-C14	leng2021	leng2021	EC;SFG	Excitatory neurons	SFG:Exc.s2/s4 ~ EC:Exc.s2/s4	within	exists	state_existence	state_signature	ok	within all donors (SFG vs EC subpopulations)	False
 leng2021-C15	leng2021	leng2021	EC;SFG	Excitatory neurons	Mathys:Exc.s4 (RORB-high)	AD_vs_control	depleted	composition	composition_donor	ok	AD vs control (males)	False
-leng2021-C16	leng2021	leng2021	EC	Excitatory neurons	RORB+ TBR1+ neurons		depleted	composition	composition_donor	no contrast	Braak 2-4 and Braak 5-6 vs Braak 0-1	False
+leng2021-C16	leng2021	leng2021	EC	Excitatory neurons	RORB+ TBR1+ neurons	ADearly_vs_control+ADlate_vs_control	depleted	composition	composition_donor	ok	Braak 2-4 and Braak 5-6 vs Braak 0-1	False
 leng2021-C17	leng2021	leng2021	EC	Excitatory neurons	RORB+ TBR1+ neurons		enriched	pathology_association	not_testable	not_testable	RORB+ vs RORB- excitatory neurons (Braak 2-4 and 5-6)	False
 leng2021-C18	leng2021	leng2021	EC;SFG	Inhibitory neurons		ADlate_vs_control	NA	composition	composition_donor	ok	Braak 2 and Braak 6 vs Braak 0	True
 leng2021-C19	leng2021	leng2021	EC;SFG	Inhibitory neurons		sex	NA	composition	composition_donor	ok	AD vs control (males and females separately)	True
-leng2021-C20	leng2021	leng2021	EC	Microglia			enriched	composition	composition_donor	no contrast	across Braak stages 0, 2, 6	False
+leng2021-C20	leng2021	leng2021	EC	Microglia		ad_pathology	enriched	composition	composition_donor	ok	across Braak stages 0, 2, 6	False
 leng2021-C21	leng2021	leng2021	EC;SFG	Oligodendrocytes	EC:Oligo.s0; EC:Oligo.s4; SFG:Oligo.s1; SFG:Oligo.s2	within	exists	state_existence	state_signature	ok	within all donors (oligodendrocyte subpopulations)	False
 leng2021-C22	leng2021	leng2021	EC;SFG	Astrocytes	GFAPhigh astrocytes (EC:Astro.3; SFG:Astro.s4; SFG:Astro.s5)	within	exists	state_existence	state_signature	ok	within all donors (astrocyte subpopulations)	False
 leng2021-C23	leng2021	leng2021	SFG	Astrocytes	SFG:Astro.s4; SFG:Astro.s5 (GFAPhigh)	within	exists	state_existence	state_signature	ok	within all donors (astrocyte subpopulations)	False
@@ -185,7 +185,7 @@ sun2023-C08	sun2023	sun2023	PFC	Microglia	P2RY12+ (homeostatic marker)	AD_vs_con
 sun2023-C09	sun2023	sun2023	PFC	Microglia	MG4 lipid-processing (PPARG+)	AD_vs_control	enriched	composition	composition_donor	ok	AD vs non-AD	False
 sun2023-C10	sun2023	sun2023	PFC	Microglia	MG8 inflammatory II (FOXP1+LRRK2+)	AD_vs_control	enriched	composition	composition_donor	ok	AD vs non-AD	False
 sun2023-C11	sun2023	sun2023	AG;EC;MTG;PFC;hippocampus;thalamus	Microglia	MG3 ribosome biogenesis; MG4 lipid-processing; MG10 inflammatory III		NA	other	state_signature	no contrast	all donors (signature enrichment across states)	False
-sun2023-C12	sun2023	sun2023	PFC	Microglia	MG3 ribosome biogenesis	not_available	NA	composition	composition_donor	not_available	AD (early and late) vs non-AD	True
+sun2023-C12	sun2023	sun2023	PFC	Microglia	MG3 ribosome biogenesis	AD_vs_control	NA	composition	composition_donor	ok	AD (early and late) vs non-AD	True
 sun2023-C13	sun2023	sun2023	AG;EC;MTG;PFC;hippocampus;thalamus	Microglia	MG2 inflammatory I; MG8 inflammatory II; MG10 inflammatory III	within	NA	trajectory	trajectory	ok	within donors (AD subjects for RNAscope)	False
 sun2023-C14	sun2023	sun2023	AG;EC;MTG;PFC;hippocampus;thalamus	Microglia	MG10; MG2; MG8	ADearly_vs_control	NA	de_gene	de_pseudobulk	ok	early AD vs non-AD; late AD vs early AD	False
 sun2023-C15	sun2023	sun2023	AG;EC;MTG;PFC;hippocampus;thalamus	Microglia	HOM; ACT1; ACT2 (epigenomic states)		NA	chromatin	chromatin_da	no contrast	all donors (RNA vs ATAC state resolution)	False
@@ -198,8 +198,8 @@ sun2023-C21	sun2023	sun2023	AG;EC;MTG;PFC;hippocampus;thalamus	Microglia	multipl
 sun2023-C22	sun2023	sun2023	AG;EC;MTG;PFC;hippocampus;thalamus	Microglia	multiple states (group G50)	ADearly_vs_control	NA	de_gene	de_pseudobulk	ok	early AD vs non-AD (down); late AD vs early AD (up)	False
 sun2023-C23	sun2023	sun2023	AG;EC;MTG;PFC;hippocampus;thalamus	Microglia	MG8 inflammatory II; MG2 inflammatory I	within	enriched	genetic_enrichment	genetic_enrichment	ok	AD GWAS signal across microglial state markers	False
 sun2023-C24	sun2023	sun2023	AG;EC;MTG;PFC;hippocampus;thalamus	Microglia	MG0 homeostatic; MG4 lipid-processing; MG11 antiviral	within	enriched	genetic_enrichment	genetic_enrichment	ok	AD GWAS signal across microglial state markers	False
-sun2023-C25	sun2023	sun2023	PFC	Microglia	MG0 homeostatic	not_available	NA	composition	composition_donor	not_available	AD (early and late) vs non-AD	True
+sun2023-C25	sun2023	sun2023	PFC	Microglia	MG0 homeostatic	AD_vs_control	NA	composition	composition_donor	ok	AD (early and late) vs non-AD	True
 sun2023-C26	sun2023	sun2023	AG;EC;MTG;PFC;hippocampus;thalamus	Microglia	MG4 lipid-processing		NA	other	state_signature	no contrast	all donors (state-specific expression of AD risk genes)	False
-sun2023-C27	sun2023	sun2023	AG;EC;MTG;PFC;hippocampus;thalamus	Microglia			enriched	genetic_enrichment	genetic_enrichment	no contrast	overlap of microglia TWAS genes with AD DEGs (early and late)	False
+sun2023-C27	sun2023	sun2023	AG;EC;MTG;PFC;hippocampus;thalamus	Microglia		AD_vs_control	enriched	genetic_enrichment	genetic_enrichment	ok	overlap of microglia TWAS genes with AD DEGs (early and late)	False
 sun2023-C28	sun2023	sun2023	AG;EC;MTG;PFC;hippocampus;thalamus	Microglia	multiple states	ADearly_vs_control	NA	de_gene	de_pseudobulk	ok	early AD vs non-AD; late AD vs early AD	False
 sun2023-C29	sun2023	sun2023	AG;EC;MTG;PFC;hippocampus;thalamus	Microglia	multiple states	within	associated_pos	other	de_pseudobulk	ok	across donors within early (non-AD + early AD) and late (early + late AD) comparisons	False

@@ -4,9 +4,9 @@ Usage: python -I src/claimstore/cli.py meta
 Reads results/tests/cross/*.tsv (and internal/*.tsv for the source result); writes results/meta/claim_meta.tsv
 (one row per claim x variant x scope) and results/meta/claim_dataset_matrix.tsv (claim x dataset outcomes).
 
-Orientation: gene-level and state tests already report z with positive = as claimed; composition and concordance
-tests ([tests] concordance in config/project.toml) report the raw sign, so they are multiplied by the claim's expected
-sign. Combined z: weighted Stouffer
+Orientation: gene-level and state tests already report z with positive = as claimed; composition (also on author
+labels and by sex), the sex-stratified pathology shift and concordance tests ([tests] concordance in
+config/project.toml) report the raw sign, so they are multiplied by the claim's expected sign. Combined z: weighted Stouffer
 (weights sqrt(units)); heterogeneity: Q = sum (z_i - mean z)^2 with k-1 df, I2 = max(0, (Q - (k-1)) / Q).
 Scopes: all other datasets; same region only; other regions only; datasets published after the claim's paper.
 Robustness class (scope = all):
@@ -30,7 +30,8 @@ from claimstore import config as cfg
 ROOT = cfg.REPO
 RES = cfg.RESULTS
 UP, DOWN = {"up", "enriched", "associated_pos", "exists"}, {"down", "depleted", "associated_neg"}
-RAW_SIGN_TEMPLATES = {"composition_clr"} | {v["template"] for v in cfg.CONFIG.get("tests", {}).get("concordance", {}).values()}
+RAW_SIGN_TEMPLATES = {"composition_clr", "composition_labels", "composition_clr_sex", "sex_pathology_shift"} | \
+    {v["template"] for v in cfg.CONFIG.get("tests", {}).get("concordance", {}).values()}
 
 
 def load(mode):

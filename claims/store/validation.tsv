@@ -319,6 +319,7 @@ leng2021-C15	modality	not in vocabulary: snRNA
 leng2021-C16	region	not in vocabulary: ['EC']
 leng2021-C16	cell_type	not in vocabulary: ['Excitatory neurons']
 leng2021-C16	modality	not in vocabulary: imaging
+leng2021-C16	contrast	code not in vocabulary: ADearly_vs_control+ADlate_vs_control
 leng2021-C17	region	not in vocabulary: ['EC']
 leng2021-C17	cell_type	not in vocabulary: ['Excitatory neurons']
 leng2021-C17	modality	not in vocabulary: imaging

@@ -202,6 +202,9 @@ def finalise(a, dataset, author_to_class):
     a.X = X.astype(np.float32, copy=False)  # no second copy of multi-GB matrices
     del X
     a.var_names_make_unique()
+    for key in ("donor", "region"):  # the unit: a missing value would pool nuclei into one false donor or region
+        miss = a.obs[key].isna() | a.obs[key].astype(str).str.strip().isin(["", "nan", "NaN", "None", "NA"])
+        assert not miss.any(), f"{dataset}: {int(miss.sum())} nuclei without a {key}; drop them in the loader"
     bad = set(a.obs.region.dropna().astype(str)) - REGIONS
     assert not bad, f"{dataset}: regions not in vocabulary: {bad}"
     bad = set(a.obs.disease.dropna().astype(str)) - DISEASES

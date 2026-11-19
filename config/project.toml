@@ -27,9 +27,9 @@ staging_field = "staging"
 
 [rating]
 # Test templates of each rating family (claims/RATING.md section 2)
-effect_templates = ["composition_clr", "de_genes", "geneset_shift", "state_genes_shift", "trajectory_genes",
-                    "communication_genes"]
-pattern_templates = ["state_existence", "gwas_magma_specificity", "gwas_magma", "familial_overlap"]
+effect_templates = ["composition_clr", "composition_labels", "composition_clr_sex", "sex_pathology_shift", "de_genes",
+                    "geneset_shift", "state_genes_shift", "trajectory_genes", "communication_genes"]
+pattern_templates = ["state_existence", "gwas_magma_specificity", "gwas_magma", "familial_overlap", "twas_de_enrichment"]
 # Datasets of sorted nuclei or cells, whose composition is not tissue composition
 enriched_sort = []
 # Datasets that may share donors: dataset -> other datasets (a caveat on the rating, not merged)
@@ -42,10 +42,13 @@ not_assessed = "a gradient with disease stage; adjustment for age, sex and sampl
 gene_aliases = {}
 # Contrast codes that compare two contrasts' fold changes: code = { contrasts = ["a", "b"], template = "name" }
 concordance = {}
-# genetic_enrichment claims: "module:function" of this field's package (none: such claims are not testable)
-genetic_test = ""
+# genetic_enrichment claims: "module:function" of this field's package (none: such claims are not testable).
+# AD (2026-11-18): TWAS genes vs DEGs; GWAS heritability claims need summary statistics this project does not have
+genetic_test = "ad_sc_claims.genetics:genetic_test"
 # A curated signature whose rows name cell classes is applied per class (claims/SIGNATURES.md)
 signatures_per_class = true
+# Claims with the contrast "sex" are tested within each sex (claims/sex_claims.tsv, claims/CURATED_TESTS.md)
+sex = { column = "sex", contrast = "AD_vs_control" }
 
 [atlas]
 # The atlas page (src/claimstore/cli.py atlas -> reports/atlas.html); every key is optional (claimstore.atlas)

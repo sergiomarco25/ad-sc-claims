@@ -3,5 +3,8 @@ gabitto2024-C03	ad_pathology	Sst loss along CPS; the comparison mentions cogniti
 sun2023-C05	ad_pathology	MG4 rises with tangles, amyloid, Braak and cognitive decline: oriented along disease, not along better cognition
 green2024-C20	not_available	alternative brain ageing (ABA) trajectory, with low tau: no contrast in these datasets matches it
 green2024-C24	not_available	alternative brain ageing (ABA) trajectory, with low tau: no contrast in these datasets matches it
-sun2023-C12	not_available	a state's share of microglia, said unchanged while its genes change: its markers cannot stand in for the share
-sun2023-C25	not_available	a state's share of microglia, said unchanged while its genes change: its markers cannot stand in for the share
+sun2023-C12	AD_vs_control	a state's share of microglia, said unchanged while its genes change: tested on the authors' state labels in sun2023 only (claims/state_labels.tsv, other_datasets = none): the genes it names would test expression, not the share
+sun2023-C25	AD_vs_control	a state's share of microglia, said unchanged while its genes change: tested on the authors' state labels in sun2023 only (claims/state_labels.tsv, other_datasets = none): the genes it names would test expression, not the share
+sun2023-C27	AD_vs_control	TWAS genes against microglial AD DEGs: the AD vs control DE of each dataset (the AD genetic test, src/ad_sc_claims/genetics.py)
+leng2021-C16	ADearly_vs_control+ADlate_vs_control	Braak 2-4 and 5-6 vs Braak 0-1: early and late AD vs control (the comparison text matched no contexts rule)
+leng2021-C20	ad_pathology	a trend across Braak stages 0, 2 and 6: along Braak NFT stage (the comparison text matched no contexts rule)

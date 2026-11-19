@@ -32,9 +32,12 @@ def main():
         s.add(f"{col}_vulnerable_markers", claims, "state_markers", INH, top(st7.dropna(subset=[col]), col),
               stat=col, cell_state=state, source=f"{F.name}|ST7",
               selection="genes enriched in the affected supertypes, top 100 by mean enrichment")
-    s.unresolved(["C04", "C08", "C09", "C11", "C14"], "supertype markers",
-                 "the supertype abundance and DE tables (ST4, ST5) are links to the SEA-AD bucket, not downloaded; "
-                 "SEA-AD's own supertype labels could test these claims directly, which the engine cannot yet do")
+    s.unresolved(["C04", "C08", "C09", "C11"], "supertype markers",
+                 "no supertype marker table (ST5, 3.5 GB, not downloaded); tested on SEA-AD's own supertype labels "
+                 "instead (claims/state_labels.tsv, supertypes chosen from ST4)")
+    s.unresolved(["C14"], "replication of supertype changes in two ROSMAP datasets",
+                 "about the authors' replication in Green 2023 and Mathys 2023 data, whose supertype labels the "
+                 "project lacks; a re-test in SEA-AD would be the source data again")
     s.unresolved(["C17"], "kinase and E3 ligase gene families in vulnerable Sst supertypes",
                  "gene families named in the Supplementary Note; the per-supertype DE (ST5) is not downloaded")
     return s.write()

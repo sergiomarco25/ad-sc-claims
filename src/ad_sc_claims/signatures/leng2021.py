@@ -4,9 +4,9 @@ Source (raw/supplements/leng2021/, the publisher's copy): 41593_2020_764_MOESM2_
   Supplementary Table 1: genes differentially expressed between the RORB+ EC excitatory subpopulations EC:Exc.s2/s4
       and the other EC excitatory neurons (edgeR: logFC, FDR).
   Supplementary Table 2: per EC excitatory subpopulation, Braak stage comparisons (Braak2v0, Braak6v0, ...).
-Claims about the RORB+ vulnerable subpopulations (in EC, SFG and the Mathys et al. data) are tested on the top 100
-genes higher in them (FDR < 0.05). The Braak 6 vs 0 claim on many subpopulations uses the genes down in any of them
-(FDR < 0.05), minus genes up in another.
+Claims about the RORB+ vulnerable subpopulations (in EC, SFG and the Mathys et al. data, and their share by staining)
+are tested on the top 100 genes higher in them (FDR < 0.05). The Braak 6 vs 0 claim on many subpopulations uses the
+genes down in any of them (FDR < 0.05), minus genes up in another.
 """
 import pandas as pd
 
@@ -21,8 +21,8 @@ def main():
     s = Signatures(PAPER)
     t1 = pd.read_excel(F, sheet_name="Supplementary Table 1")
     up = top(t1[(t1.FDR < 0.05) & (t1.logFC > 0)], "logFC")
-    s.add("RORB_vulnerable_markers", ["C03", "C04", "C13", "C15"], "state_markers", EXC, up, stat="logFC", padj="FDR",
-          cell_state="EC:Exc.s2; EC:Exc.s4 (RORB+)", source=f"{F.name}|Supplementary Table 1",
+    s.add("RORB_vulnerable_markers", ["C03", "C04", "C13", "C15", "C16"], "state_markers", EXC, up, stat="logFC",
+          padj="FDR", cell_state="EC:Exc.s2; EC:Exc.s4 (RORB+)", source=f"{F.name}|Supplementary Table 1",
           selection="higher in EC:Exc.s2/s4 than other EC excitatory neurons, FDR < 0.05, top 100 by logFC")
     t2 = pd.read_excel(F, sheet_name="Supplementary Table 2")
     print(f"{PAPER}: Supplementary Table 2 comparisons {sorted(t2.comparison.unique())}, "

@@ -1,0 +1,7 @@
+# Claims about one sex, tested within it (claims/CURATED_TESTS.md; [tests] sex in config/project.toml). Added 2026-11-18.
+claim_id	sex	measure	column	note
+leng2021-C19		not_testable		needs inhibitory subpopulation labels: Leng's shares are within inhibitory neurons (claims/notes/leng2021.md), so the class share is another quantity (as a class-level check on 2026-11-18 it was lower in AD in one sex or both in all four datasets)
+mathys2019-C25		not_testable		needs the authors subpopulation labels (Ex4, Ast1, Oli0, Mic1, ...), which no dataset here carries
+mathys2019-C26	male	pathology_shift		gene-trait correlations with pathology in male oligodendrocytes; Braak NFT stage stands in for the authors global pathology score
+mathys2019-C27	female	pathology_shift	thal_phase	gene-trait correlations with amyloid (Thal phase) in female neurons
+mathys2019-C28	female	pathology_shift		gene-trait correlations with pathology in female OPCs; Braak NFT stage stands in for the authors global pathology score

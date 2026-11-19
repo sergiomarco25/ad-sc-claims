@@ -24,14 +24,17 @@ What it takes to add a field with the template and the engine; a headline number
 | Three more datasets: approved downloads, loaders, Sun 2023 signatures | 2026-11-17 | ~25 min | 185 lines (loaders `leng2021` 42, `lau2020` 52, `sun2023` 63; `signatures/sun2023.py` 28) | config/project.toml (dataset list), config/harmonise.toml (`sorted_classes`), inventory/datasets.tsv (+4 rows), claims/contrast_overrides.tsv (+2) | downloads: Leng 2021 CELLxGENE h5ad 363 MB, Lau 2020 GEO tar 1.31 GB, Sun 2023 authors' release ~650 MB and tables 11 MB; Grubman 2019 downloaded and left out |
 | Harmonise, DE and re-tests in five datasets (SLURM chain) | 2026-11-17 | 2 h 1 min compute (harmonise 8, DE 6, re-tests 108 min) | | | Leng 106,136 nuclei, 10 donors; Lau 179,392 nuclei, 21 donors; Sun 152,459 microglia |
 | Checks of the new datasets; two fixes; Sun re-run | 2026-11-18 | ~20 min (+ 6 min compute) | engine: 3 lines (`pseudobulk`); loader: 2 lines | | fixes 17 and 19 below |
-| **Total** | | **~5 h of hands-on work**, of which ~1 h 30 min engine changes AD forced; ~3 h 45 min of compute on the critical path of a clean run (harmonise 84, DE 30, re-tests 108 min); 15 min download for the first two datasets | **635 lines of AD code** (five loaders 295, signature scripts 340; counted again 2026-11-18, code lines without docstrings or comments) | | engine changes forced by AD: ~700 lines with tests, all in the reference project |
+| Curated tests: the authors' labels, sex, TWAS genes; donor and region check; region glossary; Leng contrasts | 2026-11-18 | ~3 h hands-on, spread over the day between job runs | AD: 62 lines (`genetics.py` 53, signature scripts 9) and a 10-line project test; engine: 243 lines and 142 test lines | claims/state_labels.tsv (13 rows), claims/sex_claims.tsv (5), claims/contrast_overrides.tsv (+3), claims/REGIONS.md, config/project.toml (`[tests]` +2 keys, `[rating]` +4 templates) | SEA-AD Supplementary Table 4 (26 MB) downloaded after approval; items 19-26 below |
+| Re-tests in five datasets, four runs | 2026-11-18 | ~80 min compute per run (SEA-AD 68-77 min) | | | run 1 stopped on a missing column (item 22); runs 2-4 after the sun2023-C25, Leng contrast and both-sexes fixes (items 21, 25, 26) |
+| **Total** | | **~5 h of hands-on work** for five datasets, of which ~1 h 30 min engine changes AD forced, and ~3 h more for the curated tests; ~3 h 45 min of compute on the critical path of a clean run (harmonise 84, DE 30, re-tests 108 min); 15 min download for the first two datasets | **697 lines of AD code** (five loaders 295, signature scripts 349, genetic test 53; code lines without docstrings or comments) | | engine changes forced by AD: ~1,100 lines with tests, all in the reference project |
 
 ## What the AD field forced back into the template or the engine
 1. The extraction brief (how to get full text and code claims) should ship with the template, generalised: Europe PMC
    `fullTextXML` fails for NIH author manuscripts outside the open-access subset; NCBI `efetch db=pmc` or the PMC
    OAI-PMH service return the same text. To do: `template/claims/EXTRACTION.md`.
 2. Region codes need a glossary next to the vocabulary: the brief mapped Brodmann area 10 to DLPFC (wrong: frontopolar),
-   and three files followed it; fixed here by hand. To do: an optional `[region_glossary]` in config/schema.toml.
+   and three files followed it; fixed here by hand. Done 2026-11-18: `claims/REGIONS.md` here and in the template,
+   with a project test that every region code has a row.
 3. Moved into the engine for AD (reference project, branch engine-store): merging claims, contexts
    (config/contexts.toml) and the store build, which now accepts a project without vocabularies, tests,
    evidence summaries, signatures, consensus statements or datasets; the rating likewise; a command line
@@ -79,8 +82,82 @@ What it takes to add a field with the template and the engine; a headline number
     (other)", majority excitatory). The 0.95 rule of thumb holds for deep data only; check the per-label majority for
     shallow data.
 19. A missing donor ID must stop a loader: Sun's release has 2,087 hippocampus nuclei without one, and `astype(str)`
-    turned them into one donor "nan" (pooling many donors, AD and non-AD). No test used it; fixed in the loader. To do:
-    a check in `harmonise.finalise` (donor not empty and not "nan").
+    turned them into one donor "nan" (pooling many donors, AD and non-AD). No test used it; fixed in the loader. Done
+    2026-11-18: `harmonise.finalise` stops on a missing donor or region.
+20. The authors' labels as a composition test (`claims/state_labels.tsv`, template `claims/CURATED_TESTS.md`): a
+    state's share among the nuclei of `within` per donor x region, from the labels a dataset carries (SEA-AD
+    supertypes, Sun's MG states). Marker tests stood in for shares before.
+21. A label claim whose state exists in one dataset only must stay out of the others (`other_datasets = none`):
+    sun2023-C25 names P2RY12 and CX3CR1, so PsychAD and SEA-AD tested their expression (contradicted) instead of the
+    share the claim is about.
+22. Claims comparing the sexes (`claims/sex_claims.tsv`, `[tests] sex`): tested within each sex, as a class share or as
+    the mean correlation of all genes with a pathology measure (donors permuted). The test skips datasets without the
+    measure; a first run stopped on Leng's and Lau's missing `thal_phase`.
+23. A genetic test is project code (`[tests] genetic_test`, `src/ad_sc_claims/genetics.py`): TWAS genes against the AD
+    DEGs, with expression-matched random gene sets and its own random stream.
+24. Every engine test draws from one random stream. Adding or removing tests shifts the random nulls of the tests
+    after them in a dataset: 8 untargeted AD claims moved in the second decimal of z, no verdict. In PD a new
+    whole-tissue table moved 25 tests (two outcomes, no verdict). A seed per test would remove it, at the price of
+    changing every stored result once; not done.
+25. Two claims had no contrast because no contexts rule matched their Braak wording (leng2021-C16 "Braak 2-4 and 5-6
+    vs 0-1", C20 "across Braak stages 0, 2, 6"); fixed with `claims/contrast_overrides.tsv`. The skill now says to
+    list claims without a contrast after every `contexts` run.
+26. A claim about both sexes first gave one test row per sex. The rating keeps one row per claim x dataset and ranks
+    only the variants "both", "revised" and "preprint", so it kept whichever sex came first: leng2021-C19's pooled
+    tests went from 4 to 3 between two runs with identical test rows, and PsychAD's male contradiction was never
+    seen. Now one row per dataset (`retest.both_sexes`): the sex that tests the claim hardest (for a no-difference
+    claim the larger change, p doubled for the two tests), the other sex alongside. With all four datasets pooled,
+    C19 came out Contradicted, which exposed that its class-level test measured another quantity than the claim
+    (shares within inhibitory neurons): it is now untested. An Inconclusive verdict had hidden the mismatch.
+
+## Results (2026-11-18, evening: curated tests)
+The five datasets of the morning, plus tests on the authors' own labels (SEA-AD supertypes, Sun's MG states), tests
+within each sex, a TWAS-gene test, and the contrasts of two Leng claims (items 20-26): 996 test rows, 438 informative
+(145 reproduced, 181 direction only, 104 not reproduced, 8 contradicted). 135 claims are rated, 118 of them on three or
+more independent cohorts.
+
+| Verdict | Claims | Certainty | Morning (five datasets) |
+|---|---|---|---|
+| Supported | 60 | 12 high, 11 moderate, 24 low, 13 very low | 55 |
+| Supported (no effect) | 1 | high | 1 |
+| Partly supported | 2 | 2 moderate | 1 |
+| Inconclusive | 68 | 5 high, 9 moderate, 22 low, 32 very low | 62 |
+| No effect | 3 | 1 high, 2 moderate | 3 |
+| Contradicted | 1 | very low | 1 |
+| Untested | 69 | | 81 |
+
+13 claims changed verdict:
+- Supported on SEA-AD's own supertype labels, along CPS (5, all very low certainty: one cohort, the source one):
+  gabitto2024-C04 (L2/3 IT supertypes fall, z -4.1), C08 (Micro-PVM_3 rises, z 4.8), C09 (Astro_2 rises, z 3.4) and
+  C11 (OPC_2 falls, z -2.7) from Untested; C10 (Oligo_2 and Oligo_4 fall, z -2.7) from Inconclusive. The Sst and Pvalb
+  supertype claims (C03, C05, C12) stay Inconclusive.
+- Untested -> Inconclusive (8):
+  - leng2021-C16 (RORB+ neurons fewer at early and late AD, on the 100 RORB+ markers): reproduced in Leng's own data,
+    direction only in Lau, not in SEA-AD; leng2021-C20 (microglia rise along Braak stage): reproduced in Leng and
+    SEA-AD, not in Lau. Both had no contrast before (item 25).
+  - mathys2019-C26 (male oligodendrocytes shift with pathology; low certainty, I² 61%), C27 and C28 (one test each,
+    SEA-AD only).
+  - sun2023-C12 and C25 (MG3 and MG0 shares unchanged in AD): reproduced on Sun's labels (p 0.97 and 0.41), one test.
+- Untested -> Partly supported (1, moderate): sun2023-C27 (microglial TWAS genes change more in AD than
+  expression-matched genes): z 2.0 in PsychAD, direction only in Sun, SEA-AD and Lau, not in Leng.
+
+Sun's labels also confirm sun2023-C02 and C03 (Supported, high) and C04 (Inconclusive, moderate). leng2021-C19 was
+tested as the inhibitory class's share within each sex, then left untested when it turned out to measure another
+quantity (item 26). 20 more claims moved in the second decimal through the shared random stream (item 24), none in
+verdict.
+
+Why 69 claims stay untested (321 test rows; each claim counted by its main reason):
+- no signature genes (37 claims): recorded in `claims/signatures/*_unresolved.tsv` (overlap or specificity of gene
+  sets, rankings of states, pathways named only in figures, timing along a trajectory);
+- templates left to project code (16): within-donor mediation and ordering models on Green's own states (green2024-C07,
+  C09, C12, C13), state definitions and chromatin (sun2023-C01, C11, C15, C16, C26, gabitto2024-C02), in-situ and
+  morphology claims (sun2023-C13, green2024-C16), spatial neighbourhoods (gabitto2024-C15, green2024-C27) and two
+  claims coded for a later pass;
+- too few nuclei, units or genes, or no matching contrast (9);
+- the authors' subpopulation labels, which no dataset here carries (2: leng2021-C19, mathys2019-C25);
+- AD GWAS summary statistics, which the project does not have (3: mathys2019-C15, sun2023-C23, C24; user decision) and
+  a module of cognition genes with no genetic test (mathys2019-C16);
+- coded not testable at extraction (1).
 
 ## Results (2026-11-18, five datasets)
 204 claims, five datasets: SEA-AD, PsychAD, Leng 2021 (EC, SFG), Lau 2020 (PFC) and Sun 2023 (microglia of six
@@ -185,6 +262,24 @@ Why 81 claims stay untested (162 test rows, two datasets each):
 - Leng 2021 and Sun 2023: the authors' cell labels are kept although per-nucleus marker agreement is 0.77 and 0.70
   (shallow data; item 18).
 - Grubman 2019 (2026-11-17): left out; its GEO samples pool two donors each.
+- SEA-AD supertype claims (2026-11-18): tested on SEA-AD's own supertype labels. Supertypes chosen by one rule from
+  Supplementary Table 4 (scCODA along CPS): a credible decrease in >= 80% of the reference models in both MTG and A9.
+  The share is taken among neurons (neuronal supertypes) or among non-neuronal nuclei (glial ones), and tested along
+  CPS (`cps`), the paper's pseudo-progression score, not Braak stage.
+- Sun 2023 state claims (2026-11-18): MG states from the authors' labels, among microglia; C12 and C25 (a state's
+  share unchanged) only in Sun's data.
+- Leng 2021's portal labels are classes only (Exc, Inh, Astro, ...) and its subcluster names are not the paper's:
+  claims about EC:Exc subpopulations stay on the RORB+ marker set (C03, C04, C13, C15, C16) or untested (C06, C07).
+- Sex claims (2026-11-18): mathys2019-C26 and C28 along Braak stage within one sex, for Mathys' "AD pathology"; C27
+  (amyloid) along Thal phase, so only SEA-AD tests it; C25 untested (needs Mathys' subpopulation labels, which no
+  dataset here carries). leng2021-C19 (no inhibitory subpopulation changes in AD, in either sex) untested: Leng's
+  shares are within inhibitory neurons, so the class share, first used as a check, measures another quantity. As a
+  class-level observation, the inhibitory share was lower in AD in one sex or both in all four datasets (PsychAD
+  males z -2.5).
+- AD genetics (user, 2026-11-18): no AD GWAS summary statistics for now, so the GWAS-heritability claims
+  (mathys2019-C15, sun2023-C23, C24) are not testable; sun2023-C27 is tested on Sun's 1,036 microglial TWAS genes.
+- Green 2024's mediation and ordering claims (C07, C09, C12, C13) need Green's own states (Mic.12, Mic.13, Ast.10,
+  Oli.7), which no dataset here carries: left untested, not forced onto marker genes.
 
 ## Datasets
 - psychad: the MSSM CELLxGENE release (4,140,453 nuclei, 1,042 donors), the file the reference project harmonised as

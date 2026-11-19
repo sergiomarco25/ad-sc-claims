@@ -1,0 +1,15 @@
+# Claims about the share of author-defined states, tested on the authors labels (claims/CURATED_TESTS.md). Added 2026-11-18.
+claim_id	dataset	label_column	labels	within	measure	other_datasets	note
+gabitto2024-C03	seaad	supertype_author	Sst_2;Sst_3;Sst_9;Sst_11;Sst_20;Sst_22;Sst_23;Sst_25	Excitatory neurons;Inhibitory neurons	cps		SEA-AD Supplementary Table 4 (scCODA, CPS): credible decrease (Final Parameter < 0) in >= 80% of reference models in both MTG_RNAseq and A9_RNAseq; share among neurons, as the authors neuronal model
+gabitto2024-C04	seaad	supertype_author	L2/3 IT_3;L2/3 IT_5;L2/3 IT_6;L2/3 IT_8;L2/3 IT_10;L2/3 IT_13	Excitatory neurons;Inhibitory neurons	cps		SEA-AD Supplementary Table 4 (scCODA, CPS): credible decrease (Final Parameter < 0) in >= 80% of reference models in both MTG_RNAseq and A9_RNAseq; share among neurons
+gabitto2024-C05	seaad	supertype_author	Pvalb_3;Pvalb_8;Pvalb_10;Pvalb_12;Pvalb_14	Excitatory neurons;Inhibitory neurons	cps		SEA-AD Supplementary Table 4 (scCODA, CPS): credible decrease (Final Parameter < 0) in >= 80% of reference models in both MTG_RNAseq and A9_RNAseq; share among neurons
+gabitto2024-C08	seaad	supertype_author	Micro-PVM_3-SEAAD	Astrocytes;Endothelial;Fibroblasts;Microglia;OPCs;Oligodendrocytes	cps		the supertype the claim names (SEA-AD label Micro-PVM_3-SEAAD); share among non-neuronal nuclei, as the authors non-neuronal model
+gabitto2024-C09	seaad	supertype_author	Astro_2	Astrocytes;Endothelial;Fibroblasts;Microglia;OPCs;Oligodendrocytes	cps		the supertype the claim names; share among non-neuronal nuclei
+gabitto2024-C10	seaad	supertype_author	Oligo_2;Oligo_4	Astrocytes;Endothelial;Fibroblasts;Microglia;OPCs;Oligodendrocytes	cps		the supertypes the claim names; share among non-neuronal nuclei
+gabitto2024-C11	seaad	supertype_author	OPC_2	Astrocytes;Endothelial;Fibroblasts;Microglia;OPCs;Oligodendrocytes	cps		the supertype the claim names; share among non-neuronal nuclei
+gabitto2024-C12	seaad	supertype_author	Sst_2;Sst_3;Sst_9;Sst_11;Sst_20;Sst_22;Sst_23;Sst_25	Excitatory neurons;Inhibitory neurons	cps		the vulnerable Sst supertypes of gabitto2024-C03; tests their decline in the snRNA-seq nuclei, not the MERFISH agreement
+sun2023-C02	sun2023	author_cell_type	MG4	Microglia			the state the claim names (the authors seurat cluster); share among microglia
+sun2023-C03	sun2023	author_cell_type	MG8	Microglia			the state the claim names (the authors seurat cluster); share among microglia
+sun2023-C04	sun2023	author_cell_type	MG1	Microglia			the state the claim names (the authors seurat cluster); share among microglia
+sun2023-C12	sun2023	author_cell_type	MG3	Microglia		none	the state the claim names (the authors seurat cluster); share among microglia
+sun2023-C25	sun2023	author_cell_type	MG0	Microglia		none	the state the claim names (the authors seurat cluster); share among microglia

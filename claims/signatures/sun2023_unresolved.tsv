@@ -2,8 +2,8 @@ claim_id	term	reason
 sun2023-C05	comparison between states or between pathology traits	the claim ranks states (strongest correlation) or traits (plaques vs tangles); the re-tests have no ranking test
 sun2023-C06	comparison between states or between pathology traits	the claim ranks states (strongest correlation) or traits (plaques vs tangles); the re-tests have no ranking test
 sun2023-C07	comparison between states or between pathology traits	the claim ranks states (strongest correlation) or traits (plaques vs tangles); the re-tests have no ranking test
-sun2023-C12	share of a state whose marker genes change in expression	the claim says the state's share is unchanged while its genes change, so a marker shift cannot stand in for the share; needs the authors' state labels (claims/contrast_overrides.tsv)
-sun2023-C25	share of a state whose marker genes change in expression	the claim says the state's share is unchanged while its genes change, so a marker shift cannot stand in for the share; needs the authors' state labels (claims/contrast_overrides.tsv)
+sun2023-C12	share of a state whose marker genes change in expression	the claim says the state's share is unchanged while its genes change, so a marker shift cannot stand in for the share; tested on the authors' state labels (claims/state_labels.tsv)
+sun2023-C25	share of a state whose marker genes change in expression	the claim says the state's share is unchanged while its genes change, so a marker shift cannot stand in for the share; tested on the authors' state labels (claims/state_labels.tsv)
 sun2023-C11	overlap with the mouse DAM signature	an overlap with another study's gene set
 sun2023-C13	order and overlap of the inflammatory states	a ranking of states, not a group difference
 sun2023-C14	which states and stages change most	counts and rankings of DEGs across states and stages; a direction re-test of the genes would not test them

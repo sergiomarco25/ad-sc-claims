@@ -20,6 +20,12 @@ for a continuous association and its label), and [tests] in config/project.toml:
   concordance    contrast codes that compare two contrasts' fold changes: code = {contrasts = [a, b], template = ".."}
   genetic_test   "module:function" testing genetic_enrichment claims (the field's genetics; none: not testable)
   unit_columns   cell metadata the composition test reads (default: the harmonised schema's donor columns)
+  sex            {column = "sex", contrast = CODE}: claims with the contrast "sex" are tested within each sex as
+                 claims/sex_claims.tsv says (none: such claims are not testable)
+Two curated tables switch on tests for single claims (absent: no such tests):
+  claims/state_labels.tsv  claims about the share of author-defined states (supertypes, subclusters), tested on the
+                           authors' labels in the datasets that carry them (`label_composition_test`)
+  claims/sex_claims.tsv    which sex a "sex" claim is about and what it measures (`sex_test`)
 
 Command line (analysis environment):
   python -I src/claimstore/cli.py tests internal DATASET   claims whose source dataset is DATASET
@@ -171,10 +177,13 @@ def unit_meta(dataset):
     return meta.join(unit_groups(meta))
 
 
-def composition_test(dataset, regions, classes, contrast, expected):
+def composition_test(dataset, regions, classes, contrast, expected, units=None):
+    """CLR of each class per unit, case vs reference (Mann-Whitney) or with the stage (Spearman); `units`: only these."""
     o = cell_obs(dataset)
     o = o.assign(unit=o.donor.astype(str) + "|" + o.region.astype(str))
     meta = unit_meta(dataset)
+    if units is not None:
+        meta = meta[meta.index.isin(units)]
     counts = pd.crosstab(o.unit, o.cell_class.astype(str))
     prop = (counts + 0.5).div((counts + 0.5).sum(1), axis=0)
     clr = np.log(prop).sub(np.log(prop).mean(1), axis=0)
@@ -201,6 +210,86 @@ def composition_test(dataset, regions, classes, contrast, expected):
             rows.append({"region": reg, "cell_class": cls, "z": np.sign(d) * stats.norm.isf(p / 2), "p": p,
                          "effect": d, "n_case": len(a), "n_ref": len(r),
                          "prop_case": float(prop.loc[a.index, cls].mean()), "prop_ref": float(prop.loc[r.index, cls].mean())})
+    return pd.DataFrame(rows)
+
+
+# claims/state_labels.tsv, one row per claim x dataset whose nuclei carry the claim's state as an author label:
+#   claim_id, dataset, label_column (obs column), labels (";"-separated; their nuclei are pooled), within (";"-separated
+#   cell classes forming the denominator; empty: all nuclei of the unit), measure (numeric unit column for a continuous
+#   contrast; empty: the stage), other_datasets (empty: datasets without the labels keep their usual test; "none": they
+#   cannot test the claim, e.g. a share said unchanged while the state's genes change), note
+STATE_LABELS_FILE = ROOT / "claims" / "state_labels.tsv"
+STATE_LABEL_COLUMNS = ["claim_id", "dataset", "label_column", "labels", "within", "measure", "other_datasets", "note"]
+MIN_LABEL_CELLS = 20
+
+
+@lru_cache(maxsize=1)
+def state_labels():
+    if not STATE_LABELS_FILE.exists():
+        return pd.DataFrame(columns=STATE_LABEL_COLUMNS, dtype=str)
+    t = pd.read_csv(STATE_LABELS_FILE, sep="\t", dtype=str, comment="#").fillna("")
+    return t.reindex(columns=STATE_LABEL_COLUMNS, fill_value="")
+
+
+@lru_cache(maxsize=16)
+def label_obs(dataset, column):
+    """Unit columns, cell class and one author-label column per nucleus. As in the pseudobulk, sorted nuclei count for
+    the sorted classes ([harmonise] sorted_classes) and unsorted nuclei for every other class."""
+    import anndata as ad
+    from claimstore.harmonise import SORTED_CLASSES
+    obs = ad.read_h5ad(H / f"{dataset}.h5ad", backed="r").obs
+    o = obs[[c for c in UNIT_COLUMNS if c in obs and c != column] + [column]].copy()
+    if "enrichment" in o:
+        srt = o.enrichment.astype(str).str.lower().eq("sorted").values
+        o = o[np.where(o.cell_class.astype(str).isin(SORTED_CLASSES).values, srt, ~srt)]
+    return o
+
+
+def label_composition_test(dataset, regions, spec, contrast):
+    """Share of the claim's author labels among the nuclei of `within`, per unit (log odds, 0.5 added to both counts;
+    units with >= MIN_LABEL_CELLS nuclei): case vs reference (Mann-Whitney) or with the stage or `measure` (Spearman).
+    Raw sign, like composition_clr."""
+    o = label_obs(dataset, spec.label_column)
+    within = [c.strip() for c in str(spec.within).split(";") if c.strip()]
+    if within:
+        o = o[o.cell_class.astype(str).isin(within)]
+    unit = (o.donor.astype(str) + "|" + o.region.astype(str)).values
+    labels = [x.strip() for x in str(spec.labels).split(";") if x.strip()]
+    hit = pd.Series(o[spec.label_column].astype(str).isin(labels).values, index=unit)
+    n, k = hit.groupby(level=0).size(), hit.groupby(level=0).sum()
+    n = n[n >= MIN_LABEL_CELLS]
+    k = k[n.index]
+    share = np.log((k + 0.5) / (n - k + 0.5))
+    meta = o.drop(columns=["cell_class", spec.label_column]).assign(unit=unit).groupby("unit", observed=True).first()
+    meta = meta.loc[n.index]
+    meta = meta.join(unit_groups(meta))
+    cls = ";".join(within) or "ALL"
+    rows = []
+    for reg in regions:
+        u = meta.index[meta.region.astype(str).eq(reg)]
+        if contrast == STAGE_CONTRAST:
+            if spec.measure and spec.measure not in meta:  # the dataset lacks the measure
+                continue
+            b = (pd.to_numeric(meta.loc[u, spec.measure], errors="coerce") if spec.measure else
+                 stage_value(meta.loc[u])).dropna()
+            if len(b) < 6 or b.nunique() < 3:
+                continue
+            rho, p = stats.spearmanr(share[b.index], b)
+            if not np.isfinite(p):
+                continue
+            rows.append({"region": reg, "cell_class": cls, "z": np.sign(rho) * stats.norm.isf(max(p, 1e-300) / 2),
+                         "p": p, "effect": rho, "n_case": len(b), "n_ref": 0,
+                         "test": f"author-label share ~ {spec.measure or STAGE_LABEL} (Spearman)"})
+            continue
+        g = meta.loc[u, contrast] if contrast in meta else pd.Series("", index=u)
+        a, r = share[g.index[g.eq("case")]], share[g.index[g.eq("ref")]]
+        if len(a) < 3 or len(r) < 3:
+            continue
+        p = stats.mannwhitneyu(a, r, alternative="two-sided").pvalue
+        d = a.mean() - r.mean()
+        rows.append({"region": reg, "cell_class": cls, "z": np.sign(d) * stats.norm.isf(max(p, 1e-300) / 2), "p": p,
+                     "effect": d, "n_case": len(a), "n_ref": len(r), "test": "author-label share (Mann-Whitney)",
+                     "prop_case": float((k / n)[a.index].mean()), "prop_ref": float((k / n)[r.index].mean())})
     return pd.DataFrame(rows)
 
 
@@ -463,6 +552,125 @@ def genetic_test(ctx, dataset, statement, modality, cell_state):
     return fn(ctx, dataset, statement, modality, cell_state)
 
 
+# claims/sex_claims.tsv, one row per claim with the contrast "sex" ([tests] sex in config/project.toml):
+#   claim_id, sex (female / male: the sex the claim says shows the effect; both: tested in each sex, reported as the
+#   sex that tests the claim hardest, `both_sexes`),
+#   measure (composition: cell-class share, [tests] sex contrast, within each sex; pathology_shift: the mean correlation
+#   of genes with a pathology measure, within the sex; not_testable: `note` says why), column (numeric unit column of
+#   the pathology measure; empty: the stage), note
+SEX = TESTS.get("sex", {})
+SEX_CLAIMS_FILE = ROOT / "claims" / "sex_claims.tsv"
+SEX_CLAIM_COLUMNS = ["claim_id", "sex", "measure", "column", "note"]
+N_SHIFT_PERM = 500
+
+
+@lru_cache(maxsize=1)
+def sex_claims():
+    if not SEX_CLAIMS_FILE.exists():
+        return pd.DataFrame(columns=SEX_CLAIM_COLUMNS, dtype=str)
+    t = pd.read_csv(SEX_CLAIMS_FILE, sep="\t", dtype=str, comment="#").fillna("")
+    return t.reindex(columns=SEX_CLAIM_COLUMNS, fill_value="").set_index("claim_id")
+
+
+def sex_of(values):
+    """female / male from the dataset's coding (first letter: f / m; anything else: missing)."""
+    return pd.Series(values).astype(str).str.strip().str.lower().str[0].map({"f": "female", "m": "male"}).values
+
+
+def pathology_shift_test(dataset, regions, classes, units, column):
+    """Global shift of gene-trait correlations: per region x class, the Spearman correlation of every gene's log CPM
+    with the pathology measure across `units`, averaged over genes; null from N_SHIFT_PERM permutations of the measure
+    across units (donors stay the unit, gene-gene correlation is kept). Raw sign: positive = genes go up with
+    pathology."""
+    ut = unit_table(dataset)
+    if ut is None or (column and column not in ut):  # the dataset lacks the measure
+        return pd.DataFrame()
+    rng = np.random.default_rng(0)  # own stream: other tests keep their random draws
+    rows = []
+    for reg in regions:
+        for cls in classes:
+            zt = unit_logcpm_z(dataset, reg, cls)
+            if zt is None or ut is None:
+                continue
+            u = [x for x in zt.columns if x in set(units) and x in ut.index]
+            b = (pd.to_numeric(ut.loc[u, column], errors="coerce") if column else stage_value(ut.loc[u])).dropna()
+            if len(b) < 8 or b.nunique() < 3:
+                continue
+            X = zt[b.index].rank(axis=1).values
+            X = X - X.mean(1, keepdims=True)
+            X = X / (np.linalg.norm(X, axis=1, keepdims=True) + 1e-12)
+
+            def mean_rho(v):
+                r = stats.rankdata(v)
+                r = r - r.mean()
+                return float((X @ (r / np.linalg.norm(r))).mean())
+
+            obs = mean_rho(b.values)
+            null = np.array([mean_rho(rng.permutation(b.values)) for _ in range(N_SHIFT_PERM)])
+            z = (obs - null.mean()) / null.std(ddof=1)
+            p = (np.sum(np.abs(null - null.mean()) >= abs(obs - null.mean())) + 1) / (N_SHIFT_PERM + 1)
+            rows.append({"region": reg, "cell_class": cls, "z": z, "p": p, "effect": obs, "n_case": len(b), "n_ref": 0,
+                         "n_genes": X.shape[0], "test": "mean gene-trait Spearman correlation vs permuted units"})
+    return pd.DataFrame(rows)
+
+
+def sex_test(ctx, dataset, regions, classes, exp):
+    """A claim with the contrast "sex": its test within the sex it names (the other sex reported alongside), or within
+    each sex for `both`, reported as one result (`both_sexes`)."""
+    cid = str(getattr(ctx, "claim_id", ""))
+    if cid not in sex_claims().index:
+        return [{"template_used": ctx.test_template, "outcome": "not_testable",
+                 "note": "sex claim without a curated test (claims/sex_claims.tsv)"}]
+    spec = sex_claims().loc[cid]
+    if spec.measure == "not_testable":
+        return [{"template_used": ctx.test_template, "outcome": "not_testable", "note": spec.note}]
+    meta = unit_meta(dataset) if spec.measure == "composition" else unit_table(dataset)
+    col = str(SEX.get("column", "sex"))
+    if meta is None or col not in meta:
+        return [{"template_used": ctx.test_template, "outcome": "not_testable", "note": "no sex in the unit metadata"}]
+    sexes = pd.Series(sex_of(meta[col].values), index=meta.index)
+    classes = [c for c in classes if c != "ALL"] or classes
+
+    def one(sex):
+        units = sexes.index[sexes.eq(sex)]
+        if spec.measure == "composition":
+            df = composition_test(dataset, regions, classes, str(SEX.get("contrast", "")), exp, units=units)
+            return summarise(df, exp, "composition_clr_sex", {"variant": sex})
+        df = pathology_shift_test(dataset, regions, classes, units, spec.column)
+        return summarise(df, exp, "sex_pathology_shift",
+                         {"variant": sex, "measure": spec.column or STAGE_LABEL})
+
+    if spec.sex == "both":
+        null = str(getattr(ctx, "null_claim", False)).lower() == "true"
+        return [both_sexes({s: one(s) for s in ("female", "male")}, null)]
+    res, other = one(spec.sex), one("male" if spec.sex == "female" else "female")
+    res["other_sex_z"], res["other_sex_p"] = other.get("z", np.nan), other.get("p", np.nan)
+    return [res]
+
+
+def both_sexes(rows, null):
+    """One result for a claim about both sexes (the rating keeps one row per claim x dataset): the claim must hold in
+    each sex, so the row is the sex that tests it hardest. A no-difference claim: the sex with the larger change, its p
+    doubled for the two tests; other claims: the sex with the weaker support. The other sex is reported alongside."""
+    ok = [s for s, r in rows.items() if r.get("outcome") != "not_testable" and pd.notna(r.get("p"))]
+    if not ok:
+        return {**rows["female"], "variant": "both"}
+    rank = {"contradicted": 0, "not_reproduced": 1, "direction_only": 2, "reproduced": 3}
+    pick = (min(ok, key=lambda s: rows[s]["p"]) if null
+            else min(ok, key=lambda s: (rank.get(rows[s]["outcome"], 1), -rows[s]["p"])))
+    other = "male" if pick == "female" else "female"
+    res = {**rows[pick], "variant": "both", "other_sex_z": rows[other].get("z", np.nan),
+           "other_sex_p": rows[other].get("p", np.nan)}
+    note = f"both sexes: {pick} shown"
+    if null and len(ok) == 2:
+        res["p"] = min(1.0, 2 * float(res["p"]))
+        res["z"] = float(np.sign(res["z"]) * stats.norm.isf(res["p"] / 2))
+        note += ", p doubled for two tests"
+    prev = res.get("note")
+    res["note"] = note + (f"; {prev}" if isinstance(prev, str) and prev else "")
+    return res
+
+
 def test_claim(ctx, dataset, sigs, claim=None):
     """Returns a list of result dicts (one per signature variant). `claim`: the claims.yaml row (for GWAS claims).
 
@@ -482,6 +690,18 @@ def _test_claim(ctx, dataset, sigs, claim=None):
     classes = [c for c in str(ctx.cell_classes).split(";") if c]
     exp = sign_of(ctx.direction)
     con = ctx.contrast
+    mine = state_labels()
+    mine = mine[mine.claim_id.eq(str(getattr(ctx, "claim_id", "")))]
+    lab = mine[mine.dataset.eq(dataset)]
+    if len(lab) and con not in ("within", "sex", "not_available", ""):
+        spec = lab.iloc[0]
+        df = pd.concat([label_composition_test(dataset, regions, spec, c) for c in con.split("+")], ignore_index=True)
+        return [summarise(df, exp, "composition_labels", {"labels": str(spec.labels)[:300]})]
+    if len(mine) and not len(lab) and mine.other_datasets.str.strip().eq("none").any():
+        return [{"template_used": "composition_labels", "outcome": "not_testable",
+                 "note": f"the state's labels exist only in {';'.join(mine.dataset)} (claims/state_labels.tsv)"}]
+    if con == "sex" and SEX:
+        return sex_test(ctx, dataset, regions, classes, exp)
     if ctx.test_template == "genetic_enrichment" and claim is not None:
         return genetic_test(ctx, dataset, str(claim.statement), claim.modality, ctx.cell_state)
     if con in CONCORDANCE:
