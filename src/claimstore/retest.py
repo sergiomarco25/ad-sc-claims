@@ -105,16 +105,24 @@ def stouffer(zs, ns):
     return z, 2 * stats.norm.sf(abs(z))
 
 
+def gene_index(universe):
+    """Upper-case symbol -> symbol, built once per gene universe for map_gene."""
+    return {g.upper(): g for g in universe}
+
+
+def map_gene(g, up):
+    """One symbol (or its alias / renamed form) to its spelling in the universe `up` (gene_index), else None."""
+    g0 = str(g).strip()
+    for cand in (g0, ALIASES.get(g0.upper(), g0), g0.replace("MARCH", "MARCHF") if g0.startswith("MARCH") else g0,
+                 g0.replace("SEPT", "SEPTIN") if g0.startswith("SEPT") and not g0.startswith("SEPTIN") else g0):
+        if cand.upper() in up:
+            return up[cand.upper()]
+    return None
+
+
 def map_genes(genes, universe):
-    up = {g.upper(): g for g in universe}
-    out = []
-    for g in genes:
-        g0 = str(g).strip()
-        for cand in (g0, ALIASES.get(g0.upper(), g0), g0.replace("MARCH", "MARCHF") if g0.startswith("MARCH") else g0,
-                     g0.replace("SEPT", "SEPTIN") if g0.startswith("SEPT") and not g0.startswith("SEPTIN") else g0):
-            if cand.upper() in up:
-                out.append(up[cand.upper()])
-                break
+    up = gene_index(universe)
+    out = [m for m in (map_gene(g, up) for g in genes) if m is not None]
     return list(dict.fromkeys(out))
 
 
@@ -131,7 +139,7 @@ def de_table(dataset, region, cls, contrast):
 @lru_cache(maxsize=64)
 def de_log(dataset):
     f = DE / dataset / "de_log.tsv"
-    return pd.read_csv(f, sep="\t") if f.exists() else pd.DataFrame()
+    return pd.read_csv(f, sep="\t") if f.exists() and f.stat().st_size > 0 else pd.DataFrame()  # empty: no fits
 
 
 def gene_set_test(t, genes_dir):
@@ -177,11 +185,12 @@ def unit_meta(dataset):
     return meta.join(unit_groups(meta))
 
 
-def composition_test(dataset, regions, classes, contrast, expected, units=None):
-    """CLR of each class per unit, case vs reference (Mann-Whitney) or with the stage (Spearman); `units`: only these."""
+def composition_test(dataset, regions, classes, contrast, expected, units=None, meta=None):
+    """CLR of each class per unit, case vs reference (Mann-Whitney) or with the stage (Spearman); `units`: only these;
+    `meta`: a unit table to use instead of the dataset's (the shuffled-label calibration passes one)."""
     o = cell_obs(dataset)
     o = o.assign(unit=o.donor.astype(str) + "|" + o.region.astype(str))
-    meta = unit_meta(dataset)
+    meta = unit_meta(dataset) if meta is None else meta
     if units is not None:
         meta = meta[meta.index.isin(units)]
     counts = pd.crosstab(o.unit, o.cell_class.astype(str))
@@ -293,7 +302,11 @@ def label_composition_test(dataset, regions, spec, contrast):
     return pd.DataFrame(rows)
 
 
-MIN_SCORE_GENES = 5
+# [tests] min_score_genes: the smallest gene set tested with the donor score (self-contained, donors as units); sets
+# smaller than this but of 2+ genes use the competitive random-gene test. Default 2 since phase 7a (2026-11-19): under
+# shuffled case/control labels the competitive test gave p < 0.05 in 10-16% of 2-4-gene tests (23 datasets, two fields),
+# the donor score about 5%. Releases before then used 5.
+MIN_SCORE_GENES = int(TESTS.get("min_score_genes", 2))
 
 
 @lru_cache(maxsize=64)
@@ -313,18 +326,19 @@ def unit_logcpm_z(dataset, region, cls):
     return lc.sub(lc.mean(1), axis=0).div(lc.std(1).replace(0, np.nan), axis=0).dropna()
 
 
-def donor_score_test(dataset, region, cls, contrast, genes_dir):
+def donor_score_test(dataset, region, cls, contrast, genes_dir, ut=None):
     """Self-contained set test with donors as the unit: per-unit score = mean over the set's genes of
     (expected sign x z-scored log CPM); case vs reference by Mann-Whitney (or Spearman with the stage).
-    Positive z = as claimed. Respects between-gene correlation, unlike gene-permutation set tests."""
-    zt, ut = unit_logcpm_z(dataset, region, cls), unit_table(dataset)
+    Positive z = as claimed. Respects between-gene correlation, unlike gene-permutation set tests.
+    `ut`: a unit table to use instead of the dataset's (the shuffled-label calibration passes one)."""
+    zt, ut = unit_logcpm_z(dataset, region, cls), (unit_table(dataset) if ut is None else ut)
     if zt is None or ut is None:
         return None
-    hit = {}
+    hit, up = {}, gene_index(zt.index)
     for g, sgn in genes_dir.items():
-        m = map_genes([g], zt.index)
-        if m:
-            hit[m[0]] = sgn if sgn != 0 else 1
+        m = map_gene(g, up)
+        if m is not None:
+            hit[m] = sgn if sgn != 0 else 1
     if len(hit) < MIN_SCORE_GENES:
         return None
     score = zt.loc[list(hit)].mul(pd.Series(hit), axis=0).mean(0)
@@ -349,19 +363,19 @@ def donor_score_test(dataset, region, cls, contrast, genes_dir):
 
 def gene_level_test(dataset, regions, classes, contrast, genes_dir):
     """Per region x class: donor-level signature-score test for sets of >= MIN_SCORE_GENES genes (primary);
-    edgeR FDR for single genes; gene-permutation set test only for 2-4 genes. Concordance and share of genes
-    significant in the claimed direction are always reported from the edgeR table."""
+    edgeR FDR for single genes; the gene-permutation set test only for sets below MIN_SCORE_GENES (none by default).
+    Concordance and share of genes significant in the claimed direction are always reported from the edgeR table."""
     rows = []
     for reg in regions:
         for cls in classes:
             t = de_table(dataset, reg, cls, contrast)
             if t is None:
                 continue
-            mapped = {}
+            mapped, up = {}, gene_index(t.index)
             for g, sgn in genes_dir.items():  # map gene by gene so each keeps its own expected sign
-                m = map_genes([g], t.index)
-                if m:
-                    mapped[m[0]] = sgn
+                m = map_gene(g, up)
+                if m is not None:
+                    mapped[m] = sgn
             r = gene_set_test(t, mapped)
             if r is None:
                 continue

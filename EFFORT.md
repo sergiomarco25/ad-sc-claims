@@ -26,6 +26,7 @@ What it takes to add a field with the template and the engine; a headline number
 | Checks of the new datasets; two fixes; Sun re-run | 2026-11-18 | ~20 min (+ 6 min compute) | engine: 3 lines (`pseudobulk`); loader: 2 lines | | fixes 17 and 19 below |
 | Curated tests: the authors' labels, sex, TWAS genes; donor and region check; region glossary; Leng contrasts | 2026-11-18 | ~3 h hands-on, spread over the day between job runs | AD: 62 lines (`genetics.py` 53, signature scripts 9) and a 10-line project test; engine: 243 lines and 142 test lines | claims/state_labels.tsv (13 rows), claims/sex_claims.tsv (5), claims/contrast_overrides.tsv (+3), claims/REGIONS.md, config/project.toml (`[tests]` +2 keys, `[rating]` +4 templates) | SEA-AD Supplementary Table 4 (26 MB) downloaded after approval; items 19-26 below |
 | Re-tests in five datasets, four runs | 2026-11-18 | ~80 min compute per run (SEA-AD 68-77 min) | | | run 1 stopped on a missing column (item 22); runs 2-4 after the sun2023-C25, Leng contrast and both-sexes fixes (items 21, 25, 26) |
+| Phase 7a engine: method registry, shuffled-label calibration, power; 2-4-gene sets by the donor score; re-tests, store, rating | 2026-11-19/20 | ~10 min here (engine work in the reference project) | 0 lines of AD code | 0 | calibration 15-91 min per dataset, re-tests 44 min (SEA-AD cross); 5 verdicts moved (results below) |
 | **Total** | | **~5 h of hands-on work** for five datasets, of which ~1 h 30 min engine changes AD forced, and ~3 h more for the curated tests; ~3 h 45 min of compute on the critical path of a clean run (harmonise 84, DE 30, re-tests 108 min); 15 min download for the first two datasets | **697 lines of AD code** (five loaders 295, signature scripts 349, genetic test 53; code lines without docstrings or comments) | | engine changes forced by AD: ~1,100 lines with tests, all in the reference project |
 
 ## What the AD field forced back into the template or the engine
@@ -109,6 +110,42 @@ What it takes to add a field with the template and the engine; a headline number
     claim the larger change, p doubled for the two tests), the other sex alongside. With all four datasets pooled,
     C19 came out Contradicted, which exposed that its class-level test measured another quantity than the claim
     (shares within inhibitory neurons): it is now untested. An Inconclusive verdict had hidden the mismatch.
+
+## Results (2026-11-20: 2-4-gene sets by the donor score)
+Shuffled-label calibration of the engine's tests (`cli.py calibrate`, `results/robustness/calibration_summary.tsv`):
+edgeR per gene 4.1-5.6% of null tests at p < 0.05; donor score 3.5-5.7% at 2-4 and at 5+ genes (1.2% in leng2021,
+7 donors: a Mann-Whitney with so few units rarely reaches p < 0.05); composition CLR 3.2-7.3% (0.8% in leng2021;
+PsychAD 7.3%, at the top of the band); the random-gene competitive test 9.5-12.8% at 2-4 genes and 43-52% at 5+.
+edgeR fits with at least one gene at FDR < 0.05 under shuffled labels: 12-65% (PsychAD 65%, 614 units per fit),
+against about 5% expected; a given gene reached FDR < 0.05 in at most 0.32% of null fits (leng2021), so
+single-gene claims are not affected. No test counts DE genes per fit.
+The 2-4-gene sets moved from the competitive test to the donor score (engine `[tests] min_score_genes`, default 2;
+decision in the reference project, 2026-11-19). 63 test rows switched; no other row changed. Among them reproduced
+15 -> 18, contradicted 3 -> 4, direction only 24 -> 25, not reproduced 21 -> 16.
+
+| Verdict | Claims | Before |
+|---|---|---|
+| Supported | 62 | 60 |
+| Inconclusive | 67 | 68 |
+| Contradicted | 0 | 1 |
+| Untested, No effect, Partly supported, Supported (no effect) | 69, 3, 2, 1 | unchanged |
+
+5 claims changed verdict:
+- Inconclusive -> Supported: lau2020-C06 (astrocytic NRXN1, NRXN3 down; moderate: Leng's contradiction gone, PsychAD
+  now reproduces, p 0.29 -> 0.002, I² 68% -> 0%); gabitto2024-C27 (oligodendrocyte cholesterol genes up late along
+  CPS; very low: Leng's opposite result weaker, interval 0.13 to 0.90); mathys2023-C23 (FGF genes with cognition;
+  very low: one test, SEA-AD, p 0.07 -> 0.009).
+- Contradicted -> Inconclusive: gabitto2024-C22 (microglial transcription factors up early along CPS; very low: Leng's
+  contradiction, p 0.03, no longer significant).
+- Supported -> Inconclusive: sun2023-C18 (P2RY12, CX3CR1 down in early AD; moderate: Lau's result no longer
+  significant, p 0.04 -> 0.28; interval -0.07 to 1.05).
+
+Certainty only: up for gabitto2024-C21 (very low -> low), green2024-C15 (low -> moderate), sun2023-C10 (low -> high)
+and sun2023-C21 (low -> moderate), as datasets now agree; down for mathys2019-C08 (high -> low): Leng and Lau now
+show NTNG1 falling, PsychAD the other way (I² 32% -> 74%).
+
+Inconclusive claims by reason (`cli.py power`): underpowered 34, heterogeneous 19, small_if_any 13,
+pattern_not_detected 1. Median power to detect a standardised effect of 0.5: 0.20 (400 tests, 68% underpowered).
 
 ## Results (2026-11-18, evening: curated tests)
 The five datasets of the morning, plus tests on the authors' own labels (SEA-AD supertypes, Sun's MG states), tests
