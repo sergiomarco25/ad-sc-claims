@@ -13,6 +13,9 @@ p < 0.05 in about 5% of tests. Results go to results/robustness/calibration/<dat
       --small of 2-4 genes (scores_small_null.tsv)
   python3 -I src/claimstore/cli.py calibrate composition DATASET [--perms 100] [--seed 1]
       the CLR composition test with shuffled unit labels: composition_null.tsv
+  python3 -I src/claimstore/cli.py calibrate state DATASET [--max-sets 40] [--seed 1]
+      the state-existence test on random genes in the cell classes the state claims name: state_null.tsv (no labels
+      to shuffle: random genes are its null, so p < 0.05 in about 5% and all three rules passed in at most 5%)
   python3 -I src/claimstore/cli.py calibrate summary
       one row per dataset x test: results/robustness/calibration_summary.tsv
 
@@ -170,6 +173,50 @@ def run_composition(ds, perms, seed):
     return 0
 
 
+STATE_SIZES = (5, 10, 20, 40)
+
+
+def run_state(ds, n_sets, seed, max_combos=4):
+    """state_existence_test on random detected genes of one region x class: the test's p should be uniform (its null
+    draws genes matched for expression and specificity) and the full rule (p < 0.05, tail ratio >= 2, donor spread
+    >= 0.5) should pass rarely. Classes: those the project's state claims (contrast "within") name, most named first."""
+    from claimstore import retest as rt
+    rng = np.random.default_rng(seed)
+    ctx = pd.read_csv(cfg.REPO / "claims" / "contexts.tsv", sep="\t").fillna("")
+    named = ctx[ctx.contrast.eq("within")].cell_classes.str.split(";").explode().str.strip()
+    present = set(rt.cell_obs(ds).cell_class.astype(str))
+    classes = [c for c in named[named.ne("") & named.ne("ALL")].value_counts().index if c in present]
+    regions = sorted(rt.cell_obs(ds).region.astype(str).unique())
+    combos = [(r, c) for c in classes for r in regions][:max_combos]
+    rows = []
+    for reg, cls in combos:
+        b = rt.class_cells(ds, (reg,), (cls,))
+        if b is None:
+            continue
+        det = np.asarray((b.X > 0).mean(0)).ravel()
+        pool = np.asarray(b.var_names)[det >= 0.01]
+        for i in range(n_sets):
+            size = int(STATE_SIZES[i % len(STATE_SIZES)])
+            if len(pool) < size:
+                continue
+            r = rt.state_existence_test(ds, [reg], [cls], list(rng.choice(pool, size, replace=False)))
+            if r is None:
+                continue
+            rows.append({"region": reg, "cell_class": cls, "size": size, "n_genes": r["n_genes"], "p": r["p"],
+                         "z": r["z"], "tail_ratio": r["tail_ratio"], "donor_spread": r["donor_spread"],
+                         "n_donors": r["n_case"], "passes": bool(r["p"] < ALPHA and r["tail_ratio"] >= 2
+                                                                 and r["donor_spread"] >= 0.5)})
+    res = pd.DataFrame(rows)
+    (OUT / ds).mkdir(parents=True, exist_ok=True)
+    res.to_csv(OUT / ds / "state_null.tsv", sep="\t", index=False)
+    if len(res):
+        print(ds, f"state existence on random genes: {len(res)} tests in {len(combos)} region x class, share p < 0.05 = "
+              f"{(res.p < ALPHA).mean():.3f}, all rules passed = {res.passes.mean():.3f}")
+    else:
+        print(ds, "state existence: no region x class with enough unsorted nuclei (or no state claims): nothing tested")
+    return 0
+
+
 def wilson(k, n, z=1.96):
     if n == 0:
         return np.nan, np.nan
@@ -210,7 +257,10 @@ def summary():
                 ("competitive set, 5+ genes (not primary)", ["sets_null.tsv"], lambda t: t[t.n_genes >= 5]),
                 ("donor score, 2-4 genes", SCORE_FILES, lambda t: t[t.n_genes <= 4]),
                 ("donor score, 5+ genes", SCORE_FILES, lambda t: t[t.n_genes >= 5]),
-                ("composition CLR", ["composition_null.tsv"], lambda t: t)):
+                ("composition CLR", ["composition_null.tsv"], lambda t: t),
+                ("state existence, random genes", ["state_null.tsv"], lambda t: t),
+                ("state existence, random genes, all rules", ["state_null.tsv"],
+                 lambda t: t.assign(p=np.where(t.passes.astype(str).eq("True"), 0.0, 1.0)))):
             t = _read(d, files)
             if t is None:
                 continue
@@ -219,7 +269,8 @@ def summary():
                 continue
             k, n = int((t.p < ALPHA).sum()), len(t)
             lo, hi = wilson(k, n)
-            units = (t.n_case + t.n_ref).median() if {"n_case", "n_ref"} <= set(t) else np.nan
+            units = (t.n_case + t.n_ref).median() if {"n_case", "n_ref"} <= set(t) else \
+                t.n_donors.median() if "n_donors" in t else np.nan
             rows.append({"dataset": d.name, "test": name, "n_null": n, "share_p05": k / n, "ci_lo": lo, "ci_hi": hi,
                          "median_lambda": np.nan, "fits_with_fdr05_hit": np.nan, "median_n_units": units,
                          "status": status(k / n)})
@@ -235,7 +286,7 @@ def summary():
 
 def main(argv=None):
     ap = argparse.ArgumentParser(prog="claimstore calibrate", description=__doc__.split("\n\n")[0])
-    ap.add_argument("what", choices=["de", "sets", "scores", "composition", "summary"])
+    ap.add_argument("what", choices=["de", "sets", "scores", "composition", "state", "summary"])
     ap.add_argument("datasets", nargs="*")
     ap.add_argument("--perms", type=int)
     ap.add_argument("--max-fits", type=int, default=40)
@@ -254,6 +305,8 @@ def main(argv=None):
             codes.append(run_de(ds, a.perms or 5, a.max_fits, a.seed))
         elif a.what == "sets":
             codes.append(run_sets(ds, a.max_sets or 60, a.seed))
+        elif a.what == "state":
+            codes.append(run_state(ds, a.max_sets or 40, a.seed))
         elif a.what == "scores":
             codes.append(run_scores(ds, a.perms or 20, a.max_fits, a.max_sets or 30, a.seed, a.small))
         else:

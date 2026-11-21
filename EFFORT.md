@@ -27,6 +27,7 @@ What it takes to add a field with the template and the engine; a headline number
 | Curated tests: the authors' labels, sex, TWAS genes; donor and region check; region glossary; Leng contrasts | 2026-11-18 | ~3 h hands-on, spread over the day between job runs | AD: 62 lines (`genetics.py` 53, signature scripts 9) and a 10-line project test; engine: 243 lines and 142 test lines | claims/state_labels.tsv (13 rows), claims/sex_claims.tsv (5), claims/contrast_overrides.tsv (+3), claims/REGIONS.md, config/project.toml (`[tests]` +2 keys, `[rating]` +4 templates) | SEA-AD Supplementary Table 4 (26 MB) downloaded after approval; items 19-26 below |
 | Re-tests in five datasets, four runs | 2026-11-18 | ~80 min compute per run (SEA-AD 68-77 min) | | | run 1 stopped on a missing column (item 22); runs 2-4 after the sun2023-C25, Leng contrast and both-sexes fixes (items 21, 25, 26) |
 | Phase 7a engine: method registry, shuffled-label calibration, power; 2-4-gene sets by the donor score; re-tests, store, rating | 2026-11-19/20 | ~10 min here (engine work in the reference project) | 0 lines of AD code | 0 | calibration 15-91 min per dataset, re-tests 44 min (SEA-AD cross); 5 verdicts moved (results below) |
+| Phase 7b pilot: method multiverse (`cli.py multiverse`), five datasets | 2026-11-20/21 | engine work in the reference project; ~15 min here | 0 lines of AD code | 0 | one array job, 8 cores per dataset: 8 h 52 min on the critical path (SEA-AD; PsychAD 6 h 59 min, Lau 2 h 50 min, Leng 2 h 30 min, Sun 29 min), most of it DESeq2 and the shuffled-label fits; Wilcoxon re-run for Lau and Leng 19 min; no verdict moved (results below) |
 | **Total** | | **~5 h of hands-on work** for five datasets, of which ~1 h 30 min engine changes AD forced, and ~3 h more for the curated tests; ~3 h 45 min of compute on the critical path of a clean run (harmonise 84, DE 30, re-tests 108 min); 15 min download for the first two datasets | **697 lines of AD code** (five loaders 295, signature scripts 349, genetic test 53; code lines without docstrings or comments) | | engine changes forced by AD: ~1,100 lines with tests, all in the reference project |
 
 ## What the AD field forced back into the template or the engine
@@ -111,14 +112,79 @@ What it takes to add a field with the template and the engine; a headline number
     C19 came out Contradicted, which exposed that its class-level test measured another quantity than the claim
     (shares within inhibitory neurons): it is now untested. An Inconclusive verdict had hidden the mismatch.
 
+## Results (2026-11-21: method multiverse pilot, phase 7b)
+Every claim test was re-run with the registry's sensitivity methods in place of its primary (`cli.py multiverse`,
+`results/multiverse/`). DE methods replace single-gene tests, gene-set methods replace the donor score, and propeller
+replaces the composition test. A method counts in a dataset only if it passed its own shuffled-label check there:
+2.5-7.5% of null tests at p < 0.05, separately for group contrasts and the stage, and for 2-4 and 5+ genes. Nothing
+here feeds the rating yet, so no verdict moved (see Analysis choices).
+
+Calibration (share of null tests at p < 0.05, `results/multiverse/calibration_summary.tsv`):
+- **DE per gene:** edgeR 3.8-5.7%, limma-voom 4.3-6.7%, DESeq2 4.2-6.2%, Wilcoxon or Spearman 3.9-4.9%. Wilcoxon
+  was conservative (1.4%) in Leng's groups of 3-4 donors, where it cannot reach FDR < 0.05.
+- **Gene sets:** the donor score adjusted for age, sex and PMI 4.0-6.0% in every dataset. camera with the inter-gene
+  correlation estimated per set 2.7-6.3% (conservative in Leng at 2-4 genes and in Sun, 1.5-2.2%). camera with limma's
+  preset correlation of 0.01 is liberal (5-58%, 37-58% at 5+ genes), so it is not used.
+- **Composition:** propeller 4.8-6.1%.
+- **Shuffled-label fits with at least one gene at FDR < 0.05** (about 5% expected): edgeR 2-65%, DESeq2 22-67%,
+  limma-voom 0-17%, Wilcoxon 0-11%. Two patterns:
+  - In PsychAD (614 units per fit) the same low-expressed genes recur: per-gene inflation at large n, as Li et al.
+    2022 reported for edgeR and DESeq2.
+  - In SEA-AD and Leng a few shuffles give hundreds to thousands of hits with genes that do not recur. One SEA-AD
+    DLPFC oligodendrocyte shuffle gave 4,408 hits; its true labels give none. These are random splits that line up
+    with a few outlying donors, not leakage of the true labels.
+- The edgeR refit reproduces the DE cache exactly (largest difference in p 1e-15).
+
+Agreement with the primary (`agreement.tsv`): 836 rows of 118 claims, counting rows that both tests could run.
+
+| Task | Method | Rows | Same outcome | Primary reproductions kept | Rows gained |
+|---|---|---|---|---|---|
+| Single gene | limma-voom | 86 | 93% | 12 of 12 | 3 |
+| Single gene | DESeq2 | 86 | 97% | 12 of 12 | 3 |
+| Single gene | Wilcoxon (calibrated rows) | 71 | 86% | 11 of 12 | 4 |
+| Composition | propeller | 24 | 71% | 11 of 11 | 2 |
+| Gene set | donor score, adjusted | 277 | 75% | 67 of 94 | 1 |
+| Gene set | camera | 277 | 63% | 47 of 94 | 6 |
+
+- **Single-gene and composition claims do not depend on the method.** Where outcomes differ it is mostly between
+  direction only and not reproduced. One row changed sign with Wilcoxon: gabitto2024-C30 in Leng along Braak (edgeR
+  z -0.08, Spearman z 2.3), an Inconclusive claim at very low certainty.
+- **Adjusted donor score: the losses are age.** Without covariates the same score keeps 89% (Lau) and 95% (Leng) of
+  its significant rows; age alone leaves 28-30%. All 27 lost reproductions but one are in these two datasets: Lau
+  2 of 18 kept, Leng 6 of 16, against PsychAD 20 of 20, SEA-AD 36 of 37 and Sun 3 of 3.
+  - In Lau the controls are 15 years older than the AD donors (median 87 vs 71.5; PMI 34.5 vs 17 h); diagnosis
+    correlates with age at r -0.51 (-0.75 for late AD).
+  - In Leng the controls are 22 years younger (60 vs 82); r +0.80.
+  - With 21 and 10 donors these datasets cannot separate AD from age for a donor score. The primary donor score
+    (Mann-Whitney, Spearman) has no covariates, while the DE fits have.
+  - Each of the 17 Supported claims that lose a reproduction this way still reproduces under adjustment in PsychAD,
+    SEA-AD or Sun. Lau's own claims C04 (low certainty), C05, C07, C14 and C16 (high) lose it in Lau's own data:
+    their internal replication is confounded with age, and the support comes from the other cohorts.
+- **camera loses reproductions in every dataset** (PsychAD 13 of 20 kept, SEA-AD 19 of 37), with z halved in PsychAD.
+  It is a competitive test: it asks whether the claim's genes change more than the rest of the transcriptome, which in
+  PsychAD shifts by thousands of genes. That is a different question from the claim's ("these genes go up in AD"),
+  so its disagreement is reported but is not evidence against a claim.
+- In all, 28 of the 53 Supported or Partly supported claims with a sensitivity row have a dataset where a calibrated
+  method loses the reproduction: 11 through camera only, 17 through the adjusted score in Lau or Leng (15 also through
+  camera).
+
+Engine faults the pilot found, fixed in the reference project:
+- The Wilcoxon method's stage branch transposed its rank matrix, so every Spearman stage fit failed and only group
+  contrasts ran. It is fixed, with a test that runs every DE method on a synthetic input; SEA-AD ran with the fix,
+  and Lau and Leng were re-run.
+- The summary stopped on PsychAD's header-only internal test file (no claim has its source data there). Empty files
+  are now skipped.
+
 ## Results (2026-11-20: 2-4-gene sets by the donor score)
 Shuffled-label calibration of the engine's tests (`cli.py calibrate`, `results/robustness/calibration_summary.tsv`):
 edgeR per gene 4.1-5.6% of null tests at p < 0.05; donor score 3.5-5.7% at 2-4 and at 5+ genes (1.2% in leng2021,
 7 donors: a Mann-Whitney with so few units rarely reaches p < 0.05); composition CLR 3.2-7.3% (0.8% in leng2021;
 PsychAD 7.3%, at the top of the band); the random-gene competitive test 9.5-12.8% at 2-4 genes and 43-52% at 5+.
 edgeR fits with at least one gene at FDR < 0.05 under shuffled labels: 12-65% (PsychAD 65%, 614 units per fit),
-against about 5% expected; a given gene reached FDR < 0.05 in at most 0.32% of null fits (leng2021), so
-single-gene claims are not affected. No test counts DE genes per fit.
+against about 5% expected. A given gene reached FDR < 0.05 in up to 31.7% of a dataset's null fits (GOLGA6GP,
+19 of 60 in PsychAD; 3.5-7.0% elsewhere). Corrected 2026-11-21: this line first said "at most 0.32%". The recurring
+genes are low-expressed pseudogenes, antisense and lincRNA genes, and none is a claimed gene in the same fit, so the
+single-gene claims are not affected (phase 7b checks them with three more DE methods). No test counts DE genes per fit.
 The 2-4-gene sets moved from the competitive test to the donor score (engine `[tests] min_score_genes`, default 2;
 decision in the reference project, 2026-11-19). 63 test rows switched; no other row changed. Among them reproduced
 15 -> 18, contradicted 3 -> 4, direction only 24 -> 25, not reproduced 21 -> 16.
@@ -317,6 +383,13 @@ Why 81 claims stay untested (162 test rows, two datasets each):
   (mathys2019-C15, sun2023-C23, C24) are not testable; sun2023-C27 is tested on Sun's 1,036 microglial TWAS genes.
 - Green 2024's mediation and ordering claims (C07, C09, C12, C13) need Green's own states (Mic.12, Mic.13, Ast.10,
   Oli.7), which no dataset here carries: left untested, not forced onto marker genes.
+- Method multiverse (2026-11-21, open): how sensitivity methods enter the rating. Proposal: the primary keeps setting
+  the verdict, and agreement can only lower certainty. A reproduction lost under the adjusted donor score counts
+  against a claim only when no other dataset reproduces it with adjustment. camera and the edgeR, DESeq2 FDR tails are
+  reported, not used.
+- Donor score covariates (2026-11-21, open): the primary donor score has no covariates while the DE fits adjust for
+  age, sex and PMI. Adjusting the primary would mostly move Lau and Leng rows (age-confounded), and it would need a
+  verdict diff first.
 
 ## Datasets
 - psychad: the MSSM CELLxGENE release (4,140,453 nuclei, 1,042 donors), the file the reference project harmonised as

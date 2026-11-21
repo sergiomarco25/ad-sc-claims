@@ -16,8 +16,9 @@ Usage: python3 -I src/claimstore/cli.py COMMAND [ARGS...]
   store       build the claim store (results/store/claim_store.sqlite, claims/store/)
   rating      rate every claim of the store (claims/store/claim_rating.tsv); --db / --out
   registry    validate the method registry (src/claimstore/methods.toml); --md OUT writes it as a page
-  calibrate   de|sets|composition|summary DATASET...: shuffled-label check of the current tests (results/robustness/)
+  calibrate   de|sets|scores|composition|state|summary DATASET...: null checks of the current tests (results/robustness/)
   power       detectability per claim x dataset and reasons for Inconclusive, from the store (results/robustness/)
+  multiverse  sets|fit|null|tests|summary: claims re-tested with the registry's sensitivity methods (results/multiverse/)
   atlas       the browsable atlas page of the store (reports/atlas.html); --public --db STORE for a release
   release     build a public release (VERSION ...)
   serve       MCP server over stdio;  http: MCP + REST server over HTTP
@@ -34,7 +35,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 COMMANDS = {"schema": "schema", "merge": "claims", "contexts": "contexts", "signatures": "signatures", "supplements": "supplements", "harmonise": "harmonise",
             "relabel": "harmonise:relabel_main", "pseudobulk": "pseudobulk", "de-cache": "de_cache",
             "de-log": "de_cache:rebuild_main", "tests": "retest", "meta": "claim_meta", "store": "build_store",
-            "rating": "rating", "registry": "registry", "calibrate": "calibration", "power": "power", "atlas": "atlas", "release": "release", "serve": "mcp_server", "http": "mcp_http", "config": "config",
+            "rating": "rating", "registry": "registry", "calibrate": "calibration", "power": "power", "multiverse": "multiverse", "atlas": "atlas", "release": "release", "serve": "mcp_server", "http": "mcp_http", "config": "config",
             "diff": "release_diff", "linked-data": "linked_data", "audit": "audit"}
 
 

@@ -382,6 +382,7 @@ def gene_level_test(dataset, regions, classes, contrast, genes_dir):
             ds = donor_score_test(dataset, reg, cls, contrast, mapped) if len(mapped) >= MIN_SCORE_GENES else None
             if ds is not None:
                 r.update({k: ds[k] for k in ["z", "p", "effect", "test"]})
+                r.update({k: ds[k] for k in ("d_native", "se_native") if k in ds})  # a test with its own effect size
                 r["n_case"], r["n_ref"] = ds["n_case"], ds["n_ref"]
             else:
                 lg = de_log(dataset)
@@ -434,6 +435,13 @@ def summarise(df, expected, label, extra=None):
     for c in ["n_genes", "concordance", "frac_sig_concordant", "prop_case", "prop_ref"]:
         if c in df:
             out[c] = float(np.nanmean(df[c]))
+    if "d_native" in df and df.d_native.notna().any():
+        # a test with its own effect size: unit-weighted means across regions and classes. The standard error is not
+        # pooled, because the regions and classes share donors (as rating.to_smd treats combined tests)
+        ok = df.d_native.notna() & df.se_native.notna()
+        w = n[ok].clip(lower=1)
+        out["d_native"] = float(np.average(df.d_native[ok], weights=w))
+        out["se_native"] = float(np.average(df.se_native[ok], weights=w))
     out["outcome"] = classify_outcome(z, p, expected)
     return out
 
@@ -791,10 +799,10 @@ def signatures():
     return sig
 
 
-def run(mode, ds, part="all"):
+def run(mode, ds, part="all", out_dir=None):
     """Test claims in one dataset: mode "internal" (claims whose source dataset is ds) or "cross" (all other claims,
     regions retargeted to ds); part "gwas" / "nogwas" / "all" (genetic_enrichment claims only / all but them / all).
-    Writes results/tests/<mode>[_gwas]/<ds>.tsv and returns the table."""
+    Writes results/tests/<mode>[_gwas]/<ds>.tsv (out_dir: <out_dir>/<mode>[_gwas]/<ds>.tsv) and returns the table."""
     import yaml
     from claimstore.contexts import target_regions
     ctx = pd.read_csv(ROOT / "claims" / "contexts.tsv", sep="\t").fillna("")
@@ -818,7 +826,7 @@ def run(mode, ds, part="all"):
         extra = {"region_match": c.region_match} if mode == "cross" else {}
         for r in test_claim(c, ds, sig[sig.claim_id.eq(c.claim_id)], claims_all.loc[c.claim_id]):
             rows.append({"claim_id": c.claim_id, "dataset": ds, "contrast": c.contrast, **extra, **r})
-    out = RES / "tests" / (mode + ("_gwas" if part == "gwas" else ""))
+    out = (RES / "tests" if out_dir is None else type(RES)(out_dir)) / (mode + ("_gwas" if part == "gwas" else ""))
     out.mkdir(parents=True, exist_ok=True)
     df = pd.DataFrame(rows, columns=None if rows else ["claim_id", "dataset", "outcome"])
     df.to_csv(out / f"{ds}.tsv", sep="\t", index=False)

@@ -251,7 +251,8 @@ def load_tests():
             t["role"], t["engine"] = role, "gwas" if sub.endswith("gwas") else "main"
             parts.append(t)
     keep = ["claim_id", "dataset", "role", "engine", "variant", "contrast", "region_match", "template_used",
-            "outcome", "effect", "z", "p", "n_case", "n_ref", "regions_tested", "classes_tested", "set_test", "note"]
+            "outcome", "effect", "z", "p", "n_case", "n_ref", "regions_tested", "classes_tested", "set_test", "note",
+            "d_native", "se_native"]  # the last two only from a test that reports its own effect size
     t = pd.concat(parts, ignore_index=True) if parts else pd.DataFrame(columns=keep)  # no tests run yet
     for k in keep:
         if k not in t:
@@ -422,7 +423,8 @@ def main():
     for cid in struct.claim_id[~struct.source_dataset.isin(datasets.dataset) & ~is_finding]:
         problems.append((cid, "source_dataset", "source dataset not harmonised"))
     tests = load_tests()
-    tests["d_native"], tests["se_native"] = np.nan, np.nan
+    for c in ("d_native", "se_native"):  # kept from a test that reports its own effect size, otherwise empty
+        tests[c] = pd.to_numeric(tests[c], errors="coerce") if c in tests else np.nan
     if len(ftests):
         tests = pd.concat([tests, ftests], ignore_index=True)
     rel, stmts = relations(struct, claims)

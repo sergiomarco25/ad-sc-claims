@@ -18,9 +18,11 @@
 # Changes: a pull request that cites the source and what it measured; bump `version`; re-run the affected tests and
 # diff the verdicts. A project may switch methods off in config/methods.toml ([disabled] ids = [...]), never promote.
 # Render: python3 -I src/claimstore/cli.py registry --md OUT.md
+# Sensitivity methods run beside the primary with `cli.py multiverse` (results/multiverse/); each must pass the
+# shuffled-label check in a dataset before its result there counts (phase 7b).
 
-version = "0.2.0"  # 0.2.0 (2026-11-19): geneset.small primary is the donor score (phase 7a calibration)
-reviewed = "2026-11-19"
+version = "0.3.0"  # 0.3.0 (2026-11-20): first sensitivity methods implemented (phase 7b, claimstore.multiverse); 0.2.0 (2026-11-19): geneset.small primary is the donor score
+reviewed = "2026-11-20"
 book = "sc-best-practices 0.2.0 (2026-10-29)"
 book_url = "https://www.sc-best-practices.org"
 watch = [
@@ -53,7 +55,8 @@ why = "recommended by the book; donor is the unit; pseudobulk keeps false discov
 [[task."de.case_control".method]]
 id = "deseq2"
 tier = "sensitivity"
-status = "planned"
+status = "implemented"
+engine = "de_sensitivity.R deseq2: Wald test on the DE cache's model matrix and genes, no independent filtering"
 serves = ["de_pseudobulk"]
 unit = "donor x region x class pseudobulk"
 evidence = ["sc-best-practices: conditions/differential_gene_expression", "Squair 2021 Nat Commun"]
@@ -62,7 +65,8 @@ why = "named by the book beside edgeR; different dispersion shrinkage"
 [[task."de.case_control".method]]
 id = "limma_voom"
 tier = "sensitivity"
-status = "planned"
+status = "implemented"
+engine = "de_sensitivity.R limma_voom: voom, lmFit, eBayes(robust) on the DE cache's design and genes"
 serves = ["de_pseudobulk"]
 unit = "donor x region x class pseudobulk"
 evidence = ["Squair 2021 Nat Commun", "Crowell 2020 Nat Commun"]
@@ -74,6 +78,7 @@ tier = "sensitivity"
 status = "planned"
 serves = ["de_pseudobulk"]
 unit = "donor random effect over pseudobulk units"
+requires = ["dreamlet and variancePartition (Bioconductor), not in the engine's R environment"]
 evidence = ["Hoffman 2026 Nat Commun", "Zimmerman 2021 Nat Commun"]
 why = "mixed model on pseudobulk: pools several regions per donor; precision weights handle unequal nuclei counts"
 
@@ -83,14 +88,15 @@ tier = "sensitivity"
 status = "planned"
 serves = ["de_pseudobulk"]
 unit = "cells with a donor random effect"
-requires = ["run on the claim's genes only (compute)"]
+requires = ["run on the claim's genes only (compute)", "nebula (CRAN), not in the engine's R environment"]
 evidence = ["He 2021 Commun Biol", "Zimmerman 2021 Nat Commun", "Junttila 2022 Brief Bioinform"]
 why = "the other side of the pseudobulk versus mixed-model debate; valid unit"
 
 [[task."de.case_control".method]]
 id = "wilcoxon_pseudobulk"
 tier = "sensitivity"
-status = "planned"
+status = "implemented"
+engine = "de_sensitivity.R wilcoxon: rank-sum per gene on TMM-normalised CPM, BH; no covariates"
 serves = ["de_pseudobulk"]
 unit = "donor log-CPM"
 requires = ["large cohorts, where the shuffled-label check shows parametric models losing control"]
@@ -126,7 +132,8 @@ why = "same model as the group contrast, with the score as the term of interest"
 [[task."de.continuous".method]]
 id = "spearman_pseudobulk"
 tier = "sensitivity"
-status = "planned"
+status = "implemented"
+engine = "de_sensitivity.R wilcoxon with the stage: Spearman per gene on TMM-normalised CPM, BH"
 serves = ["de_pseudobulk"]
 unit = "donor log-CPM"
 evidence = ["Li Y 2022 Genome Biol"]
@@ -162,11 +169,22 @@ why = "liberal: 10-16% of 2-4-gene null tests at p < 0.05; the primary before ph
 [[task."geneset.small".method]]
 id = "camera"
 tier = "sensitivity"
-status = "planned"
+status = "implemented"
+engine = "de_sensitivity.R limma_voom + camera: genes expected down sign-flipped, inter-gene correlation estimated per set"
 serves = ["de_pseudobulk", "geneset_shift", "state_signature"]
 unit = "donor pseudobulk"
 evidence = ["Wu & Smyth 2012 Nucleic Acids Res"]
 why = "competitive test that allows for correlation between genes"
+
+[[task."geneset.small".method]]
+id = "donor_score_adjusted"
+tier = "sensitivity"
+status = "implemented"
+engine = "multiverse.adjusted_score_test: the donor score in a linear model with the DE cache's covariates, t-test"
+serves = ["de_pseudobulk", "geneset_shift", "state_signature"]
+unit = "donor x region x class pseudobulk"
+evidence = ["sc-best-practices: conditions/differential_gene_expression"]
+why = "same score, parametric and adjusted for age, sex and PMI as the DE model is; the primary is rank-based and unadjusted"
 
 [[task."geneset.small".method]]
 id = "single_gene_fdr"
@@ -197,11 +215,22 @@ why = "donors as the unit; respects correlation between genes"
 [[task."geneset.shift".method]]
 id = "camera"
 tier = "sensitivity"
-status = "planned"
+status = "implemented"
+engine = "de_sensitivity.R limma_voom + camera: genes expected down sign-flipped, inter-gene correlation estimated per set"
 serves = ["geneset_shift", "state_signature"]
 unit = "donor pseudobulk"
 evidence = ["sc-best-practices: conditions/gsea_pathway", "Wu & Smyth 2012 Nucleic Acids Res"]
 why = "competitive arm, as the book prefers, with correlation between genes allowed for"
+
+[[task."geneset.shift".method]]
+id = "donor_score_adjusted"
+tier = "sensitivity"
+status = "implemented"
+engine = "multiverse.adjusted_score_test: the donor score in a linear model with the DE cache's covariates, t-test"
+serves = ["geneset_shift", "state_signature"]
+unit = "donor x region x class pseudobulk"
+evidence = ["sc-best-practices: conditions/differential_gene_expression"]
+why = "same score, parametric and adjusted for age, sex and PMI as the DE model is; the primary is rank-based and unadjusted"
 
 [[task."geneset.shift".method]]
 id = "decoupler_ulm"
@@ -209,6 +238,7 @@ tier = "sensitivity"
 status = "planned"
 serves = ["geneset_shift"]
 unit = "donor pseudobulk"
+requires = ["decoupler (Python), not in the engine's analysis environment"]
 evidence = ["sc-best-practices: conditions/gsea_pathway", "Badia-i-Mompel 2022 Bioinform Adv"]
 why = "activity score on pseudobulk; scverse implementation"
 
@@ -253,13 +283,15 @@ tier = "sensitivity"
 status = "planned"
 serves = ["composition_donor"]
 unit = "donor x region counts"
+requires = ["pertpy (Python), not in the engine's analysis environment", "a reference cell type stable across groups"]
 evidence = ["sc-best-practices: conditions/compositional", "Buettner 2021 Nat Commun"]
 why = "recommended by the book; Bayesian compositional model (pertpy)"
 
 [[task."composition.case_control".method]]
 id = "propeller"
 tier = "sensitivity"
-status = "planned"
+status = "implemented"
+engine = "composition_sensitivity.R: speckle's propeller.ttest (logit) written with limma; eBayes(robust) across classes"
 serves = ["composition_donor"]
 unit = "donor x region proportions"
 evidence = ["Phipson 2022 Bioinformatics", "Simmons 2022 bioRxiv"]
@@ -271,6 +303,7 @@ tier = "sensitivity"
 status = "planned"
 serves = ["composition_donor"]
 unit = "donor x region counts"
+requires = ["sccomp and cmdstan (Stan), not in the engine's R environment"]
 evidence = ["Mangiola 2023 PNAS"]
 why = "beta-binomial model robust to outlying samples"
 
