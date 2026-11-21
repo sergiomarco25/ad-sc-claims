@@ -18,8 +18,8 @@ import subprocess
 import numpy as np
 import pandas as pd
 
-from claimstore import config as cfg
-from claimstore.config import RAW
+from oktopy import config as cfg
+from oktopy.config import RAW
 
 D = RAW / "sun2023"
 RDS = D / "ROSMAP.ImmuneCells.6regions.snRNAseq.counts.rds"

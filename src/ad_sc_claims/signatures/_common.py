@@ -1,11 +1,11 @@
 """Shared helpers for the claim signature scripts (claims/SIGNATURES.md): one script per paper writes
 claims/signatures/<paper>.tsv and claims/signatures/<paper>_unresolved.tsv.
 
-Run all of them: python -I src/ad_sc_claims/signatures/run.py [paper ...]; then `cli.py signatures`.
+Run all of them: python -I src/ad_sc_claims/signatures/run.py [paper ...]; then `oktopy signatures`.
 """
 import pandas as pd
 
-from claimstore import config as cfg
+from oktopy import config as cfg
 
 SUPP = cfg.RAW / "supplements"
 OUT = cfg.REPO / "claims" / "signatures"

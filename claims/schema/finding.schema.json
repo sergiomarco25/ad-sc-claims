@@ -198,7 +198,7 @@
       "type": "boolean"
     },
     "evidence": {
-      "description": "where the per-dataset estimates are (claimstore.store.resolve_evidence)",
+      "description": "where the per-dataset estimates are (oktopy.store.resolve_evidence)",
       "type": "object",
       "required": [
         "table"

@@ -1,8 +1,9 @@
 """Checks of this project (run by CI): the config, the contrasts, the claim schema and every claim file.
 
-Needs pyyaml, jsonschema, pandas:  pytest tests
+Needs oktopy (requirements.txt; with pyyaml, jsonschema, pandas) and pytest:  pytest tests
 """
 import json
+import os
 import sys
 from pathlib import Path
 
@@ -10,11 +11,18 @@ import jsonschema
 import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "src"))
-from claimstore import config as cfg  # noqa: E402
-from claimstore import schema  # noqa: E402
+os.environ["OKTOPY_PROJECT"] = str(ROOT)  # the engine reads this project, wherever pytest runs from
+sys.path.insert(0, str(ROOT / "src"))  # this field's package
+import oktopy  # noqa: E402
+from oktopy import config as cfg  # noqa: E402
+from oktopy import schema  # noqa: E402
 
 NOT_PAPERS = {"claims", "findings", "background", "questions"}
+
+
+def test_oktopy_version_matches_the_pin():
+    pin = str(cfg.PROJECT.get("oktopy", ""))
+    assert not pin or pin == oktopy.__version__, f"checked with oktopy {pin}, installed {oktopy.__version__}"
 
 
 def test_config_describes_the_project():
@@ -26,7 +34,7 @@ def test_config_describes_the_project():
 
 def test_contrasts_load():
     import pandas as pd
-    from claimstore import contrasts
+    from oktopy import contrasts
     assert contrasts.CONTRASTS, "define at least one contrast in config/contrasts.toml"
     m = pd.DataFrame({"disease": ["case", "control", "other"]})
     g = contrasts.unit_groups(m)
@@ -74,7 +82,7 @@ def test_regions_have_glossary_rows():
 def test_schema_files_are_current():
     for name, built in (("claim", schema.claim_schema()), ("finding", schema.finding_schema())):
         f = ROOT / "claims" / "schema" / f"{name}.schema.json"
-        assert json.loads(f.read_text()) == built, "run python3 -I claims/schema/build_schemas.py"
+        assert json.loads(f.read_text()) == built, "run `oktopy schema`"
         jsonschema.Draft7Validator.check_schema(built)
 
 

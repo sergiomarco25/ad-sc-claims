@@ -4,7 +4,7 @@
 Donor data from the paper's Dataset S1 (raw/supplements/lau2020/pnas.2008762117.sd01.xlsx, sheet Patient_info):
 condition (AD / NC), age, sex, post-mortem delay, Braak tangle stage, APOE genotype. All 21 donors (user decision
 2026-11-17): AD = condition AD (12 donors, Braak 4-6), control = NC (9 donors, Braak 1-2).
-No author cell labels are released: cell classes come from the engine's marker-based clustering (claimstore.harmonise).
+No author cell labels are released: cell classes come from the engine's marker-based clustering (oktopy.harmonise).
 """
 import gzip
 import io
@@ -14,7 +14,7 @@ import tarfile
 import numpy as np
 import pandas as pd
 
-from claimstore.config import RAW
+from oktopy.config import RAW
 
 TAR = RAW / "lau2020" / "GSE157827_RAW.tar"
 DONORS = RAW / "supplements" / "lau2020" / "pnas.2008762117.sd01.xlsx"

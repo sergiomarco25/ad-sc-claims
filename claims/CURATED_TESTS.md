@@ -1,6 +1,6 @@
 # Curated test settings
 
-Most claims are tested from their contexts (`claims/contexts.tsv`, made by `cli.py contexts` from
+Most claims are tested from their contexts (`claims/contexts.tsv`, made by `oktopy contexts` from
 `config/contexts.toml`) and their gene signatures (`claims/SIGNATURES.md`). Three small tables, all optional, set the
 test of single claims where the rules cannot. Record the reason for every row; re-run `contexts` (overrides) or the
 re-tests after a change.

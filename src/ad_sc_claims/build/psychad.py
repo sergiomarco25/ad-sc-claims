@@ -22,7 +22,7 @@ import re
 import numpy as np
 import pandas as pd
 
-from claimstore.config import RAW
+from oktopy.config import RAW
 
 PATH = RAW / "psychad_mssm" / "0e853475-e298-4b09-881a-ed0b60d5a8c9.h5ad"
 
@@ -62,7 +62,7 @@ def _age(s):
 
 def load():
     import anndata as ad
-    from claimstore.h5io import read_csr, read_df
+    from oktopy.h5io import read_csr, read_df
 
     o = read_df(PATH, "obs")
     dis_raw = o["disease"].astype(str)

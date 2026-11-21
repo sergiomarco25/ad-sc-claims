@@ -15,7 +15,7 @@ import re
 import numpy as np
 import pandas as pd
 
-from claimstore.config import RAW
+from oktopy.config import RAW
 
 FILES = {"EC": RAW / "leng2021" / "leng2021_EC.h5ad", "SFG": RAW / "leng2021" / "leng2021_SFG.h5ad"}
 AUTHOR_TO_CLASS = {"Exc": "Excitatory neurons", "Inh": "Inhibitory neurons", "Astro": "Astrocytes",
@@ -31,7 +31,7 @@ def _age(s):
 
 def load():
     import anndata as ad
-    from claimstore.h5io import read_csr_many, read_df
+    from oktopy.h5io import read_csr_many, read_df
 
     obs, sources, var = [], [], None
     for region, path in FILES.items():

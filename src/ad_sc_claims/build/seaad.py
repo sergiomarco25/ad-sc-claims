@@ -3,7 +3,7 @@
 
 Source: raw/seaad/SEAAD_{MTG,DLPFC}_whole_taxonomy.h5ad (CELLxGENE collection 1ca90a2d-2943-483d-b678-b809bf464c30).
 Raw UMI counts are raw/X (X is normalised); both files share one gene index. The two regions are read into one matrix
-(claimstore.h5io.read_csr_many), so a donor gives one unit per region.
+(oktopy.h5io.read_csr_many), so a donor gives one unit per region.
 
 Donors: the aged cohort (84 donors); the young neurotypical reference donors (5 in MTG, 3 in DLPFC: no AD staging,
 and the only non-primary nuclei of the release) are left out.
@@ -21,7 +21,7 @@ import re
 import numpy as np
 import pandas as pd
 
-from claimstore.config import RAW
+from oktopy.config import RAW
 
 FILES = {"MTG": RAW / "seaad" / "SEAAD_MTG_whole_taxonomy.h5ad",
          "DLPFC": RAW / "seaad" / "SEAAD_DLPFC_whole_taxonomy.h5ad"}
@@ -88,7 +88,7 @@ def _obs(o, region):
 
 def load():
     import anndata as ad
-    from claimstore.h5io import read_csr_many, read_df
+    from oktopy.h5io import read_csr_many, read_df
 
     obs, sources, var = [], [], None
     for region, path in FILES.items():

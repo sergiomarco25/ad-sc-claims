@@ -14,7 +14,7 @@ import numpy as np
 import pandas as pd
 from scipy import stats
 
-from claimstore.retest import de_table, map_genes, signatures, summarise
+from oktopy.retest import de_table, map_genes, signatures, summarise
 
 N_RANDOM = 2000
 MIN_GENES = 10
@@ -47,7 +47,7 @@ def twas_de_test(ctx, dataset, genes):
                              "test": "TWAS genes: mean |z| vs expression-matched random sets"})
     df = pd.DataFrame(rows)
     if len(df):  # units are the donors of the DE fit
-        from claimstore.retest import de_log
+        from oktopy.retest import de_log
         lg = de_log(dataset)
         for i, r in df.iterrows():
             n = lg[(lg.region == r.region) & (lg.cell_class == r.cell_class) & (lg.contrast == ctx.contrast)]

@@ -1,4 +1,4 @@
-# Project configuration (claimstore.config): every path, the pipeline, the release rules and facts about this field.
+# Project configuration (oktopy.config): every path, the pipeline, the release rules and facts about this field.
 # Values may use {repo} and {data_root}; relative paths are relative to the repository. Environment variables
 # AD_SC_CLAIMS_<NAME> override paths (e.g. AD_SC_CLAIMS_DATA_ROOT).
 
@@ -10,6 +10,8 @@ keywords = ["Alzheimer's disease", "single-nucleus", "replication", "meta-analys
 server_name = "ad-sc-claims"
 licence = "CC BY 4.0 (data and text); code Apache-2.0"
 env_prefix = "AD_SC_CLAIMS"
+# The oktopy version this project is checked with (requirements.txt pins the same; oktopy warns on a mismatch)
+oktopy = "0.1.0"
 
 [server]
 # The MCP server's instructions (a file next to this one) and the ids quoted in its tool descriptions
@@ -19,7 +21,7 @@ examples = { claim = "mathys2019-C01", finding = "F-example", statement = "CS01"
 [claims]
 # Papers whose claims were made on another paper's cohort: paper id -> dataset id
 paper_to_dataset = { gabitto2024 = "seaad" }
-# How the store describes samples and claims of this field (claimstore.build_store)
+# How the store describes samples and claims of this field (oktopy.build_store)
 sample_type = "post-mortem brain"
 heritability_label = "AD genetic risk"
 stage_available_column = "stage_available"
@@ -38,7 +40,7 @@ shared_bank_caveat = "{dataset} may share donors with {others} (not verified)"
 not_assessed = "a gradient with disease stage; adjustment for age, sex and sample quality"
 
 [tests]
-# Claim re-tests (claimstore.retest). Gene symbols renamed since publication: old = "new" (MARCH*/SEPT* built in)
+# Claim re-tests (oktopy.retest). Gene symbols renamed since publication: old = "new" (MARCH*/SEPT* built in)
 gene_aliases = {}
 # Contrast codes that compare two contrasts' fold changes: code = { contrasts = ["a", "b"], template = "name" }
 concordance = {}
@@ -51,11 +53,12 @@ signatures_per_class = true
 sex = { column = "sex", contrast = "AD_vs_control" }
 
 [atlas]
-# The atlas page (src/claimstore/cli.py atlas -> reports/atlas.html); every key is optional (claimstore.atlas)
+# The atlas page (oktopy atlas -> reports/atlas.html); every key is optional (oktopy.atlas)
 title = "AD brain atlas"
 headline = "What the single-cell studies of the Alzheimer's disease brain claim, and what holds up"
 lead = "Claims of human post-mortem Alzheimer's disease single-nucleus studies."
 disease = "AD"
+regions_label = "brain regions"
 case_label = "AD vs control"
 scope = "single-nucleus studies of the human post-mortem Alzheimer's disease (AD) brain"
 examples = ["Do disease-associated microglia expand in AD?", "Which claims about astrocytes hold up across datasets?",

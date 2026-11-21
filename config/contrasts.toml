@@ -1,4 +1,4 @@
-# Contrasts of the AD field: which donor x region units are case and which are reference (claimstore.contrasts).
+# Contrasts of the AD field: which donor x region units are case and which are reference (oktopy.contrasts).
 #   column = "value" | ["a", "b"] | { contains = "x" } ;  braak_nft = { min = 5 }  (stage defined in [stage])
 
 [stage]

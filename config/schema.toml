@@ -1,5 +1,5 @@
-# Claim schema of this project: required fields, controlled vocabularies and field descriptions (claimstore.schema).
-# Regions and cell classes of the AD field (set 2026-11-16); after changes run python3 -I claims/schema/build_schemas.py.
+# Claim schema of this project: required fields, controlled vocabularies and field descriptions (oktopy.schema).
+# Regions and cell classes of the AD field (set 2026-11-16); after changes run `oktopy schema`.
 version = "1.0.0"
 required = ["id", "paper", "statement", "location", "centrality", "modality", "region", "cell_type", "claim_type",
     "direction", "comparison", "unit_of_analysis", "testable_with", "test_template"]
@@ -52,5 +52,5 @@ origin = "record origin"
 themes = "biological themes, ';'-separated"
 contrast = "contrast code (config/contrasts.toml)"
 null_claim = "true if the finding asserts the absence of an effect"
-evidence = "where the per-dataset estimates are (claimstore.store.resolve_evidence)"
+evidence = "where the per-dataset estimates are (oktopy.store.resolve_evidence)"
 analysis = "how the finding was produced (script, spec, date)"

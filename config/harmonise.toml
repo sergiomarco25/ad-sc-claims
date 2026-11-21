@@ -1,5 +1,5 @@
 # Harmonisation of the AD field: the common schema of every harmonised dataset and the rules that check cell classes
-# against marker genes (claimstore.harmonise). Set 2026-11-16 for PsychAD and SEA-AD.
+# against marker genes (oktopy.harmonise). Set 2026-11-16 for PsychAD and SEA-AD.
 #
 # A loader (src/ad_sc_claims/build/<dataset>.py) returns an AnnData with raw integer counts in X (cells x genes, gene
 # symbols as var_names) and the `obs` columns below (values it cannot fill: NaN / "unknown"), plus AUTHOR_TO_CLASS
@@ -41,7 +41,7 @@ sorted_classes = ["Microglia"]
 "T cells" = ["CD3E", "CD3D", "CD2", "SKAP1", "CD247"]          # no THEMIS (L6 excitatory neurons) or IL7R
 "Immune (other)" = ["MRC1", "F13A1", "CD163", "LYVE1", "MS4A1"]  # no PTPRC: microglia express it
 
-# Two-step class call (claimstore.harmonise.classify): the lineage first (`pan_neuronal` against each non-neuronal
+# Two-step class call (oktopy.harmonise.classify): the lineage first (`pan_neuronal` against each non-neuronal
 # class), then the neuron subtype for neuron rows
 [labelling]
 neuron_subtypes = ["Excitatory neurons", "Inhibitory neurons"]

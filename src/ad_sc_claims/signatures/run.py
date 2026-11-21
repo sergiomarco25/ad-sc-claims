@@ -1,4 +1,4 @@
-"""Write every paper's claim signatures (claims/signatures/), then run `cli.py signatures` to merge them.
+"""Write every paper's claim signatures (claims/signatures/), then run `oktopy signatures` to merge them.
 
 Usage: python -I src/ad_sc_claims/signatures/run.py [paper ...]
 """

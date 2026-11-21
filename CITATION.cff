@@ -4,7 +4,7 @@ title: "AD single-cell claim store"
 abstract: >-
   Published conclusions of human post-mortem brain Alzheimer's disease single-nucleus studies, extracted as structured
   claims, re-tested donor-level across harmonised datasets (SEA-AD, PsychAD), rated for certainty, and served as an
-  atlas, a knowledge graph and an MCP server. Built with the claimstore engine and template of the PD single-cell
+  atlas, a knowledge graph and an MCP server. Built with oktopy (https://github.com/sergiomarco25/oktopy), the engine of the PD single-cell
   claim store (https://github.com/sergiomarco25/pd-sc-claims).
 type: software
 authors:

@@ -1,4 +1,4 @@
-# Claim contexts and the store's contrast vocabulary for the AD field (claimstore.contexts, claimstore.build_store).
+# Claim contexts and the store's contrast vocabulary for the AD field (oktopy.contexts, oktopy.build_store).
 # A claim's comparison text (lower case) is matched against `rules` in order; the first match gives its contrast code
 # (claims/contrast_overrides.tsv takes precedence).
 
